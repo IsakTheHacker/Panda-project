@@ -1,0 +1,8 @@
+Definitions:
+<file> = Filename without extension
+
+Convert from .blend to .bam:
+py -m blend2bam src=./blend/<file>.blend dst=./bam/<file>.bam
+
+Convert from .bam to .egg:
+bam2egg ./bam/<file>.bam ./egg/<file>.egg
