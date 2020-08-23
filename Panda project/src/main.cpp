@@ -108,13 +108,6 @@ int main(int argc, char* argv[]) {
 
 
 
-	//Collision
-	//PT(CollisionSphere) cs = new CollisionSphere(0, 0, 0, 4);
-	CollisionNode* cSphere_node = new CollisionNode("Sphere");
-	cSphere_node->add_solid(new CollisionSphere(0, 0, 0, 40));
-
-
-
 	#include "../gameClasses.h"
 
 
@@ -200,11 +193,6 @@ int main(int argc, char* argv[]) {
 	scene.reparent_to(window->get_render());
 	scene.set_scale(0.25, 0.25, 0.25);
 	scene.set_pos(-8, 42, 0);
-	
-	//Load the house
-	NodePath house = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/simple_house.egg");
-	house.reparent_to(window->get_render());
-	house.set_pos(40, 0, 40);
 
 	// Load our characters
 	NodePath blocky = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/blocky.egg");
@@ -212,22 +200,28 @@ int main(int argc, char* argv[]) {
 	blocky.set_pos(0, 0, 0);
 	blocky.reparent_to(window->get_render());
 
-	NodePath pandaActor = window->load_model(framework.get_models(), "models/panda-model");
-	pandaActor.set_scale(0.05);
-	pandaActor.set_pos(0, 10, 0);
-	pandaActor.reparent_to(window->get_render());
-	NodePath smileyC = pandaActor.attach_new_node(cSphere_node);
+	CollisionNode* cSphere_node = new CollisionNode("Sphere");
+	cSphere_node->add_solid(new CollisionSphere(0, 0, 0, 4));
+	NodePath smileyC = blocky.attach_new_node(cSphere_node);
 	smileyC.show();
 
-	game::object smallPanda(window, framework, "models/panda-model");
-	smallPanda.model.set_pos(10, 10, 10);
 
-	// set up collisions handler and pusher
+	NodePath panda = window->load_model(framework.get_models(), "panda.egg");
+	panda.set_scale(0.5);
+	panda.set_pos(0, 0, 0);
+	panda.reparent_to(window->get_render());
+
+	CollisionNode* cSphere_nodel = new CollisionNode("Sphere");
+	cSphere_nodel->add_solid(new CollisionSphere(0, 0, 0, 4));
+	NodePath smileyCC = panda.attach_new_node(cSphere_nodel);
+	smileyCC.show();
+
+
 	CollisionHandlerPusher pusher;
 	CollisionTraverser* collTrav = new CollisionTraverser();
 
-	pusher.add_collider(camera, pandaActor);
-	collTrav->add_collider(camera, &pusher);
+	collTrav->add_collider(smileyC, &pusher);
+	pusher.add_collider(smileyC, blocky);
 
 
 	//Reading settings from settings map
@@ -258,7 +252,7 @@ int main(int argc, char* argv[]) {
 
 		// check collisions, will call pusher collision handler
 		// if a collision is detected
-		collTrav->traverse(window->get_render());
+		//collTrav->traverse(window->get_render());
 
 		if (mouseWatcher->has_mouse()) {
 			if (window->get_graphics_window()) {
@@ -288,14 +282,18 @@ int main(int argc, char* argv[]) {
 		}
 
 		if (key_w.pressed) {
-			current_z = camera.get_pos().get_z();
-			camera.set_y(camera, 0 + y_speed);
-			camera.set_z(current_z);
+			//current_z = camera.get_pos().get_z();
+			//camera.set_y(camera, 0 + y_speed);
+			//camera.set_z(current_z);
+
+			panda.set_y(panda, 0 - 1);
 		}
 		if (key_s.pressed) {
-			current_z = camera.get_pos().get_z();
+			/*current_z = camera.get_pos().get_z();
 			camera.set_y(camera, 0 - y_speed);
-			camera.set_z(current_z);
+			camera.set_z(current_z);*/
+
+			panda.set_y(panda, 0 + 1);
 		}
 		if (key_a.pressed) {
 			camera.set_x(camera, 0 - x_speed);
