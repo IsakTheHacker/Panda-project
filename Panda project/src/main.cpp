@@ -23,64 +23,13 @@
 #include "collisionHandlerFluidPusher.h"
 #include "collisionSphere.h"
 
+std::map<std::string, bool> keys;
+bool shouldRun = true;
+
 //My libraries
 #include "../gameFunctions.h"
 #include "../gameClasses.h"
-
-//Preparing for keyboard input
-
-game::key key_w("w", false);
-game::key key_a("a", false);
-game::key key_s("s", false);
-game::key key_d("d", false);
-game::key key_space("space", false);
-game::key key_lshift("lshift", false);
-
-bool shouldRun = true;
-
-//Key press events
-void runPyScript(const Event * theEvent, void * data) {
-	game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
-}
-void exitGame(const Event* theEvent, void* data) {
-	shouldRun = false;
-}
-void key_down(const Event* theEvent, void* data) {
-	const char* &keyname = *((const char* *) data);
-	if (keyname == "w") {
-		key_w.pressed = true;
-	} else if (keyname == "a") {
-		key_a.pressed = true;
-	} else if (keyname == "s") {
-		key_s.pressed = true;
-	} else if (keyname == "d") {
-		key_d.pressed = true;
-	} else if (keyname == "space") {
-		key_space.pressed = true;
-	} else if (keyname == "lshift") {
-		key_lshift.pressed = true;
-	} else {
-		std::cout << "Unknown key";
-	}
-}
-void key_up(const Event* theEvent, void* data) {
-	const char*& keyname = *((const char**)data);
-	if (keyname == "w") {
-		key_w.pressed = false;
-	} else if (keyname == "a") {
-		key_a.pressed = false;
-	} else if (keyname == "s") {
-		key_s.pressed = false;
-	} else if (keyname == "d") {
-		key_d.pressed = false;
-	} else if (keyname == "space") {
-		key_space.pressed = false;
-	} else if (keyname == "lshift") {
-		key_lshift.pressed = false;
-	} else {
-		std::cout << "Unknown key";
-	}
-}
+#include "../constantVars.h"
 
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
@@ -118,34 +67,42 @@ int main(int argc, char* argv[]) {
 	window->enable_keyboard();
 
 	//W-key
-	framework.define_key("w", "W-key", key_down, (void*)&key_w.keyname);
-	framework.define_key("w-up", "W-key", key_up, (void*)&key_w.keyname);
+	framework.define_key("w", "W-key", game::key_down, (void*)&game::w);
+	framework.define_key("w-up", "W-key", game::key_up, (void*)&game::w);
 
 	//A-key
-	framework.define_key("a", "A-key", key_down, (void*)&key_a.keyname);
-	framework.define_key("a-up", "A-key", key_up, (void*)&key_a.keyname);
+	framework.define_key("a", "A-key", game::key_down, (void*)&game::a);
+	framework.define_key("a-up", "A-key", game::key_up, (void*)&game::a);
 
 	//S-key
-	framework.define_key("s", "S-key", key_down, (void*)&key_s.keyname);
-	framework.define_key("s-up", "S-key", key_up, (void*)&key_s.keyname);
+	framework.define_key("s", "S-key", game::key_down, (void*)&game::s);
+	framework.define_key("s-up", "S-key", game::key_up, (void*)&game::s);
 
 	//D-key
-	framework.define_key("d", "D-key", key_down, (void*)&key_d.keyname);
-	framework.define_key("d-up", "D-key", key_up, (void*)&key_d.keyname);
+	framework.define_key("d", "D-key", game::key_down, (void*)&game::d);
+	framework.define_key("d-up", "D-key", game::key_up, (void*)&game::d);
 
 	//Space-key
-	framework.define_key("space", "Space-key", key_down, (void*)&key_space.keyname);
-	framework.define_key("space-up", "Space-key", key_up, (void*)&key_space.keyname);
+	framework.define_key("space", "Space-key", game::key_down, (void*)&game::space);
+	framework.define_key("space-up", "Space-key", game::key_up, (void*)&game::space);
 
 	//LShift-key
-	framework.define_key("lshift", "LShift-key", key_down, (void*)&key_lshift.keyname);
-	framework.define_key("lshift-up", "LShift-key", key_up, (void*)&key_lshift.keyname);
+	framework.define_key("lshift", "LShift-key", game::key_down, (void*)&game::lshift);
+	framework.define_key("lshift-up", "LShift-key", game::key_up, (void*)&game::lshift);
+
+	//Arrow up-key
+	framework.define_key("arrow_up", "Arrow up-key", game::key_down, (void*)&game::arrow_up);
+	framework.define_key("arrow_up-up", "Arrow up-key", game::key_up, (void*)&game::arrow_up);
+
+	//Arrow down-key
+	framework.define_key("arrow_down", "Arrow down-key", game::key_down, (void*)&game::arrow_down);
+	framework.define_key("arrow_down-up", "Arrow down-key", game::key_up, (void*)&game::arrow_down);
 
 	//R-key
-	framework.define_key("r", "R-key", runPyScript, 0);
+	framework.define_key("r", "R-key", game::runPyScript, 0);
 
 	//Esc-key
-	framework.define_key("escape", "Esc-key", exitGame, 0);
+	framework.define_key("escape", "Esc-key", game::exitGame, 0);
 
 
 
@@ -195,6 +152,19 @@ int main(int argc, char* argv[]) {
 	scene.set_pos(-8, 42, 0);
 
 	// Load our characters
+	game::object player(window, framework, "models/pandamodel.egg");
+	game::object qlayer(window, framework, "models/pandamodel.egg");
+	game::object wlayer(window, framework, "models/pandamodel.egg");
+	game::object elayer(window, framework, "models/pandamodel.egg");
+	std::cout << player.id << std::endl;
+	std::cout << qlayer.id << std::endl;
+	std::cout << wlayer.id << std::endl;
+	std::cout << elayer.id << std::endl;
+
+	game::player playyer(window, framework, "models/pandamodel.egg");
+	std::cout << playyer.id << std::endl;
+
+
 	NodePath blocky = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/blocky.egg");
 	blocky.set_scale(0.5);
 	blocky.set_pos(0, 0, 0);
@@ -252,7 +222,7 @@ int main(int argc, char* argv[]) {
 
 		// check collisions, will call pusher collision handler
 		// if a collision is detected
-		//collTrav->traverse(window->get_render());
+		collTrav->traverse(window->get_render());
 
 		if (mouseWatcher->has_mouse()) {
 			if (window->get_graphics_window()) {
@@ -281,34 +251,34 @@ int main(int argc, char* argv[]) {
 			}
 		}
 
-		if (key_w.pressed) {
-			//current_z = camera.get_pos().get_z();
-			//camera.set_y(camera, 0 + y_speed);
-			//camera.set_z(current_z);
+		if (keys["w"]) {
+			current_z = camera.get_pos().get_z();
+			camera.set_y(camera, 0 + y_speed);
+			camera.set_z(current_z);
 
 			panda.set_y(panda, 0 - 1);
 		}
-		if (key_s.pressed) {
-			/*current_z = camera.get_pos().get_z();
+		if (keys["s"]) {
+			current_z = camera.get_pos().get_z();
 			camera.set_y(camera, 0 - y_speed);
-			camera.set_z(current_z);*/
+			camera.set_z(current_z);
 
 			panda.set_y(panda, 0 + 1);
 		}
-		if (key_a.pressed) {
+		if (keys["a"]) {
 			camera.set_x(camera, 0 - x_speed);
 		}
-		if (key_d.pressed) {
+		if (keys["d"]) {
 			camera.set_x(camera, 0 + x_speed);
 		}
-		if (key_space.pressed) {
+		if (keys["space"]) {
 			current_x = camera.get_pos().get_x();
 			current_y = camera.get_pos().get_y();
 			camera.set_z(camera, 0 + z_speed);
 			//camera.set_x(current_x);
 			//camera.set_y(current_y);
 		}
-		if (key_lshift.pressed) {
+		if (keys["lshift"]) {
 			current_x = camera.get_pos().get_x();
 			current_y = camera.get_pos().get_y();
 			camera.set_z(camera, 0 - z_speed);

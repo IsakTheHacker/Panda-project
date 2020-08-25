@@ -26,6 +26,9 @@
     <ClInclude Include="gameFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="constantVars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\scripts\readOptions.py">
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="Collision example.cpp">
       <Filter>Source Files\C++ files\Devtools</Filter>
+    </ClCompile>
+    <ClCompile Include="gameClasses.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

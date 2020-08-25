@@ -147,4 +147,20 @@ namespace game {
 		optionsFile.close();
 		return 0;
 	}
+
+	//Events
+	void runPyScript(const Event* theEvent, void* data) {
+		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
+	}
+	void exitGame(const Event* theEvent, void* data) {
+		shouldRun = false;
+	}
+	void key_down(const Event* theEvent, void* data) {
+		std::string& key = *((std::string*)data);
+		keys[key] = true;
+	}
+	void key_up(const Event* theEvent, void* data) {
+		std::string& key = *((std::string*)data);
+		keys[key] = false;
+	}
 }

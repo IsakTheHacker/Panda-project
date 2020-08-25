@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="gameClasses.cpp" />
     <ClCompile Include="models\Model converter source\Model converter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -33,6 +34,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constantVars.h" />
     <ClInclude Include="gameClasses.h" />
     <ClInclude Include="gameFunctions.h" />
   </ItemGroup>
