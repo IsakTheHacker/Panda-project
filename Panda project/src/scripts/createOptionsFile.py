@@ -19,7 +19,7 @@ if not os.path.isfile("data/options.txt"):
 		"z_speed=1",
 		"hidden_cursor=1",
 		"close_console_without_input=1",
-		"lower_border=-100",
+		"lower_border=-2",
 		"upper_border=0"
 	]
 	try:

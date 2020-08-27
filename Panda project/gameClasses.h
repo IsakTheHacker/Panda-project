@@ -6,6 +6,7 @@ namespace game {
 			std::string modelpathIntern;
 			bool shouldLogInConsoleIntern;
 			bool shouldLogToFileIntern;
+			bool modelNotFound;
 		public:
 			NodePath model;
 			static int current_id;
@@ -24,19 +25,26 @@ namespace game {
 				shouldLogToFileIntern = shouldLogToFile;
 
 				if (shouldLogInConsole) {
-					game::logOut("Succesfully created an object with modelpath: " + modelpath);
+					game::logOut("Succesfully created object: " + std::to_string(id));
 				}
 				if (shouldLogToFile) {
-					logToFile("game.log", "Log: Succesfully created an object with modelpath: " + modelpath);
+					logToFile("game.log", "Log: Succesfully created object: " + std::to_string(id));
+				}
+
+				std::ifstream modelFile(modelpath);
+				if (modelFile.fail()) {
+					modelNotFound = true;
+					game::warningOut("Could not find model for object: " + std::to_string(id) + " with modelpath: " + modelpath);
+					logToFile("game.log", "Warning: Could not find model for object: " + std::to_string(id) + " with modelpath: " + modelpath);
 				}
 			}
 
 			~object() {
 				if (shouldLogInConsoleIntern) {
-					game::logOut("Succesfully destroyed an object with modelpath: " + modelpathIntern);
+					game::logOut("Succesfully destroyed object: " + std::to_string(id));
 				}
 				if (shouldLogToFileIntern) {
-					logToFile("game.log", "Log: Succesfully destroyed an object with modelpath: " + modelpathIntern);
+					logToFile("game.log", "Log: Succesfully destroyed object: " + std::to_string(id));
 				}
 			}
 	};
@@ -44,21 +52,21 @@ namespace game {
 	class player : public object {
 		public:
 			player(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool shouldLogInConsole = true, bool shouldLogToFile = false) : object{ window, framework, modelpath, shouldLogInConsole, shouldLogToFile } {
-				if (shouldLogInConsole) {
-					game::logOut("Succesfully created the player! Modelpath: " + modelpath);
+				/*if (shouldLogInConsole) {
+					game::logOut("Succesfully created the player! id: " + std::to_string(id));
 				}
 				if (shouldLogToFile) {
-					logToFile("game.log", "Log: Succesfully created the player! Modelpath: " + modelpath);
-				}
+					logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
+				}*/
 			}
 
 			~player() {
-				if (shouldLogInConsoleIntern) {
-					game::logOut("Succesfully destroyed the player! Modelpath: " + modelpathIntern);
+				/*if (shouldLogInConsoleIntern) {
+					game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
 				}
 				if (shouldLogToFileIntern) {
-					logToFile("game.log", "Log: Succesfully destroyed the player! Modelpath: " + modelpathIntern);
-				}
+					logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
+				}*/
 			}
 	};
 }

@@ -286,6 +286,21 @@ int main(int argc, char* argv[]) {
 			//camera.set_y(current_y);
 		}
 
+
+		//Border checking
+		if (std::stoi(options["lower_border"]) != 0) {
+			if (camera.get_pos().get_z() < std::stoi(options["lower_border"])) {
+				camera.set_z(std::stoi(options["lower_border"]));
+				std::cout << "testt" << std::endl;
+			}
+		}
+		if (std::stoi(options["upper_border"]) != 0) {
+			if (camera.get_pos().get_z() < std::stoi(options["upper_border"])) {
+				camera.set_z(std::stoi(options["upper_border"]));
+				std::cout << "test" << std::endl;
+			}
+		}
+
 		delta_ticks = clock() - current_ticks;
 		if (delta_ticks > 0) {
 			fps = CLOCKS_PER_SEC / delta_ticks;

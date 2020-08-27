@@ -125,7 +125,7 @@ namespace game {
 		Py_Finalize();
 		return 0;
 	}
-	
+
 	int readOptions(std::map<std::string, std::string>& options, std::string path = "data/options.txt") {
 		std::ifstream optionsFile(path);
 		std::string line;
