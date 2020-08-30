@@ -180,11 +180,7 @@ int main(int argc, char* argv[]) {
 	panda.set_scale(0.5);
 	panda.set_pos(0, 0, 0);
 	panda.reparent_to(window->get_render());
-
-	CollisionNode* cSphere_nodel = new CollisionNode("Sphere");
-	cSphere_nodel->add_solid(new CollisionSphere(0, 0, 0, 4));
-	NodePath smileyCC = panda.attach_new_node(cSphere_nodel);
-	smileyCC.show();
+	panda.hide();
 
 
 	CollisionHandlerPusher pusher;
@@ -207,10 +203,6 @@ int main(int argc, char* argv[]) {
 
 	int offset_x;
 	int offset_y;
-
-	int current_x;
-	int current_y;
-	int current_z;
 
 	//Preparing for frame counter
 	clock_t current_ticks, delta_ticks;
@@ -240,6 +232,8 @@ int main(int argc, char* argv[]) {
 					offset_y += move_y/camera_y_speed;
 					
 					camera.set_h(offset_x);
+					panda.set_h(offset_x);
+
 
 					if (offset_y < 90 && offset_y > -90) {
 						camera.set_p(offset_y);
@@ -252,38 +246,28 @@ int main(int argc, char* argv[]) {
 		}
 
 		if (keys["w"]) {
-			current_z = camera.get_pos().get_z();
-			camera.set_y(camera, 0 + y_speed);
-			camera.set_z(current_z);
-
-			panda.set_y(panda, 0 - 1);
+			camera.set_y(panda, 0 + y_speed);
+			panda.set_y(panda, 0 + y_speed);
 		}
 		if (keys["s"]) {
-			current_z = camera.get_pos().get_z();
-			camera.set_y(camera, 0 - y_speed);
-			camera.set_z(current_z);
-
-			panda.set_y(panda, 0 + 1);
+			camera.set_y(panda, 0 - y_speed);
+			panda.set_y(panda, 0 - y_speed);
 		}
 		if (keys["a"]) {
 			camera.set_x(camera, 0 - x_speed);
+			panda.set_x(camera, 0 - x_speed);
 		}
 		if (keys["d"]) {
 			camera.set_x(camera, 0 + x_speed);
+			panda.set_x(camera, 0 + x_speed);
 		}
 		if (keys["space"]) {
-			current_x = camera.get_pos().get_x();
-			current_y = camera.get_pos().get_y();
-			camera.set_z(camera, 0 + z_speed);
-			//camera.set_x(current_x);
-			//camera.set_y(current_y);
+			camera.set_z(camera.get_pos().get_z() + z_speed);
+			panda.set_z(camera.get_pos().get_z() + z_speed);
 		}
 		if (keys["lshift"]) {
-			current_x = camera.get_pos().get_x();
-			current_y = camera.get_pos().get_y();
-			camera.set_z(camera, 0 - z_speed);
-			//camera.set_x(current_x);
-			//camera.set_y(current_y);
+			camera.set_z(camera.get_pos().get_z() - z_speed);
+			panda.set_z(camera.get_pos().get_z() - z_speed);
 		}
 
 
@@ -291,13 +275,11 @@ int main(int argc, char* argv[]) {
 		if (std::stoi(options["lower_border"]) != 0) {
 			if (camera.get_pos().get_z() < std::stoi(options["lower_border"])) {
 				camera.set_z(std::stoi(options["lower_border"]));
-				std::cout << "testt" << std::endl;
 			}
 		}
 		if (std::stoi(options["upper_border"]) != 0) {
 			if (camera.get_pos().get_z() < std::stoi(options["upper_border"])) {
 				camera.set_z(std::stoi(options["upper_border"]));
-				std::cout << "test" << std::endl;
 			}
 		}
 
