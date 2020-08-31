@@ -191,15 +191,15 @@ int main(int argc, char* argv[]) {
 
 
 	//Reading settings from settings map
-	int force_x = std::stoi(options["force_x"]);
-	int force_y = std::stoi(options["force_y"]);
+	double force_x = std::stof(options["force_x"]);
+	double force_y = std::stof(options["force_y"]);
 
-	int camera_x_speed = std::stoi(options["camera_x_speed"]);
-	int camera_y_speed = std::stoi(options["camera_y_speed"]);
+	double camera_x_speed = std::stof(options["camera_x_speed"]);
+	double camera_y_speed = std::stof(options["camera_y_speed"]);
 
-	int x_speed = std::stoi(options["x_speed"]);
-	int y_speed = std::stoi(options["y_speed"]);
-	int z_speed = std::stoi(options["z_speed"]);
+	double x_speed = std::stof(options["x_speed"]);
+	double y_speed = std::stof(options["y_speed"]);
+	double z_speed = std::stof(options["z_speed"]);
 
 	int offset_x;
 	int offset_y;
@@ -272,14 +272,14 @@ int main(int argc, char* argv[]) {
 
 
 		//Border checking
-		if (std::stoi(options["lower_border"]) != 0) {
-			if (camera.get_pos().get_z() < std::stoi(options["lower_border"])) {
-				camera.set_z(std::stoi(options["lower_border"]));
+		if (std::stof(options["lower_border"]) != 0) {
+			if (camera.get_pos().get_z() < std::stof(options["lower_border"])) {
+				camera.set_z(std::stof(options["lower_border"]));
 			}
 		}
-		if (std::stoi(options["upper_border"]) != 0) {
-			if (camera.get_pos().get_z() < std::stoi(options["upper_border"])) {
-				camera.set_z(std::stoi(options["upper_border"]));
+		if (std::stof(options["upper_border"]) != 0) {
+			if (camera.get_pos().get_z() < std::stof(options["upper_border"])) {
+				camera.set_z(std::stof(options["upper_border"]));
 			}
 		}
 
