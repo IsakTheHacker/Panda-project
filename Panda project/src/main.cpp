@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <iostream>
 #include <chrono>
+#include <vector>
 //#include <json/json.h>
 
 //Python library
@@ -27,8 +28,10 @@ std::map<std::string, bool> keys;
 bool shouldRun = true;
 
 //My libraries
+#include "../cppExtension.h"
 #include "../gameFunctions.h"
 #include "../gameClasses.h"
+#include "../gameLanguage.h"
 #include "../constantVars.h"
 
 // Global stuff
@@ -40,11 +43,12 @@ NodePath camera;
 int main(int argc, char* argv[]) {
 	game::logOut("Starting...");
 
+	game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\scripts\\makeDirectories.py");
+	game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\scripts\\createOptionsFile.py");
+
 	//Reading options
 	std::map<std::string, std::string> options;
 	game::readOptions(options);
-
-	game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\scripts\\createOptionsFile.py");
 
 	// Open a new window framework and set the title
 	PandaFramework framework;
@@ -54,13 +58,6 @@ int main(int argc, char* argv[]) {
 	// Open the window
 	WindowFramework* window = framework.open_window();
 	camera = window->get_camera_group(); // Get the camera and store it
-
-
-
-	#include "../gameClasses.h"
-
-
-	//Gui
 
 
 	//Keyboard input
@@ -152,17 +149,8 @@ int main(int argc, char* argv[]) {
 	scene.set_pos(-8, 42, 0);
 
 	// Load our characters
-	game::object player(window, framework, "models/pandamodel.egg");
-	game::object qlayer(window, framework, "models/pandamodel.egg");
-	game::object wlayer(window, framework, "models/pandamodel.egg");
-	game::object elayer(window, framework, "models/pandamodel.egg");
-	std::cout << player.id << std::endl;
-	std::cout << qlayer.id << std::endl;
-	std::cout << wlayer.id << std::endl;
-	std::cout << elayer.id << std::endl;
 
-	game::player playyer(window, framework, "models/pandamodel.egg");
-	std::cout << playyer.id << std::endl;
+	game::object asd(window, framework, "/c/dev/Panda project/Panda project/models/egg/simple_house.egg");
 
 
 	NodePath blocky = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/blocky.egg");
@@ -203,6 +191,10 @@ int main(int argc, char* argv[]) {
 
 	int offset_x;
 	int offset_y;
+
+	std::string sad = "Hello World";
+	game::encrypt(sad);
+	game::decrypt(sad);
 
 	//Preparing for frame counter
 	clock_t current_ticks, delta_ticks;
@@ -256,6 +248,8 @@ int main(int argc, char* argv[]) {
 		if (keys["a"]) {
 			camera.set_x(camera, 0 - x_speed);
 			panda.set_x(camera, 0 - x_speed);
+
+			game::objects.push_back(game::object(window, framework, "/c/dev/Panda project/Panda project/models/egg/simple_house.egg"));
 		}
 		if (keys["d"]) {
 			camera.set_x(camera, 0 + x_speed);

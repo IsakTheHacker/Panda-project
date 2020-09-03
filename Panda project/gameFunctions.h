@@ -7,6 +7,8 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <array>
+#include <algorithm>
 
 //Including necessary Windows libraries
 #include <Windows.h>
@@ -20,8 +22,55 @@ namespace game {
 		getch();
 	}
 
-	int findReplace(std::string& str, std::string oldSubstring, std::string newSubstring) {
+	int findReplaceFirst(std::string& str, std::string oldSubstring, std::string newSubstring) {
 		str.replace(str.find(oldSubstring), oldSubstring.length(), newSubstring);
+		return 0;
+	}
+
+	int findReplaceAll(std::string& str, std::string oldSubstring, std::string newSubstring) {
+		while (str.find(oldSubstring) != std::string::npos) {
+			str.replace(str.find(oldSubstring), oldSubstring.length(), newSubstring);
+		}
+		return 0;
+	}
+
+	int encrypt(std::string& str, std::string separator = "|") {
+		std::string newStr;
+		for (int i = 0; i < str.size(); i++) {
+			char newChar = str[i];
+			newStr += std::to_string(int(newChar));
+
+			//Append separator
+			if (i != str.size()-1) {
+				newStr += separator;
+			}
+		}
+		str = newStr;
+		std::cout << str << std::endl;
+		return 0;
+	}
+
+	int decrypt(std::string& str, std::string separator = "|") {
+		std::array<int, 11> validChars = {1,2,3,4,5,6,7,8,9,0,int(stoc(separator)) };
+		std::string newStr;
+		std::string newCharA;
+		char newChar;
+		for (int i = 0; i < str.size(); i++) {
+			newCharA = "";
+			while (true) {
+				newCharA += str[i];
+				i++;
+
+				//Checking if next character is a separator
+				if (int(str[i]) == int(stoc(separator)) || std::find(validChars.begin(), validChars.end(), int(str[i])) != validChars.end()) {
+					break;
+				}
+			}
+			newChar = (char)std::stoi(newCharA);
+			newStr += newChar;
+		}
+		str = newStr;
+		std::cout << str << std::endl;
 		return 0;
 	}
 

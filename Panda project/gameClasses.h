@@ -4,6 +4,7 @@ namespace game {
 	class object {
 		protected:
 			std::string modelpathIntern;
+			std::string oldModelpath;
 			bool shouldLogInConsoleIntern;
 			bool shouldLogToFileIntern;
 			bool modelNotFound;
@@ -16,6 +17,16 @@ namespace game {
 				id = current_id;
 				current_id++;
 
+				std::string convertedModelpath = modelpath;
+				findReplaceAll(convertedModelpath, "/c", "C:");
+				findReplaceAll(convertedModelpath, "/", "\\");
+				std::ifstream modelFile(convertedModelpath);
+				if (modelFile.fail()) {
+					modelNotFound = true;
+					oldModelpath = modelpath;
+					modelpath = "/c/dev/Panda project/Panda project/models/egg/blocky.egg";			//Changing modelpath to standard model!
+				}
+
 				model = window->load_model(framework.get_models(), modelpath);
 				model.reparent_to(window->get_render());
 
@@ -25,17 +36,18 @@ namespace game {
 				shouldLogToFileIntern = shouldLogToFile;
 
 				if (shouldLogInConsole) {
-					game::logOut("Succesfully created object: " + std::to_string(id));
+					if (modelNotFound) {
+						game::warningOut("Could not find model for object: " + std::to_string(id) + " with modelpath: " + oldModelpath + " - Standard model was used!");
+					} else {
+						game::logOut("Succesfully created object: " + std::to_string(id));
+					}
 				}
 				if (shouldLogToFile) {
-					logToFile("game.log", "Log: Succesfully created object: " + std::to_string(id));
-				}
-
-				std::ifstream modelFile(modelpath);
-				if (modelFile.fail()) {
-					modelNotFound = true;
-					game::warningOut("Could not find model for object: " + std::to_string(id) + " with modelpath: " + modelpath);
-					logToFile("game.log", "Warning: Could not find model for object: " + std::to_string(id) + " with modelpath: " + modelpath);
+					if (modelNotFound) {
+						logToFile("game.log", "Warning: Could not find model for object: " + std::to_string(id) + " with modelpath: " + oldModelpath + " - Standard model was used!");
+					} else {
+						logToFile("game.log", "Log: Succesfully created object: " + std::to_string(id));
+					}
 				}
 			}
 
@@ -69,6 +81,9 @@ namespace game {
 				}*/
 			}
 	};
+
+	//Creating vector for storing the object class
+	std::vector<game::object> objects;
 }
 
 // Initialize static member of object class

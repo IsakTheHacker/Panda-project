@@ -1,13 +1,7 @@
 #Imports
 import os
 
-#Checking if data directory exists
-if not os.path.isdir("data"):
-	try:
-		os.mkdir("data")
-	except OSError:
-		print("Creation of 'data' directory failed!")
-
+#Checking if options file exists
 if not os.path.isfile("data/options.txt"):
 	options = [
 		"force_x=4",
@@ -20,7 +14,8 @@ if not os.path.isfile("data/options.txt"):
 		"hidden_cursor=1",
 		"close_console_without_input=1",
 		"lower_border=-2",
-		"upper_border=0"
+		"upper_border=0",
+		"startscript=scripts/standard_startscript.txt"
 	]
 	try:
 		with open("data/options.txt","w") as optionsFile:
@@ -31,4 +26,3 @@ if not os.path.isfile("data/options.txt"):
 				optionsFile.write(item + newLine)
 	except OSError:
 		print("Creation of 'options.txt' file failed!")
-print("It works")

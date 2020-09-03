@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gameClasses.cpp" />
+    <ClCompile Include="Clicking on 3d objects.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="models\Model converter source\Model converter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -35,11 +37,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constantVars.h" />
+    <ClInclude Include="cppExtension.h" />
     <ClInclude Include="gameClasses.h" />
     <ClInclude Include="gameFunctions.h" />
+    <ClInclude Include="gameLanguage.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.hint" />
     <None Include="src\scripts\createOptionsFile.py" />
+    <None Include="src\scripts\makeDirectories.py" />
     <None Include="src\scripts\readOptions.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

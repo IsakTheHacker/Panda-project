@@ -18,6 +18,9 @@
     <Filter Include="Source Files\C++ files\Devtools">
       <UniqueIdentifier>{41c10c94-81a5-4917-a9da-52dff7661620}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\C++ files\Testing...">
+      <UniqueIdentifier>{8428eee7-3130-48eb-9035-ca4e588fff6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameClasses.h">
@@ -29,12 +32,22 @@
     <ClInclude Include="constantVars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cppExtension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameLanguage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\scripts\readOptions.py">
       <Filter>Source Files\Python files</Filter>
     </None>
     <None Include="src\scripts\createOptionsFile.py">
+      <Filter>Source Files\Python files</Filter>
+    </None>
+    <None Include="cpp.hint" />
+    <None Include="src\scripts\makeDirectories.py">
       <Filter>Source Files\Python files</Filter>
     </None>
   </ItemGroup>
@@ -45,14 +58,14 @@
     <ClCompile Include="models\Model converter source\Model converter.cpp">
       <Filter>Source Files\C++ files\Devtools</Filter>
     </ClCompile>
-    <ClCompile Include="Testing area.cpp">
-      <Filter>Source Files\C++ files\Devtools</Filter>
+    <ClCompile Include="Clicking on 3d objects.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
     </ClCompile>
     <ClCompile Include="Collision example.cpp">
-      <Filter>Source Files\C++ files\Devtools</Filter>
+      <Filter>Source Files\C++ files\Testing...</Filter>
     </ClCompile>
-    <ClCompile Include="gameClasses.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Testing area.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
