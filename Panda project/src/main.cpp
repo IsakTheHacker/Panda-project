@@ -4,7 +4,6 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
-//#include <json/json.h>
 
 //Python library
 #define PY_SSIZE_T_CLEAN
