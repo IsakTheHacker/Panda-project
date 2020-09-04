@@ -12,6 +12,7 @@ namespace game {
 			NodePath model;
 			static int current_id;
 			unsigned int id;
+			std::string name;
 
 			object(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool shouldLogInConsole = true, bool shouldLogToFile = false) {
 				id = current_id;
@@ -86,5 +87,5 @@ namespace game {
 	std::vector<game::object> objects;
 }
 
-// Initialize static member of object class
+// Initialize static members of object class
 int game::object::current_id = 0;
