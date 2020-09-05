@@ -101,12 +101,6 @@ int main(int argc, char* argv[]) {
 	framework.define_key("escape", "Esc-key", game::exitGame, 0);
 
 
-
-
-
-
-
-
 	//PT(PGButton) my_button;
 	//my_button = new PGButton("MyButton");
 	//my_button->setup("Button", 0.1);
