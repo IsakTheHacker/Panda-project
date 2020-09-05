@@ -40,14 +40,19 @@ PT(TextNode) text = new TextNode("textnode");
 NodePath camera;
 
 int main(int argc, char* argv[]) {
-	game::logOut("Starting...");
 
+	//Creating folders and files
 	game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\scripts\\makeDirectories.py");
 	game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\scripts\\createOptionsFile.py");
 
 	//Reading options
 	std::map<std::string, std::string> options;
 	game::readOptions(options);
+
+	game::setHeading(options["console-heading"]);
+	game::logOut("Starting...");
+
+	game::listOptions(options);
 
 	// Open a new window framework and set the title
 	PandaFramework framework;

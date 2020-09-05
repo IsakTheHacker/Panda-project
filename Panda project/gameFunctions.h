@@ -22,6 +22,19 @@ namespace game {
 		getch();
 	}
 
+	int setConsoleTitle(const char* title) {
+		return 0;
+	}
+
+	int setHeading(std::string heading) {
+		std::cout << "\n\n" << heading << std::endl;
+		for (int i = 0; i < heading.length(); i++) {
+			std::cout << "-";
+		}
+		std::cout << "\n" << std::endl;
+		return 0;
+	}
+
 	int findReplaceFirst(std::string& str, std::string oldSubstring, std::string newSubstring) {
 		str.replace(str.find(oldSubstring), oldSubstring.length(), newSubstring);
 		return 0;
@@ -178,11 +191,7 @@ namespace game {
 	int readOptions(std::map<std::string, std::string>& options, std::string path = "data/options.txt") {
 		std::ifstream optionsFile(path);
 		std::string line;
-		game::logOut("Options:");
 		while (std::getline(optionsFile, line)) {
-			std::cout << line << std::endl;
-
-			//Splitting algorithm
 			std::string delimiter = "=";
 			size_t pos = 0;
 			std::string token;
@@ -194,6 +203,15 @@ namespace game {
 			options[token] = line;
 		}
 		optionsFile.close();
+		return 0;
+	}
+
+	int listOptions(std::map<std::string, std::string>& options) {
+		game::logOut("Options:");
+		for (std::pair<std::string, std::string> option : options)
+		{
+			std::cout << option.first << "=" << option.second << std::endl;
+		}
 		return 0;
 	}
 

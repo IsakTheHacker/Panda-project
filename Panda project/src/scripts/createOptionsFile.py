@@ -15,7 +15,10 @@ if not os.path.isfile("data/options.txt"):
 		"close_console_without_input=1",
 		"lower_border=-2",
 		"upper_border=0",
-		"startscript=scripts/standard_startscript.txt"
+		"startscript=scripts/standard_startscript.txt",
+		"console-title=The Panda Project",
+		"console-heading=The Panda Project",
+		"window-title=The Panda Project"
 	]
 	try:
 		with open("data/options.txt","w") as optionsFile:
