@@ -13,12 +13,15 @@ if not os.path.isfile("data/options.txt"):
 		"z_speed=1",
 		"hidden_cursor=1",
 		"close_console_without_input=1",
-		"lower_border=-2",
-		"upper_border=0",
+		"lower_border=0",
+		"upper_border=none",
 		"startscript=scripts/standard_startscript.txt",
 		"console-title=The Panda Project",
 		"console-heading=The Panda Project",
-		"window-title=The Panda Project"
+		"window-title=The Panda Project",
+		"model-format=egg",
+		"hide_fps=0",
+		"pitch-behavior_while_rotating=none"
 	]
 	try:
 		with open("data/options.txt","w") as optionsFile:
@@ -29,3 +32,18 @@ if not os.path.isfile("data/options.txt"):
 				optionsFile.write(item + newLine)
 	except OSError:
 		print("Creation of 'options.txt' file failed!")
+
+#Checking if scripting options file exists
+if not os.path.isfile("data/scripting_options.txt"):
+	scripting_options = [
+		"cin_enabled=1"
+	]
+	try:
+		with open("data/scripting_options.txt","w") as optionsFile:
+			newLine = "\n"
+			for item in scripting_options:
+				if item == scripting_options[len(scripting_options)-1]:
+					newLine = ""
+				optionsFile.write(item + newLine)
+	except OSError:
+		print("Creation of 'scripting_options.txt' file failed!")

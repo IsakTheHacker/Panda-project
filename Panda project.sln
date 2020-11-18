@@ -3,24 +3,46 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Panda project", "Panda project\Panda project.vcxproj", "{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Panda Project Source", "Panda project\Panda project.vcxproj", "{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Panda Project Installer", "Panda Project Installer\Panda Project Installer.vcxproj", "{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Debug|ARM.ActiveCfg = Debug|Win32
+		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Debug|ARM64.ActiveCfg = Debug|Win32
 		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Debug|x64.ActiveCfg = Debug|x64
 		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Debug|x64.Build.0 = Debug|x64
 		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Debug|x86.ActiveCfg = Debug|Win32
 		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Debug|x86.Build.0 = Debug|Win32
+		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Release|ARM.ActiveCfg = Release|Win32
+		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Release|ARM64.ActiveCfg = Release|Win32
 		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Release|x64.ActiveCfg = Release|x64
 		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Release|x64.Build.0 = Release|x64
 		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Release|x86.ActiveCfg = Release|Win32
 		{DF2E027A-47E5-4543-8362-D5DB5B8DC11E}.Release|x86.Build.0 = Release|Win32
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Debug|ARM.ActiveCfg = Debug|Win32
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Debug|ARM64.ActiveCfg = Debug|Win32
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Debug|x64.ActiveCfg = Debug|x64
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Debug|x64.Build.0 = Debug|x64
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Debug|x86.ActiveCfg = Debug|Win32
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Debug|x86.Build.0 = Debug|Win32
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Release|ARM.ActiveCfg = Release|Win32
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Release|ARM64.ActiveCfg = Release|Win32
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Release|x64.ActiveCfg = Release|x64
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Release|x64.Build.0 = Release|x64
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Release|x86.ActiveCfg = Release|Win32
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

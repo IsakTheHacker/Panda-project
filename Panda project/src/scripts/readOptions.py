@@ -15,3 +15,12 @@
 #define color_lightpurple "D";
 #define color_lightyellow "E";
 #define color_brightwhite "F";
+
+<Texture> initialShadingGroup {
+  "tunnel.jpg"
+  <Scalar> format { rgb }
+  <Scalar> wrapu { repeat }
+  <Scalar> wrapv { repeat }
+  <Scalar> minfilter { linear_mipmap_linear }
+  <Scalar> magfilter { linear }
+}

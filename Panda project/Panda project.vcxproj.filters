@@ -21,6 +21,12 @@
     <Filter Include="Source Files\C++ files\Testing...">
       <UniqueIdentifier>{8428eee7-3130-48eb-9035-ca4e588fff6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Platform Specific">
+      <UniqueIdentifier>{407702c6-525a-49c8-93e2-efd97aee829c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\External">
+      <UniqueIdentifier>{0f9aa260-658a-4ed0-8e3d-d828cc591fac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameClasses.h">
@@ -37,6 +43,21 @@
     </ClInclude>
     <ClInclude Include="gameLanguage.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="win32Platform.h">
+      <Filter>Header Files\Platform Specific</Filter>
+    </ClInclude>
+    <ClInclude Include="platformPicker.h">
+      <Filter>Header Files\Platform Specific</Filter>
+    </ClInclude>
+    <ClInclude Include="linuxPlatform.h">
+      <Filter>Header Files\Platform Specific</Filter>
+    </ClInclude>
+    <ClInclude Include="keyDefinitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\external\json.hpp">
+      <Filter>Header Files\External</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +87,18 @@
     </ClCompile>
     <ClCompile Include="Testing area.cpp">
       <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="Some example.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Chunk viewer.cpp">
+      <Filter>Source Files\C++ files\Devtools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

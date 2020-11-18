@@ -1,0 +1,7 @@
+<CoordinateSystem> { Z-Up }
+
+<Comment> {
+  "bam2egg ./bam/block_outline.bam -o ./egg/block_outline.egg"
+}
+<Group> Cube {
+}
