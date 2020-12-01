@@ -1,0 +1,131 @@
+<CoordinateSystem> { Z-Up }
+
+<Comment> {
+  "bam2egg ./bam/half_block_wedge_base.bam -o ./egg/half_block_wedge_base.egg"
+}
+<Material> Material {
+  <Scalar> baser { 0.800000011920929 }
+  <Scalar> baseg { 0.800000011920929 }
+  <Scalar> baseb { 0.800000011920929 }
+  <Scalar> emitr { 0 }
+  <Scalar> emitg { 0 }
+  <Scalar> emitb { 0 }
+  <Scalar> emita { 0 }
+  <Scalar> roughness { 0.400000005960464 }
+  <Scalar> metallic { 0 }
+  <Scalar> local { 0 }
+}
+<VertexPool> Scene {
+  <Vertex> 0 {
+    1 -1 -1
+    <UV> 0 { 0.375 0.75 }
+    <Normal> { 0 -1 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 1 {
+    1 -1 1
+    <UV> 0 { 0.625 0.75 }
+    <Normal> { 0 -1 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 2 {
+    -1 -1 -1
+    <UV> 0 { 0.375 1 }
+    <Normal> { 0 -1 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 3 {
+    -1 -1 -1
+    <UV> 0 { 0.125 0.75 }
+    <Normal> { 0 0 -1 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 4 {
+    -1 1 -1
+    <UV> 0 { 0.125 0.5 }
+    <Normal> { 0 0 -1 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 5 {
+    1 1 -1
+    <UV> 0 { 0.375 0.5 }
+    <Normal> { 0 0 -1 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 6 {
+    1 -1 -1
+    <UV> 0 { 0.375 0.75 }
+    <Normal> { 0 0 -1 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 7 {
+    1 -1 1
+    <UV> 0 { 0.625 0.75 }
+    <Normal> { 1 0 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 8 {
+    1 -1 -1
+    <UV> 0 { 0.375 0.75 }
+    <Normal> { 1 0 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 9 {
+    1 1 -1
+    <UV> 0 { 0.375 0.5 }
+    <Normal> { 1 0 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 10 {
+    1 1 1
+    <UV> 0 { 0.625 0.5 }
+    <Normal> { 1 0 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 11 {
+    -1 1 -1
+    <UV> 0 { 0.375 0.25 }
+    <Normal> { 0 1 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 12 {
+    1 1 1
+    <UV> 0 { 0.625 0.5 }
+    <Normal> { 0 1 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 13 {
+    1 1 -1
+    <UV> 0 { 0.375 0.5 }
+    <Normal> { 0 1 0 }
+    <RGBA> { 1 1 1 1 }
+  }
+}
+<Group> Cube {
+  <Group> Cube {
+    <Polygon> {
+      <MRef> { Material }
+      <VertexRef> { 0 1 2 <Ref> { Scene } }
+    }
+    <Polygon> {
+      <MRef> { Material }
+      <VertexRef> { 3 4 5 <Ref> { Scene } }
+    }
+    <Polygon> {
+      <MRef> { Material }
+      <VertexRef> { 3 5 6 <Ref> { Scene } }
+    }
+    <Polygon> {
+      <MRef> { Material }
+      <VertexRef> { 7 8 9 <Ref> { Scene } }
+    }
+    <Polygon> {
+      <MRef> { Material }
+      <VertexRef> { 7 9 10 <Ref> { Scene } }
+    }
+    <Polygon> {
+      <MRef> { Material }
+      <VertexRef> { 11 12 13 <Ref> { Scene } }
+    }
+  }
+}

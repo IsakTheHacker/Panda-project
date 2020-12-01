@@ -1,0 +1,11 @@
+name=Grass Block
+autoRotateOnPlacement=0
+returnedItem=Grass Block
+chiselable=1
+variants=[
+	wedge={
+		name=Grass Wedge
+		autoRotateOnPlacement=1
+		returnedItem=Grass Wedge
+	}
+]

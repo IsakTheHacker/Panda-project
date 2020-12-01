@@ -12,6 +12,20 @@
 #include "collisionNode.h"
 #include "collisionHandlerFluidPusher.h"
 #include "CollisionHandlerQueue.h"
+
+#include "particleSystem.h"
+#include "particles.h"
+#include "forces.h"
+#include "physical.h"
+#include "physicsManager.h"
+#include "physicsCollisionHandler.h"
+#include "linearEulerIntegrator.h"
+#include "actorNode.h"
+#include "forceNode.h"
+#include "lvector3.h"
+#include <auto_bind.h>
+#include <animControlCollection.h>
+
 #include "collisionSphere.h"
 #include "collisionRay.h"
 
@@ -28,6 +42,7 @@ bool shouldRun = true;
 bool terrainAnimationShouldRun;
 bool devMode = false;
 bool mouseInGame = true;
+bool playerOnGround = false;
 
 //My libraries
 #include "../cppExtension.h"
@@ -371,7 +386,7 @@ int main(int argc, char* argv[]) {
 	NodePath blockyC = blocky.attach_new_node(cSphere_node2);
 	blockyC.show();
 	
-
+	camera.set_z(30);
 
 	NodePath panda = window->load_model(framework.get_models(), "panda.egg");
 	panda.set_scale(0.5);
@@ -382,20 +397,32 @@ int main(int argc, char* argv[]) {
 
 	CollisionNode* cSphere_node = new CollisionNode("Sphere");
 	cSphere_node->add_solid(new CollisionBox(0, 2, 2, 4));
-	cSphere_node->set_from_collide_mask(0);
 	NodePath cameraC = camera.attach_new_node(cSphere_node);
 	cameraC.show();
 
-	CollisionHandlerPusher* pusher = new CollisionHandlerPusher();
-	CollisionHandlerQueue* queue = new CollisionHandlerQueue();
-	CollisionTraverser traverser;
+	/*PhysicsManager physicsManager;
+	physicsManager.attach_linear_integrator(new LinearEulerIntegrator);*/
 
-	pusher->add_collider(cameraC, camera);
-	traverser.add_collider(cameraC, pusher);
 
-	traverser.traverse(window->get_render());
+	//PhysicsCollisionHandler* physicsCollisionHandler = new PhysicsCollisionHandler();
 
-	traverser.show_collisions(window->get_render());
+	CollisionHandlerPusher pusher;
+	pusher.add_in_pattern("Something");
+	//pusher.add_again_pattern("%fn-into-%in");
+
+	//framework.define_key("render/camera_group/Sphere-into-render/object/Box", "", game::testIfPlayerOnGround, 0);
+	framework.define_key("Something", "", game::testIfPlayerOnGround, 0);
+
+	//window->get_render().ls();
+
+	//CollisionHandlerQueue queue;
+	CollisionTraverser* traverser = new CollisionTraverser();
+
+	traverser->add_collider(cameraC, &pusher);
+	pusher.add_collider(cameraC, camera);
+
+	traverser->traverse(window->get_render());
+	traverser->show_collisions(window->get_render());
 
 
 	//Reading settings from settings map
@@ -425,13 +452,34 @@ int main(int argc, char* argv[]) {
 
 	//myTraverser.show_collisions(window->get_render());
 
+	/*framework.show_collision_solids(window->get_render());*/
+
 	NodePath block;
 
 	double heading;
 	double pitch;
 
+	double velocity = 0.0;
+
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
+
+		/*physicsManager.do_physics(1.0f);*/
+		
+
+
+		if (velocity == 0 && !playerOnGround) {
+			velocity = 0.01;
+		} else {
+			velocity = velocity * 1.05;
+		}
+
+		if (playerOnGround) {
+			velocity = 0;
+		}
+
+		camera.set_z(camera.get_pos().get_z() - velocity);
+		panda.set_z(camera.get_pos().get_z() - velocity);
 
 		if (handInventoryIndex < 0) {
 			handInventoryIndex = 10;
@@ -451,14 +499,14 @@ int main(int argc, char* argv[]) {
 
 		// check collisions, will call pusher collision handler
 		// if a collision is detected
-		traverser.traverse(window->get_render());
+		traverser->traverse(window->get_render());
 
 		myTraverser.traverse(window->get_render());
 		if (myHandler->get_num_entries() > 0) {
 			myHandler->sort_entries();
 			block.hide_bounds();
 			CollisionEntry* entry = myHandler->get_entry(0);
-			block = myHandler->get_entry(0)->get_into_node_path().get_parent();
+			block = myHandler->get_entry(0)->get_into_node_path().get_parent().get_parent();
 			LVector3 surface = entry->get_surface_normal(window->get_render());
 			block.show_tight_bounds();
 			if (keys["mouse1"]) {
@@ -466,10 +514,72 @@ int main(int argc, char* argv[]) {
 				keys["mouse1"] = false;
 			}
 			if (keys["mouse3"]) {
+				LVector3 notRotatedSurface = surface;
+				notRotatedSurface.set_x(0);
+				notRotatedSurface.set_y(0);
+				notRotatedSurface.set_z(0);
+
 				std::cout << surface << std::endl;
-				NodePath object = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"block.egg");
+				std::cout << notRotatedSurface << std::endl;
+
+				std::string path;
+
+				NodePath object;
+				TexturePool* texturePool = TexturePool::get_global_ptr();
+				TextureStage* textureStage = new TextureStage("textureStage2");
+				textureStage->set_sort(0);
+				textureStage->set_mode(TextureStage::M_replace);
+				Texture* texture;
+				Texture* texture2;
+
+				NodePath block2;
+
+				if (handInventoryIndex == 0) {
+					path = "wedge.egg";
+					object = NodePath("object");
+					NodePath incline = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"half_block_wedge_incline");
+					incline.reparent_to(object);
+					NodePath base = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"half_block_wedge_base");
+					base.reparent_to(object);
+
+					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/grass-#.png");
+					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+					base.set_texture(texture, 1);
+
+					texture2 = texturePool->load_texture("/c/dev/Panda project/Panda project/models/textures/png/grass-4.png");
+					texture2->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture2->set_magfilter(SamplerState::FilterType::FT_nearest);
+					incline.set_texture(texture2, 1);
+
+					object.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
+					object.set_tex_projector(textureStage->get_default(), window->get_render(), object);
+				} else if (handInventoryIndex == 1) {
+					path = "block.egg";
+					object = NodePath("object");
+					NodePath block2 = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)path);
+					block2.reparent_to(object);
+
+					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/rotational-complex-#.png");
+					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+					block2.set_texture(texture, 1);
+				} else {
+					path = "block.egg";
+					object = NodePath("object");
+					NodePath block2 = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)path);
+					block2.reparent_to(object);
+
+					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/grass-#.png");
+					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+					block2.set_texture(texture, 1);
+				}
+
+
 				object.set_pos(block.get_x() + surface.get_x()*2, block.get_y() + surface.get_y()*2, block.get_z() + surface.get_z()*2);
 				object.reparent_to(window->get_render());
+				//physicsManager.attach_physical_node((PhysicalNode*)object.node());
 
 				if (keys["r"]) {
 
@@ -498,16 +608,27 @@ int main(int argc, char* argv[]) {
 					object.set_hpr(heading * 180, pitch * 180, 0);
 				}
 
-				TexturePool* texturePool = TexturePool::get_global_ptr();
-				TextureStage* textureStage = new TextureStage("textureStage2");
-				textureStage->set_sort(0);
-				textureStage->set_mode(TextureStage::M_replace);
+				
 				object.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
 				object.set_tex_projector(textureStage->get_default(), window->get_render(), object);
-				Texture* texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/rotational-complex-#.png");
-				texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-				texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-				object.set_texture(texture, 1);
+
+				if (handInventoryIndex == 0) {
+					
+				} else if (handInventoryIndex == 1) {
+					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/rotational-complex-#.png");
+					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+					block2.set_texture(texture, 1);
+				} else {
+					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/grass-#.png");
+					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+					block2.set_texture(texture, 1);
+				}
+
+				CollisionNode* collisionNode = new CollisionNode("Box");
+				collisionNode->add_solid(new CollisionBox(0, 1, 1, 1));
+				NodePath collisionNodePath = object.attach_new_node(collisionNode);
 
 				game::blocks.push_back(object);
 				keys["mouse3"] = false;
@@ -519,14 +640,12 @@ int main(int argc, char* argv[]) {
 
 		// Surt sa räven
 
-		//for (int i = 0; i < myHandler->get_num_entries(); ++i) {
-		//	CollisionEntry* entry = myHandler->get_entry(i);
-		//	if (keys["mouse1"]) {
-		//		NodePath block = entry->get_into_node_path();
-		//		block.remove_node();
-		//	}
-		//	//std::cout << *entry << std::endl;
-		//}
+		/*for (int i = 0; i < queue.get_num_entries(); ++i) {
+			CollisionEntry* entry = queue.get_entry(i);
+			NodePath block = entry->get_into_node_path().get_parent().get_parent();
+			block.remove_node();
+			std::cout << *entry << std::endl;
+		}*/
 
 		text->set_text("X: " + std::to_string(floor(camera.get_x())) + "\nY: " + std::to_string(floor(camera.get_y())) + "\nZ: " + std::to_string(floor(camera.get_z())));
 		text2->set_text("H: " + std::to_string(floor(camera.get_h())) + "\nP: " + std::to_string(floor(camera.get_p())) + "\nR: " + std::to_string(floor(camera.get_r())));
@@ -593,8 +712,11 @@ int main(int argc, char* argv[]) {
 			panda.set_x(camera, 0 + x_speed);
 		}
 		if (keys["space"]) {
-			camera.set_z(camera.get_pos().get_z() + z_speed);
-			panda.set_z(camera.get_pos().get_z() + z_speed);
+			camera.set_z(camera.get_pos().get_z() + z_speed*7);
+			panda.set_z(camera.get_pos().get_z() + z_speed*7);
+			keys["space"] = false;
+			playerOnGround = false;
+			velocity = 0;
 		}
 		if (keys["lshift"]) {
 			camera.set_z(camera.get_pos().get_z() - z_speed);

@@ -1,0 +1,55 @@
+<CoordinateSystem> { Z-Up }
+
+<Comment> {
+  "bam2egg ./bam/half_block_wedge_incline.bam -o ./egg/half_block_wedge_incline.egg"
+}
+<Material> Material {
+  <Scalar> baser { 0.800000011920929 }
+  <Scalar> baseg { 0.800000011920929 }
+  <Scalar> baseb { 0.800000011920929 }
+  <Scalar> emitr { 0 }
+  <Scalar> emitg { 0 }
+  <Scalar> emitb { 0 }
+  <Scalar> emita { 0 }
+  <Scalar> roughness { 0.400000005960464 }
+  <Scalar> metallic { 0 }
+  <Scalar> local { 0 }
+}
+<VertexPool> Scene {
+  <Vertex> 0 {
+    1 1 1
+    <UV> 0 { 0.625 0.5 }
+    <Normal> { -0.707106828689575 0 0.707106828689575 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 1 {
+    -1 1 -1
+    <UV> 0 { 0.375 0.25 }
+    <Normal> { -0.707106828689575 0 0.707106828689575 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 2 {
+    -1 -1 -1
+    <UV> 0 { 0.375 0 }
+    <Normal> { -0.707106828689575 0 0.707106828689575 }
+    <RGBA> { 1 1 1 1 }
+  }
+  <Vertex> 3 {
+    1 -1 1
+    <UV> 0 { 0.625 0.75 }
+    <Normal> { -0.707106828689575 0 0.707106828689575 }
+    <RGBA> { 1 1 1 1 }
+  }
+}
+<Group> Cube {
+  <Group> Cube {
+    <Polygon> {
+      <MRef> { Material }
+      <VertexRef> { 0 1 2 <Ref> { Scene } }
+    }
+    <Polygon> {
+      <MRef> { Material }
+      <VertexRef> { 0 2 3 <Ref> { Scene } }
+    }
+  }
+}

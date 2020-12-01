@@ -100,5 +100,8 @@
     <ClCompile Include="src\Chunk viewer.cpp">
       <Filter>Source Files\C++ files\Devtools</Filter>
     </ClCompile>
+    <ClCompile Include="Physicsexample.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

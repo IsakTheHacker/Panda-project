@@ -362,10 +362,11 @@ namespace game {
 							placeholder[attribute_array[0]] = attribute_array[1];
 						}
 					}
-					NodePath object = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"block.egg");
+					NodePath object = NodePath("object");
+					NodePath object2 = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"block.egg");
+					object2.reparent_to(object);
 					object.reparent_to(window->get_render());
 					object.set_pos(x_level, y_level, z_level);
-					object.set_tag("myObjectTag", "");
 					if (placeholder["texture"] != "") {
 						game::setTexture(object, placeholder["texture"]);
 					}
@@ -393,7 +394,13 @@ namespace game {
 					std::cout << "OrigFileXSize: " << texture->get_orig_file_x_size() << std::endl;
 					std::cout << "XSize: " << texture->get_x_size() << std::endl;
 					std::cout << "TexScale: " << texture->get_tex_scale() << std::endl;*/
-					object.set_texture(texture, 1);
+					object2.set_texture(texture, 1);
+
+					CollisionNode* collisionNode = new CollisionNode("Box");
+					collisionNode->add_solid(new CollisionBox(0, 1, 1, 1));
+					NodePath collisionNodePath = object.attach_new_node(collisionNode);
+					//collisionNodePath.show();
+
 
 					blocks.push_back(object);
 
@@ -423,5 +430,19 @@ namespace game {
 	void wheel_roll(const Event* theEvent, void* data) {
 		int& indexModification = *((int*)data);
 		handInventoryIndex += indexModification;
+	}
+	void testIfPlayerOnGround(const Event* theEvent, void* data) {
+		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
+		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
+		nassertv(entry != NULL);
+
+		if (entry->get_into_node_path().get_parent().get_parent().get_z() < entry->get_from_node_path().get_parent().get_z()) {
+			playerOnGround = true;
+		} else {
+			playerOnGround = false;
+		}
+
+		std::cerr << "Collision from " << entry->get_from_node_path()
+			<< " into " << entry->get_into_node_path() << "\n";
 	}
 }

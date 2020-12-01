@@ -2,23 +2,33 @@
 
 //W-key
 framework.define_key("w", "W-key", game::key_down, (void*)&game::w);
+framework.define_key("shift-w", "W-key", game::key_down, (void*)&game::w);
 framework.define_key("w-up", "W-key", game::key_up, (void*)&game::w);
+framework.define_key("shift-w-up", "W-key", game::key_up, (void*)&game::w);
 
 //A-key
 framework.define_key("a", "A-key", game::key_down, (void*)&game::a);
+framework.define_key("shift-a", "A-key", game::key_down, (void*)&game::a);
 framework.define_key("a-up", "A-key", game::key_up, (void*)&game::a);
+framework.define_key("shift-a-up", "A-key", game::key_up, (void*)&game::a);
 
 //S-key
 framework.define_key("s", "S-key", game::key_down, (void*)&game::s);
+framework.define_key("shift-s", "S-key", game::key_down, (void*)&game::s);
 framework.define_key("s-up", "S-key", game::key_up, (void*)&game::s);
+framework.define_key("shift-s-up", "S-key", game::key_up, (void*)&game::s);
 
 //D-key
 framework.define_key("d", "D-key", game::key_down, (void*)&game::d);
+framework.define_key("shift-d", "D-key", game::key_down, (void*)&game::d);
 framework.define_key("d-up", "D-key", game::key_up, (void*)&game::d);
+framework.define_key("shift-d-up", "D-key", game::key_up, (void*)&game::d);
 
 //Space-key
 framework.define_key("space", "Space-key", game::key_down, (void*)&game::space);
+framework.define_key("shift-space", "Space-key", game::key_down, (void*)&game::space);
 framework.define_key("space-up", "Space-key", game::key_up, (void*)&game::space);
+framework.define_key("shift-space-up", "Space-key", game::key_up, (void*)&game::space);
 
 //LShift-key
 framework.define_key("lshift", "LShift-key", game::key_down, (void*)&game::lshift);
