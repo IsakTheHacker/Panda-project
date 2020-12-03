@@ -320,98 +320,6 @@ namespace game {
 
 	std::vector<NodePath> blocks;
 
-	//Reads a chunk
-	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
-		//Initalize variables
-		std::ifstream file(path);
-		std::string line;
-
-		int x_level = x;
-		int y_level = y;
-		int z_level;
-		std::vector<std::string> block_list;
-		std::vector<std::string> block_attributes;
-		std::vector<std::string> attribute_array;
-		std::string block_model;
-		std::string block_texture;
-		std::map<std::string, std::string> placeholder = {
-			{"model",""},
-			{"texture",""},
-			{"texture-scale",""}
-		};
-
-		NodePath object;
-
-		while (std::getline(file, line)) {
-			if (line.find("z") != std::string::npos) {
-				findReplaceFirst(line, "z", "");
-				z_level = std::stoi(line);
-				x_level = x;
-			} else {
-				x_level += 2;
-				y_level = y;
-				block_list = split(line, ",");
-				for (std::string block : block_list) {
-					y_level += 2;
-					findReplaceFirst(block, "{", "");
-					findReplaceFirst(block, "}", "");
-					block_attributes = split(block, "|");
-					for (std::string attribute : block_attributes) {
-						attribute_array = split(attribute, ":");
-						if (placeholder.find(attribute_array[0]) != placeholder.end()) {
-							placeholder[attribute_array[0]] = attribute_array[1];
-						}
-					}
-					NodePath object = NodePath("object");
-					NodePath object2 = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"block.egg");
-					object2.reparent_to(object);
-					object.reparent_to(window->get_render());
-					object.set_pos(x_level, y_level, z_level);
-					if (placeholder["texture"] != "") {
-						game::setTexture(object, placeholder["texture"]);
-					}
-					if (placeholder["texture-scale"] != "") {
-						game::setTextureScale(object, std::stoi(placeholder["texture-scale"]));
-					}
-
-					object.clear_texture();
-
-
-					TexturePool* texturePool = TexturePool::get_global_ptr();
-					TextureStage* textureStage = new TextureStage("textureStage2");
-					textureStage->set_sort(0);
-					textureStage->set_mode(TextureStage::M_replace);
-
-					object.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
-					object.set_tex_projector(textureStage->get_default(), window->get_render(), object);
-
-					Texture* texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/grass-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-					/*texture->set_x_size(32);
-					texture->set_y_size(32);*/
-					/*std::cout << "Pages: " << texture->get_num_pages() << std::endl;
-					std::cout << "OrigFileXSize: " << texture->get_orig_file_x_size() << std::endl;
-					std::cout << "XSize: " << texture->get_x_size() << std::endl;
-					std::cout << "TexScale: " << texture->get_tex_scale() << std::endl;*/
-					object2.set_texture(texture, 1);
-
-					CollisionNode* collisionNode = new CollisionNode("Box");
-					collisionNode->add_solid(new CollisionBox(0, 1, 1, 1));
-					NodePath collisionNodePath = object.attach_new_node(collisionNode);
-					//collisionNodePath.show();
-
-
-					blocks.push_back(object);
-
-					framework.all_windows_closed();
-				}
-			}
-		}
-		file.close();
-		return 0;
-	}
-
 	// Events
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
@@ -432,17 +340,20 @@ namespace game {
 		handInventoryIndex += indexModification;
 	}
 	void testIfPlayerOnGround(const Event* theEvent, void* data) {
+		bool in_out_pattern = (bool)data;
+		
 		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
 		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
 		nassertv(entry != NULL);
 
-		if (entry->get_into_node_path().get_parent().get_parent().get_z() < entry->get_from_node_path().get_parent().get_z()) {
-			playerOnGround = true;
+		if (!in_out_pattern) {
+			if (entry->get_into_node_path().get_parent().get_parent().get_z() < entry->get_from_node_path().get_parent().get_z()) {
+				playerOnGround = true;
+			} else {
+				playerOnGround = false;
+			}
 		} else {
 			playerOnGround = false;
 		}
-
-		std::cerr << "Collision from " << entry->get_from_node_path()
-			<< " into " << entry->get_into_node_path() << "\n";
 	}
 }

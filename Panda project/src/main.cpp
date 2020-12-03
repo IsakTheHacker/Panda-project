@@ -13,6 +13,12 @@
 #include "collisionHandlerFluidPusher.h"
 #include "CollisionHandlerQueue.h"
 
+//Lighting
+#include "ambientLight.h"
+#include "directionalLight.h"
+#include "pointLight.h"
+#include "spotlight.h"
+
 #include "particleSystem.h"
 #include "particles.h"
 #include "forces.h"
@@ -380,7 +386,6 @@ int main(int argc, char* argv[]) {
 	blocky.set_pos(0, 0, 100);
 	blocky.reparent_to(window->get_render());
 
-
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
 	NodePath blockyC = blocky.attach_new_node(cSphere_node2);
@@ -396,9 +401,8 @@ int main(int argc, char* argv[]) {
 
 
 	CollisionNode* cSphere_node = new CollisionNode("Sphere");
-	cSphere_node->add_solid(new CollisionBox(0, 2, 2, 4));
+	cSphere_node->add_solid(new CollisionBox(0, 0.8, 0.8, 3));
 	NodePath cameraC = camera.attach_new_node(cSphere_node);
-	cameraC.show();
 
 	/*PhysicsManager physicsManager;
 	physicsManager.attach_linear_integrator(new LinearEulerIntegrator);*/
@@ -408,10 +412,12 @@ int main(int argc, char* argv[]) {
 
 	CollisionHandlerPusher pusher;
 	pusher.add_in_pattern("Something");
+	pusher.add_out_pattern("Something2");
 	//pusher.add_again_pattern("%fn-into-%in");
 
 	//framework.define_key("render/camera_group/Sphere-into-render/object/Box", "", game::testIfPlayerOnGround, 0);
 	framework.define_key("Something", "", game::testIfPlayerOnGround, 0);
+	framework.define_key("Something2", "", game::testIfPlayerOnGround, (void*)1);
 
 	//window->get_render().ls();
 
@@ -422,7 +428,27 @@ int main(int argc, char* argv[]) {
 	pusher.add_collider(cameraC, camera);
 
 	traverser->traverse(window->get_render());
-	traverser->show_collisions(window->get_render());
+	//traverser->show_collisions(window->get_render());
+
+
+	/*PT(PointLight) plight = new PointLight("sun");
+	plight->set_color(LColor(.7, .7, .7, 1));
+	NodePath plnp = window->get_render().attach_new_node(plight);
+	plnp.set_pos(5, 5, 5);
+	window->get_render().set_light(plnp);*/
+
+	PT(AmbientLight) alight = new AmbientLight("alight");
+	alight->set_color(0.2);
+	NodePath alnp = window->get_render().attach_new_node(alight);
+	window->get_render().set_light(alnp);
+
+	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
+	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
+	NodePath dlnp = window->get_render().attach_new_node(d_light);
+	dlnp.set_hpr(0, -90, 0);
+	dlnp.set_pos(5, 5, 10);
+	window->get_render().set_light(dlnp);
+
 
 
 	//Reading settings from settings map
@@ -450,9 +476,9 @@ int main(int argc, char* argv[]) {
 		}
 	}*/
 
-	//myTraverser.show_collisions(window->get_render());
+	/*myTraverser.show_collisions(window->get_render());
 
-	/*framework.show_collision_solids(window->get_render());*/
+	framework.show_collision_solids(window->get_render());*/
 
 	NodePath block;
 
@@ -682,6 +708,10 @@ int main(int argc, char* argv[]) {
 					offset_p += move_y / camera_y_speed;
 					panda.set_h(offset_h);
 
+					//Adjust the collision box so its orientation doesn't change
+					//cameraC.set_h(offset_h);
+					cameraC.set_p(offset_p - offset_p*2);
+
 					if (!keys["v"]) {
 						if (offset_p < 90 && offset_p > -90) {
 							camera.set_p(offset_p);
@@ -712,8 +742,10 @@ int main(int argc, char* argv[]) {
 			panda.set_x(camera, 0 + x_speed);
 		}
 		if (keys["space"]) {
-			camera.set_z(camera.get_pos().get_z() + z_speed*7);
-			panda.set_z(camera.get_pos().get_z() + z_speed*7);
+			if (playerOnGround) {
+				camera.set_z(camera.get_pos().get_z() + z_speed*17);
+				panda.set_z(camera.get_pos().get_z() + z_speed*17);
+			}
 			keys["space"] = false;
 			playerOnGround = false;
 			velocity = 0;
