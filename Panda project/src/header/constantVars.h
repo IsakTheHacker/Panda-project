@@ -19,5 +19,5 @@ namespace game {
 	const int wheel_up = -1;
 	const int wheel_down = 1;
 
-	const std::array<std::string, 1> allowed_parameters = {"-dev"};
+	const std::array<std::string, 2> allowed_parameters = {"-dev", "-vs"};
 }

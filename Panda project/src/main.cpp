@@ -1,46 +1,4 @@
-//Panda3d libraries
-#include "pgButton.h"
-#include "pandaFramework.h"
-#include "pandaSystem.h"
-#include "genericAsyncTask.h"
-#include "asyncTaskManager.h"
-#include "mouseWatcher.h"
-#include "load_prc_file.h"
-
-#include "collisionTraverser.h"
-#include "collisionHandlerPusher.h"
-#include "collisionNode.h"
-#include "collisionHandlerFluidPusher.h"
-#include "CollisionHandlerQueue.h"
-
-//Lighting
-#include "ambientLight.h"
-#include "directionalLight.h"
-#include "pointLight.h"
-#include "spotlight.h"
-
-#include "particleSystem.h"
-#include "particles.h"
-#include "forces.h"
-#include "physical.h"
-#include "physicsManager.h"
-#include "physicsCollisionHandler.h"
-#include "linearEulerIntegrator.h"
-#include "actorNode.h"
-#include "forceNode.h"
-#include "lvector3.h"
-#include <auto_bind.h>
-#include <animControlCollection.h>
-
-#include "collisionSphere.h"
-#include "collisionRay.h"
-
-#include <geoMipTerrain.h>
-
-#include <perlinNoise2.h>
-#include <perlinNoise3.h>
-#include <texturePool.h>
-#include <cardMaker.h>
+#include "./header/pandaIncludes.h"
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -49,12 +7,13 @@ bool terrainAnimationShouldRun;
 bool devMode = false;
 bool mouseInGame = true;
 bool playerOnGround = false;
+std::string gamePath = "./";
 
 //My libraries
-#include "../cppExtension.h"
-#include "../gameFunctions.h"
-#include "../gameLanguage.h"
-#include "../constantVars.h"
+#include "./header/cppExtension.h"
+#include "./header/gameFunctions.h"
+#include "./header/gameLanguage.h"
+#include "./header/constantVars.h"
 
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
@@ -73,24 +32,7 @@ PT(CollisionHandlerQueue) myHandler;
 PT(CollisionNode) pickerNode;
 NodePath pickerNP;
 
-#include "../gameClasses.h"
-
-//void myFunction(const Event* theEvent, void* data) {
-//
-//	game::collisionRayEventParameters* parameters = (game::collisionRayEventParameters*)data;
-//
-//	std::cout << "FFF";
-//
-//	// This gives up the screen coordinates of the mouse.
-//	LPoint2 mpos = parameters->mouseWatcher->get_mouse();
-//
-//	// This makes the ray's origin the camera and makes the ray point
-//	// to the screen coordinates of the mouse.
-//
-//	parameters->pickerRay->set_from_lens(parameters->window->get_camera(0), mpos.get_x(), mpos.get_y());
-//
-//	std::cout << "SSS";
-//}
+#include "./header/gameClasses.h"
 
 // Set up the GeoMipTerrain
 GeoMipTerrain* terrain;
@@ -130,11 +72,9 @@ int main(int argc, char* argv[]) {
 	//Changing window size
 	load_prc_file_data("", "win-size 1280 720");
 
-	
-
 	//Creating folders and files
-	game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\scripts\\makeDirectories.py");
-	game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\scripts\\createOptionsFile.py");
+	game::runPyScript(gamePath + (std::string)"data/scripts/makeDirectories.py");
+	game::runPyScript(gamePath + (std::string)"data/scripts/createOptionsFile.py");
 
 	//Reading options
 	std::map<std::string, std::string> options;
@@ -153,6 +93,10 @@ int main(int argc, char* argv[]) {
 			if (argv[1] == game::allowed_parameters[0]) {
 				devMode = true;
 				game::importantInfoOut("Game was started in devmode!");
+			} else if (argv[1] == game::allowed_parameters[1]) {
+				gamePath = "../../../Panda Project/";
+				devMode = true;
+				game::importantInfoOut("Game was started in Visual Studio devmode!");
 			}
 		} else {
 			game::warningOut("An unknown argument was given!");
@@ -169,7 +113,7 @@ int main(int argc, char* argv[]) {
 	// Open a new window framework and set the title
 	PandaFramework framework;
 	framework.open_framework(argc, argv);
-	framework.set_window_title("asd");
+	framework.set_window_title("The Panda Project: Alpha 0.1.0");
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
@@ -215,7 +159,7 @@ int main(int argc, char* argv[]) {
 
 	//Keyboard input
 	window->enable_keyboard();
-	#include "../keyDefinitions.h"
+	#include "./header/keyDefinitions.h"
 
 	PT(TextNode) text;
 	text = new TextNode("node name");
@@ -232,7 +176,7 @@ int main(int argc, char* argv[]) {
 	// Crosshair
 	CardMaker cardmaker("crosshair");
 	NodePath cursor(cardmaker.generate());
-	game::setTexture(cursor, "/c/dev/Panda project/Panda project/crosshair.png");
+	game::setTexture(cursor, gamePath + (std::string)"models/textures/png/crosshair.png");
 	cursor.set_sx(0.1);
 	cursor.set_sz(0.1);
 	cursor.set_pos(0 - cursor.get_sx() / 2, 0, 0 - cursor.get_sz() / 2);
@@ -245,7 +189,7 @@ int main(int argc, char* argv[]) {
 		std::cout << "Run..." << std::endl;
 		CardMaker hand_inventory("hand_inventory" + i);
 		NodePath hand_inventoryNode(hand_inventory.generate());
-		game::setTexture(hand_inventoryNode, "/c/dev/Panda project/Panda project/models/textures/png/hand-inventory-all.png");
+		game::setTexture(hand_inventoryNode, gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
 		hand_inventoryNode.set_sx(0.2);
 		hand_inventoryNode.set_sz(0.2);
 		hand_inventoryNode.set_pos(i/static_cast<float>(5) - hand_inventoryNode.get_sx() / 2, 0, -0.85 - hand_inventoryNode.get_sz() / 2);
@@ -255,71 +199,6 @@ int main(int argc, char* argv[]) {
 	}
 
 	std::cout << inventory[5] << std::endl;
-
-
-	//terrain = new GeoMipTerrain("myDynamicTerrain");
-	//terrain->set_heightfield(Filename("/c/dev/Panda project/Panda project/noise_0000.png"));
-
-	//// Set terrain properties
-	//terrain->set_block_size(32);
-	//terrain->set_near(40);
-	//terrain->set_far(100);
-	////terrain->set_focal_point(camera);
-
-	//NodePath root2 = terrain->get_root();
-
-
-	//double block = terrain->get_elevation(10, 20);
-
-	//
-
-	////PNMImage b2 = terrain->heightfield();
-	////b2.
-	//
-
-	//game::logOut(std::to_string(block));
-
-	////std::cout << root2. << std::endl;
-
-
-	//std::cout << "Start" << std::endl;
-	//std::cout << terrain->heightfield() << std::endl;
-	//std::cout << "End" << std::endl;
-
-	//// Store the root NodePath for convenience
-	//NodePath root = terrain->get_root();
-	//root.reparent_to(window->get_render());
-	//root.set_sz(100);
-
-	//root.set_pos(root, 0, 0, 0);
-
-	//TexturePool* texture_pool = TexturePool::get_global_ptr();
-	//TextureStage* ts = new TextureStage("stage");
-	//ts->set_sort(0);
-	//ts->set_mode(TextureStage::M_replace);
-	//Texture* terrain_texture = texture_pool->load_texture("/c/dev/Panda project/Panda project/envir-rock1.jpg", "/c/dev/Panda project/Panda project/envir-rock1.jpg");
-	//terrain->get_root().set_texture(ts, terrain_texture);
-
-	///// this line applies same texture to terrain multiple times
-	///// if you are using a small texture over a large terrain
-	///// panda will expand the texture over all terrain unless you use below line
-	//terrain->get_root().set_tex_scale(ts, 20, 20);
-	//ts->set_saved_result(true);
-
-	//// Generate it.
-	//terrain->generate();
-
-	///*for (unsigned short i; i < terrain->get_block_size(); i++) {
-	//	for (unsigned short j; j < terrain->get_block_size(); j++) {
-	//		std::cout << "asd" << std::endl;
-	//		std::cout << terrain->get_block_node_path(i, j).get_z() << std::endl;
-	//	}
-	//}*/
-
-
-	//// Add a task to keep updating the terrain
-	//taskMgr->add(new GenericAsyncTask("Updates terrain", &UpdateTerrain, nullptr));
-
 
 	terrainAnimationShouldRun = true;
 	std::thread terrain_animation_thread(game::terrainAnimation);
@@ -369,19 +248,8 @@ int main(int argc, char* argv[]) {
 	framework.define_key(my_button->get_click_event(button_handle), "button press", game::key_down, 0);
 
 
-	//PerlinNoise3 hellot(4, 4, 4);
-
-
-
-	//// Load the environment model
-	//NodePath scene = window->load_model(framework.get_models(), "models/environment");
-	//scene.reparent_to(window->get_render());
-	//scene.set_scale(0.25, 0.25, 0.25);
-	//scene.set_pos(-8, 42, 0);
-
-	// Load our characters
-
-	NodePath blocky = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/blocky.egg");
+	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
+	//NodePath blocky = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/blocky.egg");
 	blocky.set_scale(0.5);
 	blocky.set_pos(0, 0, 100);
 	blocky.reparent_to(window->get_render());
@@ -404,12 +272,6 @@ int main(int argc, char* argv[]) {
 	cSphere_node->add_solid(new CollisionBox(0, 0.8, 0.8, 3));
 	NodePath cameraC = camera.attach_new_node(cSphere_node);
 
-	/*PhysicsManager physicsManager;
-	physicsManager.attach_linear_integrator(new LinearEulerIntegrator);*/
-
-
-	//PhysicsCollisionHandler* physicsCollisionHandler = new PhysicsCollisionHandler();
-
 	CollisionHandlerPusher pusher;
 	pusher.add_in_pattern("Something");
 	pusher.add_out_pattern("Something2");
@@ -429,13 +291,6 @@ int main(int argc, char* argv[]) {
 
 	traverser->traverse(window->get_render());
 	//traverser->show_collisions(window->get_render());
-
-
-	/*PT(PointLight) plight = new PointLight("sun");
-	plight->set_color(LColor(.7, .7, .7, 1));
-	NodePath plnp = window->get_render().attach_new_node(plight);
-	plnp.set_pos(5, 5, 5);
-	window->get_render().set_light(plnp);*/
 
 	PT(AmbientLight) alight = new AmbientLight("alight");
 	alight->set_color(0.2);
@@ -464,18 +319,6 @@ int main(int argc, char* argv[]) {
 	double offset_r = 0.0;
 
 	std::string sad = "Hello World";
-	game::encrypt(sad);
-	game::decrypt(sad);
-
-	/*for (int i = -10; i < 10; i += 2) {
-		for (int j = -10; j < 10; j += 2) {
-			for (int k = -10; k < 10; k += 2) {
-				game::objects.push_back(game::object(window, framework, "/c/dev/Panda project/Panda project/models/egg/block.egg", true, false));
-				game::objects[game::objects.size() - 1].model.set_pos(i, j, k);
-			}
-		}
-	}*/
-
 	/*myTraverser.show_collisions(window->get_render());
 
 	framework.show_collision_solids(window->get_render());*/
@@ -489,11 +332,6 @@ int main(int argc, char* argv[]) {
 
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
-
-		/*physicsManager.do_physics(1.0f);*/
-		
-
-
 		if (velocity == 0 && !playerOnGround) {
 			velocity = 0.01;
 		} else {
@@ -515,9 +353,9 @@ int main(int argc, char* argv[]) {
 
 		for (int i = 0; i < 11; i++) {
 			if (i == handInventoryIndex) {
-				game::setTexture(inventory[i], "/c/dev/Panda project/Panda project/models/textures/png/hand-inventory-highlighted.png");
+				game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-highlighted.png");
 			} else if (i != handInventoryIndex) {
-				game::setTexture(inventory[i], "/c/dev/Panda project/Panda project/models/textures/png/hand-inventory-all.png");
+				game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
 			}
 		}
 		
@@ -563,17 +401,17 @@ int main(int argc, char* argv[]) {
 				if (handInventoryIndex == 0) {
 					path = "wedge.egg";
 					object = NodePath("object");
-					NodePath incline = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"half_block_wedge_incline");
+					NodePath incline = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_incline");
 					incline.reparent_to(object);
-					NodePath base = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"half_block_wedge_base");
+					NodePath base = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_base");
 					base.reparent_to(object);
 
-					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/grass-#.png");
+					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 					base.set_texture(texture, 1);
 
-					texture2 = texturePool->load_texture("/c/dev/Panda project/Panda project/models/textures/png/grass-4.png");
+					texture2 = texturePool->load_texture(gamePath + (std::string)"models/textures/png/grass-4.png");
 					texture2->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture2->set_magfilter(SamplerState::FilterType::FT_nearest);
 					incline.set_texture(texture2, 1);
@@ -583,20 +421,20 @@ int main(int argc, char* argv[]) {
 				} else if (handInventoryIndex == 1) {
 					path = "block.egg";
 					object = NodePath("object");
-					NodePath block2 = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)path);
+					NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"/models/egg/" + (std::string)path);
 					block2.reparent_to(object);
 
-					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/rotational-complex-#.png");
+					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 					block2.set_texture(texture, 1);
 				} else {
 					path = "block.egg";
 					object = NodePath("object");
-					NodePath block2 = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)path);
+					NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)path);
 					block2.reparent_to(object);
 
-					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/grass-#.png");
+					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 					block2.set_texture(texture, 1);
@@ -605,7 +443,6 @@ int main(int argc, char* argv[]) {
 
 				object.set_pos(block.get_x() + surface.get_x()*2, block.get_y() + surface.get_y()*2, block.get_z() + surface.get_z()*2);
 				object.reparent_to(window->get_render());
-				//physicsManager.attach_physical_node((PhysicalNode*)object.node());
 
 				if (keys["r"]) {
 
@@ -641,12 +478,12 @@ int main(int argc, char* argv[]) {
 				if (handInventoryIndex == 0) {
 					
 				} else if (handInventoryIndex == 1) {
-					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/rotational-complex-#.png");
+					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 					block2.set_texture(texture, 1);
 				} else {
-					texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/grass-#.png");
+					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 					block2.set_texture(texture, 1);
@@ -663,15 +500,6 @@ int main(int argc, char* argv[]) {
 			// No targeted block
 			block.hide_bounds();
 		}
-
-		// Surt sa räven
-
-		/*for (int i = 0; i < queue.get_num_entries(); ++i) {
-			CollisionEntry* entry = queue.get_entry(i);
-			NodePath block = entry->get_into_node_path().get_parent().get_parent();
-			block.remove_node();
-			std::cout << *entry << std::endl;
-		}*/
 
 		text->set_text("X: " + std::to_string(floor(camera.get_x())) + "\nY: " + std::to_string(floor(camera.get_y())) + "\nZ: " + std::to_string(floor(camera.get_z())));
 		text2->set_text("H: " + std::to_string(floor(camera.get_h())) + "\nP: " + std::to_string(floor(camera.get_p())) + "\nR: " + std::to_string(floor(camera.get_r())));
@@ -708,8 +536,7 @@ int main(int argc, char* argv[]) {
 					offset_p += move_y / camera_y_speed;
 					panda.set_h(offset_h);
 
-					//Adjust the collision box so its orientation doesn't change
-					//cameraC.set_h(offset_h);
+					//Adjust the collision box so its pitch doesn't change
 					cameraC.set_p(offset_p - offset_p*2);
 
 					if (!keys["v"]) {
@@ -755,14 +582,15 @@ int main(int argc, char* argv[]) {
 			panda.set_z(camera.get_pos().get_z() - z_speed);
 		}
 		if (keys["q"]) {
-			game::objects.push_back(game::object(window, framework, "/c/dev/Panda project/Panda project/models/egg/simple_house.egg"));
+			game::objects.push_back(game::object(window, framework, gamePath + (std::string)"models/egg/simple_house.egg"));
 			game::errorOut("Object quantity: " + std::to_string(game::object::object_quantity));
 			keys["q"] = false;
 		}
 		if (keys["e"]) {
-			game::objects.push_back(game::object(window, framework, "/c/dev/Panda project/Panda project/models/egg/block.egg"));
-			game::objects[game::objects.size()-1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));
-			game::setTexture(game::objects[game::objects.size() - 1].model, "/c/dev/Panda project/Panda project/envir-rock1.jpg");
+			game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
+			//game::objects.push_back(game::object(window, framework, "/c/dev/Panda project/Panda project/models/egg/block.egg"));
+			game::winds[game::winds.size()-1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));
+			//game::setTexture(game::objects[game::objects.size() - 1].model, "/c/dev/Panda project/Panda project/envir-rock1.jpg");
 		}
 
 		//Border checking

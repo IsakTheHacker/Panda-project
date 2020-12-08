@@ -97,6 +97,58 @@ namespace game {
 		public:
 			std::string platform;
 	};
+
+	// Wind Object class
+	class windObject {
+		protected:
+			bool shouldLogInConsoleIntern;
+			bool shouldLogToFileIntern;
+		public:
+			NodePath model;
+			static int current_id;
+			static int object_quantity;
+			unsigned int id;
+			std::string name;
+			LPoint3 direction;
+			double velocity;
+
+			windObject(WindowFramework*& window, PandaFramework& framework, double mx, double my, double mz, double velocity, PN_stdfloat sx = 1, PN_stdfloat sy = 1, PN_stdfloat sz = 1, bool shouldLogInConsole = false, bool shouldLogToFile = false) {
+				id = current_id;
+				current_id++;
+				object_quantity++;
+				direction = LPoint3(mx, my, mz);
+				this->velocity = velocity;
+
+				model = NodePath("windObject");
+				model.reparent_to(window->get_render());
+
+				CollisionNode* collisionNode = new CollisionNode("Box");
+				collisionNode->add_solid(new CollisionBox(0, sx, sy, sz));
+				NodePath collisionNodePath = model.attach_new_node(collisionNode);
+
+				//Setting internal class variables
+				shouldLogInConsoleIntern = shouldLogInConsole;
+				shouldLogToFileIntern = shouldLogToFile;
+
+				if (shouldLogInConsole) {
+					game::logOut("Succesfully created object: " + std::to_string(id));
+				}
+				if (shouldLogToFile) {
+					logToFile("game.log", "Log: Succesfully created object: " + std::to_string(id));
+				}
+			}
+
+			~windObject() {
+				object_quantity--;
+
+				if (shouldLogInConsoleIntern) {
+					game::logOut("Succesfully destroyed object: " + std::to_string(id));
+				}
+				if (shouldLogToFileIntern) {
+					logToFile("game.log", "Log: Succesfully destroyed object: " + std::to_string(id));
+				}
+			}
+	};
 	
 	// Object class
 	class object {
@@ -125,7 +177,7 @@ namespace game {
 				if (modelFile.fail()) {
 					modelNotFound = true;
 					oldModelpath = modelpath;
-					modelpath = "/c/dev/Panda project/Panda project/models/egg/blocky.egg";			//Changing modelpath to standard model!
+					modelpath = gamePath + (std::string)"models/egg/blocky.egg";			//Changing modelpath to standard model!
 				}
 
 				model = window->load_model(framework.get_models(), modelpath);
@@ -269,9 +321,14 @@ namespace game {
 	int object::current_id = 0;
 	int object::object_quantity = 0;
 
+	// Initialize static members of windObject class
+	int windObject::current_id = 0;
+	int windObject::object_quantity = 0;
+
 
 	//Creating vectors for the classes
 	std::vector<object> objects;
+	std::vector<windObject> winds;
 	std::vector<chunk> chunks;
 	std::vector<entity> entities;
 	std::vector<player> players;
@@ -328,7 +385,7 @@ namespace game {
 					textureStage->set_mode(TextureStage::M_replace);
 					std::vector<NodePath> subobjects;
 
-					NodePath object2 = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/" + (std::string)"block.egg");
+					NodePath object2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)"block.egg");
 					/*if (placeholder["texture"] != "") {
 						game::setTexture(object, placeholder["texture"]);
 					}
@@ -337,7 +394,7 @@ namespace game {
 					}*/
 					/*object.clear_texture();*/
 
-					Texture* texture = texturePool->load_cube_map("/c/dev/Panda project/Panda project/models/textures/png/grass-#.png");
+					Texture* texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 

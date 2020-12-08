@@ -240,8 +240,13 @@ namespace game {
 	}
 
 	// Executes a Python script
-	int runPyScript(const char* path) {
-		const char* filename = path;
+	int runPyScript(std::string path) {
+		std::ifstream pyFile(path);
+		if (pyFile.fail()) {
+			game::errorOut("Could not find Python file: " + path);
+			return 1;
+		}
+		const char* filename = path.c_str();
 		FILE* fp;
 		Py_Initialize();
 		PyObject* m_pMainModule = PyImport_AddModule("__main__");
@@ -265,18 +270,25 @@ namespace game {
 
 	// Reads options
 	int readOptions(std::map<std::string, std::string>& options, std::string path = "data/options.txt") {
+		
+		//Constant vars
+		std::string delimiter = "=";
+		const char commentChar = '#';
+
 		std::ifstream optionsFile(path);
 		std::string line;
 		while (std::getline(optionsFile, line)) {
-			std::string delimiter = "=";
-			size_t pos = 0;
-			std::string token;
-			while ((pos = line.find(delimiter)) != std::string::npos) {
-				token = line.substr(0, pos);
-				line.erase(0, pos + delimiter.length());
+			if (line[0] == commentChar) {
+				pass();
+			} else {
+				size_t pos = 0;
+				std::string token;
+				while ((pos = line.find(delimiter)) != std::string::npos) {
+					token = line.substr(0, pos);
+					line.erase(0, pos + delimiter.length());
+				}
+				options[token] = line;
 			}
-
-			options[token] = line;
 		}
 		optionsFile.close();
 		return 0;

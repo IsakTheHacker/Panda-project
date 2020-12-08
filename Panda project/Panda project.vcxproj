@@ -19,26 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Clicking on 3d objects.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="models\Model converter source\Model converter.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Collision example.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Physicsexample.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Some example.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -46,36 +27,41 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\crap\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Testing area.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="src\testing\Clicking on 3d objects.cpp" />
+    <ClCompile Include="src\testing\Collision example.cpp" />
+    <ClCompile Include="src\testing\Collision.cpp" />
+    <ClCompile Include="src\testing\Physicsexample.cpp" />
+    <ClCompile Include="src\testing\Some example.cpp" />
+    <ClCompile Include="src\testing\test.cpp" />
+    <ClCompile Include="src\testing\Testing area.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="constantVars.h" />
-    <ClInclude Include="cppExtension.h" />
-    <ClInclude Include="gameClasses.h" />
-    <ClInclude Include="gameFunctions.h" />
-    <ClInclude Include="gameLanguage.h" />
-    <ClInclude Include="keyDefinitions.h" />
-    <ClInclude Include="linuxPlatform.h" />
-    <ClInclude Include="platformPicker.h" />
-    <ClInclude Include="src\external\json.hpp" />
-    <ClInclude Include="win32Platform.h" />
+    <ClInclude Include="src\header\constantVars.h" />
+    <ClInclude Include="src\header\cppExtension.h" />
+    <ClInclude Include="src\header\external\json.hpp" />
+    <ClInclude Include="src\header\gameClasses.h" />
+    <ClInclude Include="src\header\gameFunctions.h" />
+    <ClInclude Include="src\header\gameLanguage.h" />
+    <ClInclude Include="src\header\keyDefinitions.h" />
+    <ClInclude Include="src\header\linuxPlatform.h" />
+    <ClInclude Include="src\header\pandaIncludes.h" />
+    <ClInclude Include="src\header\platformPicker.h" />
+    <ClInclude Include="src\header\win32Platform.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.gitattributes" />
+    <None Include="..\.gitignore" />
     <None Include="cpp.hint" />
-    <None Include="src\scripts\createOptionsFile.py" />
-    <None Include="src\scripts\makeDirectories.py" />
-    <None Include="src\scripts\readOptions.py" />
+    <None Include="data\scripts\createOptionsFile.py" />
+    <None Include="data\scripts\makeDirectories.py" />
+    <None Include="data\scripts\readOptions.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

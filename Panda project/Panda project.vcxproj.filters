@@ -27,49 +27,64 @@
     <Filter Include="Header Files\External">
       <UniqueIdentifier>{0f9aa260-658a-4ed0-8e3d-d828cc591fac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Git">
+      <UniqueIdentifier>{b3ec0fdf-a1f3-4b8e-b2c5-edc3549cd19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crap">
+      <UniqueIdentifier>{34d6fb8e-0616-4b68-96ce-a9338bbad0ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gameClasses.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="constantVars.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cppExtension.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameLanguage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="win32Platform.h">
+    <ClInclude Include="src\header\linuxPlatform.h">
       <Filter>Header Files\Platform Specific</Filter>
     </ClInclude>
-    <ClInclude Include="platformPicker.h">
+    <ClInclude Include="src\header\platformPicker.h">
       <Filter>Header Files\Platform Specific</Filter>
     </ClInclude>
-    <ClInclude Include="linuxPlatform.h">
+    <ClInclude Include="src\header\win32Platform.h">
       <Filter>Header Files\Platform Specific</Filter>
     </ClInclude>
-    <ClInclude Include="keyDefinitions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\external\json.hpp">
+    <ClInclude Include="src\header\external\json.hpp">
       <Filter>Header Files\External</Filter>
     </ClInclude>
+    <ClInclude Include="src\header\constantVars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\header\cppExtension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\header\gameClasses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\header\gameFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\header\gameLanguage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\header\keyDefinitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\header\pandaIncludes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\scripts\readOptions.py">
-      <Filter>Source Files\Python files</Filter>
-    </None>
-    <None Include="src\scripts\createOptionsFile.py">
-      <Filter>Source Files\Python files</Filter>
-    </None>
     <None Include="cpp.hint" />
-    <None Include="src\scripts\makeDirectories.py">
+    <None Include="data\scripts\createOptionsFile.py">
       <Filter>Source Files\Python files</Filter>
+    </None>
+    <None Include="data\scripts\makeDirectories.py">
+      <Filter>Source Files\Python files</Filter>
+    </None>
+    <None Include="data\scripts\readOptions.py">
+      <Filter>Source Files\Python files</Filter>
+    </None>
+    <None Include="..\.gitattributes">
+      <Filter>Git</Filter>
+    </None>
+    <None Include="..\.gitignore">
+      <Filter>Git</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -79,29 +94,32 @@
     <ClCompile Include="models\Model converter source\Model converter.cpp">
       <Filter>Source Files\C++ files\Devtools</Filter>
     </ClCompile>
-    <ClCompile Include="Clicking on 3d objects.cpp">
-      <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision example.cpp">
-      <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
-    <ClCompile Include="Testing area.cpp">
-      <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
-    <ClCompile Include="Some example.cpp">
-      <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
     <ClCompile Include="src\Chunk viewer.cpp">
       <Filter>Source Files\C++ files\Devtools</Filter>
     </ClCompile>
-    <ClCompile Include="Physicsexample.cpp">
+    <ClCompile Include="src\testing\Clicking on 3d objects.cpp">
       <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testing\Collision example.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testing\Collision.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testing\Physicsexample.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testing\Some example.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testing\test.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testing\Testing area.cpp">
+      <Filter>Source Files\C++ files\Testing...</Filter>
+    </ClCompile>
+    <ClCompile Include="src\crap\main.cpp">
+      <Filter>Crap</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@
 #include <pandaFramework.h>
 
 //My libraries
-#include "../gameFunctions.h"
+#include "./header/gameFunctions.h"
 
 //Global stuff
 bool shouldRun = true;
