@@ -16,7 +16,7 @@
 #include <filesystem>
 
 //JSON library
-#include "src/external/json.hpp"
+#include "header/external/json.hpp"
 using json = nlohmann::json;
 
 //Python library

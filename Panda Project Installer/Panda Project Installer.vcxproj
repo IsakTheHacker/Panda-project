@@ -24,6 +24,7 @@
     <ProjectGuid>{1ea3b4b7-2e9e-4e28-832f-75e29e069a0b}</ProjectGuid>
     <RootNamespace>PandaProjectInstaller</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Panda Project Textbased Installer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
