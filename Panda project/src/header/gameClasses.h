@@ -159,6 +159,7 @@ namespace game {
 			bool shouldLogToFileIntern;
 			bool modelNotFound;
 		public:
+			bool empty = false;
 			NodePath model;
 			static int current_id;
 			static int object_quantity;
@@ -237,6 +238,25 @@ namespace game {
 				}
 				if (shouldLogToFile) {
 					logToFile("game.log", "Log: Succesfully created object: " + std::to_string(id));
+				}
+			}
+
+			//Empty game::object constructor
+			object(bool shouldLogInConsole = false, bool shouldLogToFile = false) {
+				id = current_id;
+				current_id++;
+				object_quantity++;
+				empty = true;
+
+				//Setting internal class variables
+				shouldLogInConsoleIntern = shouldLogInConsole;
+				shouldLogToFileIntern = shouldLogToFile;
+
+				if (shouldLogInConsole) {
+					game::logOut("Succesfully created empty object: " + std::to_string(id));
+				}
+				if (shouldLogToFile) {
+					logToFile("game.log", "Log: Succesfully created empty object: " + std::to_string(id));
 				}
 			}
 
@@ -412,7 +432,7 @@ namespace game {
 				}
 			}
 		}
-		game::chunk chunk = game::chunk(blocks, x, y);
+		game::chunk chunk(blocks, x, y);
 		game::chunks.push_back(chunk);
 
 		file.close();
@@ -421,8 +441,51 @@ namespace game {
 
 	
 
-	//Saves a chunk
+	/// <summary> Saves a specified chunk to it's destination. </summary>
+	/// <remarks> detailed descripsadtion of object </remarks>
+	/// <param name="chunk">- your specifed chunk object</param>
+	/// <returns> 0 if successful, nonzero if not! </returns>
+	int saveChunk(game::chunk chunk) {
+		int x = chunk.x;
+		int y = chunk.y;
+		std::string path = std::to_string(x) + "." + std::to_string(y) + ".chunk";
 
+		game::object emptyObject = {};
+		std::vector<game::object> y_levels(8, emptyObject);
+		std::vector<std::vector<game::object>> x_levels(8, y_levels);
+		std::vector<std::vector<std::vector<game::object>>> z_levels(8, x_levels);
 
+		for (game::object object : chunk.objects) {
+			z_levels[object.model.get_z()][object.model.get_x()/2-1][object.model.get_y()/2-1] = object;
+			//z_levels[object.model.get_z()][object.model.get_y()][object.model.get_x()] = object;
+			//z_levels[4][0][0] = object;
+		}
 
+		bool x_level_empty = false;
+		bool y_level_empty = false;
+		bool z_level_empty = false;
+		std::string final;
+		for (std::vector<std::vector<game::object>> z_level : z_levels) {
+			final.append("z" + std::to_string(static_cast<int>(z_level[0][0].model.get_z())) + "\n");
+			for (std::vector<game::object> x_level : z_level) {
+				for (game::object y_level : x_level) {
+					if (!y_level.empty) {
+						final.append("{model:block.egg},");
+					} else {
+						final.append("{empty},");
+						y_level_empty = true;
+					}
+				}
+				//if (!y_level_empty) {
+					final.append("\n");
+				//} else {
+					//x_level_empty = true;
+				//}
+			}
+		}
+		std::ofstream file("C:\\dev\\Panda project\\Panda project\\universes\\Test\\" + path + "test");
+		file << final;
+		
+		return 0;
+	}
 }

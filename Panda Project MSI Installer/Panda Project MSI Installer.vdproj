@@ -325,6 +325,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -341,6 +349,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -1492,6 +1516,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_467BFC9D516A4CB084A4CD246D5875B5"
+                    {
+                    "Name" = "8:Placeholder Company"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_B6DCCBA5C71948CDAE1C88286849A5A0"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -1510,24 +1545,24 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Panda Project"
-        "ProductCode" = "8:{0C069489-8732-4CE1-A25B-99CAB84234CD}"
-        "PackageCode" = "8:{ADBE519F-5DBD-42CC-A2D5-D2565E8DD1BF}"
+        "ProductCode" = "8:{2027752F-3365-44F2-9524-0CBF91E737B3}"
+        "PackageCode" = "8:{9B3F8173-1B4E-4855-920D-A202AD225A2E}"
         "UpgradeCode" = "8:{85F4E197-8AE8-4284-85E5-9F8BC2D8CBC2}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:0.1.0"
         "Manufacturer" = "8:Placeholder Company"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
+        "ARPHELPLINK" = "8:https://github.com/IsakTheHacker/Panda-project"
         "Title" = "8:Panda Project Installer"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:Isak_The_Hacker"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPCOMMENTS" = "8:This is the official installer for The Panda Project!"
+        "ARPURLINFOABOUT" = "8:https://github.com/IsakTheHacker/Panda-project"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -1631,6 +1666,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_849BD6ACD4CE4976BB1FEB5CB378B098"
+            {
+            "Name" = "8:The Panda Project"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_9BACE30D0E0648ECB22492D08995C451"
+            "Folder" = "8:_467BFC9D516A4CB084A4CD246D5875B5"
+            "WorkingFolder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_916E5BD882F84E5BB4B454FCD2862CCD"
+            {
+            "Name" = "8:The Panda Project"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_9BACE30D0E0648ECB22492D08995C451"
+            "Folder" = "8:_2F9B6ED1052D4D248AD400876FD14586"
+            "WorkingFolder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {

@@ -318,6 +318,12 @@ int main(int argc, char* argv[]) {
 	double offset_p = 0.0;
 	double offset_r = 0.0;
 
+	double center_x = 0.0;
+	double center_y = 0.0;
+
+	double x = 0.0;
+	double y = 0.0;
+
 	std::string sad = "Hello World";
 	/*myTraverser.show_collisions(window->get_render());
 
@@ -507,14 +513,14 @@ int main(int argc, char* argv[]) {
 		if (mouseInGame) {
 			if (mouseWatcher->has_mouse()) {
 				if (window->get_graphics_window()) {
-					double center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
-					double center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
+					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
+					center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 
-					double x = window->get_graphics_window()->get_pointer(0).get_x();
-					double y = window->get_graphics_window()->get_pointer(0).get_y();
+					x = window->get_graphics_window()->get_pointer(0).get_x();
+					y = window->get_graphics_window()->get_pointer(0).get_y();
 
-					double move_x = center_x - x;
-					double move_y = center_y - y;
+					double move_x = std::floor(center_x - x);
+					double move_y = std::floor(center_y - y);
 
 					if (keys["v"]) {
 						offset_r += move_x / camera_x_speed;
@@ -582,8 +588,10 @@ int main(int argc, char* argv[]) {
 			panda.set_z(camera.get_pos().get_z() - z_speed);
 		}
 		if (keys["q"]) {
-			game::objects.push_back(game::object(window, framework, gamePath + (std::string)"models/egg/simple_house.egg"));
+			/*game::objects.push_back(game::object(window, framework, gamePath + (std::string)"models/egg/simple_house.egg"));
 			game::errorOut("Object quantity: " + std::to_string(game::object::object_quantity));
+			keys["q"] = false;*/
+			game::saveChunk(game::chunks[0]);
 			keys["q"] = false;
 		}
 		if (keys["e"]) {

@@ -88,16 +88,25 @@ namespace game {
 		}
 	}
 
-	std::vector<std::string> split(std::string str, std::string delimiter) {
-		std::vector<std::string> vector;
+	/// <summary> Splits a string with the specified delimiter. </summary>
+	/// <param name="str">- your string</param>
+	/// <param name="delimiter">- the delimter to use. " " is standard</param>
+	/// <returns> A vector containing the tokens. </returns>
+	std::vector<std::string> split(std::string str, std::string delimiter = " ") {
+		std::vector<std::string> tokens;
 		size_t pos = 0;
 		std::string token;
 		while ((pos = str.find(delimiter)) != std::string::npos) {
 			token = str.substr(0, pos);
 			str.erase(0, pos + delimiter.length());
-			vector.push_back(token);
+			if (token != "") {
+				tokens.push_back(token);
+			}
 		}
-		return vector;
+		if (str != "") {
+			tokens.push_back(str);
+		}
+		return tokens;
 	}
 
 	// Encrypts a given string with a basic encryption
