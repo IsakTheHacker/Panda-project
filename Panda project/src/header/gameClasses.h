@@ -450,13 +450,33 @@ namespace game {
 		int y = chunk.y;
 		std::string path = std::to_string(x) + "." + std::to_string(y) + ".chunk";
 
+		std::cout << "\n\n\n";
+
+		std::set<int> z;
+		for (game::object object : chunk.objects) {
+			//if (std::find(z.begin(), z.end(), object.model.get_z()) != z.end()) {
+			//	// Element in vector.
+			//}
+			z.insert(object.model.get_z());
+		}
+
+		
+
 		game::object emptyObject = {};
 		std::vector<game::object> y_levels(8, emptyObject);
 		std::vector<std::vector<game::object>> x_levels(8, y_levels);
-		std::vector<std::vector<std::vector<game::object>>> z_levels(8, x_levels);
+		//std::vector<std::vector<std::vector<game::object>>> z_levels(z.size()+1, x_levels);
+		std::map<int, std::vector<std::vector<game::object>>> z_levels;
+
+		for (auto i : z) {
+			z_levels[i] = x_levels;
+			std::cout << i << std::endl;
+		}
+
 
 		for (game::object object : chunk.objects) {
-			z_levels[object.model.get_z()][object.model.get_x()/2-1][object.model.get_y()/2-1] = object;
+			std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
+			z_levels[object.model.get_z()][(object.model.get_x()-x)/2-1][(object.model.get_y()-y)/2-1] = object;
 			//z_levels[object.model.get_z()][object.model.get_y()][object.model.get_x()] = object;
 			//z_levels[4][0][0] = object;
 		}
@@ -465,7 +485,8 @@ namespace game {
 		bool y_level_empty = false;
 		bool z_level_empty = false;
 		std::string final;
-		for (std::vector<std::vector<game::object>> z_level : z_levels) {
+		for (std::pair<const int, std::vector<std::vector<game::object>>> pair : z_levels) {
+			std::vector<std::vector<game::object>> z_level = pair.second;
 			final.append("z" + std::to_string(static_cast<int>(z_level[0][0].model.get_z())) + "\n");
 			for (std::vector<game::object> x_level : z_level) {
 				for (game::object y_level : x_level) {
@@ -483,7 +504,7 @@ namespace game {
 				//}
 			}
 		}
-		std::ofstream file("C:\\dev\\Panda project\\Panda project\\universes\\Test\\" + path + "test");
+		std::ofstream file("universes/Test/" + path);
 		file << final;
 		
 		return 0;

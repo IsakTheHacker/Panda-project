@@ -69,22 +69,6 @@ AsyncTask::DoneStatus UpdateTerrain(GenericAsyncTask* task, void* data) {
 
 int main(int argc, char* argv[]) {
 
-	//Changing window size
-	load_prc_file_data("", "win-size 1280 720");
-
-	//Creating folders and files
-	game::runPyScript(gamePath + (std::string)"data/scripts/makeDirectories.py");
-	game::runPyScript(gamePath + (std::string)"data/scripts/createOptionsFile.py");
-
-	//Reading options
-	std::map<std::string, std::string> options;
-	game::readOptions(options);
-	std::map<std::string, std::string> scripting_options;
-	game::readOptions(scripting_options, "data/scripting_options.txt");
-
-	game::setHeading(options["console-heading"]);
-	game::logOut("Starting...");
-
 	//Checking if any arguments was given at startup
 	if (argc > 2) {
 		game::warningOut("Too many arguments was given, only one is allowed!");
@@ -105,6 +89,23 @@ int main(int argc, char* argv[]) {
 
 	//Starting debug input thread if game was started in devmode!
 	//std::thread debugInputThread(game::takeDebugInput);
+
+	//Changing window size
+	load_prc_file_data("", "win-size 1280 720");
+
+	//Creating folders and files
+	game::runPyScript("data/scripts/makeDirectories.py");
+	game::runPyScript("data/scripts/createOptionsFile.py");
+
+	//Reading options
+	std::map<std::string, std::string> options;
+	game::readOptions(options, "data/options.txt");
+	std::map<std::string, std::string> scripting_options;
+	game::readOptions(scripting_options, "data/scripting_options.txt");
+
+	game::setHeading(options["console-heading"]);
+	game::logOut("Starting...");
+
 
 
 	game::listOptions(options);
@@ -201,13 +202,13 @@ int main(int argc, char* argv[]) {
 	std::cout << inventory[5] << std::endl;
 
 	terrainAnimationShouldRun = true;
-	std::thread terrain_animation_thread(game::terrainAnimation);
+	std::thread terrain_animation_thread(game::terrainAnimation, "Loading terrain");
 
 	{
-		std::ifstream index("C:\\dev\\Panda project\\Panda project\\universes\\Test\\index");
+		std::ifstream index("universes/Test/index");
 		std::string line;
 		while (std::getline(index, line)) {
-			game::readChunk(window, framework, "C:\\dev\\Panda project\\Panda project\\universes\\Test\\" + line, std::stoi(game::split(line, ".")[0]), std::stoi(game::split(line, ".")[1]));
+			game::readChunk(window, framework, "universes/Test/" + line, std::stoi(game::split(line, ".")[0]), std::stoi(game::split(line, ".")[1]));
 		}
 		index.close();
 	}
@@ -613,6 +614,19 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
+
+	//Saving chunks
+	terrainAnimationShouldRun = true;
+	std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
+	{
+		for (game::chunk chunk : game::chunks) {
+			game::importantInfoOut("chunk");
+			game::saveChunk(chunk);
+		}
+	}
+	terrainAnimationShouldRun = false;
+	saving_animation_thread.join();
+
 	framework.close_framework();
 	//debugInputThread.detach();
 	game::logOut("Closing...");

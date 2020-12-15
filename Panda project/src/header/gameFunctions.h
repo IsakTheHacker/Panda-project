@@ -31,9 +31,9 @@ HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 namespace game {
 
-	// Loading terrain animation
-	void terrainAnimation() {
-		std::cout << "Loading terrain";
+	// Loading animation
+	void terrainAnimation(std::string message) {
+		std::cout << message;
 		while (terrainAnimationShouldRun) {
 			for (int i = 0; i < 3; i++) {
 				std::cout << ".";
@@ -278,7 +278,7 @@ namespace game {
 	}
 
 	// Reads options
-	int readOptions(std::map<std::string, std::string>& options, std::string path = "data/options.txt") {
+	int readOptions(std::map<std::string, std::string>& options, std::string path) {
 		
 		//Constant vars
 		std::string delimiter = "=";
