@@ -355,7 +355,13 @@ namespace game {
 
 
 
-	//Reads a chunk
+	/// <summary> Reads a chunk from the specified path. </summary>
+	/// <param name="window">- The window object</param>
+	/// <param name="framework">- The framework object</param>
+	/// <param name="path">- The path where the chunk file is located</param>
+	/// <param name="x">- The chunk's x-pos</param>
+	/// <param name="y">- The chunk's y-pos</param>
+	/// <returns> 0 if successful, nonzero if not! </returns>
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
 		//Initalize variables
 		std::ifstream file(path);
@@ -427,6 +433,7 @@ namespace game {
 
 					object.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
 					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
+					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
 
 					blocks.push_back(object);
 				}
@@ -442,7 +449,6 @@ namespace game {
 	
 
 	/// <summary> Saves a specified chunk to it's destination. </summary>
-	/// <remarks> detailed descripsadtion of object </remarks>
 	/// <param name="chunk">- your specifed chunk object</param>
 	/// <returns> 0 if successful, nonzero if not! </returns>
 	int saveChunk(game::chunk chunk) {
@@ -470,12 +476,12 @@ namespace game {
 
 		for (auto i : z) {
 			z_levels[i] = x_levels;
-			std::cout << i << std::endl;
+			//std::cout << i << std::endl;
 		}
 
 
 		for (game::object object : chunk.objects) {
-			std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
+			//std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
 			z_levels[object.model.get_z()][(object.model.get_x()-x)/2-1][(object.model.get_y()-y)/2-1] = object;
 			//z_levels[object.model.get_z()][object.model.get_y()][object.model.get_x()] = object;
 			//z_levels[4][0][0] = object;

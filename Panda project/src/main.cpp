@@ -385,6 +385,7 @@ int main(int argc, char* argv[]) {
 				keys["mouse1"] = false;
 			}
 			if (keys["mouse3"]) {
+				std::vector<NodePath> vec;
 				LVector3 notRotatedSurface = surface;
 				notRotatedSurface.set_x(0);
 				notRotatedSurface.set_y(0);
@@ -500,7 +501,11 @@ int main(int argc, char* argv[]) {
 				collisionNode->add_solid(new CollisionBox(0, 1, 1, 1));
 				NodePath collisionNodePath = object.attach_new_node(collisionNode);
 
-				game::blocks.push_back(object);
+				game::object obj(window, framework, vec);
+
+				game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
+				chunk.objects.push_back(obj);
+
 				keys["mouse3"] = false;
 			}
 		} else {
