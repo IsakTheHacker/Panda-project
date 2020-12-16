@@ -120,6 +120,9 @@ int main(int argc, char* argv[]) {
 	WindowFramework* window = framework.open_window();
 	camera = window->get_camera_group();
 
+	//Enable shader generation for the game
+	window->get_render().set_shader_auto();
+
 	// Cool stuff
 	pickerNode = new CollisionNode("mouseRay");
 	pickerNP = camera.attach_new_node(pickerNode);
@@ -300,9 +303,11 @@ int main(int argc, char* argv[]) {
 
 	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
 	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
+	d_light->set_shadow_caster(true, 512, 512);
 	NodePath dlnp = window->get_render().attach_new_node(d_light);
 	dlnp.set_hpr(0, -90, 0);
 	dlnp.set_pos(5, 5, 10);
+	dlnp.show_tight_bounds();
 	window->get_render().set_light(dlnp);
 
 
@@ -396,7 +401,6 @@ int main(int argc, char* argv[]) {
 
 				std::string path;
 
-				NodePath object;
 				TexturePool* texturePool = TexturePool::get_global_ptr();
 				TextureStage* textureStage = new TextureStage("textureStage2");
 				textureStage->set_sort(0);
@@ -408,11 +412,10 @@ int main(int argc, char* argv[]) {
 
 				if (handInventoryIndex == 0) {
 					path = "wedge.egg";
-					object = NodePath("object");
 					NodePath incline = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_incline");
-					incline.reparent_to(object);
 					NodePath base = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_base");
-					base.reparent_to(object);
+					vec.push_back(incline);
+					vec.push_back(base);
 
 					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
@@ -423,34 +426,32 @@ int main(int argc, char* argv[]) {
 					texture2->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture2->set_magfilter(SamplerState::FilterType::FT_nearest);
 					incline.set_texture(texture2, 1);
-
-					object.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
-					object.set_tex_projector(textureStage->get_default(), window->get_render(), object);
 				} else if (handInventoryIndex == 1) {
 					path = "block.egg";
-					object = NodePath("object");
 					NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"/models/egg/" + (std::string)path);
-					block2.reparent_to(object);
 
 					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 					block2.set_texture(texture, 1);
+					vec.push_back(block2);
 				} else {
 					path = "block.egg";
-					object = NodePath("object");
 					NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)path);
-					block2.reparent_to(object);
 
 					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 					block2.set_texture(texture, 1);
+					vec.push_back(block2);
 				}
 
 
-				object.set_pos(block.get_x() + surface.get_x()*2, block.get_y() + surface.get_y()*2, block.get_z() + surface.get_z()*2);
-				object.reparent_to(window->get_render());
+
+				game::object obj(window, framework, vec);
+				obj.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
+				obj.model.set_tex_projector(textureStage->get_default(), window->get_render(), obj.model);
+				obj.model.set_pos(block.get_x() + surface.get_x()*2, block.get_y() + surface.get_y()*2, block.get_z() + surface.get_z()*2);
 
 				if (keys["r"]) {
 
@@ -476,12 +477,8 @@ int main(int argc, char* argv[]) {
 
 					std::cout << heading << std::endl;
 					std::cout << pitch << std::endl;
-					object.set_hpr(heading * 180, pitch * 180, 0);
+					obj.model.set_hpr(heading * 180, pitch * 180, 0);
 				}
-
-				
-				object.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
-				object.set_tex_projector(textureStage->get_default(), window->get_render(), object);
 
 				if (handInventoryIndex == 0) {
 					
@@ -497,11 +494,7 @@ int main(int argc, char* argv[]) {
 					block2.set_texture(texture, 1);
 				}
 
-				CollisionNode* collisionNode = new CollisionNode("Box");
-				collisionNode->add_solid(new CollisionBox(0, 1, 1, 1));
-				NodePath collisionNodePath = object.attach_new_node(collisionNode);
-
-				game::object obj(window, framework, vec);
+				obj.model.set_tag("chunk", block.get_tag("chunk"));
 
 				game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
 				chunk.objects.push_back(obj);
