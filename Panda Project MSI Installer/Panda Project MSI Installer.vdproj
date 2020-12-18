@@ -332,6 +332,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -1507,6 +1515,28 @@
                     }
                 }
             }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_844BBCF301CB419EBCCB8BEFFE8BFBF0"
+            {
+            "Name" = "8:#1917"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:FavoritesFolder"
+                "Folders"
+                {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_A57F613663A044399C98D3524B342887"
+            {
+            "Name" = "8:#1921"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:StartMenuFolder"
+                "Folders"
+                {
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_C9372BAE862F4A5993278FF9B99DA1A6"
             {
             "Name" = "8:#1919"
@@ -1666,6 +1696,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0198AEF163524E7D954620F9723EA416"
+            {
+            "Name" = "8:The Panda Project"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_9BACE30D0E0648ECB22492D08995C451"
+            "Folder" = "8:_A57F613663A044399C98D3524B342887"
+            "WorkingFolder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5C06ABD4AD934794B0EFAA5025758605"
+            {
+            "Name" = "8:The Panda Project"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_9BACE30D0E0648ECB22492D08995C451"
+            "Folder" = "8:_844BBCF301CB419EBCCB8BEFFE8BFBF0"
+            "WorkingFolder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_849BD6ACD4CE4976BB1FEB5CB378B098"
             {
             "Name" = "8:The Panda Project"

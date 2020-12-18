@@ -446,7 +446,7 @@ int main(int argc, char* argv[]) {
 					vec.push_back(block2);
 				}
 
-
+				
 
 				game::object obj(window, framework, vec);
 				obj.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
