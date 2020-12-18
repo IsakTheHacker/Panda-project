@@ -540,9 +540,7 @@ int main(int argc, char* argv[]) {
 				camera.set_z(camera.get_pos().get_z() + z_speed*17);
 				panda.set_z(camera.get_pos().get_z() + z_speed*17);
 			}
-			keys["space"] = false;
 			playerOnGround = false;
-			velocity = 0;
 		}
 		if (keys["lshift"]) {
 			camera.set_z(camera.get_pos().get_z() - z_speed);
