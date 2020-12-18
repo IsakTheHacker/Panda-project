@@ -345,15 +345,12 @@ namespace game {
 	int windObject::current_id = 0;
 	int windObject::object_quantity = 0;
 
-
 	//Creating vectors for the classes
 	std::vector<object> objects;
 	std::vector<windObject> winds;
 	std::vector<chunk> chunks;
 	std::vector<entity> entities;
 	std::vector<player> players;
-
-
 
 	/// <summary> Reads a chunk from the specified path. </summary>
 	/// <param name="window">- The window object</param>
@@ -363,10 +360,10 @@ namespace game {
 	/// <param name="y">- The chunk's y-pos</param>
 	/// <returns> 0 if successful, nonzero if not! </returns>
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
+		
 		//Initalize variables
 		std::ifstream file(path);
 		std::string line;
-
 		int x_level = x;
 		int y_level = y;
 		int z_level;
@@ -380,7 +377,6 @@ namespace game {
 			{"texture",""},
 			{"texture-scale",""}
 		};
-
 		NodePath object;
 		std::vector<game::object> blocks;
 
@@ -456,13 +452,8 @@ namespace game {
 		int y = chunk.y;
 		std::string path = std::to_string(x) + "." + std::to_string(y) + ".chunk";
 
-		std::cout << "\n\n\n";
-
 		std::set<int> z;
 		for (game::object object : chunk.objects) {
-			//if (std::find(z.begin(), z.end(), object.model.get_z()) != z.end()) {
-			//	// Element in vector.
-			//}
 			z.insert(object.model.get_z());
 		}
 
@@ -471,20 +462,16 @@ namespace game {
 		game::object emptyObject = {};
 		std::vector<game::object> y_levels(8, emptyObject);
 		std::vector<std::vector<game::object>> x_levels(8, y_levels);
-		//std::vector<std::vector<std::vector<game::object>>> z_levels(z.size()+1, x_levels);
 		std::map<int, std::vector<std::vector<game::object>>> z_levels;
 
 		for (auto i : z) {
 			z_levels[i] = x_levels;
-			//std::cout << i << std::endl;
 		}
 
 
 		for (game::object object : chunk.objects) {
 			//std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
 			z_levels[object.model.get_z()][(object.model.get_x()-x)/2-1][(object.model.get_y()-y)/2-1] = object;
-			//z_levels[object.model.get_z()][object.model.get_y()][object.model.get_x()] = object;
-			//z_levels[4][0][0] = object;
 		}
 
 		bool x_level_empty = false;

@@ -190,7 +190,6 @@ int main(int argc, char* argv[]) {
 	std::vector<NodePath> inventory;
 
 	for (int i = -5; i < 6; i++) {
-		std::cout << "Run..." << std::endl;
 		CardMaker hand_inventory("hand_inventory" + i);
 		NodePath hand_inventoryNode(hand_inventory.generate());
 		game::setTexture(hand_inventoryNode, gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
@@ -202,11 +201,8 @@ int main(int argc, char* argv[]) {
 		inventory.push_back(hand_inventoryNode);
 	}
 
-	std::cout << inventory[5] << std::endl;
-
 	terrainAnimationShouldRun = true;
 	std::thread terrain_animation_thread(game::terrainAnimation, "Loading terrain");
-
 	{
 		std::ifstream index("universes/Test/index");
 		std::string line;
@@ -215,41 +211,8 @@ int main(int argc, char* argv[]) {
 		}
 		index.close();
 	}
-	
 	terrainAnimationShouldRun = false;
 	terrain_animation_thread.join();
-
-
-	PT(PGButton) my_button;
-	my_button = new PGButton("MyButton");
-	my_button->setup("Button");
-	PT(Texture) button_ready = TexturePool::load_texture("button.png");
-	PT(Texture) button_rollover = TexturePool::load_texture("button_active.png");
-	PT(Texture) button_pressed = TexturePool::load_texture("button_pressed.png");
-	PT(Texture) button_inactive = TexturePool::load_texture("button_inactive.png");
-
-	// PGFrameStyle is a powerful way to change the appearance of the button:
-	PGFrameStyle MyStyle = my_button->get_frame_style(0); // frame_style(0): ready state
-	MyStyle.set_type(PGFrameStyle::T_flat);
-
-	MyStyle.set_texture(button_ready);    my_button->set_frame_style(0, MyStyle);
-	MyStyle.set_texture(button_rollover); my_button->set_frame_style(1, MyStyle);
-	MyStyle.set_texture(button_pressed);  my_button->set_frame_style(2, MyStyle);
-	MyStyle.set_texture(button_inactive); my_button->set_frame_style(3, MyStyle);
-
-	NodePath defbutNP = window->get_aspect_2d().attach_new_node(my_button);
-	defbutNP.set_scale(0.1);
-	//defbutNP.set_pos(0, 0, 0);
-	std::cout << defbutNP.get_pos() << std::endl;
-	defbutNP.set_pos(0 - defbutNP.get_sx()/2, 0, 0 - defbutNP.get_sz()/2);
-	//defbutNP.show_bounds();
-	defbutNP.hide();
-	//defbutNP.set_pos(defbutNP.get_sx(), 3, 0);
-
-	ButtonHandle button_handle{};
-
-	// Setup callback function
-	framework.define_key(my_button->get_click_event(button_handle), "button press", game::key_down, 0);
 
 
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
@@ -281,7 +244,6 @@ int main(int argc, char* argv[]) {
 	pusher.add_out_pattern("Something2");
 	//pusher.add_again_pattern("%fn-into-%in");
 
-	//framework.define_key("render/camera_group/Sphere-into-render/object/Box", "", game::testIfPlayerOnGround, 0);
 	framework.define_key("Something", "", game::testIfPlayerOnGround, 0);
 	framework.define_key("Something2", "", game::testIfPlayerOnGround, (void*)1);
 
@@ -587,17 +549,12 @@ int main(int argc, char* argv[]) {
 			panda.set_z(camera.get_pos().get_z() - z_speed);
 		}
 		if (keys["q"]) {
-			/*game::objects.push_back(game::object(window, framework, gamePath + (std::string)"models/egg/simple_house.egg"));
-			game::errorOut("Object quantity: " + std::to_string(game::object::object_quantity));
-			keys["q"] = false;*/
 			game::saveChunk(game::chunks[0]);
 			keys["q"] = false;
 		}
 		if (keys["e"]) {
 			game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
-			//game::objects.push_back(game::object(window, framework, "/c/dev/Panda project/Panda project/models/egg/block.egg"));
 			game::winds[game::winds.size()-1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));
-			//game::setTexture(game::objects[game::objects.size() - 1].model, "/c/dev/Panda project/Panda project/envir-rock1.jpg");
 		}
 
 		//Border checking
@@ -618,7 +575,6 @@ int main(int argc, char* argv[]) {
 	std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
 	{
 		for (game::chunk chunk : game::chunks) {
-			game::importantInfoOut("chunk");
 			game::saveChunk(chunk);
 		}
 	}
