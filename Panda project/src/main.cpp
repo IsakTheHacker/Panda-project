@@ -306,10 +306,27 @@ int main(int argc, char* argv[]) {
 
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
+		std::cout << velocity << std::endl;
+		
 		if (velocity == 0 && !playerOnGround) {
 			velocity = 0.01;
 		} else {
-			velocity = velocity * 1.05;
+			if (velocity > 0) {
+				//std::cout << "bigger" << std::endl;
+				velocity = velocity * 1.05;
+			} else if (velocity < 0) {
+				//std::cout << "smaller" << std::endl;
+				//if (floor(camera.get_z()) == floor(camera.get_z() - velocity)) {
+				double value = (int)(camera.get_z() * 100 + 0.5);
+				value = (double)value / 100;
+				double value2 = (int)((camera.get_z() - velocity) * 100 + 0.5);
+				value2 = (double)value2 / 100;
+				if (value == value2) {
+					velocity = 0.01;
+				} else {
+					velocity = velocity / 1.05;
+				}
+			}
 		}
 
 		if (playerOnGround) {
@@ -468,8 +485,8 @@ int main(int argc, char* argv[]) {
 			block.hide_bounds();
 		}
 
-		text->set_text("X: " + std::to_string(floor(camera.get_x())) + "\nY: " + std::to_string(floor(camera.get_y())) + "\nZ: " + std::to_string(floor(camera.get_z())));
-		text2->set_text("H: " + std::to_string(floor(camera.get_h())) + "\nP: " + std::to_string(floor(camera.get_p())) + "\nR: " + std::to_string(floor(camera.get_r())));
+		text->set_text("X: " + std::to_string(camera.get_x()) + "\nY: " + std::to_string(camera.get_y()) + "\nZ: " + std::to_string(camera.get_z()));
+		text2->set_text("H: " + std::to_string(camera.get_h()) + "\nP: " + std::to_string(camera.get_p()) + "\nR: " + std::to_string(camera.get_r()));
 
 		if (mouseInGame) {
 			if (mouseWatcher->has_mouse()) {
@@ -537,8 +554,9 @@ int main(int argc, char* argv[]) {
 		}
 		if (keys["space"]) {
 			if (playerOnGround) {
-				camera.set_z(camera.get_pos().get_z() + z_speed*17);
-				panda.set_z(camera.get_pos().get_z() + z_speed*17);
+				velocity = -0.15;
+				/*camera.set_z(camera.get_pos().get_z() + z_speed*17);
+				panda.set_z(camera.get_pos().get_z() + z_speed*17);*/
 			}
 			playerOnGround = false;
 		}
