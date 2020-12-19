@@ -579,12 +579,6 @@ int main(int argc, char* argv[]) {
 			camera.set_x(camera, 0 + x_speed);
 			panda.set_x(camera, 0 + x_speed);
 		}
-		if (keys["space"]) {
-			if (playerOnGround) {
-				velocity = -0.15;
-			}
-			playerOnGround = false;
-		}
 		if (keys["lshift"]) {
 			if (playerOnGround && !player_sneaking) {
 				player_sneaking = true;
@@ -596,6 +590,16 @@ int main(int argc, char* argv[]) {
 				player_sneaking = false;
 				cameraC.set_z(cameraC.get_z() - sneak_distance);
 				camera.set_z(camera.get_pos().get_z() + sneak_distance);
+			}
+		}
+		if (keys["space"]) {
+			if (playerOnGround) {
+				if (!player_sneaking) {
+					velocity = -0.15;
+				} else if (player_sneaking) {
+					velocity = -0.30;
+				}
+				playerOnGround = false;
 			}
 		}
 		if (keys["q"]) {
