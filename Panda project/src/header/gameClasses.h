@@ -216,7 +216,6 @@ namespace game {
 				current_id++;
 				object_quantity++;
 
-
 				model = NodePath("model");
 				for (std::size_t i = 0; i < subobjects.size(); i++) {
 					subobjects[i].reparent_to(model);
@@ -392,6 +391,9 @@ namespace game {
 
 				for (std::string block : block_list) {
 					y_level += 2;
+					if (block == "{empty}") {
+						continue;
+					}
 					findReplaceFirst(block, "{", "");
 					findReplaceFirst(block, "}", "");
 					block_attributes = split(block, "|");
@@ -430,6 +432,7 @@ namespace game {
 					object.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
 					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
 					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
+					object.model.set_tag("id", std::to_string(object.id));
 
 					blocks.push_back(object);
 				}
@@ -466,6 +469,7 @@ namespace game {
 
 		for (auto i : z) {
 			z_levels[i] = x_levels;
+			std::cout << "z-set: " << i << std::endl;
 		}
 
 
@@ -477,10 +481,23 @@ namespace game {
 		bool x_level_empty = false;
 		bool y_level_empty = false;
 		bool z_level_empty = false;
+		bool shouldBreak = false;
 		std::string final;
 		for (std::pair<const int, std::vector<std::vector<game::object>>> pair : z_levels) {
 			std::vector<std::vector<game::object>> z_level = pair.second;
-			final.append("z" + std::to_string(static_cast<int>(z_level[0][0].model.get_z())) + "\n");
+			shouldBreak = false;
+			for (std::vector<game::object> x_level : z_level) {
+				for (game::object y_level : x_level) {
+					if (!y_level.empty) {
+						final.append("z" + std::to_string(static_cast<int>(y_level.model.get_z())) + "\n");
+						shouldBreak = true;
+						break;
+					}
+				}
+				if (shouldBreak) {
+					break;
+				}
+			}
 			for (std::vector<game::object> x_level : z_level) {
 				for (game::object y_level : x_level) {
 					if (!y_level.empty) {

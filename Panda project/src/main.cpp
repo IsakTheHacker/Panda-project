@@ -306,17 +306,14 @@ int main(int argc, char* argv[]) {
 
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
-		std::cout << velocity << std::endl;
 		
+		// Velocity computing (Z axis)
 		if (velocity == 0 && !playerOnGround) {
 			velocity = 0.01;
 		} else {
 			if (velocity > 0) {
-				//std::cout << "bigger" << std::endl;
 				velocity = velocity * 1.05;
 			} else if (velocity < 0) {
-				//std::cout << "smaller" << std::endl;
-				//if (floor(camera.get_z()) == floor(camera.get_z() - velocity)) {
 				double value = (int)(camera.get_z() * 100 + 0.5);
 				value = (double)value / 100;
 				double value2 = (int)((camera.get_z() - velocity) * 100 + 0.5);
@@ -328,13 +325,12 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
-
 		if (playerOnGround) {
 			velocity = 0;
 		}
-
 		camera.set_z(camera.get_pos().get_z() - velocity);
 		panda.set_z(camera.get_pos().get_z() - velocity);
+
 
 		if (handInventoryIndex < 0) {
 			handInventoryIndex = 10;
@@ -365,6 +361,16 @@ int main(int argc, char* argv[]) {
 			LVector3 surface = entry->get_surface_normal(window->get_render());
 			block.show_tight_bounds();
 			if (keys["mouse1"]) {
+				game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
+				game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;
+				/*for (size_t i = 0; i < chunk.objects.size(); i++) {
+					if (chunk.objects[i].id == std::stoi(block.get_tag("id"))) {
+						chunk.objects[i].~object();
+						chunk.objects[i].model.remove_node();
+						std::swap(chunk.objects[i], chunk.objects.back());
+						chunk.objects.pop_back();
+					}
+				}*/
 				block.remove_node();
 				keys["mouse1"] = false;
 			}
@@ -474,9 +480,13 @@ int main(int argc, char* argv[]) {
 				}
 
 				obj.model.set_tag("chunk", block.get_tag("chunk"));
+				obj.model.set_tag("id", std::to_string(obj.id));
 
+				std::cout << "Object z: " << obj.model.get_z() << std::endl;
 				game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
+
 				chunk.objects.push_back(obj);
+				game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;
 
 				keys["mouse3"] = false;
 			}
@@ -523,6 +533,10 @@ int main(int argc, char* argv[]) {
 					//Adjust the collision box so its pitch doesn't change
 					cameraC.set_p(offset_p - offset_p*2);
 
+					//Adjust the collision box so its rotation doesn't change
+					//cameraC.set_r(offset_r - offset_r * 2);
+					//Not fixed yet
+
 					if (!keys["v"]) {
 						if (offset_p < 90 && offset_p > -90) {
 							camera.set_p(offset_p);
@@ -555,8 +569,6 @@ int main(int argc, char* argv[]) {
 		if (keys["space"]) {
 			if (playerOnGround) {
 				velocity = -0.15;
-				/*camera.set_z(camera.get_pos().get_z() + z_speed*17);
-				panda.set_z(camera.get_pos().get_z() + z_speed*17);*/
 			}
 			playerOnGround = false;
 		}
