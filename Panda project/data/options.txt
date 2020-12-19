@@ -16,3 +16,4 @@ window-title=The Panda Project
 model-format=egg
 hide_fps=0
 pitch-behavior_while_rotating=none
+sneak-distance=0.5

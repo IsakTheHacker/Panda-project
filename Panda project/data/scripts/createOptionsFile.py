@@ -8,9 +8,9 @@ if not os.path.isfile("data/options.txt"):
 		"force_y=4",
 		"camera_x_speed=5",
 		"camera_y_speed=5",
-		"x_speed=1",
-		"y_speed=1",
-		"z_speed=1",
+		"x_speed=0.2",
+		"y_speed=0.2",
+		"z_speed=0.2",
 		"hidden_cursor=1",
 		"close_console_without_input=1",
 		"lower_border=0",
@@ -21,7 +21,8 @@ if not os.path.isfile("data/options.txt"):
 		"window-title=The Panda Project",
 		"model-format=egg",
 		"hide_fps=0",
-		"pitch-behavior_while_rotating=none"
+		"pitch-behavior_while_rotating=none",
+		"sneak-distance=0.5"
 	]
 	try:
 		with open("data/options.txt","w") as optionsFile:

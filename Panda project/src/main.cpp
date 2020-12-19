@@ -8,6 +8,7 @@ bool devMode = false;
 bool mouseInGame = true;
 bool playerOnGround = false;
 std::string gamePath = "./";
+bool player_sneaking = false;
 
 //My libraries
 #include "./header/cppExtension.h"
@@ -273,6 +274,17 @@ int main(int argc, char* argv[]) {
 	window->get_render().set_light(dlnp);
 
 
+	PNMImage pnmImage("images/noise_0000.png");
+	for (size_t i = 0; i < pnmImage.get_x_size(); i++) {
+		for (size_t j = 0; j < pnmImage.get_y_size(); j++) {
+			auto pixel = pnmImage.get_pixel(i, j);
+			//std::cout << "Pixel: " << i << "," << j << " " << pixel << std::endl;
+		}
+	}
+
+	PerlinNoise3 perlinNoise(8, 8, 8, 256, 78306730);
+	std::cout << perlinNoise.noise(7, 7, 3) << std::endl;
+
 
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
@@ -291,6 +303,8 @@ int main(int argc, char* argv[]) {
 
 	double x = 0.0;
 	double y = 0.0;
+
+	double sneak_distance = std::stod(options["sneak-distance"]);
 
 	std::string sad = "Hello World";
 	/*myTraverser.show_collisions(window->get_render());
@@ -345,7 +359,6 @@ int main(int argc, char* argv[]) {
 				game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
 			}
 		}
-		
 
 
 		// check collisions, will call pusher collision handler
@@ -573,8 +586,17 @@ int main(int argc, char* argv[]) {
 			playerOnGround = false;
 		}
 		if (keys["lshift"]) {
-			camera.set_z(camera.get_pos().get_z() - z_speed);
-			panda.set_z(camera.get_pos().get_z() - z_speed);
+			if (playerOnGround && !player_sneaking) {
+				player_sneaking = true;
+				cameraC.set_z(cameraC.get_z() + sneak_distance);
+				camera.set_z(camera.get_pos().get_z() - sneak_distance);
+			}
+		} else if (!keys["lshift"]) {
+			if (playerOnGround && player_sneaking) {
+				player_sneaking = false;
+				cameraC.set_z(cameraC.get_z() - sneak_distance);
+				camera.set_z(camera.get_pos().get_z() + sneak_distance);
+			}
 		}
 		if (keys["q"]) {
 			game::saveChunk(game::chunks[0]);
