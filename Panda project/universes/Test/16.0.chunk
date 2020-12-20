@@ -9,10 +9,10 @@ z2
 {model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},
 z4
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
-{empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
+{empty},{model:block.egg},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{model:block.egg},
 {empty},{empty},{empty},{model:block.egg},{empty},{empty},{model:block.egg},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
-{empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
+{empty},{empty},{empty},{model:block.egg},{empty},{empty},{empty},{empty},

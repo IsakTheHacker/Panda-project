@@ -91,12 +91,13 @@ int main(int argc, char* argv[]) {
 	//Starting debug input thread if game was started in devmode!
 	//std::thread debugInputThread(game::takeDebugInput);
 
-	//Changing window size
-	load_prc_file_data("", "win-size 1280 720");
-
 	//Creating folders and files
 	game::runPyScript("data/scripts/makeDirectories.py");
 	game::runPyScript("data/scripts/createOptionsFile.py");
+
+	//Loading config files
+	load_prc_file("data/Confauto.prc");
+	load_prc_file("data/Config.prc");
 
 	//Reading options
 	std::map<std::string, std::string> options;
@@ -229,7 +230,7 @@ int main(int argc, char* argv[]) {
 	
 	camera.set_z(30);
 
-	NodePath panda = window->load_model(framework.get_models(), "panda.egg");
+	NodePath panda = NodePath("panda");
 	panda.set_scale(0.5);
 	panda.set_pos(0, 0, 0);
 	panda.reparent_to(window->get_render());

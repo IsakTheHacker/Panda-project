@@ -9,7 +9,7 @@ z2
 {model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},{model:block.egg},
 z4
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
-{empty},{empty},{empty},{model:block.egg},{empty},{empty},{empty},{empty},
+{empty},{model:block.egg},{empty},{model:block.egg},{empty},{empty},{empty},{empty},
 {empty},{model:block.egg},{empty},{model:block.egg},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
@@ -76,7 +76,7 @@ z18
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
-{empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
+{empty},{model:block.egg},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{model:block.egg},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 z20
@@ -85,7 +85,7 @@ z20
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
-{empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
+{empty},{model:block.egg},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{model:block.egg},{empty},{empty},{empty},{empty},{empty},{empty},
 {empty},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 z22
