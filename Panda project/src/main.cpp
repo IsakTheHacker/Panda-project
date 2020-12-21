@@ -318,6 +318,7 @@ int main(int argc, char* argv[]) {
 	double pitch;
 
 	double velocity = 0.0;
+	double velocityModifier = 1.1;
 
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
@@ -327,7 +328,7 @@ int main(int argc, char* argv[]) {
 			velocity = 0.01;
 		} else {
 			if (velocity > 0) {
-				velocity = velocity * 1.05;
+				velocity = velocity * velocityModifier;
 			} else if (velocity < 0) {
 				double value = (int)(camera.get_z() * 100 + 0.5);
 				value = (double)value / 100;
@@ -336,7 +337,7 @@ int main(int argc, char* argv[]) {
 				if (value == value2) {
 					velocity = 0.01;
 				} else {
-					velocity = velocity / 1.05;
+					velocity = velocity / velocityModifier;
 				}
 			}
 		}
