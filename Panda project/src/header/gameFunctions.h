@@ -182,7 +182,9 @@ namespace game {
 
 
 	// Logs a string to a file
-	int logToFile(std::string path, std::string text, bool datePresent = true, bool timePresent = true) {
+	template<typename T>
+	int logToFile(std::string path, T input, bool datePresent = true, bool timePresent = true) {
+		std::string text = std::to_string(input);
 		std::string convertedText = getConvertedDateTime(datePresent, timePresent) + " " + text;
 		std::ofstream logFile(path, std::ios_base::app);
 		logFile << convertedText << "\n";
@@ -191,7 +193,9 @@ namespace game {
 	}
 
 	// Prints an error to the console (red color)
-	int errorOut(std::string text, bool shouldLogToFile = true, bool includeTime = true) {
+	template<typename T>
+	int errorOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
+		std::string text = std::to_string(input);
 		SetConsoleTextAttribute(h, 4 | FOREGROUND_INTENSITY);
 		if (!includeTime) {
 			std::cout << "Error: " << text << "\n";
@@ -206,7 +210,9 @@ namespace game {
 	}
 
 	// Prints a warning to the console (yellow color)
-	int warningOut(std::string text, bool shouldLogToFile = true, bool includeTime = true) {
+	template<typename T>
+	int warningOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
+		std::string text = std::to_string(input);
 		SetConsoleTextAttribute(h, 6 | FOREGROUND_INTENSITY);
 		if (!includeTime) {
 			std::cout << "Warning: " << text << "\n";
@@ -221,7 +227,9 @@ namespace game {
 	}
 
 	// Prints important info to the console (green color)
-	int importantInfoOut(std::string text, bool shouldLogToFile = true, bool includeTime = true) {
+	template<typename T>
+	int importantInfoOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
+		std::string text = std::to_string(input);
 		SetConsoleTextAttribute(h, 2 | FOREGROUND_INTENSITY);
 		if (!includeTime) {
 			std::cout << "Important info: " << text << "\n";
@@ -236,7 +244,9 @@ namespace game {
 	}
 
 	// Prints unimportant logs to the console (white color)
-	int logOut(std::string text, bool shouldLogToFile = false, bool includeTime = true) {
+	template<typename T>
+	int logOut(T input, bool shouldLogToFile = false, bool includeTime = true) {
+		std::string text = std::to_string(input);
 		if (!includeTime) {
 			std::cout << "Log: " << text << "\n";
 		} else {

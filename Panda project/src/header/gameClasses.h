@@ -160,7 +160,7 @@ namespace game {
 			bool modelNotFound;
 		public:
 			bool empty = false;
-			NodePath model;
+			NodePath model = NodePath("");
 			static int current_id;
 			static int object_quantity;
 			unsigned int id;
@@ -376,7 +376,7 @@ namespace game {
 			{"texture",""},
 			{"texture-scale",""}
 		};
-		NodePath object;
+		NodePath object = NodePath("");
 		std::vector<game::object> blocks;
 
 		while (std::getline(file, line)) {
