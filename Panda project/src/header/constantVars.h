@@ -9,6 +9,8 @@ namespace game {
 	const std::string lshift = "lshift";
 	const std::string arrow_up = "arrow_up";
 	const std::string arrow_down = "arrow_down";
+	const std::string arrow_left = "arrow_left";
+	const std::string arrow_right = "arrow_right";
 	const std::string q = "q";
 	const std::string e = "e";
 	const std::string v = "v";

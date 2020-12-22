@@ -34,13 +34,18 @@ framework.define_key("shift-space-up", "Space-key", game::key_up, (void*)&game::
 framework.define_key("lshift", "LShift-key", game::key_down, (void*)&game::lshift);
 framework.define_key("lshift-up", "LShift-key", game::key_up, (void*)&game::lshift);
 
-//Arrow up-key
+//Arrow keys
 framework.define_key("arrow_up", "Arrow up-key", game::key_down, (void*)&game::arrow_up);
 framework.define_key("arrow_up-up", "Arrow up-key", game::key_up, (void*)&game::arrow_up);
 
-//Arrow down-key
 framework.define_key("arrow_down", "Arrow down-key", game::key_down, (void*)&game::arrow_down);
 framework.define_key("arrow_down-up", "Arrow down-key", game::key_up, (void*)&game::arrow_down);
+
+framework.define_key("arrow_left", "Arrow left-key", game::key_down, (void*)&game::arrow_left);
+framework.define_key("arrow_left-up", "Arrow left-key", game::key_up, (void*)&game::arrow_left);
+
+framework.define_key("arrow_right", "Arrow right-key", game::key_down, (void*)&game::arrow_right);
+framework.define_key("arrow_right-up", "Arrow right-key", game::key_up, (void*)&game::arrow_right);
 
 //R-key
 //framework.define_key("r", "R-key", game::runPyScript, 0);

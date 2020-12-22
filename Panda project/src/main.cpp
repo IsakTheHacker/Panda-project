@@ -613,6 +613,59 @@ int main(int argc, char* argv[]) {
 			game::winds[game::winds.size()-1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));
 		}
 
+		if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
+
+			double move_y = 0.0;
+			double move_x = 0.0;
+			if (keys["arrow_up"]) {
+				move_y += 3.0;
+			}
+			if (keys["arrow_down"]) {
+				move_y -= 3.0;
+			}
+			if (keys["arrow_left"]) {
+				move_x += 3.0;
+			}
+			if (keys["arrow_right"]) {
+				move_x -= 3.0;
+			}
+
+			if (keys["v"]) {
+				offset_r += move_x / camera_x_speed;
+
+				if (offset_r < 90 && offset_r > -90) {
+					camera.set_r(offset_r);
+				} else {
+					offset_r -= move_x / 5;
+				}
+			} else {
+				offset_h += move_x / camera_x_speed;
+				camera.set_h(offset_h);
+
+				// Reset rotation
+				offset_r = 0;
+				camera.set_r(offset_r);
+			}
+
+			offset_p += move_y / camera_y_speed;
+			panda.set_h(offset_h);
+
+			//Adjust the collision box so its pitch doesn't change
+			cameraC.set_p(offset_p - offset_p * 2);
+
+			//Adjust the collision box so its rotation doesn't change
+			//cameraC.set_r(offset_r - offset_r * 2);
+			//Not fixed yet
+
+			/*if (!keys["v"]) {
+				if (offset_p < 90 && offset_p > -90) {
+					camera.set_p(offset_p);
+				} else {
+					offset_p -= move_y / 5;
+				}
+			}*/
+		}
+
 		//Border checking
 		if (options["lower_border"] != "none" && options["lower_border"] != "null") {
 			if (camera.get_pos().get_z() < std::stof(options["lower_border"])) {
