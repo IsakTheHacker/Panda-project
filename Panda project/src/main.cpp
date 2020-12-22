@@ -23,8 +23,6 @@ PT(TextNode) text = new TextNode("textnode");
 NodePath camera;
 WindowFramework* window;
 
-
-
 // Cool stuff
 PT(MouseWatcher) mouseWatcher;
 PT(CollisionRay) pickerRay;
@@ -34,11 +32,6 @@ PT(CollisionNode) pickerNode;
 NodePath pickerNP;
 
 #include "./header/gameClasses.h"
-
-// Set up the GeoMipTerrain
-GeoMipTerrain* terrain;
-
-
 
 void pauseMenu(const Event* theEvent, void* data) {
 	game::pauseMenuEventParameters* parameters = (game::pauseMenuEventParameters*)data;
@@ -58,15 +51,6 @@ void pauseMenu(const Event* theEvent, void* data) {
 		mouseInGame = true;
 	}
 }
-
-
-
-// And the task, outside main:
-AsyncTask::DoneStatus UpdateTerrain(GenericAsyncTask* task, void* data) {
-	terrain->update();
-	return AsyncTask::DS_cont;
-}
-
 
 int main(int argc, char* argv[]) {
 

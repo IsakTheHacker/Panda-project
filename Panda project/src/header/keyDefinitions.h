@@ -71,10 +71,6 @@ parameters.mouseWatcher = mouseWatcher;
 framework.define_key("escape", "Esc-key", pauseMenu, (void*)&parameters);
 
 //Mouse button 1
-//game::collisionRayEventParameters parameters;
-//parameters.window = window;
-//parameters.pickerRay = pickerRay;
-//parameters.mouseWatcher = mouseWatcher;
 framework.define_key("mouse1", "Mouse1-button", game::key_down, (void*)&game::mouse1);
 framework.define_key("shift-mouse1", "Mouse1-button", game::key_down, (void*)&game::mouse1);
 
