@@ -360,134 +360,138 @@ int main(int argc, char* argv[]) {
 			LVector3 surface = entry->get_surface_normal(window->get_render());
 			block.show_tight_bounds();
 			if (keys["mouse1"]) {
-				game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
-				game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;
-				/*for (size_t i = 0; i < chunk.objects.size(); i++) {
-					if (chunk.objects[i].id == std::stoi(block.get_tag("id"))) {
-						chunk.objects[i].~object();
-						chunk.objects[i].model.remove_node();
-						std::swap(chunk.objects[i], chunk.objects.back());
-						chunk.objects.pop_back();
-					}
-				}*/
-				block.remove_node();
-				keys["mouse1"] = false;
+				if (mouseInGame) {
+					game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
+					game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;
+					/*for (size_t i = 0; i < chunk.objects.size(); i++) {
+						if (chunk.objects[i].id == std::stoi(block.get_tag("id"))) {
+							chunk.objects[i].~object();
+							chunk.objects[i].model.remove_node();
+							std::swap(chunk.objects[i], chunk.objects.back());
+							chunk.objects.pop_back();
+						}
+					}*/
+					block.remove_node();
+					keys["mouse1"] = false;
+				}
 			}
 			if (keys["mouse3"]) {
-				std::vector<NodePath> vec;
-				LVector3 notRotatedSurface = surface;
-				notRotatedSurface.set_x(0);
-				notRotatedSurface.set_y(0);
-				notRotatedSurface.set_z(0);
+				if (mouseInGame) {
+					std::vector<NodePath> vec;
+					LVector3 notRotatedSurface = surface;
+					notRotatedSurface.set_x(0);
+					notRotatedSurface.set_y(0);
+					notRotatedSurface.set_z(0);
 
-				std::cout << surface << std::endl;
-				std::cout << notRotatedSurface << std::endl;
+					std::cout << surface << std::endl;
+					std::cout << notRotatedSurface << std::endl;
 
-				std::string path;
+					std::string path;
 
-				TexturePool* texturePool = TexturePool::get_global_ptr();
-				TextureStage* textureStage = new TextureStage("textureStage2");
-				textureStage->set_sort(0);
-				textureStage->set_mode(TextureStage::M_replace);
-				Texture* texture;
-				Texture* texture2;
+					TexturePool* texturePool = TexturePool::get_global_ptr();
+					TextureStage* textureStage = new TextureStage("textureStage2");
+					textureStage->set_sort(0);
+					textureStage->set_mode(TextureStage::M_replace);
+					Texture* texture;
+					Texture* texture2;
 
-				NodePath block2;
+					NodePath block2;
 
-				if (handInventoryIndex == 0) {
-					path = "wedge.egg";
-					NodePath incline = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_incline");
-					NodePath base = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_base");
-					vec.push_back(incline);
-					vec.push_back(base);
+					if (handInventoryIndex == 0) {
+						path = "wedge.egg";
+						NodePath incline = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_incline");
+						NodePath base = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_base");
+						vec.push_back(incline);
+						vec.push_back(base);
 
-					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-					base.set_texture(texture, 1);
+						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
+						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+						base.set_texture(texture, 1);
 
-					texture2 = texturePool->load_texture(gamePath + (std::string)"models/textures/png/grass-4.png");
-					texture2->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture2->set_magfilter(SamplerState::FilterType::FT_nearest);
-					incline.set_texture(texture2, 1);
-				} else if (handInventoryIndex == 1) {
-					path = "block.egg";
-					NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"/models/egg/" + (std::string)path);
+						texture2 = texturePool->load_texture(gamePath + (std::string)"models/textures/png/grass-4.png");
+						texture2->set_minfilter(SamplerState::FilterType::FT_nearest);
+						texture2->set_magfilter(SamplerState::FilterType::FT_nearest);
+						incline.set_texture(texture2, 1);
+					} else if (handInventoryIndex == 1) {
+						path = "block.egg";
+						NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"/models/egg/" + (std::string)path);
 
-					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-					block2.set_texture(texture, 1);
-					vec.push_back(block2);
-				} else {
-					path = "block.egg";
-					NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)path);
+						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
+						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+						block2.set_texture(texture, 1);
+						vec.push_back(block2);
+					} else {
+						path = "block.egg";
+						NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)path);
 
-					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-					block2.set_texture(texture, 1);
-					vec.push_back(block2);
-				}
-
-				
-
-				game::object obj(window, framework, vec);
-				obj.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
-				obj.model.set_tex_projector(textureStage->get_default(), window->get_render(), obj.model);
-				obj.model.set_pos(block.get_x() + surface.get_x()*2, block.get_y() + surface.get_y()*2, block.get_z() + surface.get_z()*2);
-
-				if (keys["r"]) {
-
-					if (surface.get_z() == -1) {
-						pitch = 1;
-					} else{
-						pitch = 0;
+						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
+						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+						block2.set_texture(texture, 1);
+						vec.push_back(block2);
 					}
 
-					if (surface.get_x() == -1) {
-						pitch = 0.5;
-						heading = -0.5;
-					} else if (surface.get_x() == 1) {
-						pitch = 0.5;
-						heading = 0.5;
-					} else if (surface.get_y() == -1) {
-						pitch = 0.5;
-						heading = 0;
-					} else if (surface.get_y() == 1) {
-						pitch = 0.5;
-						heading = 1;
+
+
+					game::object obj(window, framework, vec);
+					obj.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
+					obj.model.set_tex_projector(textureStage->get_default(), window->get_render(), obj.model);
+					obj.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
+
+					if (keys["r"]) {
+
+						if (surface.get_z() == -1) {
+							pitch = 1;
+						} else {
+							pitch = 0;
+						}
+
+						if (surface.get_x() == -1) {
+							pitch = 0.5;
+							heading = -0.5;
+						} else if (surface.get_x() == 1) {
+							pitch = 0.5;
+							heading = 0.5;
+						} else if (surface.get_y() == -1) {
+							pitch = 0.5;
+							heading = 0;
+						} else if (surface.get_y() == 1) {
+							pitch = 0.5;
+							heading = 1;
+						}
+
+						std::cout << heading << std::endl;
+						std::cout << pitch << std::endl;
+						obj.model.set_hpr(heading * 180, pitch * 180, 0);
 					}
 
-					std::cout << heading << std::endl;
-					std::cout << pitch << std::endl;
-					obj.model.set_hpr(heading * 180, pitch * 180, 0);
+					if (handInventoryIndex == 0) {
+
+					} else if (handInventoryIndex == 1) {
+						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
+						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+						block2.set_texture(texture, 1);
+					} else {
+						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
+						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+						block2.set_texture(texture, 1);
+					}
+
+					obj.model.set_tag("chunk", block.get_tag("chunk"));
+					obj.model.set_tag("id", std::to_string(obj.id));
+
+					std::cout << "Object z: " << obj.model.get_z() << std::endl;
+					game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
+
+					chunk.objects.push_back(obj);
+					game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;
+
+					keys["mouse3"] = false;
 				}
-
-				if (handInventoryIndex == 0) {
-					
-				} else if (handInventoryIndex == 1) {
-					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-					block2.set_texture(texture, 1);
-				} else {
-					texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-					block2.set_texture(texture, 1);
-				}
-
-				obj.model.set_tag("chunk", block.get_tag("chunk"));
-				obj.model.set_tag("id", std::to_string(obj.id));
-
-				std::cout << "Object z: " << obj.model.get_z() << std::endl;
-				game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
-
-				chunk.objects.push_back(obj);
-				game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;
-
-				keys["mouse3"] = false;
 			}
 		} else {
 			// No targeted block
@@ -530,7 +534,7 @@ int main(int argc, char* argv[]) {
 					panda.set_h(offset_h);
 
 					//Adjust the collision box so its pitch doesn't change
-					cameraC.set_p(offset_p - offset_p*2);
+					cameraC.set_p(offset_p - offset_p * 2);
 
 					//Adjust the collision box so its rotation doesn't change
 					//cameraC.set_r(offset_r - offset_r * 2);
@@ -547,105 +551,105 @@ int main(int argc, char* argv[]) {
 					window->get_graphics_window()->move_pointer(0, center_x, center_y);
 				}
 			}
-		}
 
-		if (keys["w"]) {
-			camera.set_y(panda, 0 + y_speed);
-			panda.set_y(panda, 0 + y_speed);
-		}
-		if (keys["s"]) {
-			camera.set_y(panda, 0 - y_speed);
-			panda.set_y(panda, 0 - y_speed);
-		}
-		if (keys["a"]) {
-			camera.set_x(camera, 0 - x_speed);
-			panda.set_x(camera, 0 - x_speed);
-		}
-		if (keys["d"]) {
-			camera.set_x(camera, 0 + x_speed);
-			panda.set_x(camera, 0 + x_speed);
-		}
-		if (keys["lshift"]) {
-			if (playerOnGround && !player_sneaking) {
-				player_sneaking = true;
-				cameraC.set_z(cameraC.get_z() + sneak_distance);
-				camera.set_z(camera.get_pos().get_z() - sneak_distance);
+
+			if (keys["w"]) {
+				camera.set_y(panda, 0 + y_speed);
+				panda.set_y(panda, 0 + y_speed);
 			}
-		} else if (!keys["lshift"]) {
-			if (playerOnGround && player_sneaking) {
-				player_sneaking = false;
-				cameraC.set_z(cameraC.get_z() - sneak_distance);
-				camera.set_z(camera.get_pos().get_z() + sneak_distance);
+			if (keys["s"]) {
+				camera.set_y(panda, 0 - y_speed);
+				panda.set_y(panda, 0 - y_speed);
 			}
-		}
-		if (keys["space"]) {
-			if (playerOnGround) {
-				if (!player_sneaking) {
-					velocity = -0.15;
-				} else if (player_sneaking) {
-					velocity = -0.30;
+			if (keys["a"]) {
+				camera.set_x(camera, 0 - x_speed);
+				panda.set_x(camera, 0 - x_speed);
+			}
+			if (keys["d"]) {
+				camera.set_x(camera, 0 + x_speed);
+				panda.set_x(camera, 0 + x_speed);
+			}
+			if (keys["lshift"]) {
+				if (playerOnGround && !player_sneaking) {
+					player_sneaking = true;
+					cameraC.set_z(cameraC.get_z() + sneak_distance);
+					camera.set_z(camera.get_pos().get_z() - sneak_distance);
 				}
-				playerOnGround = false;
+			} else if (!keys["lshift"]) {
+				if (playerOnGround && player_sneaking) {
+					player_sneaking = false;
+					cameraC.set_z(cameraC.get_z() - sneak_distance);
+					camera.set_z(camera.get_pos().get_z() + sneak_distance);
+				}
 			}
-		}
-		if (keys["q"]) {
-			game::saveChunk(game::chunks[0]);
-			keys["q"] = false;
-		}
-		if (keys["e"]) {
-			game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
-			game::winds[game::winds.size()-1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));
-		}
-
-		if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
-
-			double move_y = 0.0;
-			double move_x = 0.0;
-			if (keys["arrow_up"]) {
-				move_y += 3.0;
+			if (keys["space"]) {
+				if (playerOnGround) {
+					if (!player_sneaking) {
+						velocity = -0.15;
+					} else if (player_sneaking) {
+						velocity = -0.30;
+					}
+					playerOnGround = false;
+				}
 			}
-			if (keys["arrow_down"]) {
-				move_y -= 3.0;
+			if (keys["q"]) {
+				game::saveChunk(game::chunks[0]);
+				keys["q"] = false;
 			}
-			if (keys["arrow_left"]) {
-				move_x += 3.0;
-			}
-			if (keys["arrow_right"]) {
-				move_x -= 3.0;
+			if (keys["e"]) {
+				game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
+				game::winds[game::winds.size() - 1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));
 			}
 
-			if (keys["v"]) {
-				offset_r += move_x / camera_x_speed;
+			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
+				double move_y = 0.0;
+				double move_x = 0.0;
+				if (keys["arrow_up"]) {
+					move_y += 3.0;
+				}
+				if (keys["arrow_down"]) {
+					move_y -= 3.0;
+				}
+				if (keys["arrow_left"]) {
+					move_x += 3.0;
+				}
+				if (keys["arrow_right"]) {
+					move_x -= 3.0;
+				}
 
-				if (offset_r < 90 && offset_r > -90) {
+				if (keys["v"]) {
+					offset_r += move_x / camera_x_speed;
+
+					if (offset_r < 90 && offset_r > -90) {
+						camera.set_r(offset_r);
+					} else {
+						offset_r -= move_x / 5;
+					}
+				} else {
+					offset_h += move_x / camera_x_speed;
+					camera.set_h(offset_h);
+
+					// Reset rotation
+					offset_r = 0;
 					camera.set_r(offset_r);
-				} else {
-					offset_r -= move_x / 5;
 				}
-			} else {
-				offset_h += move_x / camera_x_speed;
-				camera.set_h(offset_h);
 
-				// Reset rotation
-				offset_r = 0;
-				camera.set_r(offset_r);
-			}
+				offset_p += move_y / camera_y_speed;
+				panda.set_h(offset_h);
 
-			offset_p += move_y / camera_y_speed;
-			panda.set_h(offset_h);
+				//Adjust the collision box so its pitch doesn't change
+				cameraC.set_p(offset_p - offset_p * 2);
 
-			//Adjust the collision box so its pitch doesn't change
-			cameraC.set_p(offset_p - offset_p * 2);
+				//Adjust the collision box so its rotation doesn't change
+				//cameraC.set_r(offset_r - offset_r * 2);
+				//Not fixed yet
 
-			//Adjust the collision box so its rotation doesn't change
-			//cameraC.set_r(offset_r - offset_r * 2);
-			//Not fixed yet
-
-			if (!keys["v"]) {
-				if (offset_p < 90 && offset_p > -90) {
-					camera.set_p(offset_p);
-				} else {
-					offset_p -= move_y / 5;
+				if (!keys["v"]) {
+					if (offset_p < 90 && offset_p > -90) {
+						camera.set_p(offset_p);
+					} else {
+						offset_p -= move_y / 5;
+					}
 				}
 			}
 		}
