@@ -147,11 +147,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Panda3D-1.10.6-x64t\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Panda3D-1.10.6-x64t\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
-    <ExecutablePath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\bin;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>C:\Panda3D-1.10.6-x64t\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -204,17 +204,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CONSOLE;WIN32_VC;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\AppData\Local\Programs\Python\Python38\include;C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Administrator\AppData\Local\Programs\Python\Python38\include;C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\include;C:\Panda3D-1.10.6-x64t\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libp3framework.lib;libpanda.lib;libpandaexpress.lib;libp3dtool.lib;libp3dtoolconfig.lib;libp3direct.lib;libpandafx.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Administrator\AppData\Local\Programs\Python\Python38\libs;C:\Users\Administrator\AppData\Local\Programs\Python\Python38\Lib;C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libp3framework.lib;libpanda.lib;libpandaexpress.lib;libp3dtool.lib;libp3dtoolconfig.lib;libp3direct.lib;libpandafx.lib;libpandaphysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Administrator\AppData\Local\Programs\Python\Python38\libs;C:\Users\Administrator\AppData\Local\Programs\Python\Python38\Lib;C:\Panda3D-1.10.6-x64t\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
