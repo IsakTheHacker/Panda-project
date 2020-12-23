@@ -460,8 +460,6 @@ namespace game {
 			z.insert(object.model.get_z());
 		}
 
-		
-
 		game::object emptyObject = {};
 		std::vector<game::object> y_levels(8, emptyObject);
 		std::vector<std::vector<game::object>> x_levels(8, y_levels);
@@ -469,9 +467,7 @@ namespace game {
 
 		for (auto i : z) {
 			z_levels[i] = x_levels;
-			std::cout << "z-set: " << i << std::endl;
 		}
-
 
 		for (game::object object : chunk.objects) {
 			//std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;

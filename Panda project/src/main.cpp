@@ -383,9 +383,6 @@ int main(int argc, char* argv[]) {
 					notRotatedSurface.set_y(0);
 					notRotatedSurface.set_z(0);
 
-					std::cout << surface << std::endl;
-					std::cout << notRotatedSurface << std::endl;
-
 					std::string path;
 
 					TexturePool* texturePool = TexturePool::get_global_ptr();
@@ -435,7 +432,7 @@ int main(int argc, char* argv[]) {
 
 
 
-					game::object obj(window, framework, vec);
+					game::object obj(window, framework, vec, true, false, false);
 					obj.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
 					obj.model.set_tex_projector(textureStage->get_default(), window->get_render(), obj.model);
 					obj.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
@@ -461,9 +458,6 @@ int main(int argc, char* argv[]) {
 							pitch = 0.5;
 							heading = 1;
 						}
-
-						std::cout << heading << std::endl;
-						std::cout << pitch << std::endl;
 						obj.model.set_hpr(heading * 180, pitch * 180, 0);
 					}
 
@@ -484,7 +478,6 @@ int main(int argc, char* argv[]) {
 					obj.model.set_tag("chunk", block.get_tag("chunk"));
 					obj.model.set_tag("id", std::to_string(obj.id));
 
-					std::cout << "Object z: " << obj.model.get_z() << std::endl;
 					game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
 
 					chunk.objects.push_back(obj);
