@@ -647,6 +647,10 @@ int main(int argc, char* argv[]) {
 			}
 		}
 
+		//Reset mouse clicks
+		keys["mouse1"] = false;
+		keys["mouse3"] = false;
+
 		//Border checking
 		if (options["lower_border"] != "none" && options["lower_border"] != "null") {
 			if (camera.get_pos().get_z() < std::stof(options["lower_border"])) {
