@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_002AC1F359C447F38570BC40B2489D3A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_10A0D9CC5D0441DA91E1ECFCB5FFF7C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -27,7 +33,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_158A121CA09A4E1083159BD4C78CF9AB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_166849956E2C403FB864345BD07C19A7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1BC9490494A9420CBB51DACFA524739A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,7 +57,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_21B250AF638744A9866508B0B9143807"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_23797D784B15439C903A0C2578C27E48"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_25F61FB02DCB45FCA2526F61FDB8EC60"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2DAC15C32E404AD789FBBB51A3CBA420"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,7 +117,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_4AAF5FC9514746C091A8C6F64198FAB9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_51E35FA591914C0FAD7A5F56EEF351C3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5C5DCE4F64FC41588B2086AC0365F97F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -117,6 +165,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_775386EA7C334238B3BA6FDE99694BAE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8293E92B142043D8A8D07C65C3651D67"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -129,7 +183,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_87EB3080C05247C39B8C85E7BD1CE7A6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_88D904A3BE044853AC5F34A9E3618DE1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8D0193212F904762A371655FD07EC258"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -171,7 +237,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_9D6E8BF0A4174D5A91B7B48988E2459C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9F98C10959D2441E843FEC7C74310F12"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A3D324371F76404BA3C9355E96B93B68"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -376,6 +454,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_002AC1F359C447F38570BC40B2489D3A"
+            {
+            "SourcePath" = "8:..\\Panda project\\libpandagl.dll"
+            "TargetName" = "8:libpandagl.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_10A0D9CC5D0441DA91E1ECFCB5FFF7C7"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-3.png"
@@ -416,12 +514,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_158A121CA09A4E1083159BD4C78CF9AB"
+            {
+            "SourcePath" = "8:..\\Panda project\\python38.dll"
+            "TargetName" = "8:python38.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_166849956E2C403FB864345BD07C19A7"
             {
             "SourcePath" = "8:..\\Panda project\\universes\\Test\\16.16.chunk"
             "TargetName" = "8:16.16.chunk"
             "Tag" = "8:"
             "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1BC9490494A9420CBB51DACFA524739A"
+            {
+            "SourcePath" = "8:..\\Panda project\\libp3dtoolconfig.dll"
+            "TargetName" = "8:libp3dtoolconfig.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -456,12 +594,72 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_21B250AF638744A9866508B0B9143807"
+            {
+            "SourcePath" = "8:..\\Panda project\\libpandaegg.dll"
+            "TargetName" = "8:libpandaegg.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_23797D784B15439C903A0C2578C27E48"
+            {
+            "SourcePath" = "8:..\\Panda project\\libpanda.dll"
+            "TargetName" = "8:libpanda.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_25F61FB02DCB45FCA2526F61FDB8EC60"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-1.png"
             "TargetName" = "8:grass-1.png"
             "Tag" = "8:"
             "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2DAC15C32E404AD789FBBB51A3CBA420"
+            {
+            "SourcePath" = "8:..\\Panda project\\libp3ptloader.dll"
+            "TargetName" = "8:libp3ptloader.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -596,12 +794,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4AAF5FC9514746C091A8C6F64198FAB9"
+            {
+            "SourcePath" = "8:..\\Panda project\\cg.dll"
+            "TargetName" = "8:cg.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_51E35FA591914C0FAD7A5F56EEF351C3"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-2.png"
             "TargetName" = "8:grass-2.png"
             "Tag" = "8:"
             "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C5DCE4F64FC41588B2086AC0365F97F"
+            {
+            "SourcePath" = "8:..\\Panda project\\libpandaexpress.dll"
+            "TargetName" = "8:libpandaexpress.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -716,6 +954,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_775386EA7C334238B3BA6FDE99694BAE"
+            {
+            "SourcePath" = "8:..\\Panda project\\libp3dtool.dll"
+            "TargetName" = "8:libp3dtool.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8293E92B142043D8A8D07C65C3651D67"
             {
             "SourcePath" = "8:..\\Panda project\\data\\assets\\blockproperties\\grass.blockproperties"
@@ -756,12 +1014,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87EB3080C05247C39B8C85E7BD1CE7A6"
+            {
+            "SourcePath" = "8:..\\Panda project\\libp3framework.dll"
+            "TargetName" = "8:libp3framework.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_88D904A3BE044853AC5F34A9E3618DE1"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-1.png"
             "TargetName" = "8:rotational-complex-1.png"
             "Tag" = "8:"
             "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D0193212F904762A371655FD07EC258"
+            {
+            "SourcePath" = "8:..\\Panda project\\cgGL.dll"
+            "TargetName" = "8:cgGL.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -876,12 +1174,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9D6E8BF0A4174D5A91B7B48988E2459C"
+            {
+            "SourcePath" = "8:..\\Panda project\\libp3windisplay.dll"
+            "TargetName" = "8:libp3windisplay.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9F98C10959D2441E843FEC7C74310F12"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\crosshair.png"
             "TargetName" = "8:crosshair.png"
             "Tag" = "8:"
             "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A3D324371F76404BA3C9355E96B93B68"
+            {
+            "SourcePath" = "8:..\\Panda project\\libp3assimp.dll"
+            "TargetName" = "8:libp3assimp.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
