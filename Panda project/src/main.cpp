@@ -641,13 +641,13 @@ int main(int argc, char* argv[]) {
 			//cameraC.set_r(offset_r - offset_r * 2);
 			//Not fixed yet
 
-			/*if (!keys["v"]) {
+			if (!keys["v"]) {
 				if (offset_p < 90 && offset_p > -90) {
 					camera.set_p(offset_p);
 				} else {
 					offset_p -= move_y / 5;
 				}
-			}*/
+			}
 		}
 
 		//Border checking
