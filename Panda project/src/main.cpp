@@ -607,6 +607,9 @@ int main(int argc, char* argv[]) {
 				game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
 				game::winds[game::winds.size() - 1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));
 			}
+			if (keys["r"]) {
+				camera.set_z(30);
+			}
 
 			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
 				double move_y = 0.0;
