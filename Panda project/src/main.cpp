@@ -12,6 +12,7 @@ bool player_sneaking = false;
 
 //My libraries
 #include "./header/cppExtension.h"
+#include "./header/gameVars.h"
 #include "./header/gameFunctions.h"
 #include "./header/gameLanguage.h"
 #include "./header/constantVars.h"

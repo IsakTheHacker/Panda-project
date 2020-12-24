@@ -68,6 +68,9 @@
     <ClInclude Include="src\header\pandaIncludes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\header\gameVars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -120,6 +123,12 @@
     </ClCompile>
     <ClCompile Include="src\crap\main.cpp">
       <Filter>Crap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameFunctions.cpp">
+      <Filter>Source Files\C++ files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cppExtension.cpp">
+      <Filter>Source Files\C++ files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

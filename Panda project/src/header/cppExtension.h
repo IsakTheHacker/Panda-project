@@ -1,16 +1,12 @@
 #pragma once
 
-int pass() {
-	return 0;
-}
+//C++ built-in libraries
+#include <string>
 
-char stoc(std::string input) {
-	char output = input[0];
-	return output;
-}
+int pass();
+
+char stoc(std::string input);
 
 namespace std {
-	string to_string(string input) {
-		return input;
-	}
+	string to_string(string input);
 }
