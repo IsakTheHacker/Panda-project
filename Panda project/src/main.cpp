@@ -510,7 +510,7 @@ int main(int argc, char* argv[]) {
 						}
 					} else {
 						offset_h += move_x / camera_x_speed;
-						camera.set_h(offset_h);
+						camera.set_h(std::fmod(offset_h, 360));
 
 						// Reset rotation
 						offset_r = 0;
@@ -518,7 +518,7 @@ int main(int argc, char* argv[]) {
 					}
 
 					offset_p += move_y / camera_y_speed;
-					panda.set_h(offset_h);
+					panda.set_h(std::fmod(offset_h, 360));
 
 					//Adjust the collision box so its pitch doesn't change
 					cameraC.set_p(offset_p - offset_p * 2);
