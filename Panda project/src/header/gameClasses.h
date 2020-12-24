@@ -433,6 +433,7 @@ namespace game {
 					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
 					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
 					object.model.set_tag("id", std::to_string(object.id));
+					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
 					blocks.push_back(object);
 				}
@@ -471,7 +472,9 @@ namespace game {
 
 		for (game::object object : chunk.objects) {
 			//std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
-			z_levels[object.model.get_z()][(object.model.get_x()-x)/2-1][(object.model.get_y()-y)/2-1] = object;
+			if (!object.empty) {
+				z_levels[object.model.get_z()][(object.model.get_x()-x)/2-1][(object.model.get_y()-y)/2-1] = object;
+			}
 		}
 
 		bool x_level_empty = false;

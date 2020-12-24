@@ -361,17 +361,10 @@ int main(int argc, char* argv[]) {
 			block.show_tight_bounds();
 			if (keys["mouse1"]) {
 				if (mouseInGame) {
-					game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
-					game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;
-					/*for (size_t i = 0; i < chunk.objects.size(); i++) {
-						if (chunk.objects[i].id == std::stoi(block.get_tag("id"))) {
-							chunk.objects[i].~object();
-							chunk.objects[i].model.remove_node();
-							std::swap(chunk.objects[i], chunk.objects.back());
-							chunk.objects.pop_back();
-						}
-					}*/
-					block.remove_node();
+					game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];							//Get chunk containing the block
+					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();					//Remove node
+					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);		//Replace game::object with empty game::object
+					game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;										//Save chunk changes in vector "chunks"
 					keys["mouse1"] = false;
 				}
 			}
@@ -475,10 +468,11 @@ int main(int argc, char* argv[]) {
 						block2.set_texture(texture, 1);
 					}
 
+					game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
+					
 					obj.model.set_tag("chunk", block.get_tag("chunk"));
 					obj.model.set_tag("id", std::to_string(obj.id));
-
-					game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];
+					obj.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
 
 					chunk.objects.push_back(obj);
 					game::chunks[std::stoi(block.get_tag("chunk"))] = chunk;
