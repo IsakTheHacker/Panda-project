@@ -17,7 +17,7 @@
 #include <string>
 
 //JSON library
-#include "header/external/json.hpp"
+#include "external/json.hpp"
 using json = nlohmann::json;
 
 //Python library
@@ -25,9 +25,9 @@ using json = nlohmann::json;
 #include <Python.h>
 
 //My libraries
-#include "header/cppExtension.h"
-#include "header/gameVars.h"
-#include "header/pandaIncludes.h"
+#include "cppExtension.h"
+#include "gameVars.h"
+#include "pandaIncludes.h"
 
 //Including necessary Windows libraries
 #include <Windows.h>

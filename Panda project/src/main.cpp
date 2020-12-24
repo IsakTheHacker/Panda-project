@@ -1,4 +1,4 @@
-#include "./header/pandaIncludes.h"
+#include "pandaIncludes.h"
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -11,11 +11,11 @@ std::string gamePath = "./";
 bool player_sneaking = false;
 
 //My libraries
-#include "./header/cppExtension.h"
-#include "./header/gameVars.h"
-#include "./header/gameFunctions.h"
-#include "./header/gameLanguage.h"
-#include "./header/constantVars.h"
+#include "cppExtension.h"
+#include "gameVars.h"
+#include "gameFunctions.h"
+#include "gameLanguage.h"
+#include "constantVars.h"
 
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
@@ -32,7 +32,7 @@ PT(CollisionHandlerQueue) myHandler;
 PT(CollisionNode) pickerNode;
 NodePath pickerNP;
 
-#include "./header/gameClasses.h"
+#include "gameClasses.h"
 
 void pauseMenu(const Event* theEvent, void* data) {
 	game::pauseMenuEventParameters* parameters = (game::pauseMenuEventParameters*)data;
@@ -148,7 +148,7 @@ int main(int argc, char* argv[]) {
 
 	//Keyboard input
 	window->enable_keyboard();
-	#include "./header/keyDefinitions.h"
+	#include "keyDefinitions.h"
 
 	PT(TextNode) text;
 	text = new TextNode("node name");

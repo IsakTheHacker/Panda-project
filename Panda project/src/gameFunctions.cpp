@@ -1,4 +1,4 @@
-#include "header/gameFunctions.h"
+#include "gameFunctions.h"
 
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 

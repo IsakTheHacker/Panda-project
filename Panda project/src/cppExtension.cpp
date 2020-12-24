@@ -1,4 +1,4 @@
-#include "header/cppExtension.h"
+#include "cppExtension.h"
 
 int pass() {
 	return 0;
