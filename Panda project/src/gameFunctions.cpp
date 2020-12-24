@@ -140,78 +140,6 @@ namespace game {
 		return convertedDateTime;
 	}
 
-	/*template<typename T>
-	int logToFile(std::string path, T input, bool datePresent = true, bool timePresent = true) {
-		std::string text = std::to_string(input);
-		std::string convertedText = getConvertedDateTime(datePresent, timePresent) + " " + text;
-		std::ofstream logFile(path, std::ios_base::app);
-		logFile << convertedText << "\n";
-		logFile.close();
-		return 0;
-	}
-
-	template<typename T>
-	int errorOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
-		std::string text = std::to_string(input);
-		SetConsoleTextAttribute(h, 4 | FOREGROUND_INTENSITY);
-		if (!includeTime) {
-			std::cout << "Error: " << text << "\n";
-		} else {
-			std::cout << getConvertedDateTime(false, true) << " Error: " << text << "\n";
-		}
-		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
-		if (shouldLogToFile) {
-			logToFile("game.log", "Error: " + text);
-		}
-		return 0;
-	}
-
-	template<typename T>
-	int warningOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
-		std::string text = std::to_string(input);
-		SetConsoleTextAttribute(h, 6 | FOREGROUND_INTENSITY);
-		if (!includeTime) {
-			std::cout << "Warning: " << text << "\n";
-		} else {
-			std::cout << getConvertedDateTime(false, true) << " Warning: " << text << "\n";
-		}
-		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
-		if (shouldLogToFile) {
-			logToFile("game.log", "Warning: " + text);
-		}
-		return 0;
-	}
-
-	template<typename T>
-	int importantInfoOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
-		std::string text = std::to_string(input);
-		SetConsoleTextAttribute(h, 2 | FOREGROUND_INTENSITY);
-		if (!includeTime) {
-			std::cout << "Important info: " << text << "\n";
-		} else {
-			std::cout << getConvertedDateTime(false, true) << " Important info: " << text << "\n";
-		}
-		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
-		if (shouldLogToFile) {
-			logToFile("game.log", "Important info: " + text);
-		}
-		return 0;
-	}
-
-	template<typename T>
-	int logOut(T input, bool shouldLogToFile = false, bool includeTime = true) {
-		std::string text = std::to_string(input);
-		if (!includeTime) {
-			std::cout << "Log: " << text << "\n";
-		} else {
-			std::cout << getConvertedDateTime(false, true) << " Log: " << text << "\n";
-		}
-		if (shouldLogToFile) {
-			logToFile("game.log", "Log: " + text);
-		}
-		return 0;
-	}*/
-
 	int runPyScript(std::string path) {
 		std::ifstream pyFile(path);
 		if (pyFile.fail()) {
@@ -225,17 +153,6 @@ namespace game {
 		PyObject* m_pGlobalDict = PyModule_GetDict(m_pMainModule);
 		fp = _Py_fopen(filename, "r");
 		PyObject* result = PyRun_File(fp, filename, Py_file_input, m_pGlobalDict, m_pGlobalDict);
-		/*Py_INCREF(result);
-		PyObject* list;
-		if (PyArg_Parse(result, "O", &list)) {
-			int count = PyList_Size(list);
-			for (int i = 0; i < count; i++)
-			{
-				PyObject* item = PyList_GetItem(list, i);
-				const char* str = PyBytes_AsString(item);
-				std::cout << str;
-			}
-		}*/
 		Py_Finalize();
 		return 0;
 	}
