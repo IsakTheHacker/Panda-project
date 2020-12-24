@@ -163,6 +163,12 @@ int main(int argc, char* argv[]) {
 	textNodePath2.set_scale(0.07);
 	textNodePath2.set_pos(-1.25, 0, 0.65);
 
+	PT(TextNode) text3;
+	text3 = new TextNode("node name3");
+	NodePath textNodePath3 = window->get_aspect_2d().attach_new_node(text3);
+	textNodePath3.set_scale(0.07);
+	textNodePath3.set_pos(-1.25, 0, 0.40);
+
 	// Crosshair
 	CardMaker cardmaker("crosshair");
 	NodePath cursor(cardmaker.generate());
@@ -288,6 +294,9 @@ int main(int argc, char* argv[]) {
 
 	double x = 0.0;
 	double y = 0.0;
+
+	std::string chunk_x;
+	std::string chunk_y;
 
 	double sneak_distance = std::stod(options["sneak-distance"]);
 
@@ -487,6 +496,17 @@ int main(int argc, char* argv[]) {
 
 		text->set_text("X: " + std::to_string(camera.get_x()) + "\nY: " + std::to_string(camera.get_y()) + "\nZ: " + std::to_string(camera.get_z()));
 		text2->set_text("H: " + std::to_string(camera.get_h()) + "\nP: " + std::to_string(camera.get_p()) + "\nR: " + std::to_string(camera.get_r()));
+		if (camera.get_x() < 0) {
+			chunk_x = std::to_string(((int)(camera.get_x()-16) / 16) * 16);
+		} else {
+			chunk_x = std::to_string(((int)camera.get_x() / 16) * 16);
+		}
+		if (camera.get_y() < 0) {
+			chunk_y = std::to_string(((int)(camera.get_y()-16) / 16) * 16);
+		} else {
+			chunk_y = std::to_string(((int)camera.get_y() / 16) * 16);
+		}
+		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
 
 		if (mouseInGame) {
 			if (mouseWatcher->has_mouse()) {
