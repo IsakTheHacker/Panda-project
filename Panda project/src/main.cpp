@@ -92,8 +92,6 @@ int main(int argc, char* argv[]) {
 	game::setHeading(options["console-heading"]);
 	game::logOut("Starting...");
 
-
-
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
@@ -208,7 +206,6 @@ int main(int argc, char* argv[]) {
 
 
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
-	//NodePath blocky = window->load_model(framework.get_models(), "/c/dev/Panda project/Panda project/models/egg/blocky.egg");
 	blocky.set_scale(0.5);
 	blocky.set_pos(0, 0, 100);
 	blocky.reparent_to(window->get_render());
@@ -431,8 +428,6 @@ int main(int argc, char* argv[]) {
 						block2.set_texture(texture, 1);
 						vec.push_back(block2);
 					}
-
-
 
 					game::object obj(window, framework, vec, true, false, false);
 					obj.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
