@@ -130,5 +130,8 @@
     <ClCompile Include="src\cppExtension.cpp">
       <Filter>Source Files\C++ files</Filter>
     </ClCompile>
+    <ClCompile Include="src\gameClasses.cpp">
+      <Filter>Source Files\C++ files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
