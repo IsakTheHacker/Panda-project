@@ -272,7 +272,13 @@ int main(int argc, char* argv[]) {
 	}
 
 	PerlinNoise3 perlinNoise(8, 8, 8, 256, 78306730);
-	std::cout << perlinNoise.noise(7, 7, 3) << std::endl;
+	for (size_t i = 0; i < 10; i++) {
+		for (size_t j = 0; j < 10; j++) {
+			for (size_t k = 0; k < 10; k++) {
+				std::cout << "Perlin: " << perlinNoise.noise(i, j, k) << std::endl;
+			}
+		}
+	}
 
 
 	//Reading settings from settings map
@@ -297,6 +303,7 @@ int main(int argc, char* argv[]) {
 	std::string chunk_y;
 
 	double sneak_distance = std::stod(options["sneak-distance"]);
+	bool chunk_exists = false;
 
 	std::string sad = "Hello World";
 	/*myTraverser.show_collisions(window->get_render());
@@ -338,6 +345,27 @@ int main(int argc, char* argv[]) {
 		camera.set_z(camera.get_pos().get_z() - velocity);
 		panda.set_z(camera.get_pos().get_z() - velocity);
 
+		// Checking if current chunk exists, generate if not.
+		if (camera.get_x() < 0) {
+			chunk_x = std::to_string(((int)(camera.get_x() - 16) / 16) * 16);
+		} else {
+			chunk_x = std::to_string(((int)camera.get_x() / 16) * 16);
+		}
+		if (camera.get_y() < 0) {
+			chunk_y = std::to_string(((int)(camera.get_y() - 16) / 16) * 16);
+		} else {
+			chunk_y = std::to_string(((int)camera.get_y() / 16) * 16);
+		}
+		std::ifstream chunkFile("universes/Test/" + chunk_x + "." + chunk_y + ".chunk");
+		for (size_t i = 0; i < game::chunks.size(); i++) {
+			if (game::chunks[i].x == std::stoi(chunk_x) && game::chunks[i].y == std::stoi(chunk_y)) {
+				chunk_exists = true;
+			}
+		}
+		if (chunkFile.fail() && !chunk_exists) {
+			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));		//Create new chunk
+			game::generateChunk(window, framework, chunk, perlinNoise);		//Apply the generateChunk function on the new chunk
+		}
 
 		if (handInventoryIndex < 0) {
 			handInventoryIndex = 10;
@@ -492,16 +520,6 @@ int main(int argc, char* argv[]) {
 
 		text->set_text("X: " + std::to_string(camera.get_x()) + "\nY: " + std::to_string(camera.get_y()) + "\nZ: " + std::to_string(camera.get_z()));
 		text2->set_text("H: " + std::to_string(camera.get_h()) + "\nP: " + std::to_string(camera.get_p()) + "\nR: " + std::to_string(camera.get_r()));
-		if (camera.get_x() < 0) {
-			chunk_x = std::to_string(((int)(camera.get_x()-16) / 16) * 16);
-		} else {
-			chunk_x = std::to_string(((int)camera.get_x() / 16) * 16);
-		}
-		if (camera.get_y() < 0) {
-			chunk_y = std::to_string(((int)(camera.get_y()-16) / 16) * 16);
-		} else {
-			chunk_y = std::to_string(((int)camera.get_y() / 16) * 16);
-		}
 		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
 
 		if (mouseInGame) {
@@ -605,6 +623,7 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["r"]) {
 				camera.set_z(30);
+				velocity = 0;
 			}
 
 			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {

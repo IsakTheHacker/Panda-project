@@ -153,6 +153,7 @@ namespace game {
 		std::vector<object> objects;
 
 		chunk(std::vector<object> objects, int x, int y);
+		chunk(int x, int y);
 	};
 
 	//Creating vectors for the classes
@@ -173,5 +174,7 @@ namespace game {
 	/// <summary> Saves a specified chunk to it's destination. </summary>
 	/// <param name="chunk">- your specifed chunk object</param>
 	/// <returns> 0 if successful, nonzero if not! </returns>
-	int saveChunk(game::chunk chunk);
+	int saveChunk(chunk chunk);
+
+	int generateChunk(WindowFramework*& window, PandaFramework& framework, chunk chunk, PerlinNoise3 perlinNoise);
 }

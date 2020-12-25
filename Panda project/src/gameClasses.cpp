@@ -217,6 +217,10 @@ namespace game {
 		this->x = x;
 		this->y = y;
 	}
+	chunk::chunk(int x, int y) {
+		this->x = x;
+		this->y = y;
+	}
 
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
 
@@ -372,6 +376,46 @@ namespace game {
 		file << final;
 
 		return 0;
+	}
+
+	int generateChunk(WindowFramework*& window, PandaFramework& framework, chunk chunk, PerlinNoise3 perlinNoise) {
+		int x = chunk.x;
+		int y = chunk.y;
+		TexturePool* texturePool = TexturePool::get_global_ptr();
+
+		for (size_t i = 0; i < 1; i++) {
+			for (size_t j = 0; j < 16; j++) {
+				for (size_t k = 0; k < 16; k++) {
+					TextureStage* textureStage = new TextureStage("textureStage2");
+					textureStage->set_sort(0);
+					textureStage->set_mode(TextureStage::M_replace);
+					std::vector<NodePath> subobjects;
+					NodePath object2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)"block.egg");
+
+					Texture* texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
+					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+
+					object2.set_texture(texture, 1);
+
+					subobjects.push_back(object2);
+
+					game::object object = game::object(window, framework, subobjects, true, false);
+					object.model.set_pos(x + j, y + k, i);
+
+					object.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
+					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
+					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
+					object.model.set_tag("id", std::to_string(object.id));
+					object.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
+
+					chunk.objects.push_back(object);
+					k += 1;
+				}
+				j += 1;
+			}
+		}
+		game::chunks.push_back(chunk);
 	}
 
 	std::vector<windObject> winds;
