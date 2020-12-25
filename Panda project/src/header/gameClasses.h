@@ -132,23 +132,8 @@ namespace game {
 	// Entity class
 	class entity : public object {
 		public:
-			entity(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false) : object{ window, framework, modelpath, collidable, shouldLogInConsole, shouldLogToFile } {
-				/*if (shouldLogInConsole) {
-					game::logOut("Succesfully created the player! id: " + std::to_string(id));
-				}
-				if (shouldLogToFile) {
-					logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
-				}*/
-			}
-
-			~entity() {
-				/*if (shouldLogInConsoleIntern) {
-					game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
-				}
-				if (shouldLogToFileIntern) {
-					logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
-				}*/
-			}
+			entity(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+			~entity();
 	};
 
 	// Player class
@@ -156,28 +141,8 @@ namespace game {
 		public:
 			NodePath collisionNodePath;
 
-			player(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool shouldLogInConsole = true, bool shouldLogToFile = false) : entity{ window, framework, modelpath, shouldLogInConsole, shouldLogToFile } {
-				CollisionNode* collisionNode = new CollisionNode("Box");
-				collisionNode->add_solid(new CollisionBox(0, 2, 2, 4));
-				collisionNodePath = model.attach_new_node(collisionNode);
-				collisionNodePath.show();
-
-				/*if (shouldLogInConsole) {
-					game::logOut("Succesfully created the player! id: " + std::to_string(id));
-				}
-				if (shouldLogToFile) {
-					logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
-				}*/
-			}
-
-			~player() {
-				/*if (shouldLogInConsoleIntern) {
-					game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
-				}
-				if (shouldLogToFileIntern) {
-					logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
-				}*/
-			}
+			player(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+			~player();
 	};
 
 	//Chunk class
@@ -187,11 +152,7 @@ namespace game {
 		int y;
 		std::vector<object> objects;
 
-		chunk(std::vector<object> objects, int x, int y) {
-			this->objects = objects;
-			this->x = x;
-			this->y = y;
-		}
+		chunk(std::vector<object> objects, int x, int y);
 	};
 
 	//Creating vectors for the classes

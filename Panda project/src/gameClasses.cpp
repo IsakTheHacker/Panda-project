@@ -168,6 +168,56 @@ namespace game {
 	int object::current_id = 0;
 	int object::object_quantity = 0;
 
+	//Entity class
+	entity::entity(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable, bool shouldLogInConsole, bool shouldLogToFile) : object{ window, framework, modelpath, collidable, shouldLogInConsole, shouldLogToFile } {
+		/*if (shouldLogInConsole) {
+			game::logOut("Succesfully created the player! id: " + std::to_string(id));
+		}
+		if (shouldLogToFile) {
+			logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
+		}*/
+	}
+
+	entity::~entity() {
+		/*if (shouldLogInConsoleIntern) {
+			game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
+		}
+		if (shouldLogToFileIntern) {
+			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
+		}*/
+	}
+
+	//Player class
+	player::player(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool shouldLogInConsole, bool shouldLogToFile) : entity{ window, framework, modelpath, shouldLogInConsole, shouldLogToFile } {
+		CollisionNode* collisionNode = new CollisionNode("Box");
+		collisionNode->add_solid(new CollisionBox(0, 2, 2, 4));
+		collisionNodePath = model.attach_new_node(collisionNode);
+		collisionNodePath.show();
+
+		/*if (shouldLogInConsole) {
+			game::logOut("Succesfully created the player! id: " + std::to_string(id));
+		}
+		if (shouldLogToFile) {
+			logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
+		}*/
+	}
+
+	player::~player() {
+		/*if (shouldLogInConsoleIntern) {
+			game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
+		}
+		if (shouldLogToFileIntern) {
+			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
+		}*/
+	}
+
+	//Chunk class
+	chunk::chunk(std::vector<object> objects, int x, int y) {
+		this->objects = objects;
+		this->x = x;
+		this->y = y;
+	}
+
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
 
 		//Initalize variables
