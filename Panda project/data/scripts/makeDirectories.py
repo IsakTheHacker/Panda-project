@@ -8,6 +8,13 @@ if not os.path.isdir("data"):
 	except OSError:
 		print("Creation of 'data' directory failed!")
 
+#Checking if screenshots directory exists
+if not os.path.isdir("screenshots"):
+	try:
+		os.mkdir("screenshots")
+	except OSError:
+		print("Creation of 'screenshots' directory failed!")
+
 #Checking if scripts directory exists
 if not os.path.isdir("scripts"):
 	try:
