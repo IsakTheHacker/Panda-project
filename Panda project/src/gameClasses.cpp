@@ -414,18 +414,17 @@ namespace game {
 		return 0;
 	}
 
-	int generateChunk(WindowFramework*& window, PandaFramework& framework, chunk chunk, PerlinNoise3 perlinNoise) {
-		int x = chunk.x;
-		int y = chunk.y;
+	int generateChunk(WindowFramework*& window, PandaFramework& framework, std::pair<int, int> coords, PerlinNoise3 perlinNoise) {
+		int x = coords.first;
+		int y = coords.second;
 		TexturePool* texturePool = TexturePool::get_global_ptr();
 		std::vector<object> blocks;
 		std::vector<NodePath> subobjects;
 		game::object object;
 
-		game::warningOut(object);
+		//game::warningOut(object);
 
 		for (size_t i = 1; i < 2; i++) {
-			std::cout << "z: " << i << std::endl;
 			for (int j = x; j < 16; j+=2) {
 				//std::cout << "x: " << j << std::endl;
 				for (int k = y; k < 16; k+=2) {
@@ -458,14 +457,15 @@ namespace game {
 			}
 		}
 		game::chunk newChunk(blocks, x, y);
+		game::chunk::index.insert(coords);
 		blocks.clear();
-		std::cout << "Before size: " << game::chunks.size() << std::endl;
+		//std::cout << "Before size: " << game::chunks.size() << std::endl;
 		game::chunks.push_back(newChunk);
-		std::cout << "After size: " << game::chunks.size() << std::endl;
-		game::importantInfoOut("Finsihed generating: " + std::to_string(x) + "   " + std::to_string(y));
-		game::importantInfoOut(newChunk.objects.size());
+		//std::cout << "After size: " << game::chunks.size() << std::endl;
+		//game::importantInfoOut("Finsihed generating: " + std::to_string(x) + "   " + std::to_string(y));
+		//game::importantInfoOut(newChunk.objects.size());
 		newChunk.reset();
-		game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
+		//game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
 		return 0;
 	}
 

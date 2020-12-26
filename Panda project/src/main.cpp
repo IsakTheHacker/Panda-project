@@ -366,12 +366,14 @@ int main(int argc, char* argv[]) {
 		
 		if (game::chunk::index.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::index.end()) {
 			chunk_exists = true;
+		} else {
+			chunk_exists = false;
 		}
 
 		if (!chunk_exists) {
 			//game::errorOut("Before: " + game::chunks.size());
-			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));		//Create new chunk
-			game::generateChunk(window, framework, chunk, perlinNoise);		//Apply the generateChunk function on the new chunk
+			std::cout << std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y)).first << "," << std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y)).second << std::endl;
+			game::generateChunk(window, framework, std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y)), perlinNoise);		//Apply the generateChunk function on the new chunk
 			//game::errorOut("After: " + game::chunks.size());
 		}
 

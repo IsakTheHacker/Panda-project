@@ -117,7 +117,7 @@ namespace game {
 			bool modelNotFound;
 		public:
 			bool empty = false;
-			NodePath model = NodePath("");
+			NodePath model;
 			static int current_id;
 			static int object_quantity;
 			unsigned int id;
@@ -180,5 +180,5 @@ namespace game {
 	/// <returns> 0 if successful, nonzero if not! </returns>
 	int saveChunk(chunk chunk);
 
-	int generateChunk(WindowFramework*& window, PandaFramework& framework, chunk chunk, PerlinNoise3 perlinNoise);
+	int generateChunk(WindowFramework*& window, PandaFramework& framework, std::pair<int, int> coords, PerlinNoise3 perlinNoise);
 }
