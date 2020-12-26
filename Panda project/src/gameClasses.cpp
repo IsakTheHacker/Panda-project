@@ -246,9 +246,9 @@ namespace game {
 		//game::warningOut(object);
 
 		for (size_t i = 1; i < 2; i++) {
-			for (int j = x; j < 16; j += 2) {
+			for (int j = x; j < x+16; j += 2) {
 				//std::cout << "x: " << j << std::endl;
-				for (int k = y; k < 16; k += 2) {
+				for (int k = y; k < y+16; k += 2) {
 					//std::cout << "y: " << k << std::endl;
 					TextureStage* textureStage = new TextureStage("textureStage2");
 					textureStage->set_sort(0);
@@ -283,6 +283,7 @@ namespace game {
 		//std::cout << "After size: " << game::chunks.size() << std::endl;
 		if (devMode) {
 			game::importantInfoOut("Finsihed generating: " + std::to_string(x) + "    " + std::to_string(y));
+			game::importantInfoOut("Objects size:" + std::to_string(this->objects.size()));
 		}
 		//game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
 		return 0;
