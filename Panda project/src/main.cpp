@@ -622,7 +622,10 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			if (keys["q"]) {
-				game::saveChunk(game::chunks[0]);
+				/*game::saveChunk(game::chunks[0]);*/
+				for (std::pair<int, int> pair : game::chunk::index) {
+					std::cout << pair.first << "	" << pair.second << std::endl;
+				}
 				keys["q"] = false;
 			}
 			if (keys["e"]) {
@@ -706,12 +709,12 @@ int main(int argc, char* argv[]) {
 
 	//Saving chunks
 	{
-		std::ofstream updateIndex("universes/Test/index");
+		std::ofstream updateIndex("universes/Test/index", std::ios::out | std::ios::trunc);
 		terrainAnimationShouldRun = true;
 		std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
 		for (game::chunk chunk : game::chunks) {
 			updateIndex << chunk.x << "." << chunk.y << ".chunk" << std::endl;
-			game::saveChunk(chunk);
+			//game::saveChunk(chunk);
 		}
 		updateIndex.close();
 		terrainAnimationShouldRun = false;

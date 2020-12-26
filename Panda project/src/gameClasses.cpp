@@ -236,9 +236,18 @@ namespace game {
 		chunk::objects.clear();
 		return 0;
 	}
-	std::set<std::pair<int, int>> chunk::index;
+	std::set<std::pair<int, int>> chunk::index = {};
 
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
+
+		std::cout << "Pairs: " << std::endl;
+		for (std::pair<int, int> pair : chunk::index) {
+			std::cout << pair.first << "	" << pair.second << std::endl;
+		}
+
+		if (game::chunk::index.find(std::pair<int, int>(x, y)) != game::chunk::index.end()) {
+			return 0;																					//Chunk is already loaded
+		}
 
 		//Initalize variables
 		std::ifstream file(path);
@@ -320,7 +329,12 @@ namespace game {
 			}
 		}
 		game::chunk chunk(blocks, x, y);
+		chunk::index.insert(std::pair<int, int>(x, y));
 		game::chunks.push_back(chunk);
+		std::cout << "Pairs 2: " << std::endl;
+		for (std::pair<int, int> pair : chunk::index) {
+			std::cout << pair.first << "	" << pair.second << std::endl;
+		}
 
 		file.close();
 		return 0;
