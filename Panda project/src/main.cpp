@@ -729,7 +729,7 @@ int main(int argc, char* argv[]) {
 		std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
 		for (game::chunk chunk : game::chunks) {
 			updateIndex << chunk.x << "." << chunk.y << ".chunk" << std::endl;
-			//game::saveChunk(chunk);
+			chunk.saveChunk();
 		}
 		updateIndex.close();
 		terrainAnimationShouldRun = false;

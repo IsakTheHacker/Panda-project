@@ -158,6 +158,12 @@ namespace game {
 		chunk(std::vector<object> objects, int x, int y);
 		chunk(int x, int y);
 		int reset();
+
+		/// <summary> Saves a specified chunk to it's destination. </summary>
+		/// <param name="chunk">- your specifed chunk object</param>
+		/// <returns> 0 if successful, nonzero if not! </returns>
+		int saveChunk();
+
 		int generateChunk(WindowFramework*& window, PandaFramework& framework, PerlinNoise3 perlinNoise);
 	};
 
@@ -175,9 +181,4 @@ namespace game {
 	/// <param name="y">- The chunk's y-pos</param>
 	/// <returns> 0 if successful, nonzero if not! </returns>
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y);
-
-	/// <summary> Saves a specified chunk to it's destination. </summary>
-	/// <param name="chunk">- your specifed chunk object</param>
-	/// <returns> 0 if successful, nonzero if not! </returns>
-	int saveChunk(chunk chunk);
 }

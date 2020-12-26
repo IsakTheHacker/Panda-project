@@ -287,6 +287,73 @@ namespace game {
 		//game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
 		return 0;
 	}
+	int chunk::saveChunk() {
+		int x = this->x;
+		int y = this->y;
+		std::string path = std::to_string(x) + "." + std::to_string(y) + ".chunk";
+
+		std::set<int> z;
+		for (game::object object : this->objects) {
+			z.insert(object.model.get_z());
+		}
+
+		game::object emptyObject = {};
+		std::vector<game::object> y_levels(8, emptyObject);
+		std::vector<std::vector<game::object>> x_levels(8, y_levels);
+		std::map<int, std::vector<std::vector<game::object>>> z_levels;
+
+		for (auto i : z) {
+			z_levels[i] = x_levels;
+		}
+
+		for (game::object object : this->objects) {
+			//std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
+			if (!object.empty) {
+				z_levels[object.model.get_z()][(object.model.get_x() - x) / 2 - 1][(object.model.get_y() - y) / 2 - 1] = object;
+			}
+		}
+
+		bool x_level_empty = false;
+		bool y_level_empty = false;
+		bool z_level_empty = false;
+		bool shouldBreak = false;
+		std::string final;
+		for (std::pair<const int, std::vector<std::vector<game::object>>> pair : z_levels) {
+			std::vector<std::vector<game::object>> z_level = pair.second;
+			shouldBreak = false;
+			for (std::vector<game::object> x_level : z_level) {
+				for (game::object y_level : x_level) {
+					if (!y_level.empty) {
+						final.append("z" + std::to_string(static_cast<int>(y_level.model.get_z())) + "\n");
+						shouldBreak = true;
+						break;
+					}
+				}
+				if (shouldBreak) {
+					break;
+				}
+			}
+			for (std::vector<game::object> x_level : z_level) {
+				for (game::object y_level : x_level) {
+					if (!y_level.empty) {
+						final.append("{model:block.egg},");
+					} else {
+						final.append("{empty},");
+						y_level_empty = true;
+					}
+				}
+				//if (!y_level_empty) {
+				final.append("\n");
+				//} else {
+					//x_level_empty = true;
+				//}
+			}
+		}
+		std::ofstream file("universes/Test/" + path);
+		file << final;
+
+		return 0;
+	}
 	std::set<std::pair<int, int>> chunk::index = {};
 
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
@@ -394,74 +461,6 @@ namespace game {
 		}
 
 		file.close();
-		return 0;
-	}
-
-	int saveChunk(game::chunk chunk) {
-		int x = chunk.x;
-		int y = chunk.y;
-		std::string path = std::to_string(x) + "." + std::to_string(y) + ".chunk";
-
-		std::set<int> z;
-		for (game::object object : chunk.objects) {
-			z.insert(object.model.get_z());
-		}
-
-		game::object emptyObject = {};
-		std::vector<game::object> y_levels(8, emptyObject);
-		std::vector<std::vector<game::object>> x_levels(8, y_levels);
-		std::map<int, std::vector<std::vector<game::object>>> z_levels;
-
-		for (auto i : z) {
-			z_levels[i] = x_levels;
-		}
-
-		for (game::object object : chunk.objects) {
-			//std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
-			if (!object.empty) {
-				z_levels[object.model.get_z()][(object.model.get_x() - x) / 2 - 1][(object.model.get_y() - y) / 2 - 1] = object;
-			}
-		}
-
-		bool x_level_empty = false;
-		bool y_level_empty = false;
-		bool z_level_empty = false;
-		bool shouldBreak = false;
-		std::string final;
-		for (std::pair<const int, std::vector<std::vector<game::object>>> pair : z_levels) {
-			std::vector<std::vector<game::object>> z_level = pair.second;
-			shouldBreak = false;
-			for (std::vector<game::object> x_level : z_level) {
-				for (game::object y_level : x_level) {
-					if (!y_level.empty) {
-						final.append("z" + std::to_string(static_cast<int>(y_level.model.get_z())) + "\n");
-						shouldBreak = true;
-						break;
-					}
-				}
-				if (shouldBreak) {
-					break;
-				}
-			}
-			for (std::vector<game::object> x_level : z_level) {
-				for (game::object y_level : x_level) {
-					if (!y_level.empty) {
-						final.append("{model:block.egg},");
-					} else {
-						final.append("{empty},");
-						y_level_empty = true;
-					}
-				}
-				//if (!y_level_empty) {
-				final.append("\n");
-				//} else {
-					//x_level_empty = true;
-				//}
-			}
-		}
-		std::ofstream file("universes/Test/" + path);
-		file << final;
-
 		return 0;
 	}
 
