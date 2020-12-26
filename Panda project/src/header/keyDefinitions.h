@@ -64,6 +64,10 @@ framework.define_key("e-up", "E-key", game::key_up, (void*)&game::e);
 framework.define_key("v", "V-key", game::key_down, (void*)&game::v);
 framework.define_key("v-up", "V-key", game::key_up, (void*)&game::v);
 
+//F2-key
+framework.define_key("f2", "f2-key", game::key_down, (void*)&game::f2);
+framework.define_key("f2-up", "f2-key", game::key_up, (void*)&game::f2);
+
 //Esc-key
 game::pauseMenuEventParameters parameters;
 parameters.window = window;

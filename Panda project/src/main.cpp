@@ -531,7 +531,7 @@ int main(int argc, char* argv[]) {
 		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
 
 		if (mouseInGame) {
-			if (mouseWatcher->has_mouse()) {
+			if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
 				if (window->get_graphics_window()) {
 					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 					center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
@@ -635,6 +635,14 @@ int main(int argc, char* argv[]) {
 			if (keys["r"]) {
 				camera.set_z(30);
 				velocity = 0;
+			}
+			if (keys["f2"]) {
+				bool successful = window->get_graphics_window()->save_screenshot("screenshots/test.png", "");
+				if (successful) {
+					game::logOut("Saved screenshot: <placeholder> to the screenshots folder.");
+				} else {
+					game::errorOut("Screenshot was not saved successfully!");
+				}
 			}
 
 			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
