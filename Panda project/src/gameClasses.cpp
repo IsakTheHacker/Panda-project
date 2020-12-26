@@ -165,6 +165,16 @@ namespace game {
 			logToFile("game.log", "Log: Succesfully destroyed object: " + std::to_string(id));
 		}
 	}
+	object::operator std::string() {
+		std::string stringObject =
+			"Stringobject of game::object:\n"
+			"    id: " + std::to_string(object::id) + "\n"
+			"    empty: " + std::to_string(object::empty) + "\n"
+			"    shouldLogInConsole: " + std::to_string(object::shouldLogInConsoleIntern) + "\n"
+			"    shouldLogToFile: " + std::to_string(object::shouldLogToFileIntern) + ""
+		;
+		return stringObject;
+	}
 	int object::current_id = 0;
 	int object::object_quantity = 0;
 
@@ -220,6 +230,10 @@ namespace game {
 	chunk::chunk(int x, int y) {
 		this->x = x;
 		this->y = y;
+	}
+	int chunk::reset() {
+		chunk::objects.clear();
+		return 0;
 	}
 
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
@@ -382,40 +396,55 @@ namespace game {
 		int x = chunk.x;
 		int y = chunk.y;
 		TexturePool* texturePool = TexturePool::get_global_ptr();
+		std::vector<object> blocks;
+		std::vector<NodePath> subobjects;
+		game::object object;
 
-		for (size_t i = 0; i < 1; i++) {
-			for (size_t j = 0; j < 16; j++) {
-				for (size_t k = 0; k < 16; k++) {
+		game::warningOut(object);
+
+		for (size_t i = 1; i < 2; i++) {
+			std::cout << "z: " << i << std::endl;
+			for (int j = x; j < 16; j+=2) {
+				//std::cout << "x: " << j << std::endl;
+				for (int k = y; k < 16; k+=2) {
+					//std::cout << "y: " << k << std::endl;
 					TextureStage* textureStage = new TextureStage("textureStage2");
 					textureStage->set_sort(0);
 					textureStage->set_mode(TextureStage::M_replace);
-					std::vector<NodePath> subobjects;
 					NodePath object2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)"block.egg");
+					subobjects.clear();
 
 					Texture* texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-
 					object2.set_texture(texture, 1);
 
 					subobjects.push_back(object2);
 
-					game::object object = game::object(window, framework, subobjects, true, false);
-					object.model.set_pos(x + j, y + k, i);
+					object = game::object(window, framework, subobjects, true, false);
+					object.model.set_pos(j, k, i);
+					//std::cout << object.model.get_pos() << std::endl;
 
 					object.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
 					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
 					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
 					object.model.set_tag("id", std::to_string(object.id));
-					object.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
+					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
-					chunk.objects.push_back(object);
-					k += 1;
+					blocks.push_back(object);
 				}
-				j += 1;
 			}
 		}
-		game::chunks.push_back(chunk);
+		game::chunk newChunk(blocks, x, y);
+		blocks.clear();
+		std::cout << "Before size: " << game::chunks.size() << std::endl;
+		game::chunks.push_back(newChunk);
+		std::cout << "After size: " << game::chunks.size() << std::endl;
+		game::importantInfoOut("Finsihed generating: " + std::to_string(x) + "   " + std::to_string(y));
+		game::importantInfoOut(newChunk.objects.size());
+		newChunk.reset();
+		game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
+		return 0;
 	}
 
 	std::vector<windObject> winds;

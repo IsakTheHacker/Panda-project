@@ -127,6 +127,8 @@ namespace game {
 			object(WindowFramework*& window, PandaFramework& framework, std::vector<NodePath> subobjects, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 			object(bool shouldLogInConsole = false, bool shouldLogToFile = false);		//Empty game::object constructor
 			~object();
+
+			operator std::string();
 	};
 
 	// Entity class
@@ -154,6 +156,7 @@ namespace game {
 
 		chunk(std::vector<object> objects, int x, int y);
 		chunk(int x, int y);
+		int reset();
 	};
 
 	//Creating vectors for the classes

@@ -275,7 +275,7 @@ int main(int argc, char* argv[]) {
 	for (size_t i = 0; i < 10; i++) {
 		for (size_t j = 0; j < 10; j++) {
 			for (size_t k = 0; k < 10; k++) {
-				std::cout << "Perlin: " << perlinNoise.noise(i, j, k) << std::endl;
+				//std::cout << "Perlin: " << perlinNoise.noise(i, j, k) << std::endl;
 			}
 		}
 	}
@@ -356,15 +356,18 @@ int main(int argc, char* argv[]) {
 		} else {
 			chunk_y = std::to_string(((int)camera.get_y() / 16) * 16);
 		}
-		std::ifstream chunkFile("universes/Test/" + chunk_x + "." + chunk_y + ".chunk");
-		for (size_t i = 0; i < game::chunks.size(); i++) {
-			if (game::chunks[i].x == std::stoi(chunk_x) && game::chunks[i].y == std::stoi(chunk_y)) {
+		for (game::chunk chunkasd : game::chunks) {
+			chunk_exists = false;
+			if (chunkasd.x == std::stoi(chunk_x) && chunkasd.y == std::stoi(chunk_y)) {
 				chunk_exists = true;
+				//game::errorOut("Chunk exists");
 			}
 		}
-		if (chunkFile.fail() && !chunk_exists) {
+		if (!chunk_exists) {
+			//game::errorOut("Before: " + game::chunks.size());
 			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));		//Create new chunk
 			game::generateChunk(window, framework, chunk, perlinNoise);		//Apply the generateChunk function on the new chunk
+			//game::errorOut("After: " + game::chunks.size());
 		}
 
 		if (handInventoryIndex < 0) {
@@ -410,7 +413,7 @@ int main(int argc, char* argv[]) {
 					notRotatedSurface.set_x(0);
 					notRotatedSurface.set_y(0);
 					notRotatedSurface.set_z(0);
-
+					
 					std::string path;
 
 					TexturePool* texturePool = TexturePool::get_global_ptr();
