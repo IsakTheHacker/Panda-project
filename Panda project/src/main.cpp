@@ -278,14 +278,18 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	PerlinNoise3 perlinNoise(8, 8, 8, 256, 78306730);
-	for (size_t i = 0; i < 10; i++) {
-		for (size_t j = 0; j < 10; j++) {
-			for (size_t k = 0; k < 10; k++) {
+	std::vector<double> doubles;
+	PerlinNoise3 perlinNoise(128, 128, 128, 256, 78306730);
+	for (size_t i = 0; i < 100; i++) {
+		for (size_t j = 0; j < 100; j++) {
+			for (size_t k = 0; k < 100; k++) {
 				//std::cout << "Perlin: " << perlinNoise.noise(i, j, k) << std::endl;
+				doubles.push_back(perlinNoise.noise(i, j, k));
 			}
 		}
 	}
+	std::cout << *std::min_element(doubles.begin(), doubles.end()) << std::endl;
+	std::cout << *std::max_element(doubles.begin(), doubles.end()) << std::endl;
 
 
 	//Reading settings from settings map
@@ -726,7 +730,7 @@ int main(int argc, char* argv[]) {
 		std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
 		for (game::chunk chunk : game::chunks) {
 			updateIndex << chunk.x << "." << chunk.y << ".chunk" << std::endl;
-			chunk.saveChunk();
+			//chunk.saveChunk();
 		}
 		updateIndex.close();
 		terrainAnimationShouldRun = false;
