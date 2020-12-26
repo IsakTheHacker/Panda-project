@@ -704,15 +704,18 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Saving chunks
-	terrainAnimationShouldRun = true;
-	std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
 	{
+		std::ofstream updateIndex("universes/Test/index");
+		terrainAnimationShouldRun = true;
+		std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
 		for (game::chunk chunk : game::chunks) {
+			updateIndex << chunk.x << "." << chunk.y << ".chunk" << std::endl;
 			game::saveChunk(chunk);
 		}
+		updateIndex.close();
+		terrainAnimationShouldRun = false;
+		saving_animation_thread.join();
 	}
-	terrainAnimationShouldRun = false;
-	saving_animation_thread.join();
 
 	framework.close_framework();
 	//debugInputThread.detach();
