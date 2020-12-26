@@ -373,7 +373,9 @@ int main(int argc, char* argv[]) {
 		if (!chunk_exists) {
 			//game::errorOut("Before: " + game::chunks.size());
 			std::cout << std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y)).first << "," << std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y)).second << std::endl;
-			game::generateChunk(window, framework, std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y)), perlinNoise);		//Apply the generateChunk function on the new chunk
+			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));																//Create new chunk
+			chunk.generateChunk(window, framework, perlinNoise);																	//Apply the generateChunk function on the new chunk
+			game::chunks.push_back(chunk);																							//Push the chunk to vector game::chunks
 			//game::errorOut("After: " + game::chunks.size());
 		}
 

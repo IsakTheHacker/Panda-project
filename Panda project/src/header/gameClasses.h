@@ -158,6 +158,7 @@ namespace game {
 		chunk(std::vector<object> objects, int x, int y);
 		chunk(int x, int y);
 		int reset();
+		int generateChunk(WindowFramework*& window, PandaFramework& framework, PerlinNoise3 perlinNoise);
 	};
 
 	//Creating vectors for the classes
@@ -179,6 +180,4 @@ namespace game {
 	/// <param name="chunk">- your specifed chunk object</param>
 	/// <returns> 0 if successful, nonzero if not! </returns>
 	int saveChunk(chunk chunk);
-
-	int generateChunk(WindowFramework*& window, PandaFramework& framework, std::pair<int, int> coords, PerlinNoise3 perlinNoise);
 }
