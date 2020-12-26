@@ -356,13 +356,11 @@ int main(int argc, char* argv[]) {
 		} else {
 			chunk_y = std::to_string(((int)camera.get_y() / 16) * 16);
 		}
-		for (game::chunk chunkasd : game::chunks) {
-			chunk_exists = false;
-			if (chunkasd.x == std::stoi(chunk_x) && chunkasd.y == std::stoi(chunk_y)) {
-				chunk_exists = true;
-				//game::errorOut("Chunk exists");
-			}
+		
+		if (game::chunk::index.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::index.end()) {
+			chunk_exists = true;
 		}
+
 		if (!chunk_exists) {
 			//game::errorOut("Before: " + game::chunks.size());
 			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));		//Create new chunk

@@ -230,11 +230,13 @@ namespace game {
 	chunk::chunk(int x, int y) {
 		this->x = x;
 		this->y = y;
+		chunk::index.insert(std::pair<int, int>(x, y));
 	}
 	int chunk::reset() {
 		chunk::objects.clear();
 		return 0;
 	}
+	std::set<std::pair<int, int>> chunk::index;
 
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
 

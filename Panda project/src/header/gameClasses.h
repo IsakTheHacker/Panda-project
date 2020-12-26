@@ -153,6 +153,7 @@ namespace game {
 		int x;
 		int y;
 		std::vector<object> objects;
+		static std::set<std::pair<int, int>> index;
 
 		chunk(std::vector<object> objects, int x, int y);
 		chunk(int x, int y);
