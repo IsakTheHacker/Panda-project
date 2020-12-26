@@ -643,6 +643,7 @@ int main(int argc, char* argv[]) {
 				} else {
 					game::errorOut("Screenshot was not saved successfully!");
 				}
+				keys["f2"] = false;
 			}
 
 			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
