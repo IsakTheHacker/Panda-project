@@ -282,8 +282,12 @@ namespace game {
 		//std::cout << "Before size: " << game::chunks.size() << std::endl;
 		//std::cout << "After size: " << game::chunks.size() << std::endl;
 		if (devMode) {
-			game::importantInfoOut("Finsihed generating: " + std::to_string(x) + "    " + std::to_string(y));
-			game::importantInfoOut("Objects size:" + std::to_string(this->objects.size()));
+			std::string fancyDebugOutput =
+				"Finished generating chunk:\n"
+				"    XY: " + std::to_string(x) + ", " + std::to_string(y) + "\n"
+				"    Chunk Objects Size: " + std::to_string(this->objects.size());
+				;
+			game::importantInfoOut(fancyDebugOutput);
 		}
 		//game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
 		return 0;
