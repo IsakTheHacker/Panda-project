@@ -637,9 +637,11 @@ int main(int argc, char* argv[]) {
 				velocity = 0;
 			}
 			if (keys["f2"]) {
-				bool successful = window->get_graphics_window()->save_screenshot("screenshots/test.png", "");
+				std::string filename = "screenshots/" + game::getConvertedDateTime() + ".png";
+				game::warningOut(filename);
+				bool successful = window->get_graphics_window()->save_screenshot(filename, "");
 				if (successful) {
-					game::logOut("Saved screenshot: <placeholder> to the screenshots folder.");
+					game::logOut("Saved screenshot: '" + filename + "' to the screenshots folder.");
 				} else {
 					game::errorOut("Screenshot was not saved successfully!");
 				}

@@ -140,6 +140,19 @@ namespace game {
 		return convertedDateTime;
 	}
 
+	std::string getConvertedDateTime() {
+		std::time_t current_time = time(0);
+		std::tm* tm_local = std::localtime(&current_time);
+		std::string convertedDateTime =
+			std::to_string(tm_local->tm_year + 1900) +
+			"-" + std::to_string(tm_local->tm_mon + 1) +
+			"-" + std::to_string(tm_local->tm_mday) +
+			" " + std::to_string(tm_local->tm_hour) +
+			"." + std::to_string(tm_local->tm_min) +
+			"." + std::to_string(tm_local->tm_sec);
+		return convertedDateTime;
+	}
+
 	int runPyScript(std::string path) {
 		std::ifstream pyFile(path);
 		if (pyFile.fail()) {
