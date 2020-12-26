@@ -136,12 +136,13 @@ int main(int argc, char* argv[]) {
 	window->get_graphics_window()->request_properties(props);
 
 
-	LPoint2 mpos = mouseWatcher->get_mouse();
-
 	// This makes the ray's origin the camera and makes the ray point
 	// to the screen coordinates of the mouse.
 
-	pickerRay->set_from_lens(window->get_camera(0), mpos.get_x(), mpos.get_y());
+	//LPoint2 mpos = mouseWatcher->get_mouse();
+
+	pickerRay->set_from_lens(window->get_camera(0), 0, 0);
+	//pickerRay->set_from_lens(window->get_camera(0), mpos.get_x(), mpos.get_y());
 
 	// Change background color to black
 	window->get_graphics_window()->get_active_display_region(0)->set_clear_color(LColorf(0, 0, 0, 1));

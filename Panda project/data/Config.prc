@@ -98,3 +98,6 @@ model-cache-textures #f
 # the latest profile available.
 
 basic-shaders-only #f
+
+# Specifies if the program should abort when an assertion has failed
+assert-abort 0
