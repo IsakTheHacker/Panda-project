@@ -251,6 +251,12 @@ namespace game {
 
 		//Initalize variables
 		std::ifstream file(path);
+
+		if (file.fail()) {
+			game::warningOut("Chunk index file specified a chunk which could not be found. Skipping...");
+			return 0;
+		}
+
 		std::string line;
 		int x_level = x;
 		int y_level = y;
