@@ -192,19 +192,23 @@ int main(int argc, char* argv[]) {
 		inventory.push_back(hand_inventoryNode);
 	}
 
-	terrainAnimationShouldRun = true;
-	std::thread terrain_animation_thread(game::terrainAnimation, "Loading terrain");
-	{
-		std::ifstream index("universes/Test/index");
+	//Loading chunks
+	std::ifstream index("universes/Test/index");
+	if (index.fail()) {
+		game::warningOut("Could not find an index file for the universe. Creating one...");
+		std::ofstream createIndex("universes/Test/index");
+		createIndex.close();
+	} else {
+		terrainAnimationShouldRun = true;
+		std::thread terrain_animation_thread(game::terrainAnimation, "Loading terrain");
 		std::string line;
 		while (std::getline(index, line)) {
 			game::readChunk(window, framework, "universes/Test/" + line, std::stoi(game::split(line, ".")[0]), std::stoi(game::split(line, ".")[1]));
 		}
 		index.close();
+		terrainAnimationShouldRun = false;
+		terrain_animation_thread.join();
 	}
-	terrainAnimationShouldRun = false;
-	terrain_animation_thread.join();
-
 
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
 	blocky.set_scale(0.5);
