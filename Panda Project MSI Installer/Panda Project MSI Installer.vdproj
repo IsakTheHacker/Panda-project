@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_08EA351CC32F0B0F5E8BEBDC8837ADF6"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_10A0D9CC5D0441DA91E1ECFCB5FFF7C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -39,8 +45,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_166849956E2C403FB864345BD07C19A7"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_1B35308985390A52CE77630B92007C8A"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,8 +57,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_20763118A94782D2D628703080E309A9"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_21B250AF638744A9866508B0B9143807"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2298DDABEAA32BCD75E456023BB7D8E6"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -87,8 +105,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3E34BC0C25FD47C2948EB0B0C993160F"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_41DB5DE35F0682840693A976CC2C56B9"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -105,6 +123,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_479953B5DFB9BE61345951BF0616549F"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_49A221D76FA64040A8EBF7736A896EA8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -113,6 +137,12 @@
         {
         "MsmKey" = "8:_4AAF5FC9514746C091A8C6F64198FAB9"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4AD5B58E1A68DBCEAEC6D283C059138A"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -129,31 +159,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5C89E4E39ED5453486DFBFC82ADC918A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_69F8AC82E2F248A9A6781B9F8AEE3FAA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6AF2D1EB7AF243678BC02D0F47429C30"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_6CB928980D083ECE0452C7302D0C8230"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6E90D452DE5E7D3FB5A4F5BB4245490E"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_7503EE377ECB471AA5A4B51B4649F909"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_766FE2F4DAEF4EB3917B211227994494"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -171,8 +195,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_86758CC3453B4236A93C1A0F2437A803"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_84E258FDC1B5355DE0E3178EB9FC262E"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -195,12 +219,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_92321A7728FE4CE589D451AC997CA052"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_92F3D9C2D980496396884BF355230976"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -213,14 +231,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_94DB361DAFF3481D9B96974987B2766F"
+        "MsmKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_9C31C62F871B735A638F289A25A219A9"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -243,6 +261,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A9334543CC30FE7395A9421BE8203D51"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A9DA341C5BA848A78DC9268A44DD19A8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -255,25 +279,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B358F01121CB409C96E619A87702E90B"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_B47D18CA578929D919CC88657C784F52"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C74FE6C83B0E4E768DB1EFC88688EE2A"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_BAC897D2474414291E7C7F749A874178"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C958F821089220E73D515B6BA4ADA55A"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_CB809E1618CE4064B4B275D8F71102D4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D029702EC07D4833B586AA7432CF4B2E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -291,12 +315,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DFD7E647FE044E6488FE15BB93440AE9"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_E069A5C1D6ED40A288C913DE34365FF9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -304,18 +322,6 @@
         "Entry"
         {
         "MsmKey" = "8:_E9D90D89442B47CB82569BFB56165D3E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EDFE740ACB40400483547CA636A5A3E1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EFC0F3D964A54CDF87182A0EC1BEC752"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -357,8 +363,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FE947C9C932C4ADE926FC2663831028A"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_FDA01DA5DA9370B62149BC021F501214"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FF32B6F994E2C423032C224606C0C2B4"
+        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -468,6 +480,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_08EA351CC32F0B0F5E8BEBDC8837ADF6"
+            {
+            "SourcePath" = "8:api-ms-win-crt-math-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-math-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_10A0D9CC5D0441DA91E1ECFCB5FFF7C7"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-3.png"
@@ -528,12 +560,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_166849956E2C403FB864345BD07C19A7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1B35308985390A52CE77630B92007C8A"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\16.16.chunk"
-            "TargetName" = "8:16.16.chunk"
+            "SourcePath" = "8:api-ms-win-crt-locale-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-locale-l1-1-0.dll"
             "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -545,7 +577,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1BC9490494A9420CBB51DACFA524739A"
@@ -568,6 +600,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20763118A94782D2D628703080E309A9"
+            {
+            "SourcePath" = "8:api-ms-win-crt-convert-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-convert-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_21B250AF638744A9866508B0B9143807"
             {
             "SourcePath" = "8:..\\Panda project\\libpandaegg.dll"
@@ -586,6 +638,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2298DDABEAA32BCD75E456023BB7D8E6"
+            {
+            "SourcePath" = "8:libp3dtool.dll"
+            "TargetName" = "8:libp3dtool.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_23797D784B15439C903A0C2578C27E48"
@@ -688,12 +760,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3E34BC0C25FD47C2948EB0B0C993160F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_41DB5DE35F0682840693A976CC2C56B9"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\32.0.chunk"
-            "TargetName" = "8:32.0.chunk"
+            "SourcePath" = "8:VCRUNTIME140.dll"
+            "TargetName" = "8:VCRUNTIME140.dll"
             "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -705,7 +777,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_42A6A97A21514E7CA6DB8DA43F3680F1"
@@ -748,6 +820,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_479953B5DFB9BE61345951BF0616549F"
+            {
+            "SourcePath" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_49A221D76FA64040A8EBF7736A896EA8"
             {
             "SourcePath" = "8:..\\Panda project\\data\\scripts\\makeDirectories.py"
@@ -786,6 +878,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4AD5B58E1A68DBCEAEC6D283C059138A"
+            {
+            "SourcePath" = "8:libp3dtoolconfig.dll"
+            "TargetName" = "8:libp3dtoolconfig.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_51E35FA591914C0FAD7A5F56EEF351C3"
@@ -828,26 +940,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C89E4E39ED5453486DFBFC82ADC918A"
-            {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\0.-32.chunk"
-            "TargetName" = "8:0.-32.chunk"
-            "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69F8AC82E2F248A9A6781B9F8AEE3FAA"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-2.png"
@@ -868,12 +960,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AF2D1EB7AF243678BC02D0F47429C30"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6CB928980D083ECE0452C7302D0C8230"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\0.32.chunk"
-            "TargetName" = "8:0.32.chunk"
+            "SourcePath" = "8:api-ms-win-crt-time-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-time-l1-1-0.dll"
             "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -885,7 +977,27 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E90D452DE5E7D3FB5A4F5BB4245490E"
+            {
+            "SourcePath" = "8:python38.dll"
+            "TargetName" = "8:python38.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7503EE377ECB471AA5A4B51B4649F909"
@@ -894,26 +1006,6 @@
             "TargetName" = "8:blocky.egg"
             "Tag" = "8:"
             "Folder" = "8:_63C99BF8DCAD4B9BBB34582D040816F3"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_766FE2F4DAEF4EB3917B211227994494"
-            {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\0.0.chunk"
-            "TargetName" = "8:0.0.chunk"
-            "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -968,12 +1060,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_86758CC3453B4236A93C1A0F2437A803"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_84E258FDC1B5355DE0E3178EB9FC262E"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\index"
-            "TargetName" = "8:index"
+            "SourcePath" = "8:MSVCP140.dll"
+            "TargetName" = "8:MSVCP140.dll"
             "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -985,7 +1077,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87EB3080C05247C39B8C85E7BD1CE7A6"
@@ -1048,26 +1140,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_92321A7728FE4CE589D451AC997CA052"
-            {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\16.32.chunk"
-            "TargetName" = "8:16.32.chunk"
-            "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_92F3D9C2D980496396884BF355230976"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-3.png"
@@ -1108,12 +1180,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_94DB361DAFF3481D9B96974987B2766F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C31C62F871B735A638F289A25A219A9"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\0.-16.chunk"
-            "TargetName" = "8:0.-16.chunk"
+            "SourcePath" = "8:libp3framework.dll"
+            "TargetName" = "8:libp3framework.dll"
             "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1125,7 +1197,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9D6E8BF0A4174D5A91B7B48988E2459C"
@@ -1188,6 +1260,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9334543CC30FE7395A9421BE8203D51"
+            {
+            "SourcePath" = "8:libpandaexpress.dll"
+            "TargetName" = "8:libpandaexpress.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9DA341C5BA848A78DC9268A44DD19A8"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\hand-inventory-all.png"
@@ -1228,12 +1320,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B358F01121CB409C96E619A87702E90B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B47D18CA578929D919CC88657C784F52"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\profiles\\0.prof"
-            "TargetName" = "8:0.prof"
+            "SourcePath" = "8:api-ms-win-crt-conio-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-conio-l1-1-0.dll"
             "Tag" = "8:"
-            "Folder" = "8:_7BAAAE99027A43FCBF81FF5FA0AA1195"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1245,15 +1337,15 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C74FE6C83B0E4E768DB1EFC88688EE2A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BAC897D2474414291E7C7F749A874178"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\16.0.chunk"
-            "TargetName" = "8:16.0.chunk"
+            "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
             "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1265,7 +1357,27 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C958F821089220E73D515B6BA4ADA55A"
+            {
+            "SourcePath" = "8:api-ms-win-crt-heap-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-heap-l1-1-0.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB809E1618CE4064B4B275D8F71102D4"
@@ -1274,26 +1386,6 @@
             "TargetName" = "8:readOptions.py"
             "Tag" = "8:"
             "Folder" = "8:_0F93F777FD6147FE9F38523B6D8DD662"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D029702EC07D4833B586AA7432CF4B2E"
-            {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\0.16.chunk"
-            "TargetName" = "8:0.16.chunk"
-            "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1348,26 +1440,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DFD7E647FE044E6488FE15BB93440AE9"
-            {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\32.16.chunk"
-            "TargetName" = "8:32.16.chunk"
-            "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E069A5C1D6ED40A288C913DE34365FF9"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\hand-inventory-highlighted.png"
@@ -1394,46 +1466,6 @@
             "TargetName" = "8:Config.prc"
             "Tag" = "8:"
             "Folder" = "8:_5C5ED47CF92340B999FD5B08F81D0204"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EDFE740ACB40400483547CA636A5A3E1"
-            {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\-32.0.chunk"
-            "TargetName" = "8:-32.0.chunk"
-            "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EFC0F3D964A54CDF87182A0EC1BEC752"
-            {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\-16.0.chunk"
-            "TargetName" = "8:-16.0.chunk"
-            "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1568,12 +1600,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FE947C9C932C4ADE926FC2663831028A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FDA01DA5DA9370B62149BC021F501214"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\32.32.chunk"
-            "TargetName" = "8:32.32.chunk"
+            "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
+            "TargetName" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
             "Tag" = "8:"
-            "Folder" = "8:_B2DD5F19844F4EFA80952F50465F3EE1"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1585,7 +1617,27 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF32B6F994E2C423032C224606C0C2B4"
+            {
+            "SourcePath" = "8:libpanda.dll"
+            "TargetName" = "8:libpanda.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -1659,6 +1711,17 @@
                             }
                         }
                     }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_D4A1DA1EBB6749C6B302061815861413"
+                    {
+                    "Name" = "8:screenshots"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_4EBA3F6CB6C6467588D9E8816BAEB801"
+                        "Folders"
+                        {
+                        }
+                    }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_D7B5CA2FDE1A440DB91DEB7CC97A61FE"
                     {
                     "Name" = "8:models"
@@ -1712,28 +1775,6 @@
                     "Property" = "8:_1797F5D6C8984A99A7F13002834FFECD"
                         "Folders"
                         {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_B2DD5F19844F4EFA80952F50465F3EE1"
-                            {
-                            "Name" = "8:Test"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_651FE0E6DF0E47E8BB82D6A38E49CF04"
-                                "Folders"
-                                {
-                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_7BAAAE99027A43FCBF81FF5FA0AA1195"
-                                    {
-                                    "Name" = "8:profiles"
-                                    "AlwaysCreate" = "11:FALSE"
-                                    "Condition" = "8:"
-                                    "Transitive" = "11:FALSE"
-                                    "Property" = "8:_57982B19FF8947BFBF8C30C6CACC89FB"
-                                        "Folders"
-                                        {
-                                        }
-                                    }
-                                }
-                            }
                         }
                     }
                 }
