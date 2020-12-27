@@ -711,7 +711,7 @@ int main(int argc, char* argv[]) {
 		keys["mouse3"] = false;
 
 		//Border checking
-		if (options["lower_border"] != "none" && options["lower_border"] != "null") {
+		/*if (options["lower_border"] != "none" && options["lower_border"] != "null") {
 			if (camera.get_pos().get_z() < std::stof(options["lower_border"])) {
 				camera.set_z(std::stof(options["lower_border"]));
 			}
@@ -720,7 +720,7 @@ int main(int argc, char* argv[]) {
 			if (camera.get_pos().get_z() > std::stof(options["upper_border"])) {
 				camera.set_z(std::stof(options["upper_border"]));
 			}
-		}
+		}*/
 	}
 
 	//Saving chunks
