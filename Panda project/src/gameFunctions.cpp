@@ -250,7 +250,11 @@ namespace game {
 		nassertv(entry != NULL);
 
 		if (!in_out_pattern) {
-			if (entry->get_into_node_path().get_parent().get_parent().get_z() < entry->get_from_node_path().get_parent().get_z()) {
+			/*game::importantInfoOut(entry->get_from_node_path().get_parent().get_z());
+			game::importantInfoOut(entry->get_into_node_path().get_parent().get_parent().get_z());
+			game::importantInfoOut("");*/
+			//Fixed an unregistred bug where the player would not be registred as on the ground when he/she stands on a block which has a negative z position.
+			if (std::round(entry->get_into_node_path().get_parent().get_parent().get_z()) <= std::round(entry->get_from_node_path().get_parent().get_z())) {
 				playerOnGround = true;
 			} else {
 				playerOnGround = false;
