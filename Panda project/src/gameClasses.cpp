@@ -264,8 +264,11 @@ namespace game {
 					subobjects.push_back(object2);
 
 					game::object object(window, framework, subobjects, true, false);
-					object.model.set_pos(j, k, i);
+					double object_z = (int)(perlinNoise.noise(j, k, i) * 100 + 0.5);
+					object_z = (double)object_z / 100;
+					object.model.set_pos(j, k, std::round(object_z * 50 / 2) * 2);
 					//std::cout << object.model.get_pos() << std::endl;
+					//game::importantInfoOut(std::to_string(perlinNoise.noise(j, k, i)) + " -> " + std::to_string(object_z) + " -> " + std::to_string(std::round(object_z * 50 / 2) * 2));
 
 					object.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
 					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
@@ -287,7 +290,7 @@ namespace game {
 				"    XY: " + std::to_string(x) + ", " + std::to_string(y) + "\n"
 				"    Chunk Objects Size: " + std::to_string(this->objects.size());
 				;
-			game::importantInfoOut(fancyDebugOutput);
+			game::logOut(fancyDebugOutput);
 		}
 		//game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
 		return 0;
