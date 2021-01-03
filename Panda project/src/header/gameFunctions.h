@@ -38,7 +38,7 @@ extern HANDLE h;
 namespace game {
 
 	// Loading animation
-	void terrainAnimation(std::string message);
+	void terrainAnimation(const std::string& message);
 
 	// Waits for input
 	void waitForKeypress();
@@ -47,25 +47,25 @@ namespace game {
 	int setConsoleTitle(const char* title);
 
 	// Sets the console heading
-	int setHeading(std::string heading);
+	int setHeading(const std::string& heading);
 
 	// Replaces the first found substring in a string
-	bool findReplaceFirst(std::string& str, std::string oldSubstring, std::string newSubstring);
+	bool findReplaceFirst(std::string& str, const std::string& oldSubstring, const std::string& newSubstring);
 
 	// Replaces all found substrings in a string
-	bool findReplaceAll(std::string& str, std::string oldSubstring, std::string newSubstring);
+	bool findReplaceAll(std::string& str, const std::string& oldSubstring, const std::string& newSubstring);
 
 	/// <summary> Splits a string with the specified delimiter. </summary>
 	/// <param name="str">- your string</param>
 	/// <param name="delimiter">- the delimter to use. " " is standard</param>
 	/// <returns> A vector containing the tokens. </returns>
-	std::vector<std::string> split(std::string str, std::string delimiter = " ");
+	std::vector<std::string> split(std::string str, const std::string& delimiter = " ");
 
 	// Encrypts a given string with a basic encryption
-	int encrypt(std::string& str, std::string separator = "|");
+	int encrypt(std::string& str, const std::string& separator = "|");
 
 	// Decrypts a given string
-	int decrypt(std::string& str, std::string separator = "|");
+	int decrypt(std::string& str, const std::string& separator = "|");
 
 	// Gets the current date and time and returns a string ready for logging
 	std::string getConvertedDateTime(bool datePresent, bool timePresent);
@@ -75,7 +75,7 @@ namespace game {
 
 	// Logs a string to a file
 	template<typename T>
-	int logToFile(std::string path, T input, bool datePresent = true, bool timePresent = true) {
+	int logToFile(const std::string& path, T input, bool datePresent = true, bool timePresent = true) {
 		std::string text = std::to_string(input);
 		std::string convertedText = getConvertedDateTime(datePresent, timePresent) + " " + text;
 		std::ofstream logFile(path, std::ios_base::app);
@@ -152,32 +152,32 @@ namespace game {
 
 	// For each function to easily loop through arrays
 	template<typename listType, typename funcType>
-	void forEach(listType list, funcType function) {
+	void forEach(const listType& list, funcType function) {
 		for (auto value : list) {
 			function(value, false, true);
 		}
 	}
 	template<typename listType>			//Overload to be used if no function was specified
-	void forEach(listType list) {
+	void forEach(const listType& list) {
 		for (auto value : list) {
 			logOut(value);
 		}
 	}
 
 	// Executes a Python script
-	int runPyScript(std::string path);
+	int runPyScript(const std::string& path);
 
 	// Reads options
-	int readOptions(std::map<std::string, std::string>& options, std::string path);
+	int readOptions(std::map<std::string, std::string>& options, const std::string& path);
 
 	// Lists a std::map of options to the console
-	int listOptions(std::map<std::string, std::string>& options, std::string title = "Options:");
+	int listOptions(std::map<std::string, std::string>& options, const std::string& title = "Options:");
 
 	// Sets a texture
-	int setTexture(NodePath object, std::string path);
+	int setTexture(NodePath& object, const std::string& path);
 
 	//Changes texture scale
-	int setTextureScale(NodePath object, float scale);
+	int setTextureScale(NodePath& object, const float& scale);
 
 	// Thread functions
 	void takeDebugInput();

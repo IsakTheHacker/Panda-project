@@ -4,7 +4,7 @@ HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 namespace game {
 
-	void terrainAnimation(std::string message) {
+	void terrainAnimation(const std::string& message) {
 		std::cout << message;
 		while (terrainAnimationShouldRun) {
 			for (int i = 0; i < 3; i++) {
@@ -26,7 +26,7 @@ namespace game {
 		return 0;
 	}
 
-	int setHeading(std::string heading) {
+	int setHeading(const std::string& heading) {
 		std::cout << "\n\n" << heading << std::endl;
 		for (int i = 0; i < heading.length(); i++) {
 			std::cout << "-";
@@ -35,7 +35,7 @@ namespace game {
 		return 0;
 	}
 
-	bool findReplaceFirst(std::string& str, std::string oldSubstring, std::string newSubstring) {
+	bool findReplaceFirst(std::string& str, const std::string& oldSubstring, const std::string& newSubstring) {
 		if (str.find(oldSubstring) != std::string::npos) {
 			str.replace(str.find(oldSubstring), oldSubstring.length(), newSubstring);
 			return true;
@@ -44,7 +44,7 @@ namespace game {
 		}
 	}
 
-	bool findReplaceAll(std::string& str, std::string oldSubstring, std::string newSubstring) {
+	bool findReplaceAll(std::string& str, const std::string& oldSubstring, const std::string& newSubstring) {
 		if (str.find(oldSubstring) != std::string::npos) {
 			while (str.find(oldSubstring) != std::string::npos) {
 				str.replace(str.find(oldSubstring), oldSubstring.length(), newSubstring);
@@ -55,7 +55,7 @@ namespace game {
 		}
 	}
 
-	std::vector<std::string> split(std::string str, std::string delimiter) {
+	std::vector<std::string> split(std::string str, const std::string& delimiter) {
 		std::vector<std::string> tokens;
 		size_t pos = 0;
 		std::string token;
@@ -72,7 +72,7 @@ namespace game {
 		return tokens;
 	}
 
-	int encrypt(std::string& str, std::string separator) {
+	int encrypt(std::string& str, const std::string& separator) {
 		std::string newStr;
 		for (int i = 0; i < str.size(); i++) {
 			char newChar = str[i];
@@ -87,7 +87,7 @@ namespace game {
 		return 0;
 	}
 
-	int decrypt(std::string& str, std::string separator) {
+	int decrypt(std::string& str, const std::string& separator) {
 		std::array<int, 11> validChars = { 1,2,3,4,5,6,7,8,9,0,int(stoc(separator)) };
 		std::string newStr;
 		std::string newCharA;
@@ -153,7 +153,7 @@ namespace game {
 		return convertedDateTime;
 	}
 
-	int runPyScript(std::string path) {
+	int runPyScript(const std::string& path) {
 		std::ifstream pyFile(path);
 		if (pyFile.fail()) {
 			game::errorOut("Could not find Python file: " + path);
@@ -170,7 +170,7 @@ namespace game {
 		return 0;
 	}
 
-	int readOptions(std::map<std::string, std::string>& options, std::string path) {
+	int readOptions(std::map<std::string, std::string>& options, const std::string& path) {
 
 		//Constant vars
 		std::string delimiter = "=";
@@ -195,7 +195,7 @@ namespace game {
 		return 0;
 	}
 
-	int listOptions(std::map<std::string, std::string>& options, std::string title) {
+	int listOptions(std::map<std::string, std::string>& options, const std::string& title) {
 		game::logOut(title);
 		for (std::pair<std::string, std::string> option : options) {
 			std::cout << "    " << option.first << "=" << option.second << std::endl;
@@ -203,7 +203,7 @@ namespace game {
 		return 0;
 	}
 
-	int setTexture(NodePath object, std::string path) {
+	int setTexture(NodePath& object, const std::string& path) {
 		Texture* texture = TexturePool::load_texture(path);
 		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
@@ -211,7 +211,7 @@ namespace game {
 		return 0;
 	}
 
-	int setTextureScale(NodePath object, float scale) {
+	int setTextureScale(NodePath& object, const float& scale) {
 		TextureStage* textureStage = object.find_texture_stage("textureStage");
 		object.set_tex_scale(textureStage, scale);
 		return 0;
