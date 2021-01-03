@@ -17,6 +17,7 @@ namespace game {
 	const std::string f2 = "f2";
 	const std::string r = "r";
 	const std::string mouse1 = "mouse1";
+	const std::string mouse2 = "mouse2";
 	const std::string mouse3 = "mouse3";
 
 	const int wheel_up = -1;

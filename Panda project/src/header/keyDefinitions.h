@@ -79,6 +79,10 @@ framework.define_key("mouse1", "Mouse1-button", game::key_down, (void*)&game::mo
 framework.define_key("shift-mouse1", "Mouse1-button", game::key_down, (void*)&game::mouse1);
 
 //Mouse button 2
+framework.define_key("mouse2", "Mouse2-button", game::key_down, (void*)&game::mouse2);
+framework.define_key("shift-mouse2", "Mouse2-button", game::key_down, (void*)&game::mouse2);
+
+//Mouse button 3
 framework.define_key("mouse3", "Mouse3-button", game::key_down, (void*)&game::mouse3);
 framework.define_key("shift-mouse3", "Mouse3-button", game::key_down, (void*)&game::mouse3);
 
