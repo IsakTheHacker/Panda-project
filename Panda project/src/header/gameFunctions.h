@@ -150,6 +150,20 @@ namespace game {
 		return 0;
 	}
 
+	// For each function to easily loop through arrays
+	template<typename listType, typename funcType>
+	void forEach(listType list, funcType function) {
+		for (auto value : list) {
+			function(value, false, true);
+		}
+	}
+	template<typename listType>			//Overload to be used if no function was specified
+	void forEach(listType list) {
+		for (auto value : list) {
+			logOut(value);
+		}
+	}
+
 	// Executes a Python script
 	int runPyScript(std::string path);
 
