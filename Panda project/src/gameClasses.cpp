@@ -3,7 +3,7 @@
 namespace game {
 	
 	//Item class
-	item::item(std::string configPath, unsigned int stackedItems) {
+	item::item(const std::string& configPath, const unsigned int& stackedItems) {
 		std::ifstream file(configPath);
 		if (!file) {
 			errorOut("Specified a configPath for an item that doesn't exist!");
@@ -27,7 +27,7 @@ namespace game {
 	item emptyItem("emptyItem", 0);
 
 	//Wind Object class
-	windObject::windObject(WindowFramework*& window, PandaFramework& framework, double mx, double my, double mz, double velocity, PN_stdfloat sx, PN_stdfloat sy, PN_stdfloat sz, bool shouldLogInConsole, bool shouldLogToFile) {
+	windObject::windObject(WindowFramework*& window, PandaFramework& framework, const double& mx, const double& my, const double& mz, const double& velocity, const PN_stdfloat& sx, const PN_stdfloat& sy, const PN_stdfloat& sz, bool shouldLogInConsole, bool shouldLogToFile) {
 		id = current_id;
 		current_id++;
 		object_quantity++;
@@ -179,7 +179,7 @@ namespace game {
 	int object::object_quantity = 0;
 
 	//Entity class
-	entity::entity(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable, bool shouldLogInConsole, bool shouldLogToFile) : object{ window, framework, modelpath, collidable, shouldLogInConsole, shouldLogToFile } {
+	entity::entity(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool collidable, bool shouldLogInConsole, bool shouldLogToFile) : object{ window, framework, modelpath, collidable, shouldLogInConsole, shouldLogToFile } {
 		/*if (shouldLogInConsole) {
 			game::logOut("Succesfully created the player! id: " + std::to_string(id));
 		}
@@ -198,7 +198,7 @@ namespace game {
 	}
 
 	//Player class
-	player::player(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool shouldLogInConsole, bool shouldLogToFile) : entity{ window, framework, modelpath, shouldLogInConsole, shouldLogToFile } {
+	player::player(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool shouldLogInConsole, bool shouldLogToFile) : entity{ window, framework, modelpath, shouldLogInConsole, shouldLogToFile } {
 		CollisionNode* collisionNode = new CollisionNode("Box");
 		collisionNode->add_solid(new CollisionBox(0, 2, 2, 4));
 		collisionNodePath = model.attach_new_node(collisionNode);
@@ -222,12 +222,12 @@ namespace game {
 	}
 
 	//Chunk class
-	chunk::chunk(std::vector<object> objects, int x, int y) {
+	chunk::chunk(const std::vector<object>& objects, const int& x, const int& y) {
 		this->objects = objects;
 		this->x = x;
 		this->y = y;
 	}
-	chunk::chunk(int x, int y) {
+	chunk::chunk(const int& x, const int& y) {
 		this->x = x;
 		this->y = y;
 		chunk::index.insert(std::pair<int, int>(x, y));
@@ -236,7 +236,7 @@ namespace game {
 		chunk::objects.clear();
 		return 0;
 	}
-	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, PerlinNoise3 perlinNoise) {
+	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise) {
 		int x = this->x;
 		int y = this->y;
 		TexturePool* texturePool = TexturePool::get_global_ptr();
@@ -295,7 +295,7 @@ namespace game {
 		//game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
 		return 0;
 	}
-	int chunk::saveChunk() {
+	int chunk::saveChunk() const {
 		int x = this->x;
 		int y = this->y;
 		std::string path = std::to_string(x) + "." + std::to_string(y) + ".chunk";
@@ -364,7 +364,7 @@ namespace game {
 	}
 	std::set<std::pair<int, int>> chunk::index = {};
 
-	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
+	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path, const int& x, const int& y) {
 
 		if (game::chunk::index.find(std::pair<int, int>(x, y)) != game::chunk::index.end()) {
 			return 0;																					//Chunk is already loaded
@@ -458,7 +458,6 @@ namespace game {
 		game::chunk chunk(blocks, x, y);
 		chunk::index.insert(std::pair<int, int>(x, y));
 		game::chunks.push_back(chunk);
-		std::cout << "Pairs 2: " << std::endl;
 		for (std::pair<int, int> pair : chunk::index) {
 			std::cout << pair.first << "	" << pair.second << std::endl;
 		}

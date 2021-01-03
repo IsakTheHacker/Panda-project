@@ -20,7 +20,7 @@ namespace game {
 			unsigned int stackedItems;
 			std::map<std::string, std::string> options;
 
-			item(std::string configPath, unsigned int stackedItems = 1);
+			item(const std::string& configPath, const unsigned int& stackedItems = 1);
 	};
 
 	extern item emptyItem;
@@ -33,7 +33,7 @@ namespace game {
 			unsigned int slots;
 			unsigned int maximumStackSize; //Set to 0 for infinite
 
-			inventory(const unsigned int slots = 33, unsigned int maximumStackSize = 256) {
+			inventory(const unsigned int& slots = 33, const unsigned int& maximumStackSize = 256) {
 				this->slots = slots;
 				this->maximumStackSize = maximumStackSize;
 
@@ -62,7 +62,7 @@ namespace game {
 			//	return 0;
 			//}
 
-			int remItem(unsigned int slot, unsigned int items = 1) {
+			int remItem(const unsigned int& slot, const unsigned int& items = 1) {
 				this->items[slot] = emptyItem;
 				return 0;
 			}
@@ -103,7 +103,7 @@ namespace game {
 			LPoint3 direction;
 			double velocity;
 
-			windObject(WindowFramework*& window, PandaFramework& framework, double mx, double my, double mz, double velocity, PN_stdfloat sx = 1, PN_stdfloat sy = 1, PN_stdfloat sz = 1, bool shouldLogInConsole = false, bool shouldLogToFile = false);
+			windObject(WindowFramework*& window, PandaFramework& framework, const double& mx, const double& my, const double& mz, const double& velocity, const PN_stdfloat& sx = 1, const PN_stdfloat& sy = 1, const PN_stdfloat& sz = 1, bool shouldLogInConsole = false, bool shouldLogToFile = false);
 			~windObject();
 	};
 	
@@ -134,7 +134,7 @@ namespace game {
 	// Entity class
 	class entity : public object {
 		public:
-			entity(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+			entity(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 			~entity();
 	};
 
@@ -143,7 +143,7 @@ namespace game {
 		public:
 			NodePath collisionNodePath;
 
-			player(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+			player(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 			~player();
 	};
 
@@ -155,16 +155,16 @@ namespace game {
 		std::vector<object> objects;
 		static std::set<std::pair<int, int>> index;
 
-		chunk(std::vector<object> objects, int x, int y);
-		chunk(int x, int y);
+		chunk(const std::vector<object>& objects, const int& x, const int& y);
+		chunk(const int& x, const int& y);
 		int reset();
 
 		/// <summary> Saves a specified chunk to it's destination. </summary>
 		/// <param name="chunk">- your specifed chunk object</param>
 		/// <returns> 0 if successful, nonzero if not! </returns>
-		int saveChunk();
+		int saveChunk() const;
 
-		int generateChunk(WindowFramework*& window, PandaFramework& framework, PerlinNoise3 perlinNoise);
+		int generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise);
 	};
 
 	//Creating vectors for the classes
@@ -180,5 +180,5 @@ namespace game {
 	/// <param name="x">- The chunk's x-pos</param>
 	/// <param name="y">- The chunk's y-pos</param>
 	/// <returns> 0 if successful, nonzero if not! </returns>
-	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y);
+	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path, const int& x, const int& y);
 }
