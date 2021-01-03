@@ -416,6 +416,14 @@ int main(int argc, char* argv[]) {
 					keys["mouse1"] = false;
 				}
 			}
+			if (keys["mouse2"]) {
+				std::string blockInfo =
+					"Information about block:\n"
+					"    XYZ: " + std::to_string(block.get_x()) + ", " + std::to_string(block.get_y()) + ", " + std::to_string(block.get_z()) + ""
+				;
+				game::logOut(blockInfo);
+				keys["mouse2"] = false;
+			}
 			if (keys["mouse3"]) {
 				if (mouseInGame) {
 					std::vector<NodePath> vec;
