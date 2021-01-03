@@ -366,11 +366,6 @@ namespace game {
 
 	int readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
 
-		std::cout << "Pairs: " << std::endl;
-		for (std::pair<int, int> pair : chunk::index) {
-			std::cout << pair.first << "	" << pair.second << std::endl;
-		}
-
 		if (game::chunk::index.find(std::pair<int, int>(x, y)) != game::chunk::index.end()) {
 			return 0;																					//Chunk is already loaded
 		}
