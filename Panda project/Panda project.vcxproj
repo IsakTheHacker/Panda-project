@@ -38,6 +38,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\gameObject.cpp" />
     <ClCompile Include="src\testing\Clicking on 3d objects.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -71,6 +72,7 @@
     <ClInclude Include="src\header\gameVars.h" />
     <ClInclude Include="src\header\keyDefinitions.h" />
     <ClInclude Include="src\header\linuxPlatform.h" />
+    <ClInclude Include="src\header\gameObject.h" />
     <ClInclude Include="src\header\pandaIncludes.h" />
     <ClInclude Include="src\header\platformPicker.h" />
     <ClInclude Include="src\header\win32Platform.h" />

@@ -106,49 +106,7 @@ namespace game {
 			windObject(WindowFramework*& window, PandaFramework& framework, const double& mx, const double& my, const double& mz, const double& velocity, const PN_stdfloat& sx = 1, const PN_stdfloat& sy = 1, const PN_stdfloat& sz = 1, bool shouldLogInConsole = false, bool shouldLogToFile = false);
 			~windObject();
 	};
-	
-	// Object class
-	class object {
-		protected:
-			std::string modelpathIntern;
-			std::string oldModelpath;
-			bool shouldLogInConsoleIntern;
-			bool shouldLogToFileIntern;
-			bool modelNotFound;
-		public:
-			bool empty = false;
-			NodePath model;
-			static int current_id;
-			static int object_quantity;
-			unsigned int id;
-			std::string name;
-
-			object(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
-			object(WindowFramework*& window, PandaFramework& framework, std::vector<NodePath> subobjects, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
-			object(bool shouldLogInConsole = false, bool shouldLogToFile = false);		//Empty game::object constructor
-			~object();
-
-			operator std::string();
-	};
-
-	// Entity class
-	class entity : public object {
-		public:
-			entity(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
-			~entity();
-	};
-
-	// Player class
-	class player : public entity {
-		public:
-			NodePath collisionNodePath;
-
-			player(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool shouldLogInConsole = true, bool shouldLogToFile = false);
-			~player();
-	};
 
 	//Creating vectors for the classes
 	extern std::vector<windObject> winds;
-	extern std::vector<entity> entities;
-	extern std::vector<player> players;
 }

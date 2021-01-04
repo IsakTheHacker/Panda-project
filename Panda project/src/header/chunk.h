@@ -9,7 +9,7 @@
 #include <pandaFramework.h>
 
 //My libraries
-#include "gameClasses.h"
+#include "gameObject.h"
 
 namespace game {
 	class chunk {

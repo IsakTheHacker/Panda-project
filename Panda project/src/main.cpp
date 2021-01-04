@@ -17,6 +17,7 @@ bool player_sneaking = false;
 #include "gameLanguage.h"
 #include "constantVars.h"
 #include "chunk.h"
+#include "gameObject.h"
 
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
