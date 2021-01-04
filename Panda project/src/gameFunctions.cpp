@@ -240,6 +240,22 @@ namespace game {
 		}
 	}
 
+	int parseNegative(int value) {
+		if (isNegative(value)) {
+			return value;
+		} else {
+			return value - value * 2;
+		}
+	}
+
+	int parsePositive(int value) {
+		if (isPositive(value)) {
+			return value;
+		} else {
+			return value - value * 2;
+		}
+	}
+
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
 	}

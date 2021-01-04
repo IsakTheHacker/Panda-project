@@ -174,6 +174,16 @@ namespace game {
 	/// <returns> True, if positive. False, if not! </returns>
 	bool isPositive(const int& value);
 
+	/// <summary> Makes a value negative. Does nothing if already negative! </summary>
+	/// <param name="value">- Value to parse</param>
+	/// <returns> Parsed value </returns>
+	int parseNegative(int value);
+
+	/// <summary> Makes a value positive. Does nothing if already positive! </summary>
+	/// <param name="value">- Value to parse</param>
+	/// <returns> Parsed value </returns>
+	int parsePositive(int value);
+
 	// Executes a Python script
 	int runPyScript(const std::string& path);
 
