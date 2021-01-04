@@ -333,9 +333,10 @@ namespace game {
 			if (!object.empty) {
 				std::cout << "From " << start_x << " to " << parsePositive(start_x) << std::endl;
 				std::cout << "From " << start_y << " to " << parsePositive(start_y) << std::endl;
-				int x_value = ((parsePositive(object.model.get_x()) - parsePositive(start_x)) / 2);
+				int x_value = parsePositive((object.model.get_x() - start_x) / 2);
 				//int x_value = ((parsePositive(object.model.get_x()) - parsePositive(start_x)) / 2);
-				int y_value = ((parsePositive(object.model.get_y()) - parsePositive(start_y)) / 2);
+				int y_value = parsePositive((object.model.get_y() - start_y) / 2);
+				//int y_value = ((parsePositive(object.model.get_y()) - parsePositive(start_y)) / 2);
 				std::cout << object.model.get_z() << "	" << x_value << "	" << y_value << std::endl;
 				z_levels[object.model.get_z()][x_value][y_value] = object;
 				//z_levels[object.model.get_z()][x + object.model.get_x() - 1][y + object.model.get_y() - 1] = object;
