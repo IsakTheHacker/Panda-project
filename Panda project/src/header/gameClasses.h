@@ -161,6 +161,7 @@ namespace game {
 		chunk(const int& x, const int& y);
 		int reset();
 		static void setDefaultPerlinNoise3(PerlinNoise3 perlinNoise);
+		static PerlinNoise3 getDefaultPerlinNoise3();
 
 		/// <summary> Saves a specified chunk to it's destination. </summary>
 		/// <param name="chunk">- your specifed chunk object</param>

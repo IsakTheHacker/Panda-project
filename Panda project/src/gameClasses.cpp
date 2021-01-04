@@ -239,6 +239,9 @@ namespace game {
 	void chunk::setDefaultPerlinNoise3(const PerlinNoise3 perlinNoise) {
 		chunk::perlinNoise = perlinNoise;
 	}
+	PerlinNoise3 chunk::getDefaultPerlinNoise3() {
+		return chunk::perlinNoise;
+	}
 	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise = chunk::perlinNoise) {
 		int start_x = this->x * 16;
 		int start_y = this->y * 16;
