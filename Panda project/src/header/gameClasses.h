@@ -149,6 +149,8 @@ namespace game {
 
 	//Chunk class
 	class chunk {
+	private:
+		static PerlinNoise3 perlinNoise;
 	public:
 		int x;
 		int y;
@@ -158,6 +160,7 @@ namespace game {
 		chunk(const std::vector<object>& objects, const int& x, const int& y);
 		chunk(const int& x, const int& y);
 		int reset();
+		static void setDefaultPerlinNoise3(PerlinNoise3 perlinNoise);
 
 		/// <summary> Saves a specified chunk to it's destination. </summary>
 		/// <param name="chunk">- your specifed chunk object</param>

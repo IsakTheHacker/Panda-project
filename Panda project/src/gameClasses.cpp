@@ -236,20 +236,12 @@ namespace game {
 		chunk::objects.clear();
 		return 0;
 	}
-	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise) {
-		int x = 0;
-		if (x < 0) {
-			x = (this->x - 16) * 16;
-		} else {
-			x = this->x * 16;
-		}
-
-		int y = 0;
-		if (y < 0) {
-			y = (this->y - 16) * 16;
-		} else {
-			y = this->y * 16;
-		}
+	void chunk::setDefaultPerlinNoise3(const PerlinNoise3 perlinNoise) {
+		chunk::perlinNoise = perlinNoise;
+	}
+	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise = chunk::perlinNoise) {
+		int start_x = this->x * 16;
+		int start_y = this->y * 16;
 
 		std::vector<object> blocks;
 		std::vector<NodePath> subobjects;
@@ -257,9 +249,9 @@ namespace game {
 		//game::warningOut(object);
 
 		for (size_t i = 1; i < 2; i++) {
-			for (int j = x; j < x+16; j += 2) {
+			for (int j = start_x; j < start_x +16; j += 2) {
 				//std::cout << "x: " << j << std::endl;
-				for (int k = y; k < y+16; k += 2) {
+				for (int k = start_y; k < start_y +16; k += 2) {
 					//std::cout << "y: " << k << std::endl;
 					TextureStage* textureStage = new TextureStage("textureStage2");
 					textureStage->set_sort(0);
@@ -292,13 +284,13 @@ namespace game {
 			}
 		}
 		this->objects = blocks;															//Push the generated blocks to vector objects of this chunk
-		this->index.insert(std::pair<int, int>(x, y));									//Register that this chunk has been generated
+		this->index.insert(std::pair<int, int>(start_x, start_y));									//Register that this chunk has been generated
 		//std::cout << "Before size: " << game::chunks.size() << std::endl;
 		//std::cout << "After size: " << game::chunks.size() << std::endl;
 		if (devMode) {
 			std::string fancyDebugOutput =
 				"Finished generating chunk:\n"
-				"    XY: " + std::to_string(x) + ", " + std::to_string(y) + "\n"
+				"    XY: " + std::to_string(start_x) + ", " + std::to_string(start_y) + "\n"
 				"    Chunk Objects Size: " + std::to_string(this->objects.size());
 				;
 			game::logOut(fancyDebugOutput);
@@ -384,7 +376,8 @@ namespace game {
 
 		return 0;
 	}
-	std::set<std::pair<int, int>> chunk::index = {};
+	std::set<std::pair<int, int>> chunk::index;			//Initalize static members
+	PerlinNoise3 chunk::perlinNoise;
 
 	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path, const int& x, const int& y) {
 
