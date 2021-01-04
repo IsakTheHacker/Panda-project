@@ -716,6 +716,7 @@ int main(int argc, char* argv[]) {
 			}
 		} else {
 			if (keys["q"]) {
+				game::importantInfoOut("Crashing game...");
 				exit(1);			// Code 1 is used because we crashed the game
 			}
 		}
