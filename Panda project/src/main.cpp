@@ -358,14 +358,14 @@ int main(int argc, char* argv[]) {
 
 		// Checking if current chunk exists, generate if not.
 		if (camera.get_x() < 0) {
-			chunk_x = std::to_string(((int)(camera.get_x() - 16) / 16) * 16);
+			chunk_x = std::to_string((int)(camera.get_x() - 16) / 16);
 		} else {
-			chunk_x = std::to_string(((int)camera.get_x() / 16) * 16);
+			chunk_x = std::to_string((int)camera.get_x() / 16);
 		}
 		if (camera.get_y() < 0) {
-			chunk_y = std::to_string(((int)(camera.get_y() - 16) / 16) * 16);
+			chunk_y = std::to_string((int)(camera.get_y() - 16) / 16);
 		} else {
-			chunk_y = std::to_string(((int)camera.get_y() / 16) * 16);
+			chunk_y = std::to_string((int)camera.get_y() / 16);
 		}
 		
 		if (game::chunk::index.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::index.end()) {
@@ -738,7 +738,7 @@ int main(int argc, char* argv[]) {
 		std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
 		for (game::chunk chunk : game::chunks) {
 			updateIndex << chunk.x << "." << chunk.y << ".chunk" << std::endl;
-			//chunk.saveChunk();
+			chunk.saveChunk();
 		}
 		updateIndex.close();
 		terrainAnimationShouldRun = false;

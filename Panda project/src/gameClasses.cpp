@@ -237,9 +237,20 @@ namespace game {
 		return 0;
 	}
 	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise) {
-		int x = this->x;
-		int y = this->y;
-		TexturePool* texturePool = TexturePool::get_global_ptr();
+		int x = 0;
+		if (x < 0) {
+			x = (this->x - 16) * 16;
+		} else {
+			x = this->x * 16;
+		}
+
+		int y = 0;
+		if (y < 0) {
+			y = (this->y - 16) * 16;
+		} else {
+			y = this->y * 16;
+		}
+
 		std::vector<object> blocks;
 		std::vector<NodePath> subobjects;
 
@@ -256,7 +267,7 @@ namespace game {
 					NodePath object2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)"block.egg");
 					subobjects.clear();
 
-					Texture* texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
+					Texture* texture = TexturePool::get_global_ptr()->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
 					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 					object2.set_texture(texture, 1);
@@ -296,9 +307,22 @@ namespace game {
 		return 0;
 	}
 	int chunk::saveChunk() const {
-		int x = this->x;
-		int y = this->y;
-		std::string path = std::to_string(x) + "." + std::to_string(y) + ".chunk";
+		int start_x = 0;
+		if (x < 0) {
+			start_x = (this->x - 16) * 16;
+		} else {
+			start_x = this->x * 16;
+		}
+
+		int start_y = 0;
+		if (y < 0) {
+			start_y = (this->y - 16) * 16;
+		} else {
+			start_y = this->y * 16;
+		}
+
+		std::string path = std::to_string(this->x) + "." + std::to_string(this->y) + ".chunk";
+		game::errorOut(path);
 
 		std::set<int> z;
 		for (game::object object : this->objects) {
@@ -310,16 +334,16 @@ namespace game {
 		std::vector<std::vector<game::object>> x_levels(8, y_levels);
 		std::map<int, std::vector<std::vector<game::object>>> z_levels;
 
-		for (auto i : z) {
+		for (int i : z) {
 			z_levels[i] = x_levels;
 		}
-		forEach(z);
 
 		for (game::object object : this->objects) {
 			//std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
 			if (!object.empty) {
-				std::cout << object.model.get_z() << "	" << (object.model.get_x() - x) / 2 - 1 << "	" << (object.model.get_y() - y) / 2 - 1 << std::endl;
-				z_levels[object.model.get_z()][(object.model.get_x() - x) / 2 - 1][(object.model.get_y() - y) / 2 - 1] = object;
+				std::cout << object.model.get_z() << "	" << ((object.model.get_x() - this->x) / 2) - 1 << "	" << ((object.model.get_y() - this->y) / 2) - 1 << std::endl;
+				z_levels[object.model.get_z()][((object.model.get_x() - this->x) / 2) - 1][((object.model.get_y() - this->y) / 2) - 1] = object;
+				//z_levels[object.model.get_z()][x + object.model.get_x() - 1][y + object.model.get_y() - 1] = object;
 			}
 		}
 
@@ -461,7 +485,7 @@ namespace game {
 		chunk::index.insert(std::pair<int, int>(x, y));
 		game::chunks.push_back(chunk);
 		for (std::pair<int, int> pair : chunk::index) {
-			std::cout << pair.first << "	" << pair.second << std::endl;
+			//std::cout << pair.first << "	" << pair.second << std::endl;
 		}
 
 		file.close();
