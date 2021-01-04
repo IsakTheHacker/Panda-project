@@ -1,4 +1,14 @@
 # Panda-project
+
+[![GitHub issues](https://img.shields.io/github/issues/IsakTheHacker/Panda-project)](https://github.com/IsakTheHacker/Panda-project/issues)
+[![GitHub forks](https://img.shields.io/github/forks/IsakTheHacker/Panda-project)](https://github.com/IsakTheHacker/Panda-project/network)
+![Lines of code](https://img.shields.io/tokei/lines/github/IsakTheHacker/Panda-project)
+
+#### Latest release
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/IsakTheHacker/Panda-project?include_prereleases)](https://github.com/IsakTheHacker/Panda-project/releases)
+![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/IsakTheHacker/Panda-project)
+![GitHub all releases](https://img.shields.io/github/downloads/IsakTheHacker/Panda-project/total) (Total downloads for all releases)
+
 This is my first game made with C++. It is a sandbox game in which i plan to implement advanced machinery and many types of shapes to build with!
 
 For now, this project is Windows only. But I plan to release the game for Linux and other platforms.
