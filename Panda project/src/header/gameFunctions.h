@@ -164,6 +164,16 @@ namespace game {
 		}
 	}
 
+	/// <summary> Checks if a value is negative. </summary>
+	/// <param name="value">- Value to check</param>
+	/// <returns> True, if negative. False, if not! </returns>
+	bool isNegative(const int& value);
+
+	/// <summary> Checks if a value is positive. </summary>
+	/// <param name="value">- Value to check</param>
+	/// <returns> True, if positive. False, if not! </returns>
+	bool isPositive(const int& value);
+
 	// Executes a Python script
 	int runPyScript(const std::string& path);
 

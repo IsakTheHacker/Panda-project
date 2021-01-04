@@ -341,8 +341,10 @@ namespace game {
 		for (game::object object : this->objects) {
 			//std::cout << object.model.get_pos() << "  -  " << (object.model.get_x()-x)/2-1 << " "<< (object.model.get_y()-y)/2-1 <<  " " <<  object.model.get_z() << std::endl;
 			if (!object.empty) {
-				std::cout << object.model.get_z() << "	" << ((object.model.get_x() - this->x) / 2) - 1 << "	" << ((object.model.get_y() - this->y) / 2) - 1 << std::endl;
-				z_levels[object.model.get_z()][((object.model.get_x() - this->x) / 2) - 1][((object.model.get_y() - this->y) / 2) - 1] = object;
+				std::cout << object.model.get_z() << "	" << ((object.model.get_x() - this->x) / 2) << "	" << ((object.model.get_y() - this->y) / 2) << std::endl;
+				int x_value = ((object.model.get_x() - start_x) / 2);
+				int y_value = ((object.model.get_y() - start_y) / 2);
+				z_levels[object.model.get_z()][x_value][y_value] = object;
 				//z_levels[object.model.get_z()][x + object.model.get_x() - 1][y + object.model.get_y() - 1] = object;
 			}
 		}

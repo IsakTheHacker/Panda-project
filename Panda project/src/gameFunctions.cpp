@@ -224,6 +224,22 @@ namespace game {
 		}
 	}
 
+	bool isNegative(const int& value) {
+		if (value < 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	bool isPositive(const int& value) {
+		if (value > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
 	}
