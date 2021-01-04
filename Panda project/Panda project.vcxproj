@@ -27,6 +27,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\chunk.cpp" />
     <ClCompile Include="src\cppExtension.cpp" />
     <ClCompile Include="src\crap\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -60,6 +61,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\header\chunk.h" />
     <ClInclude Include="src\header\constantVars.h" />
     <ClInclude Include="src\header\cppExtension.h" />
     <ClInclude Include="src\header\external\json.hpp" />

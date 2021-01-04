@@ -71,6 +71,9 @@
     <ClInclude Include="src\header\gameVars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\header\chunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -131,6 +134,9 @@
       <Filter>Source Files\C++ files</Filter>
     </ClCompile>
     <ClCompile Include="src\gameClasses.cpp">
+      <Filter>Source Files\C++ files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\chunk.cpp">
       <Filter>Source Files\C++ files</Filter>
     </ClCompile>
   </ItemGroup>
