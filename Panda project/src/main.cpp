@@ -9,7 +9,7 @@
 
 
 #include "pandaIncludes.h"
-#include <direct.h>
+//#include <direct.h>
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -18,8 +18,8 @@ bool terrainAnimationShouldRun;
 bool devMode = false;
 bool mouseInGame = true;
 bool playerOnGround = false;
-std::string gamePath;
-std::string universePath = "universes/Test - Copy/";
+std::string gamePath = "./";
+std::string universePath = "universes/Test/";
 bool player_sneaking = false;
 
 //My libraries
@@ -469,62 +469,37 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["mouse3"]) {
 				if (mouseInGame) {
-					std::vector<NodePath> vec;
-					LVector3 notRotatedSurface = surface;
-					notRotatedSurface.set_x(0);
-					notRotatedSurface.set_y(0);
-					notRotatedSurface.set_z(0);
-					
-					std::string path;
-
-					TexturePool* texturePool = TexturePool::get_global_ptr();
-					TextureStage* textureStage = new TextureStage("textureStage2");
-					textureStage->set_sort(0);
-					textureStage->set_mode(TextureStage::M_replace);
-					Texture* texture;
-					Texture* texture2;
-
-					NodePath block2;
+					std::string configPath;
 
 					if (handInventoryIndex == 0) {
-						path = "wedge.egg";
-						NodePath incline = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_incline");
-						NodePath base = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/half_block_wedge_base");
-						vec.push_back(incline);
-						vec.push_back(base);
-
-						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
-						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-						base.set_texture(texture, 1);
-
-						texture2 = texturePool->load_texture(gamePath + (std::string)"models/textures/png/grass-4.png");
-						texture2->set_minfilter(SamplerState::FilterType::FT_nearest);
-						texture2->set_magfilter(SamplerState::FilterType::FT_nearest);
-						incline.set_texture(texture2, 1);
+						configPath = "data/assets/blockproperties/grass.blockproperties";
 					} else if (handInventoryIndex == 1) {
-						path = "block.egg";
-						NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"/models/egg/" + (std::string)path);
-
-						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
-						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-						block2.set_texture(texture, 1);
-						vec.push_back(block2);
-					} else {
-						path = "block.egg";
-						NodePath block2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)path);
-
-						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
-						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-						block2.set_texture(texture, 1);
-						vec.push_back(block2);
+						configPath = "";
+					} else if (handInventoryIndex == 2) {
+						configPath = "";
+					} else if (handInventoryIndex == 3) {
+						configPath = "";
+					} else if (handInventoryIndex == 4) {
+						configPath = "";
+					} else if (handInventoryIndex == 5) {
+						configPath = "";
+					} else if (handInventoryIndex == 6) {
+						configPath = "";
+					} else if (handInventoryIndex == 7) {
+						configPath = "";
+					} else if (handInventoryIndex == 8) {
+						configPath = "";
+					} else if (handInventoryIndex == 9) {
+						configPath = "";
+					} else if (handInventoryIndex == 10) {
+						configPath = "";
 					}
 
-					game::object obj(window, framework, vec, true, false, false);
-					obj.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
-					obj.model.set_tex_projector(textureStage->get_default(), window->get_render(), obj.model);
+
+
+					game::object obj(configPath, window, framework, false, false);
+					obj.model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
+					obj.model.set_tex_projector(TextureStage::get_default(), window->get_render(), obj.model);
 					obj.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
 
 					if (keys["r"]) {
@@ -549,20 +524,6 @@ int main(int argc, char* argv[]) {
 							heading = 1;
 						}
 						obj.model.set_hpr(heading * 180, pitch * 180, 0);
-					}
-
-					if (handInventoryIndex == 0) {
-
-					} else if (handInventoryIndex == 1) {
-						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/rotational-complex-#.png");
-						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-						block2.set_texture(texture, 1);
-					} else {
-						texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
-						texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-						texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-						block2.set_texture(texture, 1);
 					}
 
 					game::chunk chunk = game::chunks[std::stoi(block.get_tag("chunk"))];

@@ -19,6 +19,8 @@ namespace game {
 		bool shouldLogInConsoleIntern;
 		bool shouldLogToFileIntern;
 		bool modelNotFound;
+
+		void initConfig(WindowFramework*& window, PandaFramework& framework);
 	public:
 		bool empty = false;
 		NodePath model;
@@ -26,9 +28,12 @@ namespace game {
 		static int object_quantity;
 		unsigned int id;
 		std::string name;
+		std::string configPath = "";
+		std::map<std::string, std::string> config;
 
 		object(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		object(WindowFramework*& window, PandaFramework& framework, std::vector<NodePath> subobjects, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+		object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		object(bool shouldLogInConsole = false, bool shouldLogToFile = false);		//Empty game::object constructor
 		~object();
 

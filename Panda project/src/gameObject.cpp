@@ -74,6 +74,39 @@ namespace game {
 			logToFile("game.log", "Log: Succesfully created object: " + std::to_string(id));
 		}
 	}
+	object::object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) {
+		id = current_id;
+		current_id++;
+		object_quantity++;
+		this->configPath = configPath;
+		
+		std::ifstream file(configPath);
+		if (file.fail()) {
+			errorOut("Specified a configPath that doesn't exist!");
+		}
+		std::string line;
+		std::string delimiter = "=";
+		while (std::getline(file, line)) {
+			size_t pos = 0;
+			std::string token;
+			while ((pos = line.find(delimiter)) != std::string::npos) {
+				token = line.substr(0, pos);
+				line.erase(0, pos + delimiter.length());
+			}
+
+			config[token] = line;
+		}
+
+		model = NodePath("model");
+
+		initConfig(window, framework);
+
+		model.reparent_to(window->get_render());
+
+		//Setting internal class variables
+		shouldLogInConsoleIntern = shouldLogInConsole;
+		shouldLogToFileIntern = shouldLogToFile;
+	}
 	object::object(bool shouldLogInConsole, bool shouldLogToFile) {
 		id = current_id;
 		current_id++;
@@ -110,6 +143,52 @@ namespace game {
 			"    shouldLogToFile: " + std::to_string(object::shouldLogToFileIntern) + ""
 			;
 		return stringObject;
+	}
+	void object::initConfig(WindowFramework*& window, PandaFramework& framework) {
+		if (config.find("collidable") != config.end()) {
+			if (std::stoi(config["collidable"]) == 1) {
+				CollisionNode* collisionNode = new CollisionNode("Box");
+				collisionNode->add_solid(new CollisionBox(0, std::stoi(config["collision-x"]), std::stoi(config["collision-y"]), std::stoi(config["collision-z"])));
+				NodePath collisionNodePath = model.attach_new_node(collisionNode);
+			}
+		} else {
+			config["collidable"] = "0";
+		}
+
+		if (config.find("subobjects") != config.end()) {
+			std::vector<NodePath> subobjects;
+
+			std::vector<std::string> stringSubobjects = game::split(config["subobjects"], ",");
+			for (std::string stringSubobject : stringSubobjects) {
+
+				std::vector<std::string> stringSubobjectOptions = game::split(stringSubobject, "|");
+				std::map<std::string, std::string> subobjectOptions;
+				Texture* texture;
+				for (std::string stringSubobjectOption : stringSubobjectOptions) {
+					subobjectOptions[game::split(stringSubobjectOption, ":")[0]] = game::split(stringSubobjectOption, ":")[1];
+				}
+				if (subobjectOptions.find("texture") != subobjectOptions.end()) {
+					texture = TexturePool::get_global_ptr()->load_cube_map(subobjectOptions["texture"]);
+					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+				} else {
+					texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
+					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+				}
+
+				NodePath subobject = window->load_model(framework.get_models(), subobjectOptions["model"]);
+				if (subobjectOptions.find("texture") != subobjectOptions.end()) {
+					subobject.set_texture(texture, 1);
+				}
+				subobjects.push_back(subobject);
+			}
+
+			//Reparent subobjects to model
+			for (std::size_t i = 0; i < subobjects.size(); i++) {
+				subobjects[i].reparent_to(model);
+			}
+		}
 	}
 	int object::current_id = 0;
 	int object::object_quantity = 0;
