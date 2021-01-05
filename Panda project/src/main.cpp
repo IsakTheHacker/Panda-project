@@ -1,3 +1,7 @@
+// This will remove the console window from showing up with our window.
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+
+
 #include "pandaIncludes.h"
 
 int handInventoryIndex;
