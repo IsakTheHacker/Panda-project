@@ -1,5 +1,11 @@
-// This will remove the console window from showing up with our window.
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+
+//Specify build options
+#define game_console		//Comment this line to prevent console window from being created at startup
+
+//Process build options
+#ifndef game_console
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")		//This will remove the console window
+#endif
 
 
 #include "pandaIncludes.h"
