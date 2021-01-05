@@ -1201,6 +1201,29 @@
         }
         "FileType"
         {
+            "{5EB83D71-FA18-4901-BE56-DE22E13CC478}:_566A15D083FF4703BB40D420C3FD832F"
+            {
+            "Name" = "8:Panda Project Chunk File"
+            "Description" = "8:"
+            "Extensions" = "8:.chunk"
+            "MIME" = "8:"
+            "Icon" = "8:"
+            "IconIndex" = "3:0"
+                "Command"
+                {
+                "Command" = "8:_9BACE30D0E0648ECB22492D08995C451"
+                }
+                "Verbs"
+                {
+                    "{95C0C507-CBF0-42B8-B119-07219E384A4A}:_47000521CDD8469EBBBF843A336E9D45"
+                    {
+                    "Command" = "8:&Open"
+                    "Verb" = "8:open"
+                    "Arguments" = "8:\"%1\""
+                    "Order" = "3:0"
+                    }
+                }
+            }
         }
         "Folder"
         {
