@@ -259,11 +259,7 @@ namespace game {
 		}
 		game::chunk chunk(blocks, x, y);
 		chunk::index.insert(std::pair<int, int>(x, y));
-		game::logOut(std::to_string(x) + " " + std::to_string(y));
 		game::chunks.push_back(chunk);
-		for (std::pair<int, int> pair : chunk::index) {
-			std::cout << pair.first << "	" << pair.second << std::endl;
-		}
 
 		file.close();
 		return 0;
