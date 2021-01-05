@@ -148,7 +148,7 @@ namespace game {
 				//}
 			}
 		}
-		std::ofstream file("universes/Test/" + path);
+		std::ofstream file(universePath + path);
 		file << final;
 
 		return 0;

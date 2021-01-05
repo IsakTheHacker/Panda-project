@@ -9,6 +9,7 @@
 
 
 #include "pandaIncludes.h"
+#include <direct.h>
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -17,7 +18,8 @@ bool terrainAnimationShouldRun;
 bool devMode = false;
 bool mouseInGame = true;
 bool playerOnGround = false;
-std::string gamePath = "./";
+std::string gamePath;
+std::string universePath = "universes/Test - Copy/";
 bool player_sneaking = false;
 
 //My libraries
@@ -67,21 +69,41 @@ void pauseMenu(const Event* theEvent, void* data) {
 
 int main(int argc, char* argv[]) {
 
+	//Set gamePath to the directory of executable
+	Filename exefile = argv[0];
+	//chdir(exefile.get_fullpath().substr(0, exefile.get_fullpath().find_last_of("\\") + 1).c_str());
+	//gamePath = exefile.get_fullpath().substr(0, exefile.get_fullpath().find_last_of("\\") + 1);
+
 	//Checking if any arguments was given at startup
-	if (argc > 2) {
-		game::warningOut("Too many arguments was given, only one is allowed!");
-	} else if (argc == 2) {
-		if (std::find(std::begin(game::allowed_parameters), std::end(game::allowed_parameters), argv[1]) != std::end(game::allowed_parameters)) {
-			if (argv[1] == game::allowed_parameters[0]) {
-				devMode = true;
-				game::importantInfoOut("Game was started in devmode!");
-			} else if (argv[1] == game::allowed_parameters[1]) {
-				gamePath = "../../../Panda Project/";
-				devMode = true;
-				game::importantInfoOut("Game was started in Visual Studio devmode!");
+	if (argc > 3) {
+		game::warningOut("Too many arguments was given, 1-2 arguments are allowed!");
+	} else if (argc > 1) {
+		for (size_t i = 1; i < argc; i++) {
+			if (std::find(std::begin(game::allowed_parameters), std::end(game::allowed_parameters), argv[i]) != std::end(game::allowed_parameters)) {
+				if (argv[i] == game::allowed_parameters[0]) {
+					devMode = true;
+					game::importantInfoOut("Game was started in devmode!");
+				} else if (argv[i] == game::allowed_parameters[1]) {
+					gamePath = "../../../Panda Project/";
+					devMode = true;
+					game::importantInfoOut("Game was started in Visual Studio devmode!");
+				}
+			} else {
+				std::ifstream ulink(argv[i]);
+				if (ulink.fail()) {
+					game::warningOut("An unknown argument was given!");
+					continue;
+				}
+
+				universePath = "";
+				std::string line;
+				while (std::getline(ulink, line)) {
+					universePath += line;
+				}
+				game::errorOut(universePath);
+				ulink.close();
+				
 			}
-		} else {
-			game::warningOut("An unknown argument was given!");
 		}
 	}
 
@@ -214,17 +236,17 @@ int main(int argc, char* argv[]) {
 
 	//Loading chunks
 	{
-		std::ifstream index("universes/Test/index");
+		std::ifstream index(universePath + "index");
 		if (index.fail()) {
 			game::warningOut("Could not find an index file for the universe. Creating one...");
-			std::ofstream createIndex("universes/Test/index");
+			std::ofstream createIndex(universePath + "index");
 			createIndex.close();
 		} else {
 			terrainAnimationShouldRun = true;
 			std::thread terrain_animation_thread(game::terrainAnimation, "Loading terrain");
 			std::string line;
 			while (std::getline(index, line)) {
-				game::readChunk(window, framework, "universes/Test/" + line, std::stoi(game::split(line, ".")[0]), std::stoi(game::split(line, ".")[1]));
+				game::readChunk(window, framework, universePath + line, std::stoi(game::split(line, ".")[0]), std::stoi(game::split(line, ".")[1]));
 			}
 			index.close();
 			terrainAnimationShouldRun = false;
@@ -768,7 +790,7 @@ int main(int argc, char* argv[]) {
 
 	//Saving chunks
 	{
-		std::ofstream updateIndex("universes/Test/index", std::ios::out | std::ios::trunc);
+		std::ofstream updateIndex(universePath + "index", std::ios::out | std::ios::trunc);
 		terrainAnimationShouldRun = true;
 		std::thread saving_animation_thread(game::terrainAnimation, "Saving universe");
 		for (game::chunk chunk : game::chunks) {

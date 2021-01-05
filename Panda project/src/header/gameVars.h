@@ -9,3 +9,4 @@ extern bool mouseInGame;
 extern bool playerOnGround;
 extern std::string gamePath;
 extern bool player_sneaking;
+extern std::string universePath;

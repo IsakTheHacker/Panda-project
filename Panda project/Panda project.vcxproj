@@ -232,6 +232,10 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(TargetDir)$(ProjectName).$(OutputType)" "$(ProjectDir)$(ProjectName).$(OutputType)"</Command>
+      <Message>Copy executable to Project Directory.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
