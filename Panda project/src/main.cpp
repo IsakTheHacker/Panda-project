@@ -181,6 +181,12 @@ int main(int argc, char* argv[]) {
 	textNodePath3.set_scale(0.07);
 	textNodePath3.set_pos(-1.25, 0, 0.40);
 
+	PT(TextNode) fovText;
+	fovText = new TextNode("node name3");
+	NodePath fovTextNodePath = window->get_aspect_2d().attach_new_node(fovText);
+	fovTextNodePath.set_scale(0.07);
+	fovTextNodePath.set_pos(-1.25, 0, 0.15);
+
 	// Crosshair
 	CardMaker cardmaker("crosshair");
 	NodePath cursor(cardmaker.generate());
@@ -673,6 +679,14 @@ int main(int argc, char* argv[]) {
 					game::errorOut("Screenshot was not saved successfully!");
 				}
 				keys["f2"] = false;
+			}
+			if (keys["f3"]) {
+				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()-10);
+				keys["f3"] = false;
+			}
+			if (keys["f4"]) {
+				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()+10);
+				keys["f4"] = false;
 			}
 
 			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
