@@ -77,8 +77,7 @@ framework.define_key("f4", "f4-key", game::key_down, (void*)&game::f4);
 framework.define_key("f4-up", "f4-key", game::key_up, (void*)&game::f4);
 
 //F5-key
-framework.define_key("f5", "f5-key", game::key_down, (void*)&game::f5);
-framework.define_key("f5-up", "f5-key", game::key_up, (void*)&game::f5);
+framework.define_key("f5", "f5-key", game::key_swap, (void*)&game::f5);
 
 //Esc-key
 game::pauseMenuEventParameters parameters;

@@ -211,6 +211,7 @@ namespace game {
 	void exitGame(const Event* theEvent, void* data);
 	void key_down(const Event* theEvent, void* data);
 	void key_up(const Event* theEvent, void* data);
+	void key_swap(const Event* theEvent, void* data);
 	void wheel_roll(const Event* theEvent, void* data);
 	void testIfPlayerOnGround(const Event* theEvent, void* data);
 }

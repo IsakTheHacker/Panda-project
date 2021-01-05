@@ -424,7 +424,7 @@ int main(int argc, char* argv[]) {
 			chunk_exists = false;
 		}
 
-		if (!chunk_exists) {
+		if (!chunk_exists && !keys["f5"]) {
 			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));																//Create new chunk
 			chunk.generateChunk(window, framework, perlinNoise);																	//Apply the generateChunk function on the new chunk
 			game::chunks.push_back(chunk);																							//Push the chunk to vector game::chunks

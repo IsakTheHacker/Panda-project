@@ -286,6 +286,10 @@ namespace game {
 		std::string& key = *((std::string*)data);
 		keys[key] = false;
 	}
+	void key_swap(const Event* theEvent, void* data) {
+		std::string& key = *((std::string*)data);
+		keys[key] = !keys[key];
+	}
 	void wheel_roll(const Event* theEvent, void* data) {
 		int& indexModification = *((int*)data);
 		handInventoryIndex += indexModification;
