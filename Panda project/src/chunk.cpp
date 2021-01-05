@@ -135,7 +135,7 @@ namespace game {
 			for (std::vector<game::object> x_level : z_level) {
 				for (game::object y_level : x_level) {
 					if (!y_level.empty) {
-						final.append("{block:}");
+						final.append("{block},");
 					} else {
 						final.append("{empty},");
 						y_level_empty = true;
