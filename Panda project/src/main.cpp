@@ -641,9 +641,9 @@ int main(int argc, char* argv[]) {
 			if (keys["space"]) {
 				if (playerOnGround) {
 					if (!player_sneaking) {
-						velocity = -0.15;
+						velocity = -0.25;
 					} else if (player_sneaking) {
-						velocity = -0.30;
+						velocity = -0.45;
 					}
 					playerOnGround = false;
 				}
