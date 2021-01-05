@@ -184,6 +184,10 @@ namespace game {
 	/// <returns> Parsed value </returns>
 	int parsePositive(int value);
 
+	bool isOdd(const int& value);
+
+	bool isEven(const int& value);
+
 	// Executes a Python script
 	int runPyScript(const std::string& path);
 

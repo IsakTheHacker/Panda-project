@@ -256,6 +256,22 @@ namespace game {
 		}
 	}
 
+	bool isOdd(const int& value) {
+		if (value % 2 != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	bool isEven(const int& value) {
+		if (value % 2 == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
 	}
