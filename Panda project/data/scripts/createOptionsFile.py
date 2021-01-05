@@ -22,7 +22,8 @@ if not os.path.isfile("data/options.txt"):
 		"model-format=egg",
 		"hide_fps=0",
 		"pitch-behavior_while_rotating=none",
-		"sneak-distance=0.5"
+		"sneak-distance=0.5",
+		"fov=70"
 	]
 	try:
 		with open("data/options.txt","w") as optionsFile:
