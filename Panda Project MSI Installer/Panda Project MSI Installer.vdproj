@@ -1421,7 +1421,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Panda Project"
         "ProductCode" = "8:{2027752F-3365-44F2-9524-0CBF91E737B3}"
-        "PackageCode" = "8:{9B3F8173-1B4E-4855-920D-A202AD225A2E}"
+        "PackageCode" = "8:{BF0233F4-91B6-4D38-A7CC-056DE581880F}"
         "UpgradeCode" = "8:{85F4E197-8AE8-4284-85E5-9F8BC2D8CBC2}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
