@@ -562,6 +562,7 @@ int main(int argc, char* argv[]) {
 		text->set_text("X: " + std::to_string(camera.get_x()) + "\nY: " + std::to_string(camera.get_y()) + "\nZ: " + std::to_string(camera.get_z()));
 		text2->set_text("H: " + std::to_string(camera.get_h()) + "\nP: " + std::to_string(camera.get_p()) + "\nR: " + std::to_string(camera.get_r()));
 		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
+		fovText->set_text("Vertical Fov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHorizontal Fov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
 
 		if (mouseInGame) {
 			if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
