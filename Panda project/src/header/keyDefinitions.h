@@ -68,6 +68,14 @@ framework.define_key("v-up", "V-key", game::key_up, (void*)&game::v);
 framework.define_key("f2", "f2-key", game::key_down, (void*)&game::f2);
 framework.define_key("f2-up", "f2-key", game::key_up, (void*)&game::f2);
 
+//F3-key
+framework.define_key("f3", "f3-key", game::key_down, (void*)&game::f3);
+framework.define_key("f3-up", "f3-key", game::key_up, (void*)&game::f3);
+
+//F4-key
+framework.define_key("f4", "f4-key", game::key_down, (void*)&game::f4);
+framework.define_key("f4-up", "f4-key", game::key_up, (void*)&game::f4);
+
 //Esc-key
 game::pauseMenuEventParameters parameters;
 parameters.window = window;
