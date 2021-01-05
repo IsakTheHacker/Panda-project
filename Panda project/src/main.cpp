@@ -238,6 +238,10 @@ int main(int argc, char* argv[]) {
 	//Loading chunks
 	game::readOptions(universeOptions, universePath + "universe");
 	int chunksize = std::stoi(universeOptions["chunksize"]);
+	if (game::isOdd(chunksize)) {
+		game::errorOut("Chunksize must be even, not odd!");
+		exit(1);
+	}
 	{
 		std::ifstream index(universePath + "index");
 		if (index.fail()) {
