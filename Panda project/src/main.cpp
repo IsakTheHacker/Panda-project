@@ -217,7 +217,7 @@ int main(int argc, char* argv[]) {
 			std::thread terrain_animation_thread(game::terrainAnimation, "Loading terrain");
 			std::string line;
 			while (std::getline(index, line)) {
-				game::readChunk(window, framework, "universes/Test/" + line, std::stoi(game::split(line, ".")[0]) * 15, std::stoi(game::split(line, ".")[1]) * 15);
+				game::readChunk(window, framework, "universes/Test/" + line, std::stoi(game::split(line, ".")[0]), std::stoi(game::split(line, ".")[1]));
 			}
 			index.close();
 			terrainAnimationShouldRun = false;
@@ -379,6 +379,8 @@ int main(int argc, char* argv[]) {
 		} else {
 			chunk_y = std::to_string((int)camera.get_y() / 16);
 		}
+		/*chunk_x = std::to_string((int)camera.get_x() / 16);
+		chunk_y = std::to_string((int)camera.get_y() / 16);*/
 		
 		if (game::chunk::index.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::index.end()) {
 			chunk_exists = true;

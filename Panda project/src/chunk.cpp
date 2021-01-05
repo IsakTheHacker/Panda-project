@@ -66,7 +66,7 @@ namespace game {
 			}
 		}
 		this->objects = blocks;															//Push the generated blocks to vector objects of this chunk
-		this->index.insert(std::pair<int, int>(start_x, start_y));									//Register that this chunk has been generated
+		//this->index.insert(std::pair<int, int>(start_x, start_y));									//Register that this chunk has been generated
 		//std::cout << "Before size: " << game::chunks.size() << std::endl;
 		//std::cout << "After size: " << game::chunks.size() << std::endl;
 		if (devMode) {
@@ -166,7 +166,7 @@ namespace game {
 	//Creating vector for chunk class
 	std::vector<chunk> chunks;
 
-	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path, const int& x, const int& y) {
+	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path,int x, int y) {
 
 		if (game::chunk::index.find(std::pair<int, int>(x, y)) != game::chunk::index.end()) {
 			return 0;																					//Chunk is already loaded
@@ -181,8 +181,8 @@ namespace game {
 		}
 
 		std::string line;
-		int x_level = x;
-		int y_level = y;
+		int x_level = x * 16;
+		int y_level = y * 16;
 		int z_level;
 		std::vector<std::string> block_list;
 		std::vector<std::string> block_attributes;
@@ -201,10 +201,10 @@ namespace game {
 			if (line.find("z") != std::string::npos) {
 				findReplaceFirst(line, "z", "");
 				z_level = std::stoi(line);
-				x_level = x;
+				x_level = x * 16;
 			} else {
 				x_level += 2;
-				y_level = y;
+				y_level = y * 16;
 				block_list = split(line, ",");
 
 				for (std::string block : block_list) {
@@ -245,7 +245,7 @@ namespace game {
 					subobjects.push_back(object2);
 
 					game::object object = game::object(window, framework, subobjects, true, false);
-					object.model.set_pos(x_level, y_level, z_level);
+					object.model.set_pos(x_level-2, y_level-2, z_level);
 
 					object.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
 					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
@@ -259,9 +259,10 @@ namespace game {
 		}
 		game::chunk chunk(blocks, x, y);
 		chunk::index.insert(std::pair<int, int>(x, y));
+		game::logOut(std::to_string(x) + " " + std::to_string(y));
 		game::chunks.push_back(chunk);
 		for (std::pair<int, int> pair : chunk::index) {
-			//std::cout << pair.first << "	" << pair.second << std::endl;
+			std::cout << pair.first << "	" << pair.second << std::endl;
 		}
 
 		file.close();

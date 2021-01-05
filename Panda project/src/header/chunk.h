@@ -45,5 +45,5 @@ namespace game {
 	/// <param name="x">- The chunk's x-pos</param>
 	/// <param name="y">- The chunk's y-pos</param>
 	/// <returns> 0 if successful, nonzero if not! </returns>
-	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path, const int& x, const int& y);
+	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path, int x, int y);
 }
