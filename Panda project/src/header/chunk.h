@@ -10,6 +10,7 @@
 
 //My libraries
 #include "gameObject.h"
+#include "gameVars.h"
 
 namespace game {
 	class chunk {

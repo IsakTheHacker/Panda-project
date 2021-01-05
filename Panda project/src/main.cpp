@@ -13,6 +13,7 @@
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
+std::map<std::string, std::string> universeOptions;
 bool shouldRun = true;
 bool terrainAnimationShouldRun;
 bool devMode = false;
@@ -235,6 +236,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Loading chunks
+	game::readOptions(universeOptions, universePath + "universe");
+	int chunksize = std::stoi(universeOptions["chunksize"]);
 	{
 		std::ifstream index(universePath + "index");
 		if (index.fail()) {
@@ -399,14 +402,14 @@ int main(int argc, char* argv[]) {
 
 		// Checking if current chunk exists, generate if not.
 		if (camera.get_x() < 0) {
-			chunk_x = std::to_string((int)(camera.get_x() - 16) / 16);
+			chunk_x = std::to_string((int)(camera.get_x() - chunksize) / chunksize);
 		} else {
-			chunk_x = std::to_string((int)camera.get_x() / 16);
+			chunk_x = std::to_string((int)camera.get_x() / chunksize);
 		}
 		if (camera.get_y() < 0) {
-			chunk_y = std::to_string((int)(camera.get_y() - 16) / 16);
+			chunk_y = std::to_string((int)(camera.get_y() - chunksize) / chunksize);
 		} else {
-			chunk_y = std::to_string((int)camera.get_y() / 16);
+			chunk_y = std::to_string((int)camera.get_y() / chunksize);
 		}
 		/*chunk_x = std::to_string((int)camera.get_x() / 16);
 		chunk_y = std::to_string((int)camera.get_y() / 16);*/

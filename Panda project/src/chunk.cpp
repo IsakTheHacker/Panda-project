@@ -22,8 +22,9 @@ namespace game {
 		return chunk::perlinNoise;
 	}
 	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise = chunk::perlinNoise) {
-		int start_x = this->x * 16;
-		int start_y = this->y * 16;
+		int chunksize = std::stoi(universeOptions["chunksize"]);
+		int start_x = this->x * chunksize;
+		int start_y = this->y * chunksize;
 
 		std::vector<object> blocks;
 		std::vector<NodePath> subobjects;
@@ -31,9 +32,9 @@ namespace game {
 		//game::warningOut(object);
 
 		for (size_t i = 1; i < 2; i++) {
-			for (int j = start_x; j < start_x + 16; j += 2) {
+			for (int j = start_x; j < start_x + chunksize; j += 2) {
 				//std::cout << "x: " << j << std::endl;
-				for (int k = start_y; k < start_y + 16; k += 2) {
+				for (int k = start_y; k < start_y + chunksize; k += 2) {
 					//std::cout << "y: " << k << std::endl;
 					TextureStage* textureStage = new TextureStage("textureStage2");
 					textureStage->set_sort(0);
@@ -81,8 +82,9 @@ namespace game {
 		return 0;
 	}
 	int chunk::saveChunk() const {
-		int start_x = this->x * 16;
-		int start_y = this->y * 16;
+		int chunksize = std::stoi(universeOptions["chunksize"]);
+		int start_x = this->x * chunksize;
+		int start_y = this->y * chunksize;
 
 		std::string path = std::to_string(this->x) + "." + std::to_string(this->y) + ".chunk";
 
@@ -162,6 +164,7 @@ namespace game {
 	std::vector<chunk> chunks;
 
 	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path,int x, int y) {
+		int chunksize = std::stoi(universeOptions["chunksize"]);
 
 		if (game::chunk::index.find(std::pair<int, int>(x, y)) != game::chunk::index.end()) {
 			return 0;																					//Chunk is already loaded
@@ -176,8 +179,8 @@ namespace game {
 		}
 
 		std::string line;
-		int x_level = x * 16;
-		int y_level = y * 16;
+		int x_level = x * chunksize;
+		int y_level = y * chunksize;
 		int z_level;
 		std::vector<std::string> block_list;
 		std::vector<std::string> block_attributes;
@@ -196,10 +199,10 @@ namespace game {
 			if (line.find("z") != std::string::npos) {
 				findReplaceFirst(line, "z", "");
 				z_level = std::stoi(line);
-				x_level = x * 16;
+				x_level = x * chunksize;
 			} else {
 				x_level += 2;
-				y_level = y * 16;
+				y_level = y * chunksize;
 				block_list = split(line, ",");
 
 				for (std::string block : block_list) {
