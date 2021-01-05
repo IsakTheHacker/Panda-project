@@ -754,7 +754,7 @@ int main(int argc, char* argv[]) {
 	{
 		std::ofstream updateIndex("universes/Test/index", std::ios::out | std::ios::trunc);
 		terrainAnimationShouldRun = true;
-		std::thread saving_animation_thread(game::terrainAnimation, "Saving world");
+		std::thread saving_animation_thread(game::terrainAnimation, "Saving universe");
 		for (game::chunk chunk : game::chunks) {
 			updateIndex << chunk.x << "." << chunk.y << ".chunk" << std::endl;
 			chunk.saveChunk();
