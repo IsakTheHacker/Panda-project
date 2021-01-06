@@ -2,14 +2,18 @@
 
 namespace game {
 	chunk::chunk(const std::vector<object>& objects, const int& x, const int& y) {
-		this->objects = objects;
 		this->x = x;
 		this->y = y;
+		this->objects = objects;
 	}
 	chunk::chunk(const int& x, const int& y) {
 		this->x = x;
 		this->y = y;
-		chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
+	}
+	chunk::chunk(WindowFramework*& window, PandaFramework& framework, std::string path, const int& x, const int& y) {
+		this->x = x;
+		this->y = x;
+		readChunk(window, framework, path, x, y);
 	}
 	int chunk::reset() {
 		chunk::objects.clear();
@@ -63,7 +67,7 @@ namespace game {
 			}
 		}
 		this->objects = blocks;															//Push the generated blocks to vector objects of this chunk
-		//this->loaded_chunks.insert(std::pair<int, int>(start_x, start_y));									//Register that this chunk has been generated
+		this->loaded_chunks.insert(std::pair<int, int>(x, y));									//Register that this chunk has been generated
 		if (devMode) {
 			std::string fancyDebugOutput =
 				"Finished generating chunk:\n"
@@ -148,20 +152,11 @@ namespace game {
 
 		return 0;
 	}
-
-	//Initalize static members
-	std::set<std::pair<int, int>> chunk::loaded_chunks;
-	std::map<std::pair<int, int>, int> chunk::index;
-	PerlinNoise3 chunk::perlinNoise;
-
-	//Creating vector for chunk class
-	std::vector<chunk> chunks;
-
-	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path,int x, int y) {
+	int chunk::readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
 		int chunksize = std::stoi(universeOptions["chunksize"]);
 
 		if (game::chunk::loaded_chunks.find(std::pair<int, int>(x, y)) != game::chunk::loaded_chunks.end()) {
-			return 0;																					//Chunk is already loaded
+			return 1;																					//Chunk is already loaded
 		}
 
 		//Initalize variables
@@ -169,7 +164,8 @@ namespace game {
 
 		if (file.fail()) {
 			game::warningOut("Chunk index file specified a chunk which could not be found. Skipping...");
-			return 0;
+			file.close();
+			return 1;
 		}
 
 		std::string line;
@@ -225,12 +221,19 @@ namespace game {
 				}
 			}
 		}
-		chunk chunk(blocks, x, y);
-		chunks.push_back(chunk);
-		chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = chunks.size()-1;
+		this->objects = blocks;
+		game::chunk::index[std::pair<int, int>(x, y)] = game::chunks.size()-1;
 		chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
 
 		file.close();
 		return 0;
 	}
+
+	//Initalize static members
+	std::set<std::pair<int, int>> chunk::loaded_chunks;
+	std::map<std::pair<int, int>, int> chunk::index;
+	PerlinNoise3 chunk::perlinNoise;
+
+	//Creating vector for chunk class
+	std::vector<chunk> chunks;
 }

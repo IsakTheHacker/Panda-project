@@ -254,7 +254,15 @@ int main(int argc, char* argv[]) {
 			std::thread terrain_animation_thread(game::terrainAnimation, "Loading terrain");
 			std::string line;
 			while (std::getline(index, line)) {
-				game::readChunk(window, framework, universePath + line, std::stoi(game::split(line, ".")[0]), std::stoi(game::split(line, ".")[1]));
+				int x = std::stoi(game::split(line, ".")[0]);
+				int y = std::stoi(game::split(line, ".")[1]);
+				if (game::chunk::loaded_chunks.find(std::pair<int, int>(x, y)) == game::chunk::loaded_chunks.end()) {
+					game::chunk chunk(x, y);
+					if (chunk.readChunk(window, framework, universePath + line, x, y) == 0) {
+						game::chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
+						game::chunks.push_back(chunk);
+					}
+				}
 			}
 			index.close();
 			terrainAnimationShouldRun = false;
@@ -431,6 +439,7 @@ int main(int argc, char* argv[]) {
 			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));																//Create new chunk
 			chunk.generateChunk(window, framework, perlinNoise);																	//Apply the generateChunk function on the new chunk
 			game::chunks.push_back(chunk);																							//Push the chunk to vector game::chunks
+			game::chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
 			game::chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = game::chunks.size()-1;
 		}
 
