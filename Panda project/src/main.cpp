@@ -386,7 +386,9 @@ int main(int argc, char* argv[]) {
 			velocity = 0.01;
 		} else {
 			if (velocity > 0) {
-				velocity = velocity * velocityModifier;
+				if (velocity < 1.25) {
+					velocity = velocity * velocityModifier;
+				}
 			} else if (velocity < 0) {
 				double value = (int)(camera.get_z() * 100 + 0.5);
 				value = (double)value / 100;
