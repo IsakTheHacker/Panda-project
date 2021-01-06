@@ -486,7 +486,7 @@ int main(int argc, char* argv[]) {
 					} else if (handInventoryIndex == 1) {
 						configPath = "data/assets/blockproperties/rotational-complex.blockproperties";
 					} else if (handInventoryIndex == 2) {
-						configPath = "";
+						configPath = "data/assets/blockproperties/log.blockproperties";
 					} else if (handInventoryIndex == 3) {
 						configPath = "";
 					} else if (handInventoryIndex == 4) {
