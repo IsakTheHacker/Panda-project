@@ -238,6 +238,7 @@ int main(int argc, char* argv[]) {
 	//Loading chunks
 	game::readOptions(universeOptions, universePath + "universe");
 	int chunksize = std::stoi(universeOptions["chunksize"]);
+	unsigned long seed = std::stoul(universeOptions["seed"]);
 	if (game::isOdd(chunksize)) {
 		game::errorOut("Chunksize must be even, not odd!");
 		exit(1);
@@ -327,7 +328,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	std::vector<double> doubles;
-	PerlinNoise3 perlinNoise(128, 128, 128, 256, 78306730);
+	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 	for (size_t i = 0; i < 100; i++) {
 		for (size_t j = 0; j < 100; j++) {
 			for (size_t k = 0; k < 100; k++) {
