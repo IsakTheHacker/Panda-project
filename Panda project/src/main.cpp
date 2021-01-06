@@ -478,8 +478,8 @@ int main(int argc, char* argv[]) {
 			if (keys["mouse1"]) {
 				if (mouseInGame) {
 					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];		//Get chunk containing the block
-					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();																	//Remove node
-					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);														//Replace game::object with empty game::object
+					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();									//Remove node
+					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);						//Replace game::object with empty game::object
 					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;					//Save chunk changes in vector "chunks"
 					keys["mouse1"] = false;
 				}
