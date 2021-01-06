@@ -44,6 +44,8 @@ namespace game {
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
+					object.model.set_shader_auto();
+
 					blocks.push_back(object);
 
 					//Tree generating
@@ -54,6 +56,8 @@ namespace game {
 						object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
 						object.model.set_tag("id", std::to_string(object.id));
 						object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+
+						object.model.set_shader_auto();
 
 						blocks.push_back(object);
 					}
@@ -210,6 +214,8 @@ namespace game {
 					object.model.set_tag("chunk", std::to_string(x) + "," + std::to_string(y));
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+
+					object.model.set_shader_auto();
 
 					blocks.push_back(object);
 				}

@@ -142,7 +142,7 @@ int main(int argc, char* argv[]) {
 	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
 
 	//Enable shader generation for the game
-	window->get_render().set_shader_auto();
+	/*window->get_render().set_shader_auto();*/
 
 	//Set default window instance to use for chunk class
 	game::chunk::setDefaultWindow(window);
@@ -278,6 +278,7 @@ int main(int argc, char* argv[]) {
 	blocky.set_scale(0.5);
 	blocky.set_pos(0, 0, 100);
 	blocky.reparent_to(window->get_render());
+	blocky.set_shader_off(10);
 
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
@@ -321,15 +322,24 @@ int main(int argc, char* argv[]) {
 	NodePath alnp = window->get_render().attach_new_node(alight);
 	window->get_render().set_light(alnp);
 
+	/*PT(DirectionalLight) plight = new DirectionalLight("sun");
+	plight->set_color(LColor(0.8, 0.8, 0.5, 1));
+	plight->set_shadow_caster(true, 512, 512);
+	plight->show_frustum();
+	plight->get_lens(0)->set_film_size(1000, 100);
+	NodePath plnp = window->get_render().attach_new_node(plight);
+	plnp.set_pos(0, 0, 50);
+	plnp.set_hpr(0, -90, 0);
+	window->get_render().set_light(plnp);*/
+
 	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
 	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
 	d_light->set_shadow_caster(true, 512, 512);
 	NodePath dlnp = window->get_render().attach_new_node(d_light);
 	dlnp.set_hpr(0, -90, 0);
-	dlnp.set_pos(5, 5, 10);
+	dlnp.set_pos(0, 0, 100);
 	dlnp.show_tight_bounds();
 	window->get_render().set_light(dlnp);
-
 
 	//PNMImage pnmImage("images/noise_0000.png");
 	//for (size_t i = 0; i < pnmImage.get_x_size(); i++) {
@@ -579,6 +589,8 @@ int main(int argc, char* argv[]) {
 					obj.model.set_tag("chunk", std::to_string(block_chunk_x) + "," + std::to_string(block_chunk_y));
 					obj.model.set_tag("id", std::to_string(obj.id));
 					obj.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
+
+					obj.model.set_shader_auto();
 
 					chunk.objects.push_back(obj);
 					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;
