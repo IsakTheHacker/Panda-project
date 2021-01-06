@@ -33,6 +33,12 @@
     <Filter Include="Crap">
       <UniqueIdentifier>{34d6fb8e-0616-4b68-96ce-a9338bbad0ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Classes">
+      <UniqueIdentifier>{3113ba28-0c93-4f91-bee3-82e433f30b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\C++ files\Classes">
+      <UniqueIdentifier>{4b38116b-e94a-4804-a5a1-c750d5d6f730}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\header\linuxPlatform.h">
@@ -53,9 +59,6 @@
     <ClInclude Include="src\header\cppExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\header\gameClasses.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\header\gameFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,10 +75,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\header\chunk.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\header\gameClasses.h">
+      <Filter>Header Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="src\header\gameObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -136,14 +142,14 @@
     <ClCompile Include="src\cppExtension.cpp">
       <Filter>Source Files\C++ files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gameClasses.cpp">
-      <Filter>Source Files\C++ files</Filter>
-    </ClCompile>
     <ClCompile Include="src\chunk.cpp">
-      <Filter>Source Files\C++ files</Filter>
+      <Filter>Source Files\C++ files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="src\gameObject.cpp">
-      <Filter>Source Files\C++ files</Filter>
+      <Filter>Source Files\C++ files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameClasses.cpp">
+      <Filter>Source Files\C++ files\Classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

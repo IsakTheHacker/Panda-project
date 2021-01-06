@@ -9,7 +9,7 @@ namespace game {
 	chunk::chunk(const int& x, const int& y) {
 		this->x = x;
 		this->y = y;
-		chunk::index.insert(std::pair<int, int>(x, y));
+		chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
 	}
 	int chunk::reset() {
 		chunk::objects.clear();
@@ -42,7 +42,7 @@ namespace game {
 					game::object object("data/assets/blockproperties/grass.blockproperties", window, framework, false, false);
 					object.model.set_pos(j, k, object_z);
 
-					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
+					object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
@@ -53,7 +53,7 @@ namespace game {
 						game::object object("data/assets/blockproperties/log.blockproperties", window, framework, false, false);
 						object.model.set_pos(j, k, object_z + 2);
 
-						object.model.set_tag("chunk", std::to_string(game::chunks.size()));
+						object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
 						object.model.set_tag("id", std::to_string(object.id));
 						object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
@@ -63,7 +63,7 @@ namespace game {
 			}
 		}
 		this->objects = blocks;															//Push the generated blocks to vector objects of this chunk
-		//this->index.insert(std::pair<int, int>(start_x, start_y));									//Register that this chunk has been generated
+		//this->loaded_chunks.insert(std::pair<int, int>(start_x, start_y));									//Register that this chunk has been generated
 		if (devMode) {
 			std::string fancyDebugOutput =
 				"Finished generating chunk:\n"
@@ -150,7 +150,8 @@ namespace game {
 	}
 
 	//Initalize static members
-	std::set<std::pair<int, int>> chunk::index;
+	std::set<std::pair<int, int>> chunk::loaded_chunks;
+	std::map<std::pair<int, int>, int> chunk::index;
 	PerlinNoise3 chunk::perlinNoise;
 
 	//Creating vector for chunk class
@@ -159,7 +160,7 @@ namespace game {
 	int readChunk(WindowFramework*& window, PandaFramework& framework, const std::string& path,int x, int y) {
 		int chunksize = std::stoi(universeOptions["chunksize"]);
 
-		if (game::chunk::index.find(std::pair<int, int>(x, y)) != game::chunk::index.end()) {
+		if (game::chunk::loaded_chunks.find(std::pair<int, int>(x, y)) != game::chunk::loaded_chunks.end()) {
 			return 0;																					//Chunk is already loaded
 		}
 
@@ -216,7 +217,7 @@ namespace game {
 					game::object object("data/assets/blockproperties/" + block + ".blockproperties", window, framework, false, false);
 					object.model.set_pos(x_level-2, y_level-2, z_level);
 
-					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
+					object.model.set_tag("chunk", std::to_string(x) + "," + std::to_string(y));
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
@@ -224,9 +225,10 @@ namespace game {
 				}
 			}
 		}
-		game::chunk chunk(blocks, x, y);
-		chunk::index.insert(std::pair<int, int>(x, y));
-		game::chunks.push_back(chunk);
+		chunk chunk(blocks, x, y);
+		chunks.push_back(chunk);
+		chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = chunks.size()-1;
+		chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
 
 		file.close();
 		return 0;
