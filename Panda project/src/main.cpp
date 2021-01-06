@@ -487,7 +487,8 @@ int main(int argc, char* argv[]) {
 			if (keys["mouse2"]) {
 				std::string blockInfo =
 					"Information about block:\n"
-					"    XYZ: " + std::to_string(block.get_x()) + ", " + std::to_string(block.get_y()) + ", " + std::to_string(block.get_z()) + ""
+					"    XYZ: " + std::to_string(block.get_x()) + ", " + std::to_string(block.get_y()) + ", " + std::to_string(block.get_z()) + "\n"
+					"    Chunk XY: " + std::to_string(block_chunk_x) + ", " + std::to_string(block_chunk_y) + ""
 				;
 				game::logOut(blockInfo);
 				keys["mouse2"] = false;
