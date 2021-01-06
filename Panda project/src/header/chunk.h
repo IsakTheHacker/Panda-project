@@ -16,6 +16,7 @@ namespace game {
 	class chunk {
 	private:
 		static PerlinNoise3 perlinNoise;
+		static WindowFramework* window;
 	public:
 		int x;
 		int y;
@@ -25,10 +26,22 @@ namespace game {
 
 		chunk(const std::vector<object>& objects, const int& x, const int& y);
 		chunk(const int& x, const int& y);
-		chunk(WindowFramework*& window, PandaFramework& framework, std::string path, const int& x, const int& y);
+		chunk(std::string path, const int& x, const int& y, WindowFramework*& window, PandaFramework& framework);
 		int reset();
-		static void setDefaultPerlinNoise3(PerlinNoise3 perlinNoise);
-		static PerlinNoise3 getDefaultPerlinNoise3();
+
+		static void setDefaultPerlinNoise3(PerlinNoise3 perlinNoise) {
+			chunk::perlinNoise = perlinNoise;
+		}
+		static PerlinNoise3 getDefaultPerlinNoise3() {
+			return chunk::perlinNoise;
+		}
+
+		static void setDefaultWindow(WindowFramework*& window) {
+			chunk::window = window;
+		}
+		static WindowFramework*& getDefaultWindow() {
+			return chunk::window;
+		}
 
 		/// <summary> Saves a specified chunk to it's destination. </summary>
 		/// <param name="chunk">- your specifed chunk object</param>

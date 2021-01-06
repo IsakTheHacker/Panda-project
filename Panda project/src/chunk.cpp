@@ -10,7 +10,7 @@ namespace game {
 		this->x = x;
 		this->y = y;
 	}
-	chunk::chunk(WindowFramework*& window, PandaFramework& framework, std::string path, const int& x, const int& y) {
+	chunk::chunk(std::string path, const int& x, const int& y, WindowFramework*& window, PandaFramework& framework) {
 		this->x = x;
 		this->y = x;
 		readChunk(window, framework, path, x, y);
@@ -18,12 +18,6 @@ namespace game {
 	int chunk::reset() {
 		chunk::objects.clear();
 		return 0;
-	}
-	void chunk::setDefaultPerlinNoise3(const PerlinNoise3 perlinNoise) {
-		chunk::perlinNoise = perlinNoise;
-	}
-	PerlinNoise3 chunk::getDefaultPerlinNoise3() {
-		return chunk::perlinNoise;
 	}
 	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise = chunk::perlinNoise) {
 		int chunksize = std::stoi(universeOptions["chunksize"]);
@@ -233,6 +227,7 @@ namespace game {
 	std::set<std::pair<int, int>> chunk::loaded_chunks;
 	std::map<std::pair<int, int>, int> chunk::index;
 	PerlinNoise3 chunk::perlinNoise;
+	WindowFramework* chunk::window;
 
 	//Creating vector for chunk class
 	std::vector<chunk> chunks;
