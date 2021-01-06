@@ -146,6 +146,7 @@ int main(int argc, char* argv[]) {
 
 	//Set default window instance to use for chunk class
 	game::chunk::setDefaultWindow(window);
+	game::chunk::setDefaultFramework(framework);
 
 	// Cool stuff
 	pickerNode = new CollisionNode("mouseRay");

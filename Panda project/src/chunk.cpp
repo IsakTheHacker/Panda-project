@@ -216,7 +216,7 @@ namespace game {
 			}
 		}
 		this->objects = blocks;
-		game::chunk::index[std::pair<int, int>(x, y)] = game::chunks.size()-1;
+		game::chunk::index[std::pair<int, int>(x, y)] = game::chunks.size();
 		chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
 
 		file.close();
