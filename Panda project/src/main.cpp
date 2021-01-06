@@ -461,12 +461,26 @@ int main(int argc, char* argv[]) {
 			block = myHandler->get_entry(0)->get_into_node_path().get_parent().get_parent();
 			LVector3 surface = entry->get_surface_normal(window->get_render());
 			block.show_tight_bounds();
+
+			int block_chunk_x;
+			int block_chunk_y;
+			if (block.get_x() < 0) {
+				block_chunk_x = (int)(block.get_x() - chunksize) / chunksize;
+			} else {
+				block_chunk_x = (int)block.get_x() / chunksize;
+			}
+			if (block.get_y() < 0) {
+				block_chunk_y = (int)(block.get_y() - chunksize) / chunksize;
+			} else {
+				block_chunk_y = (int)block.get_y() / chunksize;
+			}
+
 			if (keys["mouse1"]) {
 				if (mouseInGame) {
-					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>((int)block.get_x() / chunksize, (int)block.get_y() / chunksize)]];		//Get chunk containing the block
+					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];		//Get chunk containing the block
 					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();																	//Remove node
 					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);														//Replace game::object with empty game::object
-					game::chunks[game::chunk::index[std::pair<int, int>((int)block.get_x() / chunksize, (int)block.get_y() / chunksize)]] = chunk;					//Save chunk changes in vector "chunks"
+					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;					//Save chunk changes in vector "chunks"
 					keys["mouse1"] = false;
 				}
 			}
@@ -511,6 +525,17 @@ int main(int argc, char* argv[]) {
 					game::object obj(configPath, window, framework, false, false);
 					obj.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
 
+					if (obj.model.get_x() < 0) {
+						block_chunk_x = (int)(obj.model.get_x() - chunksize) / chunksize;
+					} else {
+						block_chunk_x = (int)obj.model.get_x() / chunksize;
+					}
+					if (obj.model.get_y() < 0) {
+						block_chunk_y = (int)(obj.model.get_y() - chunksize) / chunksize;
+					} else {
+						block_chunk_y = (int)obj.model.get_y() / chunksize;
+					}
+
 					if (keys["r"]) {
 
 						if (surface.get_z() == -1) {
@@ -535,14 +560,14 @@ int main(int argc, char* argv[]) {
 						obj.model.set_hpr(heading * 180, pitch * 180, 0);
 					}
 
-					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>((int)obj.model.get_x() / chunksize, (int)obj.model.get_y() / chunksize)]];
+					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];
 					
-					obj.model.set_tag("chunk", std::to_string((int)obj.model.get_x() / chunksize) + "," + std::to_string((int)obj.model.get_x() / chunksize));
+					obj.model.set_tag("chunk", std::to_string(block_chunk_x) + "," + std::to_string(block_chunk_y));
 					obj.model.set_tag("id", std::to_string(obj.id));
 					obj.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
 
 					chunk.objects.push_back(obj);
-					game::chunks[game::chunk::index[std::pair<int, int>((int)obj.model.get_x() / chunksize, (int)obj.model.get_y() / chunksize)]] = chunk;
+					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;
 
 					keys["mouse3"] = false;
 				}

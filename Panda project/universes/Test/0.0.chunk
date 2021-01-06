@@ -1,5 +1,5 @@
 z-2
-{empty},{grass},{grass},{grass},{grass},{grass},{grass},{grass},
+{empty},{grass},{grass},{grass},{grass},{grass},{empty},{grass},
 {empty},{grass},{grass},{grass},{grass},{grass},{grass},{grass},
 {empty},{grass},{grass},{grass},{grass},{grass},{grass},{grass},
 {empty},{empty},{grass},{grass},{grass},{grass},{grass},{grass},
@@ -10,9 +10,9 @@ z-2
 z0
 {grass},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
 {grass},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
-{grass},{empty},{empty},{empty},{empty},{empty},{empty},{empty},
+{grass},{empty},{empty},{empty},{empty},{rotational-complex},{empty},{empty},
 {grass},{grass},{empty},{empty},{empty},{empty},{empty},{empty},
 {grass},{grass},{empty},{empty},{empty},{log},{empty},{empty},
 {grass},{grass},{grass},{empty},{empty},{empty},{empty},{empty},
-{grass},{grass},{grass},{grass},{empty},{empty},{empty},{empty},
+{empty},{grass},{grass},{grass},{empty},{empty},{empty},{empty},
 {grass},{grass},{grass},{grass},{grass},{grass},{empty},{empty},
