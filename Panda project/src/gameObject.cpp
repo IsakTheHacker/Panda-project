@@ -193,6 +193,10 @@ namespace game {
 			for (std::size_t i = 0; i < subobjects.size(); i++) {
 				subobjects[i].reparent_to(model);
 			}
+
+			//Texture settings
+			model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
+			model.set_tex_projector(TextureStage::get_default(), window->get_render(), model);
 		}
 	}
 	int object::current_id = 0;

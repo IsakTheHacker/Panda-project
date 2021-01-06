@@ -508,8 +508,6 @@ int main(int argc, char* argv[]) {
 
 
 					game::object obj(configPath, window, framework, false, false);
-					obj.model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
-					obj.model.set_tex_projector(TextureStage::get_default(), window->get_render(), obj.model);
 					obj.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
 
 					if (keys["r"]) {

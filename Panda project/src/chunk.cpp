@@ -37,17 +37,17 @@ namespace game {
 
 					double object_z = (int)(perlinNoise.noise(j, k, i) * 100 + 0.5);
 					object_z = (double)object_z / 100;
+					object_z = std::round(object_z * 50 / 2) * 2;
 
 					game::object object("data/assets/blockproperties/grass.blockproperties", window, framework, false, false);
-					object.model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
-					object.model.set_tex_projector(TextureStage::get_default(), window->get_render(), object.model);
-					object.model.set_pos(j, k, std::round(object_z * 50 / 2) * 2);
+					object.model.set_pos(j, k, object_z);
 
 					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
 					blocks.push_back(object);
+
 				}
 			}
 		}
@@ -203,8 +203,6 @@ namespace game {
 					}*/
 
 					game::object object("data/assets/blockproperties/" + block + ".blockproperties", window, framework, false, false);
-					object.model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
-					object.model.set_tex_projector(TextureStage::get_default(), window->get_render(), object.model);
 					object.model.set_pos(x_level-2, y_level-2, z_level);
 
 					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
