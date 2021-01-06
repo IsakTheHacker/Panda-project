@@ -215,8 +215,8 @@ int main(int argc, char* argv[]) {
 	CardMaker cardmaker("crosshair");
 	NodePath cursor(cardmaker.generate());
 	game::setTexture(cursor, gamePath + (std::string)"models/textures/png/crosshair.png");
-	cursor.set_sx(0.1);
-	cursor.set_sz(0.1);
+	cursor.set_sx(0.06);
+	cursor.set_sz(0.06);
 	cursor.set_pos(0 - cursor.get_sx() / 2, 0, 0 - cursor.get_sz() / 2);
 	cursor.set_transparency(TransparencyAttrib::M_alpha);
 	cursor.reparent_to(window->get_aspect_2d());
