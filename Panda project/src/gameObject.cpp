@@ -80,21 +80,26 @@ namespace game {
 		object_quantity++;
 		this->configPath = configPath;
 		
-		std::ifstream file(configPath);
-		if (file.fail()) {
-			errorOut("Specified a configPath that doesn't exist!");
-		}
-		std::string line;
-		std::string delimiter = "=";
-		while (std::getline(file, line)) {
-			size_t pos = 0;
-			std::string token;
-			while ((pos = line.find(delimiter)) != std::string::npos) {
-				token = line.substr(0, pos);
-				line.erase(0, pos + delimiter.length());
+		if (knownConfigs.find(configPath) != knownConfigs.end()) {
+			config = knownConfigs[configPath];
+		} else {
+			std::ifstream file(configPath);
+			if (file.fail()) {
+				errorOut("Specified a configPath that doesn't exist!");
 			}
+			std::string line;
+			std::string delimiter = "=";
+			while (std::getline(file, line)) {
+				size_t pos = 0;
+				std::string token;
+				while ((pos = line.find(delimiter)) != std::string::npos) {
+					token = line.substr(0, pos);
+					line.erase(0, pos + delimiter.length());
+				}
 
-			config[token] = line;
+				config[token] = line;
+			}
+			knownConfigs[configPath] = config;		//Add to knownConfigs
 		}
 
 		model = NodePath("model");
@@ -192,6 +197,7 @@ namespace game {
 	}
 	int object::current_id = 0;
 	int object::object_quantity = 0;
+	std::map<std::string, std::map<std::string, std::string>> object::knownConfigs;
 
 	//Entity class
 	entity::entity(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool collidable, bool shouldLogInConsole, bool shouldLogToFile) : object{ window, framework, modelpath, collidable, shouldLogInConsole, shouldLogToFile } {
