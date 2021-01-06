@@ -111,6 +111,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_58F933C8E3524EB98804014053A48F14"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5C5DCE4F64FC41588B2086AC0365F97F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -189,6 +195,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A047BA47A8E5435CBAD6F1CB1F2960EB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A3D324371F76404BA3C9355E96B93B68"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -202,6 +214,12 @@
         "Entry"
         {
         "MsmKey" = "8:_AD4ADDED4ABF4E7D92A56EAFF1BC8DFC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CA2EA395C13C408692A80EA54365DAD4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -256,6 +274,12 @@
         "Entry"
         {
         "MsmKey" = "8:_F762B54377D844BC8FE12F7895FF66B9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FD03E8CBE49044CDBC7EEF06BA6B599D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -678,6 +702,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_58F933C8E3524EB98804014053A48F14"
+            {
+            "SourcePath" = "8:..\\Panda project\\data\\assets\\blockproperties\\rotational-complex.blockproperties"
+            "TargetName" = "8:rotational-complex.blockproperties"
+            "Tag" = "8:"
+            "Folder" = "8:_0A32381248EE4E158488A52C80DE5819"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C5DCE4F64FC41588B2086AC0365F97F"
             {
             "SourcePath" = "8:..\\Panda project\\libpandaexpress.dll"
@@ -918,6 +962,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A047BA47A8E5435CBAD6F1CB1F2960EB"
+            {
+            "SourcePath" = "8:..\\Panda project\\universes\\Test\\universe"
+            "TargetName" = "8:universe"
+            "Tag" = "8:"
+            "Folder" = "8:_ABF8782CF7234A4B8B64BD4AB55EFB31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A3D324371F76404BA3C9355E96B93B68"
             {
             "SourcePath" = "8:..\\Panda project\\libp3assimp.dll"
@@ -964,6 +1028,26 @@
             "TargetName" = "8:rotational-complex-0.png"
             "Tag" = "8:"
             "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CA2EA395C13C408692A80EA54365DAD4"
+            {
+            "SourcePath" = "8:..\\Panda project\\universes\\Test\\index"
+            "TargetName" = "8:index"
+            "Tag" = "8:"
+            "Folder" = "8:_ABF8782CF7234A4B8B64BD4AB55EFB31"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1144,6 +1228,26 @@
             "TargetName" = "8:Confauto.prc"
             "Tag" = "8:"
             "Folder" = "8:_5C5ED47CF92340B999FD5B08F81D0204"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FD03E8CBE49044CDBC7EEF06BA6B599D"
+            {
+            "SourcePath" = "8:..\\Panda project\\universes\\Test\\profiles\\0.prof"
+            "TargetName" = "8:0.prof"
+            "Tag" = "8:"
+            "Folder" = "8:_B0842512DCB9497A940259EA4E92366E"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1356,6 +1460,28 @@
                     "Property" = "8:_1797F5D6C8984A99A7F13002834FFECD"
                         "Folders"
                         {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_ABF8782CF7234A4B8B64BD4AB55EFB31"
+                            {
+                            "Name" = "8:Test"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_3008D09F024A4BC1A16CFBE445FA0780"
+                                "Folders"
+                                {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_B0842512DCB9497A940259EA4E92366E"
+                                    {
+                                    "Name" = "8:profiles"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_D7442B1548884D368BD84E1C94BE9776"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -1420,15 +1546,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Panda Project"
-        "ProductCode" = "8:{2027752F-3365-44F2-9524-0CBF91E737B3}"
-        "PackageCode" = "8:{BF0233F4-91B6-4D38-A7CC-056DE581880F}"
+        "ProductCode" = "8:{C86D25C8-98B6-412E-92FC-D4F8D733AB2C}"
+        "PackageCode" = "8:{524BCBBF-C349-4E7E-B940-7347EA187069}"
         "UpgradeCode" = "8:{85F4E197-8AE8-4284-85E5-9F8BC2D8CBC2}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:0.1.0"
+        "ProductVersion" = "8:0.1.1"
         "Manufacturer" = "8:Placeholder Company"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/IsakTheHacker/Panda-project"

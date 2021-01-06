@@ -134,7 +134,7 @@ int main(int argc, char* argv[]) {
 	// Open a new window framework and set the title
 	PandaFramework framework;
 	framework.open_framework(argc, argv);
-	framework.set_window_title("The Panda Project: Alpha 0.1.0");
+	framework.set_window_title("The Panda Project: Alpha 0.1.1");
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
@@ -319,13 +319,13 @@ int main(int argc, char* argv[]) {
 	window->get_render().set_light(dlnp);
 
 
-	PNMImage pnmImage("images/noise_0000.png");
-	for (size_t i = 0; i < pnmImage.get_x_size(); i++) {
-		for (size_t j = 0; j < pnmImage.get_y_size(); j++) {
-			auto pixel = pnmImage.get_pixel(i, j);
-			//std::cout << "Pixel: " << i << "," << j << " " << pixel << std::endl;
-		}
-	}
+	//PNMImage pnmImage("images/noise_0000.png");
+	//for (size_t i = 0; i < pnmImage.get_x_size(); i++) {
+	//	for (size_t j = 0; j < pnmImage.get_y_size(); j++) {
+	//		auto pixel = pnmImage.get_pixel(i, j);
+	//		//std::cout << "Pixel: " << i << "," << j << " " << pixel << std::endl;
+	//	}
+	//}
 
 	std::vector<double> doubles;
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
