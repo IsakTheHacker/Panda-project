@@ -33,31 +33,16 @@ namespace game {
 
 		for (size_t i = 1; i < 2; i++) {
 			for (int j = start_x; j < start_x + chunksize; j += 2) {
-				//std::cout << "x: " << j << std::endl;
 				for (int k = start_y; k < start_y + chunksize; k += 2) {
-					//std::cout << "y: " << k << std::endl;
-					TextureStage* textureStage = new TextureStage("textureStage2");
-					textureStage->set_sort(0);
-					textureStage->set_mode(TextureStage::M_replace);
-					NodePath object2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)"block.egg");
-					subobjects.clear();
 
-					Texture* texture = TexturePool::get_global_ptr()->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-					object2.set_texture(texture, 1);
-
-					subobjects.push_back(object2);
-
-					game::object object(window, framework, subobjects, true, false);
 					double object_z = (int)(perlinNoise.noise(j, k, i) * 100 + 0.5);
 					object_z = (double)object_z / 100;
-					object.model.set_pos(j, k, std::round(object_z * 50 / 2) * 2);
-					//std::cout << object.model.get_pos() << std::endl;
-					//game::importantInfoOut(std::to_string(perlinNoise.noise(j, k, i)) + " -> " + std::to_string(object_z) + " -> " + std::to_string(std::round(object_z * 50 / 2) * 2));
 
-					object.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
-					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
+					game::object object("data/assets/blockproperties/grass.blockproperties", window, framework, false, false);
+					object.model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
+					object.model.set_tex_projector(TextureStage::get_default(), window->get_render(), object.model);
+					object.model.set_pos(j, k, std::round(object_z * 50 / 2) * 2);
+
 					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
@@ -68,8 +53,6 @@ namespace game {
 		}
 		this->objects = blocks;															//Push the generated blocks to vector objects of this chunk
 		//this->index.insert(std::pair<int, int>(start_x, start_y));									//Register that this chunk has been generated
-		//std::cout << "Before size: " << game::chunks.size() << std::endl;
-		//std::cout << "After size: " << game::chunks.size() << std::endl;
 		if (devMode) {
 			std::string fancyDebugOutput =
 				"Finished generating chunk:\n"
@@ -78,7 +61,6 @@ namespace game {
 			;
 			game::logOut(fancyDebugOutput);
 		}
-		//game::importantInfoOut("After reset: " + std::to_string(newChunk.objects.size()));
 		return 0;
 	}
 	int chunk::saveChunk() const {
@@ -137,7 +119,7 @@ namespace game {
 			for (std::vector<game::object> x_level : z_level) {
 				for (game::object y_level : x_level) {
 					if (!y_level.empty) {
-						final.append("{block},");
+						final.append("{" + y_level.configPath.substr(y_level.configPath.find_last_of("/")+1, y_level.configPath.substr(y_level.configPath.find_last_of("/")+1).size() - std::string(".blockproperties").size()) + "},");
 					} else {
 						final.append("{empty},");
 						y_level_empty = true;
@@ -212,41 +194,19 @@ namespace game {
 					}
 					findReplaceFirst(block, "{", "");
 					findReplaceFirst(block, "}", "");
-					block_attributes = split(block, "|");
-					for (std::string attribute : block_attributes) {
+					//block_attributes = split(block, "|");
+					/*for (std::string attribute : block_attributes) {
 						attribute_array = split(attribute, ":");
 						if (placeholder.find(attribute_array[0]) != placeholder.end()) {
 							placeholder[attribute_array[0]] = attribute_array[1];
 						}
-					}
-					TexturePool* texturePool = TexturePool::get_global_ptr();
-					TextureStage* textureStage = new TextureStage("textureStage2");
-					textureStage->set_sort(0);
-					textureStage->set_mode(TextureStage::M_replace);
-					std::vector<NodePath> subobjects;
-
-					NodePath object2 = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/" + (std::string)"block.egg");
-					/*if (placeholder["texture"] != "") {
-						game::setTexture(object, placeholder["texture"]);
-					}
-					if (placeholder["texture-scale"] != "") {
-						game::setTextureScale(object, std::stoi(placeholder["texture-scale"]));
 					}*/
-					/*object.clear_texture();*/
 
-					Texture* texture = texturePool->load_cube_map(gamePath + (std::string)"models/textures/png/grass-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-
-					object2.set_texture(texture, 1);
-
-					subobjects.push_back(object2);
-
-					game::object object = game::object(window, framework, subobjects, true, false);
+					game::object object("data/assets/blockproperties/" + block + ".blockproperties", window, framework, false, false);
+					object.model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
+					object.model.set_tex_projector(TextureStage::get_default(), window->get_render(), object.model);
 					object.model.set_pos(x_level-2, y_level-2, z_level);
 
-					object.model.set_tex_gen(textureStage->get_default(), RenderAttrib::M_world_position);
-					object.model.set_tex_projector(textureStage->get_default(), window->get_render(), object.model);
 					object.model.set_tag("chunk", std::to_string(game::chunks.size()));
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
