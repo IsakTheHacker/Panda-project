@@ -240,6 +240,13 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Loading chunks
+	if (game::fileExists(universePath + "lock")) {
+		game::importantInfoOut("This universe is opened by another instance of Panda Project! Therefore, you can't open it.");
+		exit(0);
+	} else {
+		std::ofstream lockFile(universePath + "lock");
+		lockFile.close();
+	}
 	game::readOptions(universeOptions, universePath + "universe");
 	int chunksize = std::stoi(universeOptions["chunksize"]);
 	unsigned long seed = std::stoul(universeOptions["seed"]);
@@ -334,7 +341,7 @@ int main(int argc, char* argv[]) {
 
 	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
 	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
-	d_light->set_shadow_caster(true, 512, 512);
+	//d_light->set_shadow_caster(true, 512, 512);
 	NodePath dlnp = window->get_render().attach_new_node(d_light);
 	dlnp.set_hpr(0, -90, 0);
 	dlnp.set_pos(0, 0, 100);
@@ -822,6 +829,8 @@ int main(int argc, char* argv[]) {
 		terrainAnimationShouldRun = false;
 		saving_animation_thread.join();
 	}
+	std::string filename = universePath + "lock";
+	std::remove(filename.c_str());
 
 	framework.close_framework();
 	//debugInputThread.detach();
