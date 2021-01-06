@@ -228,6 +228,7 @@ namespace game {
 	std::map<std::pair<int, int>, int> chunk::index;
 	PerlinNoise3 chunk::perlinNoise;
 	WindowFramework* chunk::window;
+	PandaFramework* chunk::framework;
 
 	//Creating vector for chunk class
 	std::vector<chunk> chunks;

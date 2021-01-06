@@ -17,6 +17,7 @@ namespace game {
 	private:
 		static PerlinNoise3 perlinNoise;
 		static WindowFramework* window;
+		static PandaFramework* framework;
 	public:
 		int x;
 		int y;
@@ -39,8 +40,15 @@ namespace game {
 		static void setDefaultWindow(WindowFramework*& window) {
 			chunk::window = window;
 		}
-		static WindowFramework*& getDefaultWindow() {
+		static WindowFramework* getDefaultWindow() {
 			return chunk::window;
+		}
+
+		static void setDefaultFramework(PandaFramework& Framework) {
+			chunk::framework = framework;
+		}
+		static PandaFramework* getDefaultFramework() {
+			return chunk::framework;
 		}
 
 		/// <summary> Saves a specified chunk to it's destination. </summary>

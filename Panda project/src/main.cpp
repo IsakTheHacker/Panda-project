@@ -144,6 +144,9 @@ int main(int argc, char* argv[]) {
 	//Enable shader generation for the game
 	window->get_render().set_shader_auto();
 
+	//Set default window instance to use for chunk class
+	game::chunk::setDefaultWindow(window);
+
 	// Cool stuff
 	pickerNode = new CollisionNode("mouseRay");
 	pickerNP = camera.attach_new_node(pickerNode);
