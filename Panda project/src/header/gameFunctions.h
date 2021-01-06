@@ -188,6 +188,8 @@ namespace game {
 
 	bool isEven(const int& value);
 
+	bool fileExists(const std::string& path);
+
 	// Executes a Python script
 	int runPyScript(const std::string& path);
 

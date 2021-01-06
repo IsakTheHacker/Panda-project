@@ -272,6 +272,17 @@ namespace game {
 		}
 	}
 
+	bool fileExists(const std::string& path) {
+		std::ifstream file(path);
+		if (file.fail()) {
+			file.close();
+			return false;
+		} else {
+			file.close();
+			return true;
+		}
+	}
+
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
 	}
