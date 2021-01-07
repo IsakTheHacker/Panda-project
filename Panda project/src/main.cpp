@@ -240,16 +240,21 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Loading chunks
+	game::readOptions(universeOptions, universePath + "universe");
+	int chunksize = std::stoi(universeOptions["chunksize"]);
+	unsigned long seed = std::stoul(universeOptions["seed"]);
+	bool ignore_lock = std::stoi(universeOptions["ignore-lock"]);
 	if (game::fileExists(universePath + "lock")) {
-		game::importantInfoOut("This universe is opened by another instance of Panda Project! Therefore, you can't open it.");
-		exit(0);
+		if (!ignore_lock) {
+			game::importantInfoOut("This universe is opened by another instance of Panda Project! Therefore, you can't open it.");
+			exit(0);
+		} else {
+			game::importantInfoOut("This universe is locked and you are ignoring it.");
+		}
 	} else {
 		std::ofstream lockFile(universePath + "lock");
 		lockFile.close();
 	}
-	game::readOptions(universeOptions, universePath + "universe");
-	int chunksize = std::stoi(universeOptions["chunksize"]);
-	unsigned long seed = std::stoul(universeOptions["seed"]);
 	if (game::isOdd(chunksize)) {
 		game::errorOut("Chunksize must be even, not odd!");
 		exit(1);

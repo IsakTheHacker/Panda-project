@@ -1,2 +1,3 @@
 chunksize=16
 seed=100
+ignore-lock=1
