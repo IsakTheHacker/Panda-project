@@ -67,6 +67,23 @@ void pauseMenu(const Event* theEvent, void* data) {
 		mouseInGame = true;
 	}
 }
+void pauseMenu(WindowFramework* window) {
+
+	if (mouseInGame) {
+		mouseInGame = false;
+		WindowProperties props = window->get_graphics_window()->get_properties();
+		props.set_cursor_hidden(false);
+		window->get_graphics_window()->request_properties(props);
+	} else {
+		double center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
+		double center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
+		window->get_graphics_window()->move_pointer(0, center_x, center_y);
+		WindowProperties props = window->get_graphics_window()->get_properties();
+		props.set_cursor_hidden(true);
+		window->get_graphics_window()->request_properties(props);
+		mouseInGame = true;
+	}
+}
 
 int main(int argc, char* argv[]) {
 
@@ -729,34 +746,6 @@ int main(int argc, char* argv[]) {
 				}
 				keys["q"] = false;
 			}
-			if (keys["e"]) {
-				/*game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
-				game::winds[game::winds.size() - 1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));*/
-
-				if (e_inventory.is_hidden()) {
-					e_inventory.show();
-					cursor.hide();
-					for (NodePath handInventoryNode : inventory) {
-						handInventoryNode.hide();
-					}
-					text->set_overall_hidden(true);
-					text2->set_overall_hidden(true);
-					text3->set_overall_hidden(true);
-					fovText->set_overall_hidden(true);
-				} else {
-					e_inventory.hide();
-					cursor.show();
-					for (NodePath handInventoryNode : inventory) {
-						handInventoryNode.show();
-					}
-					text->set_overall_hidden(false);
-					text2->set_overall_hidden(false);
-					text3->set_overall_hidden(false);
-					fovText->set_overall_hidden(false);
-				}
-
-				keys["e"] = false;
-			}
 			if (keys["r"]) {
 				camera.set_z(30);
 				velocity = 0;
@@ -837,6 +826,36 @@ int main(int argc, char* argv[]) {
 				game::importantInfoOut("Crashing game...");
 				exit(1);			// Code 1 is used because we crashed the game
 			}
+		}
+		if (keys["e"]) {
+			/*game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
+			game::winds[game::winds.size() - 1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));*/
+
+			if (e_inventory.is_hidden()) {
+				e_inventory.show();
+				cursor.hide();
+				for (NodePath handInventoryNode : inventory) {
+					handInventoryNode.hide();
+				}
+				text->set_overall_hidden(true);
+				text2->set_overall_hidden(true);
+				text3->set_overall_hidden(true);
+				fovText->set_overall_hidden(true);
+				pauseMenu(window);
+			} else {
+				e_inventory.hide();
+				cursor.show();
+				for (NodePath handInventoryNode : inventory) {
+					handInventoryNode.show();
+				}
+				text->set_overall_hidden(false);
+				text2->set_overall_hidden(false);
+				text3->set_overall_hidden(false);
+				fovText->set_overall_hidden(false);
+				pauseMenu(window);
+			}
+
+			keys["e"] = false;
 		}
 
 		//Reset mouse clicks
