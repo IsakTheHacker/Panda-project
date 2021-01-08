@@ -34,6 +34,7 @@
     </ClCompile>
     <ClCompile Include="src\gameClasses.cpp" />
     <ClCompile Include="src\gameFunctions.cpp" />
+    <ClCompile Include="src\gameInventory.cpp" />
     <ClCompile Include="src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -68,6 +69,7 @@
     <ClInclude Include="src\header\external\json.hpp" />
     <ClInclude Include="src\header\gameClasses.h" />
     <ClInclude Include="src\header\gameFunctions.h" />
+    <ClInclude Include="src\header\gameInventory.h" />
     <ClInclude Include="src\header\gameLanguage.h" />
     <ClInclude Include="src\header\gameVars.h" />
     <ClInclude Include="src\header\keyDefinitions.h" />
