@@ -1,30 +1,6 @@
 #include "gameClasses.h"
 
 namespace game {
-	
-	//Item class
-	item::item(const std::string& configPath, const unsigned int& stackedItems) {
-		std::ifstream file(configPath);
-		if (!file) {
-			errorOut("Specified a configPath for an item that doesn't exist!");
-		}
-		std::string line;
-		std::string delimiter = "=";
-		while (std::getline(file, line)) {
-			size_t pos = 0;
-			std::string token;
-			while ((pos = line.find(delimiter)) != std::string::npos) {
-				token = line.substr(0, pos);
-				line.erase(0, pos + delimiter.length());
-			}
-
-			options[token] = line;
-		}
-		this->configPath = configPath;
-		this->stackedItems = stackedItems;
-	}
-
-	item emptyItem("emptyItem", 0);
 
 	//Wind Object class
 	windObject::windObject(WindowFramework*& window, PandaFramework& framework, const double& mx, const double& my, const double& mz, const double& velocity, const PN_stdfloat& sx, const PN_stdfloat& sy, const PN_stdfloat& sz, bool shouldLogInConsole, bool shouldLogToFile) {

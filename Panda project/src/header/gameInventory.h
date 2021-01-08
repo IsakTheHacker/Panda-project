@@ -4,7 +4,7 @@
 #include <vector>
 
 //My libraries
-#include "gameClasses.h"
+#include "gameItem.h"
 
 namespace game {
 
