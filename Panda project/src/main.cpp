@@ -320,6 +320,15 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
+	//
+	/*NodePath test = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
+	test.set_scale(0.5);
+	test.set_h(45);
+	test.set_p(45);
+	test.set_r(45);
+	test.reparent_to(window->get_aspect_2d());*/
+
+
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
 	blocky.set_scale(0.5);
 	blocky.set_pos(0, 0, 100);
