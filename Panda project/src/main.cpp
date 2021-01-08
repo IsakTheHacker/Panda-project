@@ -254,6 +254,7 @@ int main(int argc, char* argv[]) {
 	e_inventory.hide();
 
 	std::vector<NodePath> inventory;
+	std::vector<NodePath> tool;
 
 	for (int i = -5; i < 6; i++) {
 		CardMaker hand_inventory("hand_inventory" + i);
@@ -264,7 +265,12 @@ int main(int argc, char* argv[]) {
 		hand_inventoryNode.set_pos(i/static_cast<float>(5) - hand_inventoryNode.get_sx() / 2, 0, -0.85 - hand_inventoryNode.get_sz() / 2);
 		hand_inventoryNode.set_transparency(TransparencyAttrib::M_alpha);
 		hand_inventoryNode.reparent_to(window->get_aspect_2d());
-		inventory.push_back(hand_inventoryNode);
+		if (i == -5) {
+			i++;
+			tool.push_back(hand_inventoryNode);
+		} else {
+			inventory.push_back(hand_inventoryNode);
+		}
 	}
 
 	//Loading chunks
@@ -499,12 +505,12 @@ int main(int argc, char* argv[]) {
 
 		if (mouseInGame) {
 			if (handInventoryIndex < 0) {
-				handInventoryIndex = 10;
-			} else if (handInventoryIndex > 10) {
+				handInventoryIndex = 8;
+			} else if (handInventoryIndex > 8) {
 				handInventoryIndex = 0;
 			}
 
-			for (int i = 0; i < 11; i++) {
+			for (int i = 0; i < 9; i++) {
 				if (i == handInventoryIndex) {
 					game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-highlighted.png");
 				} else if (i != handInventoryIndex) {
@@ -838,6 +844,7 @@ int main(int argc, char* argv[]) {
 				for (NodePath handInventoryNode : inventory) {
 					handInventoryNode.hide();
 				}
+				tool[0].hide();
 				text->set_overall_hidden(true);
 				text2->set_overall_hidden(true);
 				text3->set_overall_hidden(true);
@@ -849,6 +856,7 @@ int main(int argc, char* argv[]) {
 				for (NodePath handInventoryNode : inventory) {
 					handInventoryNode.show();
 				}
+				tool[0].show();
 				text->set_overall_hidden(false);
 				text2->set_overall_hidden(false);
 				text3->set_overall_hidden(false);
