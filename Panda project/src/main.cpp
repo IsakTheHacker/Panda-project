@@ -226,14 +226,15 @@ int main(int argc, char* argv[]) {
 	cursor.reparent_to(window->get_aspect_2d());
 
 	// Inventory
-	/*CardMaker e_inventory_card("Inventory");
+	CardMaker e_inventory_card("Inventory");
 	NodePath e_inventory(e_inventory_card.generate());
 	game::setTexture(e_inventory, gamePath + (std::string)"models/textures/png/inventory.png");
-	e_inventory.set_sx(0.06);
-	e_inventory.set_sz(0.06);
+	e_inventory.set_sx(2.2);
+	e_inventory.set_sz(0.9);
 	e_inventory.set_pos(0 - e_inventory.get_sx() / 2, 0, 0 - e_inventory.get_sz() / 2);
 	e_inventory.set_transparency(TransparencyAttrib::M_alpha);
-	e_inventory.reparent_to(window->get_aspect_2d());*/
+	e_inventory.reparent_to(window->get_aspect_2d());
+	e_inventory.hide();
 
 	std::vector<NodePath> inventory;
 
@@ -731,6 +732,14 @@ int main(int argc, char* argv[]) {
 			if (keys["e"]) {
 				/*game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
 				game::winds[game::winds.size() - 1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));*/
+
+				if (e_inventory.is_hidden()) {
+					e_inventory.show();
+				} else {
+					e_inventory.hide();
+				}
+
+				keys["e"] = false;
 			}
 			if (keys["r"]) {
 				camera.set_z(30);
