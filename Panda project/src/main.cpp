@@ -151,7 +151,7 @@ int main(int argc, char* argv[]) {
 	// Open a new window framework and set the title
 	PandaFramework framework;
 	framework.open_framework(argc, argv);
-	framework.set_window_title("The Panda Project: Alpha 0.1.1");
+	framework.set_window_title("The Panda Project: Prealpha 0.1.1");
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
