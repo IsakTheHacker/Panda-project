@@ -497,20 +497,21 @@ int main(int argc, char* argv[]) {
 			game::chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = game::chunks.size()-1;
 		}
 
-		if (handInventoryIndex < 0) {
-			handInventoryIndex = 10;
-		} else if (handInventoryIndex > 10) {
-			handInventoryIndex = 0;
-		}
+		if (mouseInGame) {
+			if (handInventoryIndex < 0) {
+				handInventoryIndex = 10;
+			} else if (handInventoryIndex > 10) {
+				handInventoryIndex = 0;
+			}
 
-		for (int i = 0; i < 11; i++) {
-			if (i == handInventoryIndex) {
-				game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-highlighted.png");
-			} else if (i != handInventoryIndex) {
-				game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
+			for (int i = 0; i < 11; i++) {
+				if (i == handInventoryIndex) {
+					game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-highlighted.png");
+				} else if (i != handInventoryIndex) {
+					game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
+				}
 			}
 		}
-
 
 		// check collisions, will call pusher collision handler
 		// if a collision is detected

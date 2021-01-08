@@ -302,8 +302,10 @@ namespace game {
 		keys[key] = !keys[key];
 	}
 	void wheel_roll(const Event* theEvent, void* data) {
-		int& indexModification = *((int*)data);
-		handInventoryIndex += indexModification;
+		if (mouseInGame) {
+			int& indexModification = *((int*)data);
+			handInventoryIndex += indexModification;
+		}
 	}
 	void testIfPlayerOnGround(const Event* theEvent, void* data) {
 		bool in_out_pattern = (bool)data;
