@@ -249,7 +249,7 @@ int main(int argc, char* argv[]) {
 	e_inventory.set_sx(2.2);
 	e_inventory.set_sz(0.9);
 	e_inventory.set_pos(0 - e_inventory.get_sx() / 2, 0, 0 - e_inventory.get_sz() / 2);
-	e_inventory.set_transparency(TransparencyAttrib::M_alpha);
+	e_inventory.set_transparency(TransparencyAttrib::M_binary);
 	e_inventory.reparent_to(window->get_aspect_2d());
 	e_inventory.hide();
 
