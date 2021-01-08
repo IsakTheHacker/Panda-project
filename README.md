@@ -11,6 +11,13 @@
 
 This is my first game made with C++. It is a sandbox game in which i plan to implement advanced machinery and many types of shapes to build with!
 
-For now, this project is Windows only. But I plan to release the game for Linux and other platforms.
+For now, this project is Windows only. But I plan to release the game for Linux and other platforms. Windows binaries can be obtained through releases here on GitHub.
 
-Windows binaries can be obtained through releases here on GitHub.
+### Controls
+- <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> - Movement
+- <kbd>Space</kbd> - Jump
+- <kbd>LShift</kbd> - Sneak
+- <kbd>R</kbd> - Reset Z position
+- <kbd>F2</kbd> - Save screenshot
+- <kbd>F3</kbd> - Decrease FOV
+- <kbd>F4</kbd> - Increase FOV
