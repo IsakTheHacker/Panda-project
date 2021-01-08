@@ -87,15 +87,15 @@ void pauseMenu(WindowFramework* window) {
 
 int main(int argc, char* argv[]) {
 
-	if (PStatClient::is_connected()) {
-		PStatClient::disconnect();
-	}
+	//if (PStatClient::is_connected()) {
+	//	PStatClient::disconnect();
+	//}
 
-	std::string host = ""; // Empty = default config var value
-	int port = -1; // -1 = default config var value
-	if (!PStatClient::connect(host, port)) {
-		std::cout << "Could not connect to PStat server." << std::endl;
-	}
+	//std::string host = ""; // Empty = default config var value
+	//int port = -1; // -1 = default config var value
+	//if (!PStatClient::connect(host, port)) {
+	//	std::cout << "Could not connect to PStat server." << std::endl;
+	//}
 
 	//Set gamePath to the directory of executable
 	Filename exefile = argv[0];

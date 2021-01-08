@@ -9,7 +9,7 @@ if not os.path.isfile("data/options.txt"):
 		"camera_x_speed=5",
 		"camera_y_speed=5",
 		"x_speed=0.2",
-		"y_speed=0.2",
+		"y_speed=0.4",
 		"z_speed=0.2",
 		"hidden_cursor=1",
 		"close_console_without_input=1",
