@@ -225,6 +225,16 @@ int main(int argc, char* argv[]) {
 	cursor.set_transparency(TransparencyAttrib::M_alpha);
 	cursor.reparent_to(window->get_aspect_2d());
 
+	// Inventory
+	/*CardMaker e_inventory_card("Inventory");
+	NodePath e_inventory(e_inventory_card.generate());
+	game::setTexture(e_inventory, gamePath + (std::string)"models/textures/png/inventory.png");
+	e_inventory.set_sx(0.06);
+	e_inventory.set_sz(0.06);
+	e_inventory.set_pos(0 - e_inventory.get_sx() / 2, 0, 0 - e_inventory.get_sz() / 2);
+	e_inventory.set_transparency(TransparencyAttrib::M_alpha);
+	e_inventory.reparent_to(window->get_aspect_2d());*/
+
 	std::vector<NodePath> inventory;
 
 	for (int i = -5; i < 6; i++) {
