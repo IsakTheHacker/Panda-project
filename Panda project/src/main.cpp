@@ -735,8 +735,16 @@ int main(int argc, char* argv[]) {
 
 				if (e_inventory.is_hidden()) {
 					e_inventory.show();
+					cursor.hide();
+					for (NodePath handInventoryNode : inventory) {
+						handInventoryNode.hide();
+					}
 				} else {
 					e_inventory.hide();
+					cursor.show();
+					for (NodePath handInventoryNode : inventory) {
+						handInventoryNode.show();
+					}
 				}
 
 				keys["e"] = false;
