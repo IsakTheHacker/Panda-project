@@ -739,12 +739,20 @@ int main(int argc, char* argv[]) {
 					for (NodePath handInventoryNode : inventory) {
 						handInventoryNode.hide();
 					}
+					text->set_overall_hidden(true);
+					text2->set_overall_hidden(true);
+					text3->set_overall_hidden(true);
+					fovText->set_overall_hidden(true);
 				} else {
 					e_inventory.hide();
 					cursor.show();
 					for (NodePath handInventoryNode : inventory) {
 						handInventoryNode.show();
 					}
+					text->set_overall_hidden(false);
+					text2->set_overall_hidden(false);
+					text3->set_overall_hidden(false);
+					fovText->set_overall_hidden(false);
 				}
 
 				keys["e"] = false;
