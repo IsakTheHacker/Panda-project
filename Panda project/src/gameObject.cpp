@@ -106,8 +106,6 @@ namespace game {
 
 		initConfig(window, framework);
 
-		model.reparent_to(window->get_render());
-
 		//Setting internal class variables
 		shouldLogInConsoleIntern = shouldLogInConsole;
 		shouldLogToFileIntern = shouldLogToFile;
