@@ -222,25 +222,25 @@ int main(int argc, char* argv[]) {
 	text = new TextNode("node name");
 	NodePath textNodePath = window->get_aspect_2d().attach_new_node(text);
 	textNodePath.set_scale(0.07);
-	textNodePath.set_pos(-1.25,0,0.9);
+	textNodePath.set_pos(-1.65,0,0.9);
 
 	PT(TextNode) text2;
 	text2 = new TextNode("node name2");
 	NodePath textNodePath2 = window->get_aspect_2d().attach_new_node(text2);
 	textNodePath2.set_scale(0.07);
-	textNodePath2.set_pos(-1.25, 0, 0.65);
+	textNodePath2.set_pos(-1.65, 0, 0.65);
 
 	PT(TextNode) text3;
 	text3 = new TextNode("node name3");
 	NodePath textNodePath3 = window->get_aspect_2d().attach_new_node(text3);
 	textNodePath3.set_scale(0.07);
-	textNodePath3.set_pos(-1.25, 0, 0.40);
+	textNodePath3.set_pos(-1.65, 0, 0.40);
 
 	PT(TextNode) fovText;
 	fovText = new TextNode("node name3");
 	NodePath fovTextNodePath = window->get_aspect_2d().attach_new_node(fovText);
 	fovTextNodePath.set_scale(0.07);
-	fovTextNodePath.set_pos(-1.25, 0, 0.15);
+	fovTextNodePath.set_pos(-1.65, 0, 0.15);
 
 	// Crosshair
 	CardMaker cardmaker("crosshair");
