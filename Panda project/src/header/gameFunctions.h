@@ -73,6 +73,9 @@ namespace game {
 	// Gets the current date and time and returns a valid filename string
 	std::string getConvertedDateTime();
 
+	// Gets the current date and time and returns an std::tm
+	std::tm getTmLocal();
+
 	// Logs a string to a file
 	template<typename T>
 	int logToFile(const std::string& path, T input, bool datePresent = true, bool timePresent = true) {

@@ -153,6 +153,12 @@ namespace game {
 		return convertedDateTime;
 	}
 
+	std::tm getTmLocal() {
+		std::time_t current_time = time(0);
+		std::tm* tm_local = std::localtime(&current_time);
+		return *tm_local;
+	}
+
 	int runPyScript(const std::string& path) {
 		std::ifstream pyFile(path);
 		if (pyFile.fail()) {
