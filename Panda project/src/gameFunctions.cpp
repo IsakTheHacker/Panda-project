@@ -156,6 +156,7 @@ namespace game {
 	std::tm getTmLocal() {
 		std::time_t current_time = time(0);
 		std::tm* tm_local = std::localtime(&current_time);
+		tm_local->tm_year += 1900;
 		return *tm_local;
 	}
 
