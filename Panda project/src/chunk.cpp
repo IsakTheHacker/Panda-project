@@ -70,7 +70,6 @@ namespace game {
 		this->loaded_chunks.insert(std::pair<int, int>(x, y));							//Register that this chunk has been generated
 		oneMesh.flatten_strong();
 		oneMesh.reparent_to(window->get_render());
-		oneMesh.get_child(0).ls();
 		if (devMode) {
 			std::string fancyDebugOutput =
 				"Finished generating chunk:\n"

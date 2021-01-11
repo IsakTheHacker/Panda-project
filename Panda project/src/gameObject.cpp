@@ -182,7 +182,7 @@ namespace game {
 
 				NodePath subobject = window->load_model(framework.get_models(), subobjectOptions["model"]);
 				if (subobjectOptions.find("texture") != subobjectOptions.end()) {
-					subobject.set_texture(texture, 1);
+					subobject.get_child(0).set_texture(texture, 1);
 				}
 				subobjects.push_back(subobject);
 			}
