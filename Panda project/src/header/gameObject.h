@@ -44,20 +44,20 @@ namespace game {
 	// Entity class
 	class entity : public object {
 	public:
-		entity(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+		entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~entity();
 	};
 
 	// Player class
-	class player : public entity {
+	/*class player : public entity {
 	public:
 		NodePath collisionNodePath;
 
 		player(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~player();
-	};
+	};*/
 
 	//Creating vectors for the classes
 	extern std::vector<entity> entities;
-	extern std::vector<player> players;
+	//extern std::vector<player> players;
 }

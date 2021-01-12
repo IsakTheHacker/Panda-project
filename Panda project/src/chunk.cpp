@@ -68,6 +68,10 @@ namespace game {
 		}
 		this->objects = blocks;															//Push the generated blocks to vector objects of this chunk
 		this->loaded_chunks.insert(std::pair<int, int>(x, y));							//Register that this chunk has been generated
+		Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
+		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+		oneMesh.get_child(0).get_child(1).get_child(0).set_texture(texture);
 		oneMesh.flatten_strong();
 		oneMesh.reparent_to(window->get_render());
 		if (devMode) {

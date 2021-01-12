@@ -465,6 +465,8 @@ int main(int argc, char* argv[]) {
 	double velocity = 0.0;
 	double velocityModifier = 1.1;
 
+	//game::entity entity("data/assets/entities/grass.blockproperties", window, framework, false);
+
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 		
