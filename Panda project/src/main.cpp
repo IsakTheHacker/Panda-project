@@ -466,14 +466,13 @@ int main(int argc, char* argv[]) {
 	double velocityModifier = 1.1;
 
 	game::entity entity("data/assets/entityproperties/test.entityproperties", window, framework, false);
-	entity.model.set_pos(camera.get_pos());
-	entity.model.show_bounds();
+	entity.model.set_pos(0, 0, 15);
 	entity.model.reparent_to(window->get_render());
 
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 		
-		//entity.update();
+		entity.update();
 
 		// Velocity computing (Z axis)
 		if (velocity == 0 && !playerOnGround) {

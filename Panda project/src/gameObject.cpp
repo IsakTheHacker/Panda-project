@@ -223,7 +223,7 @@ namespace game {
 		}*/
 	}
 	void entity::update() {
-		this->model.set_x(this->model, 0.1);
+		this->model.set_x(this->model, 0.01);
 	}
 
 	//Player class
