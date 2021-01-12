@@ -46,6 +46,8 @@ namespace game {
 	public:
 		entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~entity();
+
+		void update();
 	};
 
 	// Player class

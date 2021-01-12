@@ -465,11 +465,16 @@ int main(int argc, char* argv[]) {
 	double velocity = 0.0;
 	double velocityModifier = 1.1;
 
-	//game::entity entity("data/assets/entities/grass.blockproperties", window, framework, false);
+	game::entity entity("data/assets/entityproperties/test.entityproperties", window, framework, false);
+	entity.model.set_pos(camera.get_pos());
+	entity.model.show_bounds();
+	entity.model.reparent_to(window->get_render());
 
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 		
+		//entity.update();
+
 		// Velocity computing (Z axis)
 		if (velocity == 0 && !playerOnGround) {
 			velocity = 0.01;
@@ -772,6 +777,7 @@ int main(int argc, char* argv[]) {
 				for (std::pair<int, int> pair : game::chunk::loaded_chunks) {
 					std::cout << pair.first << "	" << pair.second << std::endl;
 				}
+				camera.set_pos(entity.model.get_pos());
 				keys["q"] = false;
 			}
 			if (keys["r"]) {

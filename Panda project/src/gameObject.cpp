@@ -106,6 +106,8 @@ namespace game {
 
 		initConfig(window, framework);
 
+		std::cout << "Constructor called: " << configPath << std::endl;
+
 		//Setting internal class variables
 		shouldLogInConsoleIntern = shouldLogInConsole;
 		shouldLogToFileIntern = shouldLogToFile;
@@ -202,7 +204,8 @@ namespace game {
 	std::map<std::string, std::map<std::string, std::string>> object::knownConfigs;
 
 	//Entity class
-	entity::entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) {
+	entity::entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : object { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
+		std::cout << "Entity constructor called: " << configPath << std::endl;
 		/*if (shouldLogInConsole) {
 			game::logOut("Succesfully created the player! id: " + std::to_string(id));
 		}
@@ -218,6 +221,9 @@ namespace game {
 		if (shouldLogToFileIntern) {
 			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
 		}*/
+	}
+	void entity::update() {
+		this->model.set_x(this->model, 0.1);
 	}
 
 	//Player class
