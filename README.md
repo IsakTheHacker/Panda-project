@@ -13,9 +13,13 @@ Click
 [here](https://github.com/IsakTheHacker/Panda-project/releases/download/prealpha-0.1.1/Panda.Project.MSI.Installer.msi)
 to download the latest prerelease!
 
+***
+
 This is my first game made with C++. It is a sandbox game in which i plan to implement advanced machinery and many types of shapes to build with!
 
 For now, this project is Windows only. But I plan to release the game for Linux and other platforms. Windows binaries can be obtained through releases here on GitHub.
+
+***
 
 ### Controls
 - <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> - Movement
