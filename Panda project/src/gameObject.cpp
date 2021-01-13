@@ -154,7 +154,7 @@ namespace game {
 			if (std::stoi(config["collidable"]) == 1) {
 				CollisionNode* collisionNode = new CollisionNode("Box");
 				collisionNode->add_solid(new CollisionBox(0, std::stoi(config["collision-x"]), std::stoi(config["collision-y"]), std::stoi(config["collision-z"])));
-				NodePath collisionNodePath = model.attach_new_node(collisionNode);
+				this->collisionNodePath = model.attach_new_node(collisionNode);
 			}
 		} else {
 			config["collidable"] = "0";

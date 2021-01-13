@@ -31,6 +31,7 @@ namespace game {
 		std::string name;
 		std::string configPath = "";
 		std::map<std::string, std::string> config;
+		NodePath collisionNodePath;
 
 		object(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		object(WindowFramework*& window, PandaFramework& framework, std::vector<NodePath> subobjects, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
