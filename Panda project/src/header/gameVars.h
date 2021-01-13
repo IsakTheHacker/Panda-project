@@ -1,4 +1,5 @@
 #pragma once
+#include "nodePath.h"
 
 extern int handInventoryIndex;
 extern std::map<std::string, bool> keys;
