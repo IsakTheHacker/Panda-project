@@ -8,6 +8,7 @@ extern bool terrainAnimationShouldRun;
 extern bool devMode;
 extern bool mouseInGame;
 extern bool playerOnGround;
+extern NodePath collidedNodePath;
 extern std::string gamePath;
 extern bool player_sneaking;
 extern std::string universePath;

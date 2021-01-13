@@ -19,6 +19,7 @@ bool terrainAnimationShouldRun;
 bool devMode = false;
 bool mouseInGame = true;
 bool playerOnGround = false;
+NodePath collidedNodePath;
 std::string gamePath = "./";
 std::string universePath = "universes/Test/";
 bool player_sneaking = false;
@@ -371,6 +372,9 @@ int main(int argc, char* argv[]) {
 	framework.define_key("Something", "", game::testIfPlayerOnGround, 0);
 	framework.define_key("Something2", "", game::testIfPlayerOnGround, (void*)1);
 
+	framework.define_key("Something", "", game::getCollidedNodePath, 0);
+	framework.define_key("Something2", "", game::getCollidedNodePath, (void*)1);
+
 	//window->get_render().ls();
 
 	//CollisionHandlerQueue queue;
@@ -470,9 +474,7 @@ int main(int argc, char* argv[]) {
 	entity.model.set_pos(0, 0, 15);
 	entity.model.reparent_to(window->get_render());
 
-	traverser->add_collider(entity.collisionNodePath, &pusher);
-	pusher.add_collider(entity.collisionNodePath, entity.model);
-	entity.collisionNodePath.ls();
+
 
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
