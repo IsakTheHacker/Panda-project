@@ -341,8 +341,7 @@ namespace game {
 
 		if (!in_out_pattern) {
 			if (std::round(entry->get_into_node_path().get_parent().get_z()) <= std::round(entry->get_from_node_path().get_parent().get_z())) {
-				NodePath intoObject = entry->get_into_node_path().get_parent();
-				entry->get_from_node_path().get_parent().set_pos(intoObject.get_x() + 2, intoObject.get_y(), intoObject.get_z() + 2);
+				collidedNodePath = entry->get_into_node_path().get_parent();
 			}
 		}
 	}

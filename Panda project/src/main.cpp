@@ -479,6 +479,10 @@ int main(int argc, char* argv[]) {
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 
+		if (collidedNodePath == entity.model) {
+			camera.set_pos(entity.model.get_x(), entity.model.get_y(), camera.get_z());
+		}
+
 		entity.update();
 
 		// Velocity computing (Z axis)
