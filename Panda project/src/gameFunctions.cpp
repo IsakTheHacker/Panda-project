@@ -333,16 +333,12 @@ namespace game {
 		}
 	}
 	void getCollidedNodePath(const Event* theEvent, void* data) {
-		bool in_out_pattern = (bool)data;
-
 		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
 		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
 		nassertv(entry != NULL);
 
-		if (!in_out_pattern) {
-			if (std::round(entry->get_into_node_path().get_parent().get_z()) <= std::round(entry->get_from_node_path().get_parent().get_z())) {
-				collidedNodePath = entry->get_into_node_path().get_parent();
-			}
+		if (playerOnGround) {
+			collidedNodePath = entry->get_into_node_path().get_parent();
 		}
 	}
 }
