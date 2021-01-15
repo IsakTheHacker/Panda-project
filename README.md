@@ -37,3 +37,4 @@ Use <kbd>&#8593;</kbd><kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8594;</kbd> if 
 - <kbd>F2</kbd> - Save screenshot
 - <kbd>F3</kbd> - Decrease FOV
 - <kbd>F4</kbd> - Increase FOV
+- <kbd>F5</kbd> - Toggle chunk generation
