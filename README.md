@@ -30,6 +30,9 @@ For now, this project is Windows only. But I plan to release the game for Linux 
 - <kbd>R</kbd> - Reset Z position
 - <kbd>E</kbd> - Open inventory
 
+##### Camera control
+Use <kbd>&#8593;</kbd><kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8594;</kbd> if you don't have access to a mouse. Otherwise just control the camera with your mouse.
+
 ##### Function keys
 - <kbd>F2</kbd> - Save screenshot
 - <kbd>F3</kbd> - Decrease FOV
