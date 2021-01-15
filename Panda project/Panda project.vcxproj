@@ -238,9 +238,20 @@
       </EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(ProjectName).$(OutputType)" "$(ProjectDir)$(ProjectName).$(OutputType)"</Command>
-      <Message>Copy executable to Project Directory.</Message>
+      <Command>call "$(DevEnvDir)..\Tools\VsDevCmd.bat"
+cd "$(ProjectDir)data\scripts\"
+call "$(ProjectDir)data\scripts\buildcounter.bat"
+copy /Y "$(TargetDir)$(ProjectName).$(OutputType)" "$(ProjectDir)$(ProjectName).$(OutputType)"</Command>
+      <Message>Copy executable to Project Directory and count this build.</Message>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <PreLinkEvent>
+      <Message>
+      </Message>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
