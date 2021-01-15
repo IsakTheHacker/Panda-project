@@ -40,6 +40,7 @@ namespace game {
 		~object();
 
 		operator std::string();
+		operator NodePath();
 	};
 
 	// Entity class
