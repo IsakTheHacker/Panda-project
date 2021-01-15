@@ -689,8 +689,8 @@ int main(int argc, char* argv[]) {
 		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
 
 		if (mouseInGame) {
-			if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
-				if (window->get_graphics_window()) {
+			if (window->get_graphics_window()) {
+				if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
 					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 					center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 
