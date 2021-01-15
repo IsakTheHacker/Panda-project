@@ -167,6 +167,7 @@ int main(int argc, char* argv[]) {
 	// Open the window
 	WindowFramework* window = framework.open_window();
 	camera = window->get_camera_group();
+	game::player player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
 	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
 
 	//Enable shader generation for the game
