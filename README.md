@@ -4,11 +4,6 @@
 
 # Panda-project
 
-### Latest release
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/IsakTheHacker/Panda-project?include_prereleases)](https://github.com/IsakTheHacker/Panda-project/releases)
-![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/IsakTheHacker/Panda-project)
-![GitHub all releases](https://img.shields.io/github/downloads/IsakTheHacker/Panda-project/total) <sub>(Total downloads for all releases)</sub>
-
 Click
 [here](https://github.com/IsakTheHacker/Panda-project/releases/download/prealpha-0.1.1/Panda.Project.MSI.Installer.msi)
 to download the latest prerelease!
@@ -18,6 +13,13 @@ to download the latest prerelease!
 This is my first game made with C++. It is a sandbox game in which i plan to implement advanced machinery and many types of shapes to build with!
 
 For now, this project is Windows only. But I plan to release the game for Linux and other platforms. Windows binaries can be obtained through releases here on GitHub.
+
+***
+
+### Latest release
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/IsakTheHacker/Panda-project?include_prereleases)](https://github.com/IsakTheHacker/Panda-project/releases)
+![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/IsakTheHacker/Panda-project)
+![GitHub all releases](https://img.shields.io/github/downloads/IsakTheHacker/Panda-project/total) <sub>(Total downloads for all releases)</sub>
 
 ***
 
