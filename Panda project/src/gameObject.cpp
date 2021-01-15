@@ -106,8 +106,6 @@ namespace game {
 
 		initConfig(window, framework);
 
-		std::cout << "Constructor called: " << configPath << std::endl;
-
 		//Setting internal class variables
 		shouldLogInConsoleIntern = shouldLogInConsole;
 		shouldLogToFileIntern = shouldLogToFile;
@@ -205,7 +203,6 @@ namespace game {
 
 	//Entity class
 	entity::entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : object { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
-		std::cout << "Entity constructor called: " << configPath << std::endl;
 		/*if (shouldLogInConsole) {
 			game::logOut("Succesfully created the player! id: " + std::to_string(id));
 		}
