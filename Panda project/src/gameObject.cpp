@@ -224,26 +224,21 @@ namespace game {
 	}
 
 	//Player class
-	//player::player(WindowFramework*& window, PandaFramework& framework, const std::string& modelpath, bool shouldLogInConsole, bool shouldLogToFile) : entity { window, framework, modelpath, shouldLogInConsole, shouldLogToFile } {
-	//	CollisionNode* collisionNode = new CollisionNode("Box");
-	//	collisionNode->add_solid(new CollisionBox(0, 2, 2, 4));
-	//	collisionNodePath = model.attach_new_node(collisionNode);
-	//	collisionNodePath.show();
+	player::player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity{ configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
+		/*if (shouldLogInConsole) {
+			game::logOut("Succesfully created the player! id: " + std::to_string(id));
+		}
+		if (shouldLogToFile) {
+			logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
+		}*/
+	}
 
-	//	/*if (shouldLogInConsole) {
-	//		game::logOut("Succesfully created the player! id: " + std::to_string(id));
-	//	}
-	//	if (shouldLogToFile) {
-	//		logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
-	//	}*/
-	//}
-
-	//player::~player() {
-	//	/*if (shouldLogInConsoleIntern) {
-	//		game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
-	//	}
-	//	if (shouldLogToFileIntern) {
-	//		logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
-	//	}*/
-	//}
+	player::~player() {
+		/*if (shouldLogInConsoleIntern) {
+			game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
+		}
+		if (shouldLogToFileIntern) {
+			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
+		}*/
+	}
 }
