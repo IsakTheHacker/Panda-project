@@ -687,6 +687,7 @@ int main(int argc, char* argv[]) {
 			block.hide_bounds();
 		}
 
+		//Set text to the new values
 		text->set_text("X: " + std::to_string(player.camera.get_x()) + "\nY: " + std::to_string(player.camera.get_y()) + "\nZ: " + std::to_string(player.camera.get_z()));
 		text2->set_text("H: " + std::to_string(player.camera.get_h()) + "\nP: " + std::to_string(player.camera.get_p()) + "\nR: " + std::to_string(player.camera.get_r()));
 		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
@@ -739,7 +740,7 @@ int main(int argc, char* argv[]) {
 						}
 					}
 
-					window->get_graphics_window()->move_pointer(0, center_x, center_y);
+					window->get_graphics_window()->move_pointer(0, center_x, center_y);		//Reset pointer to 0, 0
 				}
 			}
 
@@ -806,11 +807,11 @@ int main(int argc, char* argv[]) {
 				}
 				keys["f2"] = false;
 			}
-			if (keys["f3"]) {
+			if (keys["f3"]) {		//Decrease FOV
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()-10);
 				keys["f3"] = false;
 			}
-			if (keys["f4"]) {
+			if (keys["f4"]) {		//Increase FOV
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()+10);
 				keys["f4"] = false;
 			}
@@ -867,7 +868,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		} else {
-			if (keys["q"]) {
+			if (keys["q"]) {		//Crash game
 				game::importantInfoOut("Crashing game...");
 				exit(1);			// Code 1 is used because we crashed the game
 			}
