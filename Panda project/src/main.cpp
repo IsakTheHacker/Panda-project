@@ -33,6 +33,8 @@ bool player_sneaking = false;
 #include "chunk.h"
 #include "gameObject.h"
 
+game::player player;
+
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
 PT(ClockObject) globalClock = ClockObject::get_global_clock();
