@@ -385,20 +385,11 @@ int main(int argc, char* argv[]) {
 	traverser->traverse(window->get_render());
 	//traverser->show_collisions(window->get_render());
 
+	//Lights
 	PT(AmbientLight) alight = new AmbientLight("alight");
 	alight->set_color(0.2);
 	NodePath alnp = window->get_render().attach_new_node(alight);
 	window->get_render().set_light(alnp);
-
-	/*PT(DirectionalLight) plight = new DirectionalLight("sun");
-	plight->set_color(LColor(0.8, 0.8, 0.5, 1));
-	plight->set_shadow_caster(true, 512, 512);
-	plight->show_frustum();
-	plight->get_lens(0)->set_film_size(1000, 100);
-	NodePath plnp = window->get_render().attach_new_node(plight);
-	plnp.set_pos(0, 0, 50);
-	plnp.set_hpr(0, -90, 0);
-	window->get_render().set_light(plnp);*/
 
 	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
 	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
@@ -474,7 +465,7 @@ int main(int argc, char* argv[]) {
 	entity.model.reparent_to(window->get_render());
 
 
-
+	//Main loop
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 
