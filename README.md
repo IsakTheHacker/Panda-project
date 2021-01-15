@@ -28,6 +28,8 @@ For now, this project is Windows only. But I plan to release the game for Linux 
 - <kbd>Space</kbd> - Jump
 - <kbd>LShift</kbd> - Sneak
 - <kbd>R</kbd> - Reset Z position
+
+##### Function keys
 - <kbd>F2</kbd> - Save screenshot
 - <kbd>F3</kbd> - Decrease FOV
 - <kbd>F4</kbd> - Increase FOV
