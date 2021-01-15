@@ -18,8 +18,8 @@ For now, this project is Windows only. But I plan to release the game for Linux 
 
 ### Latest release
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/IsakTheHacker/Panda-project?include_prereleases)](https://github.com/IsakTheHacker/Panda-project/releases)
-![GitHub Release Date (including prereleases)](https://img.shields.io/github/release-date-pre/IsakTheHacker/Panda-project)
-![GitHub all releases](https://img.shields.io/github/downloads/IsakTheHacker/Panda-project/total) <sub>(Total downloads for all releases)</sub>
+[![GitHub Release Date (including prereleases)](https://img.shields.io/github/release-date-pre/IsakTheHacker/Panda-project)](https://github.com/IsakTheHacker/Panda-project/releases)
+[![GitHub all releases](https://img.shields.io/github/downloads/IsakTheHacker/Panda-project/total)](https://github.com/IsakTheHacker/Panda-project/releases) <sub>(Total downloads for all releases)</sub>
 
 ***
 
