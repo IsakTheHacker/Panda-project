@@ -385,20 +385,11 @@ int main(int argc, char* argv[]) {
 	traverser->traverse(window->get_render());
 	//traverser->show_collisions(window->get_render());
 
+	//Lights
 	PT(AmbientLight) alight = new AmbientLight("alight");
 	alight->set_color(0.2);
 	NodePath alnp = window->get_render().attach_new_node(alight);
 	window->get_render().set_light(alnp);
-
-	/*PT(DirectionalLight) plight = new DirectionalLight("sun");
-	plight->set_color(LColor(0.8, 0.8, 0.5, 1));
-	plight->set_shadow_caster(true, 512, 512);
-	plight->show_frustum();
-	plight->get_lens(0)->set_film_size(1000, 100);
-	NodePath plnp = window->get_render().attach_new_node(plight);
-	plnp.set_pos(0, 0, 50);
-	plnp.set_hpr(0, -90, 0);
-	window->get_render().set_light(plnp);*/
 
 	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
 	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
@@ -474,7 +465,7 @@ int main(int argc, char* argv[]) {
 	entity.model.reparent_to(window->get_render());
 
 
-
+	//Main loop
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 
@@ -590,10 +581,21 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			if (keys["mouse2"]) {
+				vector_string tagkeys;
+				std::string formatted_values;
+				block.get_tag_keys(tagkeys);
+				if (tagkeys.size() > 0) {
+					for (std::string key : tagkeys) {
+						formatted_values.append("\n        " + key + ": " + block.get_tag(key));
+					}
+				} else {
+					formatted_values = "none";
+				}
 				std::string blockInfo =
 					"Information about block:\n"
 					"    XYZ: " + std::to_string(block.get_x()) + ", " + std::to_string(block.get_y()) + ", " + std::to_string(block.get_z()) + "\n"
-					"    Chunk XY: " + std::to_string(block_chunk_x) + ", " + std::to_string(block_chunk_y) + ""
+					"    Chunk XY: " + std::to_string(block_chunk_x) + ", " + std::to_string(block_chunk_y) + "\n"
+					"    Tags: " + formatted_values
 				;
 				game::logOut(blockInfo);
 				keys["mouse2"] = false;
@@ -691,8 +693,8 @@ int main(int argc, char* argv[]) {
 		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
 
 		if (mouseInGame) {
-			if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
-				if (window->get_graphics_window()) {
+			if (window->get_graphics_window()) {
+				if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
 					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 					center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 

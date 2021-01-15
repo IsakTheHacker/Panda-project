@@ -147,6 +147,9 @@ namespace game {
 			;
 		return stringObject;
 	}
+	object::operator NodePath() {
+		return this->model;
+	}
 	void object::initConfig(WindowFramework*& window, PandaFramework& framework) {
 		if (config.find("collidable") != config.end()) {
 			if (std::stoi(config["collidable"]) == 1) {
