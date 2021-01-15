@@ -581,10 +581,17 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			if (keys["mouse2"]) {
+				vector_string tagkeys;
+				std::string formatted_values;
+				block.get_tag_keys(tagkeys);
+				for (std::string key : tagkeys) {
+					formatted_values.append("\n        " + key + ": " + block.get_tag(key));
+				}
 				std::string blockInfo =
 					"Information about block:\n"
 					"    XYZ: " + std::to_string(block.get_x()) + ", " + std::to_string(block.get_y()) + ", " + std::to_string(block.get_z()) + "\n"
-					"    Chunk XY: " + std::to_string(block_chunk_x) + ", " + std::to_string(block_chunk_y) + ""
+					"    Chunk XY: " + std::to_string(block_chunk_x) + ", " + std::to_string(block_chunk_y) + "\n"
+					"    Tags: " + formatted_values
 				;
 				game::logOut(blockInfo);
 				keys["mouse2"] = false;
