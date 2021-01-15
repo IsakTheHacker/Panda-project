@@ -28,6 +28,7 @@ For now, this project is Windows only. But I plan to release the game for Linux 
 - <kbd>Space</kbd> - Jump
 - <kbd>LShift</kbd> - Sneak
 - <kbd>R</kbd> - Reset Z position
+- <kbd>E</kbd> - Open inventory
 
 ##### Function keys
 - <kbd>F2</kbd> - Save screenshot
