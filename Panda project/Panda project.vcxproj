@@ -85,6 +85,7 @@
     <None Include="..\.gitattributes" />
     <None Include="..\.gitignore" />
     <None Include="cpp.hint" />
+    <None Include="data\scripts\buildcounter.bat" />
     <None Include="data\scripts\createOptionsFile.py" />
     <None Include="data\scripts\makeDirectories.py" />
     <None Include="data\scripts\readOptions.py" />

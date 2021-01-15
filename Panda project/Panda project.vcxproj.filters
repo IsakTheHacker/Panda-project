@@ -107,6 +107,9 @@
     <None Include="..\.gitignore">
       <Filter>Git</Filter>
     </None>
+    <None Include="data\scripts\buildcounter.bat">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
