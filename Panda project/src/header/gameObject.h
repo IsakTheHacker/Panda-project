@@ -56,6 +56,7 @@ namespace game {
 	class player : public entity {
 	public:
 		NodePath camera;
+		bool onGround;
 
 		player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~player();
