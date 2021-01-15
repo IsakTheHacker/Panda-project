@@ -187,10 +187,19 @@ namespace game {
 	/// <returns> Parsed value </returns>
 	int parsePositive(int value);
 
+	/// <summary> Checks if a value is odd or not. </summary>
+	/// <param name="value">- Input integer</param>
+	/// <returns> True if odd, false if not. </returns>
 	bool isOdd(const int& value);
 
+	/// <summary> Checks if a value is even or not. </summary>
+	/// <param name="value">- Input integer</param>
+	/// <returns> True if even, false if not. </returns>
 	bool isEven(const int& value);
 
+	/// <summary> Checks if a file exists. </summary>
+	/// <param name="path">- The path to your file</param>
+	/// <returns> True if file exists, false if it doesn't. </returns>
 	bool fileExists(const std::string& path);
 
 	// Executes a Python script
