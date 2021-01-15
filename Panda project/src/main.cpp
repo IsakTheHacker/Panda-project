@@ -584,8 +584,12 @@ int main(int argc, char* argv[]) {
 				vector_string tagkeys;
 				std::string formatted_values;
 				block.get_tag_keys(tagkeys);
-				for (std::string key : tagkeys) {
-					formatted_values.append("\n        " + key + ": " + block.get_tag(key));
+				if (tagkeys.size() > 0) {
+					for (std::string key : tagkeys) {
+						formatted_values.append("\n        " + key + ": " + block.get_tag(key));
+					}
+				} else {
+					formatted_values = "none";
 				}
 				std::string blockInfo =
 					"Information about block:\n"
