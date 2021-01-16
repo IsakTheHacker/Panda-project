@@ -463,7 +463,7 @@ int main(int argc, char* argv[]) {
 					velocity = velocity * velocityModifier;
 				}
 			} else if (velocity < 0) {
-				double value = (int)(player.camera.get_z() * 100 + 0.5);
+				double value = (int)((double)player.camera.get_z() * 100 + 0.5);
 				value = (double)value / 100;
 				double value2 = (int)((player.camera.get_z() - velocity) * 100 + 0.5);
 				value2 = (double)value2 / 100;
