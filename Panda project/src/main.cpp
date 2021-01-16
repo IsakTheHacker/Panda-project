@@ -32,7 +32,7 @@ bool player_sneaking = false;
 #include "chunk.h"
 #include "gameObject.h"
 
-game::player player;
+game::player defaultPlayer;
 
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();

@@ -229,6 +229,7 @@ namespace game {
 	//Player class
 	player::player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
 		this->camera = window->get_camera_group();
+		this->onGround = false;
 		
 		/*if (shouldLogInConsole) {
 			game::logOut("Succesfully created the player! id: " + std::to_string(id));
