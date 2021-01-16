@@ -324,12 +324,12 @@ namespace game {
 
 		if (!in_out_pattern) {
 			if (std::round(entry->get_into_node_path().get_parent().get_z()) <= std::round(entry->get_from_node_path().get_parent().get_z())) {
-				playerOnGround = true;
+				defaultPlayer.onGround = true;
 			} else {
-				playerOnGround = false;
+				defaultPlayer.onGround = false;
 			}
 		} else {
-			playerOnGround = false;
+			defaultPlayer.onGround = false;
 		}
 	}
 	void getCollidedNodePath(const Event* theEvent, void* data) {
@@ -337,7 +337,7 @@ namespace game {
 		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
 		nassertv(entry != NULL);
 
-		if (playerOnGround) {
+		if (defaultPlayer.onGround) {
 			collidedNodePath = entry->get_into_node_path().get_parent();
 		}
 	}

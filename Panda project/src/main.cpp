@@ -18,7 +18,6 @@ bool shouldRun = true;
 bool terrainAnimationShouldRun;
 bool devMode = false;
 bool mouseInGame = true;
-bool playerOnGround = false;
 NodePath collidedNodePath;
 std::string gamePath = "./";
 std::string universePath = "universes/Test/";
@@ -471,14 +470,14 @@ int main(int argc, char* argv[]) {
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 
-		if ((collidedNodePath == entity.model) && (playerOnGround)) {
+		if ((collidedNodePath == entity.model) && (defaultPlayer.onGround)) {
 			player.camera.set_pos(entity.model.get_x(), entity.model.get_y(), player.camera.get_z());
 		}
 
 		entity.update();
 
 		// Velocity computing (Z axis)
-		if (velocity == 0 && !playerOnGround) {
+		if (velocity == 0 && !defaultPlayer.onGround) {
 			velocity = 0.01;
 		} else {
 			if (velocity > 0) {
@@ -497,7 +496,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
-		if (playerOnGround) {
+		if (defaultPlayer.onGround) {
 			velocity = 0;
 		}
 		player.camera.set_z(player.camera.get_pos().get_z() - velocity);
@@ -764,26 +763,26 @@ int main(int argc, char* argv[]) {
 				panda.set_x(player.camera, 0 + x_speed);
 			}
 			if (keys["lshift"]) {
-				if (playerOnGround && !player_sneaking) {
+				if (defaultPlayer.onGround && !player_sneaking) {
 					player_sneaking = true;
 					cameraC.set_z(cameraC.get_z() + sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() - sneak_distance);
 				}
 			} else if (!keys["lshift"]) {
-				if (playerOnGround && player_sneaking) {
+				if (defaultPlayer.onGround && player_sneaking) {
 					player_sneaking = false;
 					cameraC.set_z(cameraC.get_z() - sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() + sneak_distance);
 				}
 			}
 			if (keys["space"]) {
-				if (playerOnGround) {
+				if (defaultPlayer.onGround) {
 					if (!player_sneaking) {
 						velocity = -0.25;
 					} else if (player_sneaking) {
 						velocity = -0.45;
 					}
-					playerOnGround = false;
+					defaultPlayer.onGround = false;
 				}
 			}
 			if (keys["q"]) {
