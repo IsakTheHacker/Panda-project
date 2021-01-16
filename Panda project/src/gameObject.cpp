@@ -239,6 +239,7 @@ namespace game {
 		this->camera = window->get_camera_group();
 		this->onGround = false;
 		this->sneaking = false;
+		this->collisionNodePath = camera.attach_new_node(collisionNodePath.node());
 		
 		/*if (shouldLogInConsole) {
 			game::logOut("Succesfully created the player! id: " + std::to_string(id));

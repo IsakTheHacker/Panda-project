@@ -377,6 +377,8 @@ int main(int argc, char* argv[]) {
 	traverser->add_collider(player.collisionNodePath, &pusher);
 	pusher.add_collider(player.collisionNodePath, player.camera);
 
+	traverser->show_collisions(window->get_render());
+
 	std::cout << player.collisionNodePath.get_scale() << std::endl;
 
 	traverser->traverse(window->get_render());
