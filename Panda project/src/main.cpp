@@ -21,7 +21,6 @@ bool mouseInGame = true;
 NodePath collidedNodePath;
 std::string gamePath = "./";
 std::string universePath = "universes/Test/";
-bool player_sneaking = false;
 
 //My libraries
 #include "cppExtension.h"
@@ -761,23 +760,23 @@ int main(int argc, char* argv[]) {
 				panda.set_x(player.camera, 0 + x_speed);
 			}
 			if (keys["lshift"]) {
-				if (player.onGround && !player_sneaking) {
-					player_sneaking = true;
+				if (player.onGround && !player.sneaking) {
+					player.sneaking = true;
 					cameraC.set_z(cameraC.get_z() + sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() - sneak_distance);
 				}
 			} else if (!keys["lshift"]) {
-				if (player.onGround && player_sneaking) {
-					player_sneaking = false;
+				if (player.onGround && player.sneaking) {
+					player.sneaking = false;
 					cameraC.set_z(cameraC.get_z() - sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() + sneak_distance);
 				}
 			}
 			if (keys["space"]) {
 				if (player.onGround) {
-					if (!player_sneaking) {
+					if (!player.sneaking) {
 						velocity = -0.25;
-					} else if (player_sneaking) {
+					} else if (player.sneaking) {
 						velocity = -0.45;
 					}
 					player.onGround = false;

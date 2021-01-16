@@ -57,6 +57,7 @@ namespace game {
 	public:
 		NodePath camera;
 		bool onGround;
+		bool sneaking;
 
 		Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~Player();

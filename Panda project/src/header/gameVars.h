@@ -18,5 +18,4 @@ extern bool mouseInGame;
 extern NodePath collidedNodePath;
 extern game::Player player;
 extern std::string gamePath;
-extern bool player_sneaking;
 extern std::string universePath;
