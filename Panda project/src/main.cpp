@@ -399,27 +399,7 @@ int main(int argc, char* argv[]) {
 	dlnp.show_tight_bounds();
 	window->get_render().set_light(dlnp);
 
-	//PNMImage pnmImage("images/noise_0000.png");
-	//for (size_t i = 0; i < pnmImage.get_x_size(); i++) {
-	//	for (size_t j = 0; j < pnmImage.get_y_size(); j++) {
-	//		auto pixel = pnmImage.get_pixel(i, j);
-	//		//std::cout << "Pixel: " << i << "," << j << " " << pixel << std::endl;
-	//	}
-	//}
-
-	std::vector<double> doubles;
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
-	for (size_t i = 0; i < 100; i++) {
-		for (size_t j = 0; j < 100; j++) {
-			for (size_t k = 0; k < 100; k++) {
-				//std::cout << "Perlin: " << perlinNoise.noise(i, j, k) << std::endl;
-				doubles.push_back(perlinNoise.noise(i, j, k));
-			}
-		}
-	}
-	std::cout << *std::min_element(doubles.begin(), doubles.end()) << std::endl;
-	std::cout << *std::max_element(doubles.begin(), doubles.end()) << std::endl;
-
 
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
