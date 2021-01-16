@@ -18,11 +18,8 @@ bool shouldRun = true;
 bool terrainAnimationShouldRun;
 bool devMode = false;
 bool mouseInGame = true;
-bool playerOnGround = false;
-NodePath collidedNodePath;
 std::string gamePath = "./";
 std::string universePath = "universes/Test/";
-bool player_sneaking = false;
 
 //My libraries
 #include "cppExtension.h"
@@ -165,7 +162,7 @@ int main(int argc, char* argv[]) {
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
-	game::player player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
+	game::Player player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
 	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
 
 	//Enable shader generation for the game
@@ -469,14 +466,14 @@ int main(int argc, char* argv[]) {
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 
-		if ((collidedNodePath == entity.model) && (playerOnGround)) {
+		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
 			player.camera.set_pos(entity.model.get_x(), entity.model.get_y(), player.camera.get_z());
 		}
 
 		entity.update();
 
 		// Velocity computing (Z axis)
-		if (velocity == 0 && !playerOnGround) {
+		if (velocity == 0 && !player.onGround) {
 			velocity = 0.01;
 		} else {
 			if (velocity > 0) {
@@ -495,7 +492,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
-		if (playerOnGround) {
+		if (player.onGround) {
 			velocity = 0;
 		}
 		player.camera.set_z(player.camera.get_pos().get_z() - velocity);
@@ -687,6 +684,7 @@ int main(int argc, char* argv[]) {
 			block.hide_bounds();
 		}
 
+		//Set text to the new values
 		text->set_text("X: " + std::to_string(player.camera.get_x()) + "\nY: " + std::to_string(player.camera.get_y()) + "\nZ: " + std::to_string(player.camera.get_z()));
 		text2->set_text("H: " + std::to_string(player.camera.get_h()) + "\nP: " + std::to_string(player.camera.get_p()) + "\nR: " + std::to_string(player.camera.get_r()));
 		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
@@ -739,7 +737,7 @@ int main(int argc, char* argv[]) {
 						}
 					}
 
-					window->get_graphics_window()->move_pointer(0, center_x, center_y);
+					window->get_graphics_window()->move_pointer(0, center_x, center_y);		//Reset pointer to 0, 0
 				}
 			}
 
@@ -761,26 +759,26 @@ int main(int argc, char* argv[]) {
 				panda.set_x(player.camera, 0 + x_speed);
 			}
 			if (keys["lshift"]) {
-				if (playerOnGround && !player_sneaking) {
-					player_sneaking = true;
+				if (player.onGround && !player.sneaking) {
+					player.sneaking = true;
 					cameraC.set_z(cameraC.get_z() + sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() - sneak_distance);
 				}
 			} else if (!keys["lshift"]) {
-				if (playerOnGround && player_sneaking) {
-					player_sneaking = false;
+				if (player.onGround && player.sneaking) {
+					player.sneaking = false;
 					cameraC.set_z(cameraC.get_z() - sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() + sneak_distance);
 				}
 			}
 			if (keys["space"]) {
-				if (playerOnGround) {
-					if (!player_sneaking) {
+				if (player.onGround) {
+					if (!player.sneaking) {
 						velocity = -0.25;
-					} else if (player_sneaking) {
+					} else if (player.sneaking) {
 						velocity = -0.45;
 					}
-					playerOnGround = false;
+					player.onGround = false;
 				}
 			}
 			if (keys["q"]) {
@@ -806,11 +804,11 @@ int main(int argc, char* argv[]) {
 				}
 				keys["f2"] = false;
 			}
-			if (keys["f3"]) {
+			if (keys["f3"]) {		//Decrease FOV
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()-10);
 				keys["f3"] = false;
 			}
-			if (keys["f4"]) {
+			if (keys["f4"]) {		//Increase FOV
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()+10);
 				keys["f4"] = false;
 			}
@@ -867,7 +865,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		} else {
-			if (keys["q"]) {
+			if (keys["q"]) {		//Crash game
 				game::importantInfoOut("Crashing game...");
 				exit(1);			// Code 1 is used because we crashed the game
 			}
