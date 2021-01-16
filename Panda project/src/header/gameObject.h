@@ -19,6 +19,7 @@ namespace game {
 		bool shouldLogInConsoleIntern;
 		bool shouldLogToFileIntern;
 		bool modelNotFound;
+		CollisionNode* collisionNode;
 		static std::map<std::string, std::map<std::string, std::string>> knownConfigs;
 
 		void initConfig(WindowFramework*& window, PandaFramework& framework);

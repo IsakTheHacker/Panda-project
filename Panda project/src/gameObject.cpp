@@ -155,6 +155,7 @@ namespace game {
 			if (std::stoi(config["collidable"]) == 1) {
 				CollisionNode* collisionNode = new CollisionNode("Box");
 				collisionNode->add_solid(new CollisionBox(0, std::stoi(config["collision-x"]), std::stoi(config["collision-y"]), std::stoi(config["collision-z"])));
+				this->collisionNode = collisionNode;
 				this->collisionNodePath = model.attach_new_node(collisionNode);
 			}
 		} else {
@@ -239,7 +240,7 @@ namespace game {
 		this->camera = window->get_camera_group();
 		this->onGround = false;
 		this->sneaking = false;
-		this->collisionNodePath = camera.attach_new_node(collisionNodePath.node());
+		this->collisionNodePath = camera.attach_new_node(this->collisionNode);
 		
 		/*if (shouldLogInConsole) {
 			game::logOut("Succesfully created the player! id: " + std::to_string(id));
