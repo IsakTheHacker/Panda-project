@@ -102,7 +102,11 @@ namespace game {
 			knownConfigs[configPath] = config;		//Add to knownConfigs
 		}
 
-		model = NodePath("model");
+		if (configPath == "data/assets/playerproperties/standard.playerproperties") {
+			model = window->get_camera_group();
+		} else {
+			model = NodePath("model");
+		}
 
 		initConfig(window, framework);
 
@@ -155,7 +159,6 @@ namespace game {
 			if (std::stoi(config["collidable"]) == 1) {
 				CollisionNode* collisionNode = new CollisionNode("Box");
 				collisionNode->add_solid(new CollisionBox(0, std::stoi(config["collision-x"]), std::stoi(config["collision-y"]), std::stoi(config["collision-z"])));
-				this->collisionNode = collisionNode;
 				this->collisionNodePath = model.attach_new_node(collisionNode);
 			}
 		} else {
@@ -238,10 +241,8 @@ namespace game {
 	}
 
 	Player::Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
-		this->camera = window->get_camera_group();
 		this->onGround = false;
 		this->sneaking = false;
-		this->collisionNodePath = camera.attach_new_node(this->collisionNode);
 		
 		/*if (shouldLogInConsole) {
 			game::logOut("Succesfully created the player! id: " + std::to_string(id));

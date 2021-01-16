@@ -175,7 +175,7 @@ int main(int argc, char* argv[]) {
 
 	// Cool stuff
 	pickerNode = new CollisionNode("mouseRay");
-	pickerNP = player.camera.attach_new_node(pickerNode);
+	pickerNP = player.model.attach_new_node(pickerNode);
 	pickerNP.show();
 	pickerNP.show_bounds();
 	pickerNP.show_tight_bounds();
@@ -335,7 +335,7 @@ int main(int argc, char* argv[]) {
 	NodePath blockyC = blocky.attach_new_node(cSphere_node2);
 	blockyC.show();
 	
-	player.camera.set_z(30);
+	player.model.set_z(30);
 
 	NodePath panda = NodePath("panda");
 	panda.set_scale(0.5);
@@ -356,7 +356,7 @@ int main(int argc, char* argv[]) {
 	CollisionTraverser* traverser = new CollisionTraverser();
 
 	traverser->add_collider(player.collisionNodePath, &pusher);
-	pusher.add_collider(player.collisionNodePath, player.camera);
+	pusher.add_collider(player.collisionNodePath, player.model);
 
 	traverser->show_collisions(window->get_render());
 
@@ -429,7 +429,7 @@ int main(int argc, char* argv[]) {
 	while (framework.do_frame(current_thread) && shouldRun) {
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
-			player.camera.set_pos(entity.model.get_x(), entity.model.get_y(), player.camera.get_z());
+			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
 		}
 		entity.update();
 
@@ -442,9 +442,9 @@ int main(int argc, char* argv[]) {
 					velocity = velocity * velocityModifier;
 				}
 			} else if (velocity < 0) {
-				double value = (int)((double)player.camera.get_z() * 100 + 0.5);
+				double value = (int)((double)player.model.get_z() * 100 + 0.5);
 				value = (double)value / 100;
-				double value2 = (int)((player.camera.get_z() - velocity) * 100 + 0.5);
+				double value2 = (int)((player.model.get_z() - velocity) * 100 + 0.5);
 				value2 = (double)value2 / 100;
 				if (value == value2) {
 					velocity = 0.01;
@@ -456,19 +456,19 @@ int main(int argc, char* argv[]) {
 		if (player.onGround) {
 			velocity = 0;
 		}
-		player.camera.set_z(player.camera.get_pos().get_z() - velocity);
-		panda.set_z(player.camera.get_pos().get_z() - velocity);
+		player.model.set_z(player.model.get_pos().get_z() - velocity);
+		panda.set_z(player.model.get_pos().get_z() - velocity);
 
 		// Checking if current chunk exists, generate if not.
-		if (player.camera.get_x() < 0) {
-			chunk_x = std::to_string((int)(player.camera.get_x() - chunksize) / chunksize);
+		if (player.model.get_x() < 0) {
+			chunk_x = std::to_string((int)(player.model.get_x() - chunksize) / chunksize);
 		} else {
-			chunk_x = std::to_string((int)player.camera.get_x() / chunksize);
+			chunk_x = std::to_string((int)player.model.get_x() / chunksize);
 		}
-		if (player.camera.get_y() < 0) {
-			chunk_y = std::to_string((int)(player.camera.get_y() - chunksize) / chunksize);
+		if (player.model.get_y() < 0) {
+			chunk_y = std::to_string((int)(player.model.get_y() - chunksize) / chunksize);
 		} else {
-			chunk_y = std::to_string((int)player.camera.get_y() / chunksize);
+			chunk_y = std::to_string((int)player.model.get_y() / chunksize);
 		}
 		
 		if (game::chunk::loaded_chunks.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::loaded_chunks.end()) {
@@ -642,8 +642,8 @@ int main(int argc, char* argv[]) {
 		}
 
 		//Set text to the new values
-		text->set_text("X: " + std::to_string(player.camera.get_x()) + "\nY: " + std::to_string(player.camera.get_y()) + "\nZ: " + std::to_string(player.camera.get_z()));
-		text2->set_text("H: " + std::to_string(player.camera.get_h()) + "\nP: " + std::to_string(player.camera.get_p()) + "\nR: " + std::to_string(player.camera.get_r()));
+		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
+		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
 		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
 		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
 
@@ -663,17 +663,17 @@ int main(int argc, char* argv[]) {
 						offset_r += move_x / camera_x_speed;
 
 						if (offset_r < 90 && offset_r > -90) {
-							player.camera.set_r(offset_r);
+							player.model.set_r(offset_r);
 						} else {
 							offset_r -= move_x / 5;
 						}
 					} else {
 						offset_h += move_x / camera_x_speed;
-						player.camera.set_h(std::fmod(offset_h, 360));
+						player.model.set_h(std::fmod(offset_h, 360));
 
 						// Reset rotation
 						offset_r = 0;
-						player.camera.set_r(offset_r);
+						player.model.set_r(offset_r);
 					}
 
 					offset_p += move_y / camera_y_speed;
@@ -688,7 +688,7 @@ int main(int argc, char* argv[]) {
 
 					if (!keys["v"]) {
 						if (offset_p < 90 && offset_p > -90) {
-							player.camera.set_p(offset_p);
+							player.model.set_p(offset_p);
 						} else {
 							offset_p -= move_y / 5;
 						}
@@ -700,32 +700,32 @@ int main(int argc, char* argv[]) {
 
 
 			if (keys["w"]) {
-				player.camera.set_y(panda, 0 + y_speed);
+				player.model.set_y(panda, 0 + y_speed);
 				panda.set_y(panda, 0 + y_speed);
 			}
 			if (keys["s"]) {
-				player.camera.set_y(panda, 0 - y_speed);
+				player.model.set_y(panda, 0 - y_speed);
 				panda.set_y(panda, 0 - y_speed);
 			}
 			if (keys["a"]) {
-				player.camera.set_x(player.camera, 0 - x_speed);
-				panda.set_x(player.camera, 0 - x_speed);
+				player.model.set_x(player.model, 0 - x_speed);
+				panda.set_x(player.model, 0 - x_speed);
 			}
 			if (keys["d"]) {
-				player.camera.set_x(player.camera, 0 + x_speed);
-				panda.set_x(player.camera, 0 + x_speed);
+				player.model.set_x(player.model, 0 + x_speed);
+				panda.set_x(player.model, 0 + x_speed);
 			}
 			if (keys["lshift"]) {
 				if (player.onGround && !player.sneaking) {
 					player.sneaking = true;
 					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance);
-					player.camera.set_z(player.camera.get_pos().get_z() - sneak_distance);
+					player.model.set_z(player.model.get_pos().get_z() - sneak_distance);
 				}
 			} else if (!keys["lshift"]) {
 				if (player.onGround && player.sneaking) {
 					player.sneaking = false;
 					player.collisionNodePath.set_z(player.collisionNodePath.get_z() - sneak_distance);
-					player.camera.set_z(player.camera.get_pos().get_z() + sneak_distance);
+					player.model.set_z(player.model.get_pos().get_z() + sneak_distance);
 				}
 			}
 			if (keys["space"]) {
@@ -746,7 +746,7 @@ int main(int argc, char* argv[]) {
 				keys["q"] = false;
 			}
 			if (keys["r"]) {
-				player.camera.set_z(30);
+				player.model.set_z(30);
 				velocity = 0;
 			}
 			if (keys["f2"]) {
@@ -789,17 +789,17 @@ int main(int argc, char* argv[]) {
 					offset_r += move_x / camera_x_speed;
 
 					if (offset_r < 90 && offset_r > -90) {
-						player.camera.set_r(offset_r);
+						player.model.set_r(offset_r);
 					} else {
 						offset_r -= move_x / 5;
 					}
 				} else {
 					offset_h += move_x / camera_x_speed;
-					player.camera.set_h(offset_h);
+					player.model.set_h(offset_h);
 
 					// Reset rotation
 					offset_r = 0;
-					player.camera.set_r(offset_r);
+					player.model.set_r(offset_r);
 				}
 
 				offset_p += move_y / camera_y_speed;
@@ -814,7 +814,7 @@ int main(int argc, char* argv[]) {
 
 				if (!keys["v"]) {
 					if (offset_p < 90 && offset_p > -90) {
-						player.camera.set_p(offset_p);
+						player.model.set_p(offset_p);
 					} else {
 						offset_p -= move_y / 5;
 					}
