@@ -1,12 +1,4 @@
 #pragma once
-#include "gameObject.h"
-
-
-//Forward declares
-namespace game {
-	class Player;
-}
-class NodePath;
 
 extern int handInventoryIndex;
 extern std::map<std::string, bool> keys;
@@ -15,6 +7,5 @@ extern bool shouldRun;
 extern bool terrainAnimationShouldRun;
 extern bool devMode;
 extern bool mouseInGame;
-extern game::Player player;
 extern std::string gamePath;
 extern std::string universePath;

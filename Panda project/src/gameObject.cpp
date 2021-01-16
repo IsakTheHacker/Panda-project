@@ -205,6 +205,10 @@ namespace game {
 	std::map<std::string, std::map<std::string, std::string>> object::knownConfigs;
 
 	//Entity class
+	entity::entity(bool shouldLogInConsole, bool shouldLogToFile) : object { shouldLogInConsole, shouldLogToFile } {
+
+	}
+
 	entity::entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : object { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
 		/*if (shouldLogInConsole) {
 			game::logOut("Succesfully created the player! id: " + std::to_string(id));
@@ -227,6 +231,10 @@ namespace game {
 	}
 
 	//Player class
+	Player::Player(bool shouldLogInConsole, bool shouldLogToFile) : entity { shouldLogInConsole, shouldLogToFile } {
+		
+	}
+
 	Player::Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
 		this->camera = window->get_camera_group();
 		this->onGround = false;
@@ -247,5 +255,32 @@ namespace game {
 		if (shouldLogToFileIntern) {
 			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
 		}*/
+	}
+
+	void testIfPlayerOnGround(const Event* theEvent, void* data) {
+		bool in_out_pattern = (bool)data;
+
+		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
+		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
+		nassertv(entry != NULL);
+
+		if (!in_out_pattern) {
+			if (std::round(entry->get_into_node_path().get_parent().get_z()) <= std::round(entry->get_from_node_path().get_parent().get_z())) {
+				player.onGround = true;
+			} else {
+				player.onGround = false;
+			}
+		} else {
+			player.onGround = false;
+		}
+	}
+	void getCollidedNodePath(const Event* theEvent, void* data) {
+		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
+		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
+		nassertv(entry != NULL);
+
+		if (player.onGround) {
+			player.collidedNodePath = entry->get_into_node_path().get_parent();
+		}
 	}
 }

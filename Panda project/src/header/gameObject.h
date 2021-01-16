@@ -46,6 +46,7 @@ namespace game {
 	// Entity class
 	class entity : public object {
 	public:
+		entity(bool shouldLogInConsole = false, bool shouldLogToFile = false);
 		entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~entity();
 
@@ -60,11 +61,18 @@ namespace game {
 		bool onGround;
 		bool sneaking;
 
+		Player(bool shouldLogInConsole = false, bool shouldLogToFile = false);
 		Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~Player();
 	};
+
+
+	void testIfPlayerOnGround(const Event* theEvent, void* data);
+	void getCollidedNodePath(const Event* theEvent, void* data);
 
 	//Creating vectors for the classes
 	extern std::vector<entity> entities;
 	//extern std::vector<player> players;
 }
+
+extern game::Player player;

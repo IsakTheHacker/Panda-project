@@ -30,6 +30,8 @@ std::string universePath = "universes/Test/";
 #include "chunk.h"
 #include "gameObject.h"
 
+game::Player player;
+
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
 PT(ClockObject) globalClock = ClockObject::get_global_clock();
@@ -162,7 +164,7 @@ int main(int argc, char* argv[]) {
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
-	game::Player player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
+	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
 	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
 
 	//Enable shader generation for the game
