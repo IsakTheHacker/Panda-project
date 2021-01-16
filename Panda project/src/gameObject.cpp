@@ -233,7 +233,8 @@ namespace game {
 
 	//Player class
 	Player::Player(bool shouldLogInConsole, bool shouldLogToFile) : entity { shouldLogInConsole, shouldLogToFile } {
-		
+		this->onGround = false;
+		this->sneaking = false;
 	}
 
 	Player::Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
