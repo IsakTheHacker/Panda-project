@@ -1,5 +1,5 @@
 collidable=1
-collision-x=1
-collision-y=1
-collision-z=1
+collision-x=0.8
+collision-y=0.8
+collision-z=3
 subobjects=texture:models/textures/png/stone-#.png|model:models/egg/block.egg

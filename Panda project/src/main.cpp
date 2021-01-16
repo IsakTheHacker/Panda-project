@@ -357,11 +357,6 @@ int main(int argc, char* argv[]) {
 	panda.reparent_to(window->get_render());
 	panda.hide();
 
-
-	CollisionNode* cSphere_node = new CollisionNode("Sphere");
-	cSphere_node->add_solid(new CollisionBox(0, 0.8, 0.8, 3));
-	NodePath cameraC = player.camera.attach_new_node(cSphere_node);
-
 	CollisionHandlerPusher pusher;
 	pusher.add_in_pattern("Something");
 	pusher.add_out_pattern("Something2");
@@ -376,10 +371,13 @@ int main(int argc, char* argv[]) {
 	//window->get_render().ls();
 
 	//CollisionHandlerQueue queue;
+	player.model.ls();
 	CollisionTraverser* traverser = new CollisionTraverser();
 
-	traverser->add_collider(cameraC, &pusher);
-	pusher.add_collider(cameraC, player.camera);
+	traverser->add_collider(player.collisionNodePath, &pusher);
+	pusher.add_collider(player.collisionNodePath, player.camera);
+
+	std::cout << player.collisionNodePath.get_scale() << std::endl;
 
 	traverser->traverse(window->get_render());
 	//traverser->show_collisions(window->get_render());
@@ -725,7 +723,7 @@ int main(int argc, char* argv[]) {
 					panda.set_h(std::fmod(offset_h, 360));
 
 					//Adjust the collision box so its pitch doesn't change
-					cameraC.set_p(offset_p - offset_p * 2);
+					player.collisionNodePath.set_p(offset_p - offset_p * 2);
 
 					//Adjust the collision box so its rotation doesn't change
 					//cameraC.set_r(offset_r - offset_r * 2);
@@ -763,13 +761,13 @@ int main(int argc, char* argv[]) {
 			if (keys["lshift"]) {
 				if (player.onGround && !player.sneaking) {
 					player.sneaking = true;
-					cameraC.set_z(cameraC.get_z() + sneak_distance);
+					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() - sneak_distance);
 				}
 			} else if (!keys["lshift"]) {
 				if (player.onGround && player.sneaking) {
 					player.sneaking = false;
-					cameraC.set_z(cameraC.get_z() - sneak_distance);
+					player.collisionNodePath.set_z(player.collisionNodePath.get_z() - sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() + sneak_distance);
 				}
 			}
@@ -852,7 +850,7 @@ int main(int argc, char* argv[]) {
 				panda.set_h(offset_h);
 
 				//Adjust the collision box so its pitch doesn't change
-				cameraC.set_p(offset_p - offset_p * 2);
+				player.collisionNodePath.set_p(offset_p - offset_p * 2);
 
 				//Adjust the collision box so its rotation doesn't change
 				//cameraC.set_r(offset_r - offset_r * 2);
