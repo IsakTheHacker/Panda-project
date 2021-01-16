@@ -40,3 +40,9 @@ Use <kbd>&#8593;</kbd><kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8594;</kbd> if 
 - <kbd>F3</kbd> - Decrease FOV
 - <kbd>F4</kbd> - Increase FOV
 - <kbd>F5</kbd> - Toggle chunk generation
+
+***
+
+### Network
+Here is the network graph so you can keep up to date on the latest changes to the different branches:
+[Network Graph](https://github.com/IsakTheHacker/Panda-project/network)
