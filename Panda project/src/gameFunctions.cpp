@@ -338,7 +338,7 @@ namespace game {
 		nassertv(entry != NULL);
 
 		if (player.onGround) {
-			collidedNodePath = entry->get_into_node_path().get_parent();
+			player.collidedNodePath = entry->get_into_node_path().get_parent();
 		}
 	}
 }

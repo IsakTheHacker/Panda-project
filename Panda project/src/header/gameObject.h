@@ -56,6 +56,7 @@ namespace game {
 	class Player : public entity {
 	public:
 		NodePath camera;
+		NodePath collidedNodePath;
 		bool onGround;
 		bool sneaking;
 

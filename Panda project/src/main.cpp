@@ -18,7 +18,6 @@ bool shouldRun = true;
 bool terrainAnimationShouldRun;
 bool devMode = false;
 bool mouseInGame = true;
-NodePath collidedNodePath;
 std::string gamePath = "./";
 std::string universePath = "universes/Test/";
 
@@ -467,7 +466,7 @@ int main(int argc, char* argv[]) {
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 
-		if ((collidedNodePath == entity.model) && (player.onGround)) {
+		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
 			player.camera.set_pos(entity.model.get_x(), entity.model.get_y(), player.camera.get_z());
 		}
 

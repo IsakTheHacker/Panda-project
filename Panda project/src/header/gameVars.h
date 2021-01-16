@@ -15,7 +15,6 @@ extern bool shouldRun;
 extern bool terrainAnimationShouldRun;
 extern bool devMode;
 extern bool mouseInGame;
-extern NodePath collidedNodePath;
 extern game::Player player;
 extern std::string gamePath;
 extern std::string universePath;
