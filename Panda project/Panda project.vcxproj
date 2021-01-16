@@ -84,6 +84,7 @@
   <ItemGroup>
     <None Include="..\.gitattributes" />
     <None Include="..\.gitignore" />
+    <None Include="..\README.md" />
     <None Include="cpp.hint" />
     <None Include="data\scripts\createOptionsFile.py" />
     <None Include="data\scripts\makeDirectories.py" />
