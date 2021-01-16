@@ -53,13 +53,13 @@ namespace game {
 	};
 
 	// Player class
-	class player : public entity {
+	class Player : public entity {
 	public:
 		NodePath camera;
 		bool onGround;
 
-		player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
-		~player();
+		Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+		~Player();
 	};
 
 	//Creating vectors for the classes

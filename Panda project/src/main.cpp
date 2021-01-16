@@ -32,8 +32,6 @@ bool player_sneaking = false;
 #include "chunk.h"
 #include "gameObject.h"
 
-game::player defaultPlayer;
-
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
 PT(ClockObject) globalClock = ClockObject::get_global_clock();
@@ -166,7 +164,7 @@ int main(int argc, char* argv[]) {
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
-	game::player player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
+	game::Player player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
 	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
 
 	//Enable shader generation for the game
@@ -470,14 +468,14 @@ int main(int argc, char* argv[]) {
 	Thread* current_thread = Thread::get_current_thread();
 	while (framework.do_frame(current_thread) && shouldRun) {
 
-		if ((collidedNodePath == entity.model) && (defaultPlayer.onGround)) {
+		if ((collidedNodePath == entity.model) && (player.onGround)) {
 			player.camera.set_pos(entity.model.get_x(), entity.model.get_y(), player.camera.get_z());
 		}
 
 		entity.update();
 
 		// Velocity computing (Z axis)
-		if (velocity == 0 && !defaultPlayer.onGround) {
+		if (velocity == 0 && !player.onGround) {
 			velocity = 0.01;
 		} else {
 			if (velocity > 0) {
@@ -496,7 +494,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
-		if (defaultPlayer.onGround) {
+		if (player.onGround) {
 			velocity = 0;
 		}
 		player.camera.set_z(player.camera.get_pos().get_z() - velocity);
@@ -763,26 +761,26 @@ int main(int argc, char* argv[]) {
 				panda.set_x(player.camera, 0 + x_speed);
 			}
 			if (keys["lshift"]) {
-				if (defaultPlayer.onGround && !player_sneaking) {
+				if (player.onGround && !player_sneaking) {
 					player_sneaking = true;
 					cameraC.set_z(cameraC.get_z() + sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() - sneak_distance);
 				}
 			} else if (!keys["lshift"]) {
-				if (defaultPlayer.onGround && player_sneaking) {
+				if (player.onGround && player_sneaking) {
 					player_sneaking = false;
 					cameraC.set_z(cameraC.get_z() - sneak_distance);
 					player.camera.set_z(player.camera.get_pos().get_z() + sneak_distance);
 				}
 			}
 			if (keys["space"]) {
-				if (defaultPlayer.onGround) {
+				if (player.onGround) {
 					if (!player_sneaking) {
 						velocity = -0.25;
 					} else if (player_sneaking) {
 						velocity = -0.45;
 					}
-					defaultPlayer.onGround = false;
+					player.onGround = false;
 				}
 			}
 			if (keys["q"]) {

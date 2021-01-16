@@ -227,7 +227,7 @@ namespace game {
 	}
 
 	//Player class
-	player::player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
+	Player::Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
 		this->camera = window->get_camera_group();
 		this->onGround = false;
 		
@@ -239,7 +239,7 @@ namespace game {
 		}*/
 	}
 
-	player::~player() {
+	Player::~Player() {
 		/*if (shouldLogInConsoleIntern) {
 			game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
 		}
