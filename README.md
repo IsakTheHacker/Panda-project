@@ -1,5 +1,6 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/IsakTheHacker/Panda-project)
 ![Lines of code](https://img.shields.io/tokei/lines/github/IsakTheHacker/Panda-project)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/IsakTheHacker/Panda-project)
 [![GitHub issues](https://img.shields.io/github/issues/IsakTheHacker/Panda-project)](https://github.com/IsakTheHacker/Panda-project/issues)
 <!-- [![GitHub forks](https://img.shields.io/github/forks/IsakTheHacker/Panda-project)](https://github.com/IsakTheHacker/Panda-project/network) -->
 
