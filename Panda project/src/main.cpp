@@ -7,9 +7,9 @@
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")		//This will remove the console window
 #endif
 
-
-#include "pandaIncludes.h"
-//#include <direct.h>
+//C++ built-in libraries
+#include <map>
+#include <string>
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -22,6 +22,7 @@ std::string gamePath = "./";
 std::string universePath = "universes/Test/";
 
 //My libraries
+#include "pandaIncludes.h"
 #include "cppExtension.h"
 #include "gameVars.h"
 #include "gameFunctions.h"
@@ -98,8 +99,6 @@ int main(int argc, char* argv[]) {
 
 	//Set gamePath to the directory of executable
 	Filename exefile = argv[0];
-	//chdir(exefile.get_fullpath().substr(0, exefile.get_fullpath().find_last_of("\\") + 1).c_str());
-	//gamePath = exefile.get_fullpath().substr(0, exefile.get_fullpath().find_last_of("\\") + 1);
 
 	//Checking if any arguments was given at startup
 	if (argc > 3) {
@@ -200,10 +199,6 @@ int main(int argc, char* argv[]) {
 	props.set_cursor_hidden(std::stoi(options["hidden_cursor"]));
 	props.set_mouse_mode(WindowProperties::M_relative);
 	window->get_graphics_window()->request_properties(props);
-
-
-	// This makes the ray's origin the camera and makes the ray point
-	// to the screen coordinates of the mouse.
 
 	//LPoint2 mpos = mouseWatcher->get_mouse();
 
@@ -329,15 +324,6 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	//
-	/*NodePath test = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
-	test.set_scale(0.5);
-	test.set_h(45);
-	test.set_p(45);
-	test.set_r(45);
-	test.reparent_to(window->get_aspect_2d());*/
-
-
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
 	blocky.set_scale(0.5);
 	blocky.set_pos(0, 0, 100);
@@ -360,7 +346,6 @@ int main(int argc, char* argv[]) {
 	CollisionHandlerPusher pusher;
 	pusher.add_in_pattern("Something");
 	pusher.add_out_pattern("Something2");
-	//pusher.add_again_pattern("%fn-into-%in");
 
 	framework.define_key("Something", "", game::testIfPlayerOnGround, 0);
 	framework.define_key("Something2", "", game::testIfPlayerOnGround, (void*)1);
@@ -368,10 +353,6 @@ int main(int argc, char* argv[]) {
 	framework.define_key("Something", "", game::getCollidedNodePath, 0);
 	framework.define_key("Something2", "", game::getCollidedNodePath, (void*)1);
 
-	//window->get_render().ls();
-
-	//CollisionHandlerQueue queue;
-	player.model.ls();
 	CollisionTraverser* traverser = new CollisionTraverser();
 
 	traverser->add_collider(player.collisionNodePath, &pusher);
@@ -427,7 +408,6 @@ int main(int argc, char* argv[]) {
 
 	std::string sad = "Hello World";
 	/*myTraverser.show_collisions(window->get_render());
-
 	framework.show_collision_solids(window->get_render());*/
 
 	NodePath block;
@@ -451,7 +431,6 @@ int main(int argc, char* argv[]) {
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
 			player.camera.set_pos(entity.model.get_x(), entity.model.get_y(), player.camera.get_z());
 		}
-
 		entity.update();
 
 		// Velocity computing (Z axis)
@@ -491,8 +470,6 @@ int main(int argc, char* argv[]) {
 		} else {
 			chunk_y = std::to_string((int)player.camera.get_y() / chunksize);
 		}
-		/*chunk_x = std::to_string((int)player.camera.get_x() / 16);
-		chunk_y = std::to_string((int)player.camera.get_y() / 16);*/
 		
 		if (game::chunk::loaded_chunks.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::loaded_chunks.end()) {
 			chunk_exists = true;
@@ -524,9 +501,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 
-		// check collisions, will call pusher collision handler
-		// if a collision is detected
-		traverser->traverse(window->get_render());
+		traverser->traverse(window->get_render());		//Check collisions and call pusher if a collision is detected
 
 		myTraverser.traverse(window->get_render());
 		if (myHandler->get_num_entries() > 0) {
@@ -764,7 +739,6 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			if (keys["q"]) {
-				/*game::saveChunk(game::chunks[0]);*/
 				for (std::pair<int, int> pair : game::chunk::loaded_chunks) {
 					std::cout << pair.first << "	" << pair.second << std::endl;
 				}
@@ -853,9 +827,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		if (keys["e"]) {
-			/*game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
-			game::winds[game::winds.size() - 1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));*/
-
 			if (e_inventory.is_hidden()) {
 				e_inventory.show();
 				cursor.hide();
@@ -888,18 +859,6 @@ int main(int argc, char* argv[]) {
 		//Reset mouse clicks
 		keys["mouse1"] = false;
 		keys["mouse3"] = false;
-
-		//Border checking
-		/*if (options["lower_border"] != "none" && options["lower_border"] != "null") {
-			if (camera.get_pos().get_z() < std::stof(options["lower_border"])) {
-				camera.set_z(std::stof(options["lower_border"]));
-			}
-		}
-		if (options["upper_border"] != "none" && options["upper_border"] != "null") {
-			if (camera.get_pos().get_z() > std::stof(options["upper_border"])) {
-				camera.set_z(std::stof(options["upper_border"]));
-			}
-		}*/
 	}
 
 	//Saving chunks
