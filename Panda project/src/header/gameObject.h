@@ -59,6 +59,7 @@ namespace game {
 		NodePath collidedNodePath;
 		bool onGround;
 		bool sneaking;
+		bool flying;
 
 		Player(bool shouldLogInConsole = false, bool shouldLogToFile = false);
 		Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
