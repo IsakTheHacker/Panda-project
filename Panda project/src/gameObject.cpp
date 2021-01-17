@@ -80,14 +80,15 @@ namespace game {
 		object_quantity++;
 		this->configPath = configPath;
 
-		if (knownConfigKeys.find(configPath) == knownConfigKeys.end()) {
+		if (knownConfigs.find(configPath) != knownConfigs.end()) {
+			config = knownConfigs[configPath];
+		} else {
 			std::ifstream file(configPath);
 			if (file.fail()) {
 				errorOut("Specified a configPath that doesn't exist!");
 			}
 			std::string line;
 			std::string delimiter = "=";
-			std::map<std::string, std::string> fortnite;
 			while (std::getline(file, line)) {
 				size_t pos = 0;
 				std::string token;
@@ -96,10 +97,9 @@ namespace game {
 					line.erase(0, pos + delimiter.length());
 				}
 
-				fortnite[token] = line;
+				config[token] = line;
 			}
-			knownConfigs.push_back(fortnite);
-			knownConfigKeys[configPath] = knownConfigs.size() - 1;
+			knownConfigs[configPath] = config;		//Add to knownConfigs
 		}
 
 		if (configPath == "data/assets/playerproperties/standard.playerproperties") {
@@ -155,30 +155,20 @@ namespace game {
 		return this->model;
 	}
 	void object::initConfig(WindowFramework*& window, PandaFramework& framework) {
-		int index = knownConfigKeys[configPath];
-		if (knownConfigKeys.count("collidable")) {
-			if (std::stoi(knownConfigs[index]["collidable"]) == 1) {
-				game::importantInfoOut("After!");
+		if (config.find("collidable") != config.end()) {
+			if (std::stoi(config["collidable"]) == 1) {
 				CollisionNode* collisionNode = new CollisionNode("Box");
-				collisionNode->add_solid(new CollisionBox(0, std::stod(knownConfigs[index]["collision-x"]), std::stod(knownConfigs[index]["collision-y"]), std::stod(knownConfigs[index]["collision-z"])));
+				collisionNode->add_solid(new CollisionBox(0, std::stod(config["collision-x"]), std::stod(config["collision-y"]), std::stod(config["collision-z"])));
 				this->collisionNodePath = model.attach_new_node(collisionNode);
 			}
 		} else {
-			knownConfigs[index]["collidable"] = "0";
+			config["collidable"] = "0";
 		}
-		
-		game::importantInfoOut("Before!");
-		game::listOptions(knownConfigs[index]);
-		for (auto value : knownConfigKeys) {
-			std::cout << value.first << "	" << value.second << std::endl;
-		}
-		std::cout << knownConfigs[index].count("collidable") << std::endl;
-		std::cout << knownConfigs[index].count("subobjects") << std::endl;
-		if (knownConfigs[index].count("subobjects") == 1) {
-			game::importantInfoOut("After!");
+
+		if (config.find("subobjects") != config.end()) {
 			std::vector<NodePath> subobjects;
 
-			std::vector<std::string> stringSubobjects = game::split(knownConfigs[index]["subobjects"], ",");
+			std::vector<std::string> stringSubobjects = game::split(config["subobjects"], ",");
 			for (std::string stringSubobject : stringSubobjects) {
 
 				std::vector<std::string> stringSubobjectOptions = game::split(stringSubobject, "|");
@@ -216,8 +206,7 @@ namespace game {
 	}
 	int object::current_id = 0;
 	int object::object_quantity = 0;
-	std::vector<std::map<std::string, std::string>> object::knownConfigs;
-	std::map<std::string, int> object::knownConfigKeys;
+	std::map<std::string, std::map<std::string, std::string>> object::knownConfigs;
 
 	//Entity class
 	entity::entity(bool shouldLogInConsole, bool shouldLogToFile) : object { shouldLogInConsole, shouldLogToFile } {

@@ -19,8 +19,7 @@ namespace game {
 		bool shouldLogInConsoleIntern;
 		bool shouldLogToFileIntern;
 		bool modelNotFound;
-		static std::vector<std::map<std::string, std::string>> knownConfigs;
-		static std::map<std::string, int> knownConfigKeys;
+		static std::map<std::string, std::map<std::string, std::string>> knownConfigs;
 
 		void initConfig(WindowFramework*& window, PandaFramework& framework);
 	public:
@@ -31,6 +30,7 @@ namespace game {
 		unsigned int id;
 		std::string name;
 		std::string configPath = "";
+		std::map<std::string, std::string> config;
 		NodePath collisionNodePath;
 
 		object(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);

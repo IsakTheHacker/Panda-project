@@ -360,8 +360,6 @@ int main(int argc, char* argv[]) {
 
 	traverser->show_collisions(window->get_render());
 
-	std::cout << player.collisionNodePath.get_scale() << std::endl;
-
 	traverser->traverse(window->get_render());
 	//traverser->show_collisions(window->get_render());
 
