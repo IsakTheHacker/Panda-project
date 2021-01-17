@@ -78,16 +78,6 @@ void pauseMenu(WindowFramework* window) {
 
 int main(int argc, char* argv[]) {
 	
-	//if (PStatClient::is_connected()) {
-	//	PStatClient::disconnect();
-	//}
-
-	//std::string host = ""; // Empty = default config var value
-	//int port = -1; // -1 = default config var value
-	//if (!PStatClient::connect(host, port)) {
-	//	std::cout << "Could not connect to PStat server." << std::endl;
-	//}
-
 	//Checking if any arguments was given at startup
 	if (argc > 3) {
 		game::warningOut("Too many arguments was given, 1-2 arguments are allowed!");
@@ -135,6 +125,18 @@ int main(int argc, char* argv[]) {
 	std::map<std::string, std::string> scripting_options;
 	game::readOptions(scripting_options, "data/scripting_options.txt");
 
+	if (std::stoi(options["enable_pstats"])) {
+		if (PStatClient::is_connected()) {
+			PStatClient::disconnect();
+		}
+
+		std::string host = "";		//Empty = default config var value
+		int port = -1;				//-1 = default config var value
+		if (!PStatClient::connect(host, port)) {
+			std::cout << "Could not connect to PStat server." << std::endl;
+		}
+	}
+
 	game::setHeading(options["console-heading"]);
 	game::logOut("Starting...");
 
@@ -150,9 +152,6 @@ int main(int argc, char* argv[]) {
 	WindowFramework* window = framework.open_window();
 	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
 	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
-
-	//Enable shader generation for the game
-	/*window->get_render().set_shader_auto();*/
 
 	//Set default window instance to use for chunk class
 	game::chunk::setDefaultWindow(window);
@@ -557,20 +556,18 @@ int main(int argc, char* argv[]) {
 						configPath = "";
 					}
 
+					game::object object(configPath, window, framework, false, false);
+					object.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
 
-
-					game::object obj(configPath, window, framework, false, false);
-					obj.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
-
-					if (obj.model.get_x() < 0) {
-						block_chunk_x = (int)(obj.model.get_x() - chunksize) / chunksize;
+					if (object.model.get_x() < 0) {
+						block_chunk_x = (int)(object.model.get_x() - chunksize) / chunksize;
 					} else {
-						block_chunk_x = (int)obj.model.get_x() / chunksize;
+						block_chunk_x = (int)object.model.get_x() / chunksize;
 					}
-					if (obj.model.get_y() < 0) {
-						block_chunk_y = (int)(obj.model.get_y() - chunksize) / chunksize;
+					if (object.model.get_y() < 0) {
+						block_chunk_y = (int)(object.model.get_y() - chunksize) / chunksize;
 					} else {
-						block_chunk_y = (int)obj.model.get_y() / chunksize;
+						block_chunk_y = (int)object.model.get_y() / chunksize;
 					}
 
 					if (keys["r"]) {
@@ -594,18 +591,18 @@ int main(int argc, char* argv[]) {
 							pitch = 0.5;
 							heading = 1;
 						}
-						obj.model.set_hpr(heading * 180, pitch * 180, 0);
+						object.model.set_hpr(heading * 180, pitch * 180, 0);
 					}
 
 					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];
 					
-					obj.model.set_tag("chunk", std::to_string(block_chunk_x) + "," + std::to_string(block_chunk_y));
-					obj.model.set_tag("id", std::to_string(obj.id));
-					obj.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
+					object.model.set_tag("chunk", std::to_string(block_chunk_x) + "," + std::to_string(block_chunk_y));
+					object.model.set_tag("id", std::to_string(object.id));
+					object.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
 
-					obj.model.set_shader_auto();
+					object.model.set_shader_auto();
 
-					chunk.objects.push_back(obj);
+					chunk.objects.push_back(object);
 					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;
 
 					keys["mouse3"] = false;
