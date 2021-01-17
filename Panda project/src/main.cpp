@@ -327,7 +327,7 @@ int main(int argc, char* argv[]) {
 
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
 	blocky.set_scale(0.5);
-	blocky.set_pos(0, 0, 100);
+	blocky.set_pos(0, 0, 20);
 	blocky.reparent_to(window->get_render());
 
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
@@ -358,7 +358,7 @@ int main(int argc, char* argv[]) {
 	traverser->add_collider(player.collisionNodePath, &pusher);
 	pusher.add_collider(player.collisionNodePath, player.model);
 
-	traverser->show_collisions(window->get_render());
+	//traverser->show_collisions(window->get_render());
 
 	traverser->traverse(window->get_render());
 	//traverser->show_collisions(window->get_render());
