@@ -126,15 +126,7 @@ int main(int argc, char* argv[]) {
 	game::readOptions(scripting_options, "data/scripting_options.txt");
 
 	if (std::stoi(options["enable_pstats"])) {
-		if (PStatClient::is_connected()) {
-			PStatClient::disconnect();
-		}
-
-		std::string host = "";		//Empty = default config var value
-		int port = -1;				//-1 = default config var value
-		if (!PStatClient::connect(host, port)) {
-			std::cout << "Could not connect to PStat server." << std::endl;
-		}
+		game::connectToPStats();
 	}
 
 	game::setHeading(options["console-heading"]);

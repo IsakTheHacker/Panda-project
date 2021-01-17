@@ -23,6 +23,9 @@ using json = nlohmann::json;
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
+//Panda3D libraries
+#include <pStatClient.h>
+
 //My libraries
 #include "cppExtension.h"
 #include "gameVars.h"
@@ -200,6 +203,8 @@ namespace game {
 	/// <param name="path">- The path to your file</param>
 	/// <returns> True if file exists, false if it doesn't. </returns>
 	bool fileExists(const std::string& path);
+
+	bool connectToPStats(std::string host = "", int port = -1);
 
 	// Executes a Python script
 	int runPyScript(const std::string& path);

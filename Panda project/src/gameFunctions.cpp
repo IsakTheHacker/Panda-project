@@ -291,6 +291,20 @@ namespace game {
 		}
 	}
 
+	bool connectToPStats(std::string host, int port) {
+		if (PStatClient::is_connected()) {
+			PStatClient::disconnect();
+		}
+
+		if (!PStatClient::connect(host, port)) {
+			game::warningOut("Could not connect to PStat server.");
+			return false;
+		} else {
+			game::importantInfoOut("Successfully connected to PStat server!");
+			return true;
+		}
+	}
+
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
 	}

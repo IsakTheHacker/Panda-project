@@ -47,5 +47,3 @@
 #include <perlinNoise3.h>
 #include <texturePool.h>
 #include <cardMaker.h>
-
-#include <pStatClient.h>
