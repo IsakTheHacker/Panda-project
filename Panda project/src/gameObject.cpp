@@ -79,15 +79,8 @@ namespace game {
 		current_id++;
 		object_quantity++;
 		this->configPath = configPath;
-		
-		bool Bool = false;
-		for (auto test : knownConfigs) {
-			if (test.find(configPath) != test.end()) {
-				Bool = true;
-			}
-		}
 
-		if (!Bool) {
+		if (knownConfigKeys.find(configPath) == knownConfigKeys.end()) {
 			std::ifstream file(configPath);
 			if (file.fail()) {
 				errorOut("Specified a configPath that doesn't exist!");
@@ -163,9 +156,9 @@ namespace game {
 	}
 	void object::initConfig(WindowFramework*& window, PandaFramework& framework) {
 		int index = knownConfigKeys[configPath];
-		if (knownConfigs[index].find("collidable") != knownConfigs[index].end()) {
-			game::importantInfoOut("After!");
+		if (knownConfigKeys.count("collidable")) {
 			if (std::stoi(knownConfigs[index]["collidable"]) == 1) {
+				game::importantInfoOut("After!");
 				CollisionNode* collisionNode = new CollisionNode("Box");
 				collisionNode->add_solid(new CollisionBox(0, std::stod(knownConfigs[index]["collision-x"]), std::stod(knownConfigs[index]["collision-y"]), std::stod(knownConfigs[index]["collision-z"])));
 				this->collisionNodePath = model.attach_new_node(collisionNode);
@@ -175,7 +168,13 @@ namespace game {
 		}
 		
 		game::importantInfoOut("Before!");
-		if (knownConfigs[index].find("subobjects") != knownConfigs[index].end()) {
+		game::listOptions(knownConfigs[index]);
+		for (auto value : knownConfigKeys) {
+			std::cout << value.first << "	" << value.second << std::endl;
+		}
+		std::cout << knownConfigs[index].count("collidable") << std::endl;
+		std::cout << knownConfigs[index].count("subobjects") << std::endl;
+		if (knownConfigs[index].count("subobjects") == 1) {
 			game::importantInfoOut("After!");
 			std::vector<NodePath> subobjects;
 
