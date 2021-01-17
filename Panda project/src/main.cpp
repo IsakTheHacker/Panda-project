@@ -355,13 +355,18 @@ int main(int argc, char* argv[]) {
 
 	CollisionTraverser* traverser = new CollisionTraverser();
 
+	//Apply show collision settings
+	if (std::stoi(options["show_ray-collisions"])) {
+		myTraverser.show_collisions(window->get_render());
+	}
+	if (std::stoi(options["show_block-collisions"])) {
+		traverser->show_collisions(window->get_render());
+	}
+
 	traverser->add_collider(player.collisionNodePath, &pusher);
 	pusher.add_collider(player.collisionNodePath, player.model);
 
-	//traverser->show_collisions(window->get_render());
-
 	traverser->traverse(window->get_render());
-	//traverser->show_collisions(window->get_render());
 
 	//Lights
 	PT(AmbientLight) alight = new AmbientLight("alight");
@@ -405,8 +410,7 @@ int main(int argc, char* argv[]) {
 	bool chunk_exists = false;
 
 	std::string sad = "Hello World";
-	/*myTraverser.show_collisions(window->get_render());
-	framework.show_collision_solids(window->get_render());*/
+	framework.show_collision_solids(window->get_render());
 
 	NodePath block;
 
