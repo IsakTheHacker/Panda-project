@@ -7,6 +7,7 @@
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")		//This will remove the console window
 #endif
 
+
 //C++ built-in libraries
 #include <map>
 #include <string>
@@ -36,16 +37,6 @@ game::Player player;
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
 PT(ClockObject) globalClock = ClockObject::get_global_clock();
-PT(TextNode) text = new TextNode("textnode");
-WindowFramework* window;
-
-// Cool stuff
-PT(MouseWatcher) mouseWatcher;
-PT(CollisionRay) pickerRay;
-CollisionTraverser myTraverser = CollisionTraverser("ctraverser");
-PT(CollisionHandlerQueue) myHandler;
-PT(CollisionNode) pickerNode;
-NodePath pickerNP;
 
 #include "gameClasses.h"
 
@@ -86,7 +77,7 @@ void pauseMenu(WindowFramework* window) {
 }
 
 int main(int argc, char* argv[]) {
-
+	
 	//if (PStatClient::is_connected()) {
 	//	PStatClient::disconnect();
 	//}
@@ -96,9 +87,6 @@ int main(int argc, char* argv[]) {
 	//if (!PStatClient::connect(host, port)) {
 	//	std::cout << "Could not connect to PStat server." << std::endl;
 	//}
-
-	//Set gamePath to the directory of executable
-	Filename exefile = argv[0];
 
 	//Checking if any arguments was given at startup
 	if (argc > 3) {
@@ -132,9 +120,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
-
-	//Starting debug input thread if game was started in devmode!
-	//std::thread debugInputThread(game::takeDebugInput);
 
 	//Creating folders and files
 	game::runPyScript("data/scripts/makeDirectories.py");
@@ -174,17 +159,14 @@ int main(int argc, char* argv[]) {
 	game::chunk::setDefaultFramework(framework);
 
 	// Cool stuff
-	pickerNode = new CollisionNode("mouseRay");
-	pickerNP = player.model.attach_new_node(pickerNode);
-	pickerNP.show();
-	pickerNP.show_bounds();
-	pickerNP.show_tight_bounds();
-	pickerNP.show_through();
+	PT(CollisionHandlerQueue) myHandler = new CollisionHandlerQueue();
+	CollisionTraverser myTraverser;
+	PT(CollisionNode) pickerNode = new CollisionNode("mouseRay");
+	PT(CollisionRay) pickerRay = new CollisionRay();
+	NodePath pickerNP = player.model.attach_new_node(pickerNode);
 	pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());
-	pickerRay = new CollisionRay();
 	pickerNode->add_solid(pickerRay);
 	pickerNode->set_into_collide_mask(0);
-	myHandler = new CollisionHandlerQueue();
 	myTraverser.add_collider(pickerNP, myHandler);
 
 	//Setting up frame rate meter
@@ -195,16 +177,13 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Mouse input
-	MouseWatcher* mouseWatcher = DCAST(MouseWatcher, window->get_mouse().node());
+	PT(MouseWatcher) mouseWatcher = DCAST(MouseWatcher, window->get_mouse().node());
 	WindowProperties props = window->get_graphics_window()->get_properties();
 	props.set_cursor_hidden(std::stoi(options["hidden_cursor"]));
 	props.set_mouse_mode(WindowProperties::M_relative);
 	window->get_graphics_window()->request_properties(props);
 
-	//LPoint2 mpos = mouseWatcher->get_mouse();
-
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);
-	//pickerRay->set_from_lens(window->get_camera(0), mpos.get_x(), mpos.get_y());
 
 	// Change background color to black
 	window->get_graphics_window()->get_active_display_region(0)->set_clear_color(LColorf(0, 0, 0, 1));
@@ -366,8 +345,6 @@ int main(int argc, char* argv[]) {
 	traverser->add_collider(player.collisionNodePath, &pusher);
 	pusher.add_collider(player.collisionNodePath, player.model);
 
-	traverser->traverse(window->get_render());
-
 	//Lights
 	PT(AmbientLight) alight = new AmbientLight("alight");
 	alight->set_color(0.2);
@@ -400,9 +377,6 @@ int main(int argc, char* argv[]) {
 	double center_x = 0.0;
 	double center_y = 0.0;
 
-	double x = 0.0;
-	double y = 0.0;
-
 	std::string chunk_x;
 	std::string chunk_y;
 
@@ -410,7 +384,6 @@ int main(int argc, char* argv[]) {
 	bool chunk_exists = false;
 
 	std::string sad = "Hello World";
-	framework.show_collision_solids(window->get_render());
 
 	NodePath block;
 
@@ -483,7 +456,7 @@ int main(int argc, char* argv[]) {
 			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));																//Create new chunk
 			chunk.generateChunk(window, framework, perlinNoise);																	//Apply the generateChunk function on the new chunk
 			game::chunks.push_back(chunk);																							//Push the chunk to vector game::chunks
-			game::chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
+			game::chunk::loaded_chunks.insert(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y)));
 			game::chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = game::chunks.size()-1;
 		}
 
@@ -655,11 +628,8 @@ int main(int argc, char* argv[]) {
 					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 					center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 
-					x = window->get_graphics_window()->get_pointer(0).get_x();
-					y = window->get_graphics_window()->get_pointer(0).get_y();
-
-					double move_x = std::floor(center_x - x);
-					double move_y = std::floor(center_y - y);
+					double move_x = std::floor(center_x - window->get_graphics_window()->get_pointer(0).get_x());
+					double move_y = std::floor(center_y - window->get_graphics_window()->get_pointer(0).get_y());
 
 					if (keys["v"]) {
 						offset_r += move_x / camera_x_speed;
@@ -880,7 +850,6 @@ int main(int argc, char* argv[]) {
 	std::remove(filename.c_str());
 
 	framework.close_framework();
-	//debugInputThread.detach();
 	game::logOut("Closing...");
 
 	if (!std::stoi(options["close_console_without_input"])) {
