@@ -338,7 +338,7 @@ int main(int argc, char* argv[]) {
 	
 	player.model.set_z(30);
 
-	NodePath panda = NodePath("panda");
+	NodePath panda("panda");
 	panda.set_scale(0.5);
 	panda.set_pos(0, 0, 0);
 	panda.reparent_to(window->get_render());
