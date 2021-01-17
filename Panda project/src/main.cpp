@@ -183,6 +183,7 @@ int main(int argc, char* argv[]) {
 	pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());
 	pickerRay = new CollisionRay();
 	pickerNode->add_solid(pickerRay);
+	pickerNode->set_into_collide_mask(0);
 	myHandler = new CollisionHandlerQueue();
 	myTraverser.add_collider(pickerNP, myHandler);
 
