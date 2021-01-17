@@ -214,21 +214,11 @@ namespace game {
 	}
 
 	entity::entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : object { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
-		/*if (shouldLogInConsole) {
-			game::logOut("Succesfully created the player! id: " + std::to_string(id));
-		}
-		if (shouldLogToFile) {
-			logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
-		}*/
+		
 	}
 
 	entity::~entity() {
-		/*if (shouldLogInConsoleIntern) {
-			game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
-		}
-		if (shouldLogToFileIntern) {
-			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
-		}*/
+		
 	}
 	void entity::update() {
 		this->model.set_x(this->model, 0.01);
@@ -243,22 +233,10 @@ namespace game {
 	Player::Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
 		this->onGround = false;
 		this->sneaking = false;
-		
-		/*if (shouldLogInConsole) {
-			game::logOut("Succesfully created the player! id: " + std::to_string(id));
-		}
-		if (shouldLogToFile) {
-			logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
-		}*/
 	}
 
 	Player::~Player() {
-		/*if (shouldLogInConsoleIntern) {
-			game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
-		}
-		if (shouldLogToFileIntern) {
-			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
-		}*/
+
 	}
 
 	void testIfPlayerOnGround(const Event* theEvent, void* data) {

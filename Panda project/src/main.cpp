@@ -329,7 +329,6 @@ int main(int argc, char* argv[]) {
 	blocky.set_scale(0.5);
 	blocky.set_pos(0, 0, 100);
 	blocky.reparent_to(window->get_render());
-	blocky.set_shader_off(10);
 
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
