@@ -20,30 +20,18 @@
 #include "CollisionHandlerQueue.h"
 
 //Lighting
-#include "ambientLight.h"
-#include "directionalLight.h"
-#include "pointLight.h"
-#include "spotlight.h"
+#include <ambientLight.h>
+#include <directionalLight.h>
+#include <pointLight.h>
+#include <spotlight.h>
 
 //Particles
-#include "particleSystem.h"
-#include "particles.h"
+#include <particleSystem.h>
+#include <particles.h>
 
-#include "forces.h"
-#include "physical.h"
-#include "physicsManager.h"
-#include "physicsCollisionHandler.h"
-#include "linearEulerIntegrator.h"
-#include "actorNode.h"
-#include "forceNode.h"
-#include "lvector3.h"
-#include <auto_bind.h>
-#include <animControlCollection.h>
-
-
-#include <geoMipTerrain.h>
-
-#include <perlinNoise2.h>
+//Perlin Noise
 #include <perlinNoise3.h>
+
+//Textures
 #include <texturePool.h>
 #include <cardMaker.h>
