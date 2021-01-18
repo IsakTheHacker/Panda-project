@@ -21,3 +21,4 @@ fov=70
 show_ray-collisions=0
 show_block-collisions=0
 enable_pstats=1
+pstat-host=localhost

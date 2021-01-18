@@ -102,4 +102,5 @@ basic-shaders-only #f
 # Specifies if the program should abort when an assertion has failed
 assert-abort 0
 
+# My options
 textures-power-2 none

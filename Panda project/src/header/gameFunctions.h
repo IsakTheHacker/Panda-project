@@ -204,7 +204,7 @@ namespace game {
 	/// <returns> True if file exists, false if it doesn't. </returns>
 	bool fileExists(const std::string& path);
 
-	bool connectToPStats(std::string host = "", int port = -1);
+	bool connectToPStats(std::string host = "localhost", int port = -1);
 
 	// Executes a Python script
 	int runPyScript(const std::string& path);

@@ -26,7 +26,8 @@ if not os.path.isfile("data/options.txt"):
 		"fov=70",
 		"show_ray-collisions=0",
 		"show_block-collisions=0",
-		"enable_pstats=0"
+		"enable_pstats=0",
+		"pstat-host=localhost"
 	]
 	try:
 		with open("data/options.txt","w") as optionsFile:

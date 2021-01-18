@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
 	game::readOptions(scripting_options, "data/scripting_options.txt");
 
 	if (std::stoi(options["enable_pstats"])) {
-		game::connectToPStats();
+		game::connectToPStats(options["pstat-host"]);
 	}
 
 	game::setHeading(options["console-heading"]);
