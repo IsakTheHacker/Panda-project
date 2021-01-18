@@ -165,6 +165,10 @@ namespace game {
 			config["collidable"] = "0";
 		}
 
+		if (config.find("hp") != config.end()) {
+			this->hp = std::stod(config["hp"]);
+		}
+
 		if (config.find("subobjects") != config.end()) {
 			std::vector<NodePath> subobjects;
 
