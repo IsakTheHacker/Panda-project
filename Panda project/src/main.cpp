@@ -111,27 +111,27 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	//Creating folders and files
+	//Create folders and files
 	game::runPyScript("data/scripts/makeDirectories.py");
 	game::runPyScript("data/scripts/createOptionsFile.py");
 
-	//Loading config files
+	//Load config files
 	load_prc_file("data/Confauto.prc");
 	load_prc_file("data/Config.prc");
 
-	//Reading options
+	//Read options
 	std::map<std::string, std::string> options;
 	game::readOptions(options, "data/options.txt");
 	std::map<std::string, std::string> scripting_options;
 	game::readOptions(scripting_options, "data/scripting_options.txt");
 
+	//Connect to PStats server if user wants to
 	if (std::stoi(options["enable_pstats"])) {
 		game::connectToPStats(options["pstat-host"]);
 	}
 
 	game::setHeading(options["console-heading"]);
 	game::logOut("Starting...");
-
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
@@ -149,18 +149,19 @@ int main(int argc, char* argv[]) {
 	game::chunk::setDefaultWindow(window);
 	game::chunk::setDefaultFramework(framework);
 
-	// Cool stuff
-	PT(CollisionHandlerQueue) myHandler = new CollisionHandlerQueue();
-	CollisionTraverser myTraverser;
-	PT(CollisionNode) pickerNode = new CollisionNode("mouseRay");
-	PT(CollisionRay) pickerRay = new CollisionRay();
-	NodePath pickerNP = player.model.attach_new_node(pickerNode);
-	pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());
-	pickerNode->add_solid(pickerRay);
-	pickerNode->set_into_collide_mask(0);
-	myTraverser.add_collider(pickerNP, myHandler);
+	//Picker Ray
+	PT(CollisionHandlerQueue) myHandler = new CollisionHandlerQueue();			//Create Handler
+	CollisionTraverser myTraverser;												//Create Traverser
+	PT(CollisionNode) pickerNode = new CollisionNode("mouseRay");				//Create CollisionNode
+	PT(CollisionRay) pickerRay = new CollisionRay();							//Create CollisionRay
+	NodePath pickerNP = player.model.attach_new_node(pickerNode);				//Create NodePath for the attached new node
+	pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());	//Set from collide mask to use
+	pickerNode->add_solid(pickerRay);											//Add solid to CollisionNode
+	pickerNode->set_into_collide_mask(0);										//Disable into-collisions
+	myTraverser.add_collider(pickerNP, myHandler);								//Add collider to traverser
+	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 
-	//Setting up frame rate meter
+	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {
 		PT(FrameRateMeter) meter;
 		meter = new FrameRateMeter("frame_rate_meter");
@@ -173,8 +174,6 @@ int main(int argc, char* argv[]) {
 	props.set_cursor_hidden(std::stoi(options["hidden_cursor"]));
 	props.set_mouse_mode(WindowProperties::M_relative);
 	window->get_graphics_window()->request_properties(props);
-
-	pickerRay->set_from_lens(window->get_camera(0), 0, 0);
 
 	// Change background color to black
 	window->get_graphics_window()->get_active_display_region(0)->set_clear_color(LColorf(0, 0, 0, 1));
