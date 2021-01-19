@@ -702,7 +702,6 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["space"]) {
 				std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - timepoint;
-				std::cout << std::to_string(duration.count()) << std::endl;
 				if (player.flying) {
 					player.model.set_z(player.model.get_pos().get_z() + z_speed);
 				} else if (!player.onGround && duration.count() > 0.175 && !player.flying) {
