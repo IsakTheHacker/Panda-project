@@ -168,6 +168,12 @@ int main(int argc, char* argv[]) {
 		meter->setup_window(window->get_graphics_window());
 	}
 
+	//Initialize fog
+	PT(Fog) fog = new Fog("Fog");
+	fog->set_color(25, 25, 25);
+	fog->set_exp_density(0.0001);
+	window->get_render().set_fog(fog);
+
 	//Mouse input
 	PT(MouseWatcher) mouseWatcher = DCAST(MouseWatcher, window->get_mouse().node());
 	WindowProperties props = window->get_graphics_window()->get_properties();
