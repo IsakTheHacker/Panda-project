@@ -140,6 +140,23 @@ namespace game {
 		return 0;
 	}
 
+	// Prints timer information to the console (blue color)
+	template<typename T>
+	int timingInfoOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
+		std::string text = std::to_string(input);
+		SetConsoleTextAttribute(h, 1 | FOREGROUND_INTENSITY);
+		if (!includeTime) {
+			std::cout << "Timing info: " << text << "\n";
+		} else {
+			std::cout << getConvertedDateTime(false, true) << " Timing info: " << text << "\n";
+		}
+		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		if (shouldLogToFile) {
+			logToFile("game.log", "Timing info: " + text);
+		}
+		return 0;
+	}
+
 	// Prints unimportant logs to the console (white color)
 	template<typename T>
 	int logOut(T input, bool shouldLogToFile = false, bool includeTime = true) {
