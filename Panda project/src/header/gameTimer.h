@@ -2,7 +2,9 @@
 
 //C++ built-in libraries
 #include <chrono>
-#include <iostream>
+
+//My libraries
+#include "gameFunctions.h"
 
 namespace game {
 	class timer {

@@ -10,6 +10,6 @@ namespace game {
 		duration = end - start;
 
 		double convertedDuration = duration.count();
-		std::cout << "Timer took " << convertedDuration << "s" << std::endl;
+		game::timingInfoOut("Timer took " + std::to_string(convertedDuration) + " seconds!");
 	}
 }
