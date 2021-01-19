@@ -702,9 +702,12 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["space"]) {
 				std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - timepoint;
-				if (player.flying) {
+				if (player.flying && duration.count() > 0.05 && duration.count() < 0.275) {
+					player.flying = false;
+					velocity = 0;
+				} else if (player.flying) {
 					player.model.set_z(player.model.get_pos().get_z() + z_speed);
-				} else if (!player.onGround && duration.count() > 0.175 && !player.flying) {
+				} else if (!player.onGround && duration.count() > 0.05 && !player.flying) {
 					player.flying = true;
 				} else if (player.onGround) {
 					if (!player.sneaking) {
