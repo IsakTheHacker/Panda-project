@@ -255,6 +255,7 @@ namespace game {
 		if (!in_out_pattern) {
 			if (std::round(entry->get_into_node_path().get_parent().get_z()) <= std::round(entry->get_from_node_path().get_parent().get_z())) {
 				player.onGround = true;
+				player.flying = false;
 			} else {
 				player.onGround = false;
 			}

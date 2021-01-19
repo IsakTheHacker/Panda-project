@@ -395,6 +395,7 @@ int main(int argc, char* argv[]) {
 	entity.model.set_pos(0, 0, 15);
 	entity.model.reparent_to(window->get_render());
 
+	std::chrono::time_point<std::chrono::steady_clock> timepoint;
 
 	//Main loop
 	Thread* current_thread = Thread::get_current_thread();
@@ -696,7 +697,13 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			if (keys["space"]) {
-				if (player.onGround) {
+				std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - timepoint;
+				std::cout << std::to_string(duration.count()) << std::endl;
+				if (!player.onGround && duration.count() > 0.1 && !player.flying) {
+					game::errorOut("Player is flying!");
+					player.flying = true;
+					velocity = -0.25;
+				} else if (player.onGround) {
 					if (!player.sneaking) {
 						velocity = -0.25;
 					} else if (player.sneaking) {
@@ -704,6 +711,7 @@ int main(int argc, char* argv[]) {
 					}
 					player.onGround = false;
 				}
+				timepoint = std::chrono::high_resolution_clock::now();
 			}
 			if (keys["q"]) {
 				for (std::pair<int, int> pair : game::chunk::loaded_chunks) {
