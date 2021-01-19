@@ -175,10 +175,6 @@ int main(int argc, char* argv[]) {
 	fog->set_exp_density(0.0001);
 	window->get_render().set_fog(fog);
 
-	{
-		game::timer timer;
-	}
-
 	//Mouse input
 	PT(MouseWatcher) mouseWatcher = DCAST(MouseWatcher, window->get_mouse().node());
 	WindowProperties props = window->get_graphics_window()->get_properties();

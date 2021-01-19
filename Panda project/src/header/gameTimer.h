@@ -8,11 +8,13 @@
 
 namespace game {
 	class timer {
+	private:
+		bool printDuration;
 	public:
 		std::chrono::time_point<std::chrono::steady_clock> start, end;
 		std::chrono::duration<double> duration;
 
-		timer();
+		timer(bool printDuration = true);
 		~timer();
 	};
 }

@@ -1,7 +1,8 @@
 #include "gameTimer.h"
 
 namespace game {
-	timer::timer() {
+	timer::timer(bool printDuration) {
+		this->printDuration = printDuration;
 		start = std::chrono::high_resolution_clock::now();
 	}
 
@@ -10,6 +11,8 @@ namespace game {
 		duration = end - start;
 
 		double convertedDuration = duration.count();
-		game::timingInfoOut("Timer took " + std::to_string(convertedDuration) + " seconds!");
+		if (this->printDuration) {
+			game::timingInfoOut("Timer took " + std::to_string(convertedDuration) + " seconds!");
+		}
 	}
 }
