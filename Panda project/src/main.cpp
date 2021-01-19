@@ -31,6 +31,7 @@ std::string universePath = "universes/Test/";
 #include "constantVars.h"
 #include "chunk.h"
 #include "gameObject.h"
+#include "gameTimer.h"
 
 game::Player player;
 
