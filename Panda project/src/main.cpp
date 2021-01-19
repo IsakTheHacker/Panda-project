@@ -407,30 +407,32 @@ int main(int argc, char* argv[]) {
 		entity.update();
 
 		// Velocity computing (Z axis)
-		if (velocity == 0 && !player.onGround) {
-			velocity = 0.01;
-		} else {
-			if (velocity > 0) {
-				if (velocity < 1.25) {
-					velocity = velocity * velocityModifier;
-				}
-			} else if (velocity < 0) {
-				double value = (int)((double)player.model.get_z() * 100 + 0.5);
-				value = (double)value / 100;
-				double value2 = (int)((player.model.get_z() - velocity) * 100 + 0.5);
-				value2 = (double)value2 / 100;
-				if (value == value2) {
-					velocity = 0.01;
-				} else {
-					velocity = velocity / velocityModifier;
+		if (!player.flying) {
+			if (velocity == 0 && !player.onGround) {
+				velocity = 0.01;
+			} else {
+				if (velocity > 0) {
+					if (velocity < 1.25) {
+						velocity = velocity * velocityModifier;
+					}
+				} else if (velocity < 0) {
+					double value = (int)((double)player.model.get_z() * 100 + 0.5);
+					value = (double)value / 100;
+					double value2 = (int)((player.model.get_z() - velocity) * 100 + 0.5);
+					value2 = (double)value2 / 100;
+					if (value == value2) {
+						velocity = 0.01;
+					} else {
+						velocity = velocity / velocityModifier;
+					}
 				}
 			}
+			if (player.onGround) {
+				velocity = 0;
+			}
+			player.model.set_z(player.model.get_pos().get_z() - velocity);
+			panda.set_z(player.model.get_pos().get_z() - velocity);
 		}
-		if (player.onGround) {
-			velocity = 0;
-		}
-		player.model.set_z(player.model.get_pos().get_z() - velocity);
-		panda.set_z(player.model.get_pos().get_z() - velocity);
 
 		// Checking if current chunk exists, generate if not.
 		if (player.model.get_x() < 0) {
@@ -684,7 +686,9 @@ int main(int argc, char* argv[]) {
 				panda.set_x(player.model, 0 + x_speed);
 			}
 			if (keys["lshift"]) {
-				if (player.onGround && !player.sneaking) {
+				if (player.flying) {
+					player.model.set_z(player.model.get_pos().get_z() - z_speed);
+				} else if (player.onGround && !player.sneaking) {
 					player.sneaking = true;
 					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance);
 					player.model.set_z(player.model.get_pos().get_z() - sneak_distance);
@@ -699,10 +703,10 @@ int main(int argc, char* argv[]) {
 			if (keys["space"]) {
 				std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - timepoint;
 				std::cout << std::to_string(duration.count()) << std::endl;
-				if (!player.onGround && duration.count() > 0.1 && !player.flying) {
-					game::errorOut("Player is flying!");
+				if (player.flying) {
+					player.model.set_z(player.model.get_pos().get_z() + z_speed);
+				} else if (!player.onGround && duration.count() > 0.175 && !player.flying) {
 					player.flying = true;
-					velocity = -0.25;
 				} else if (player.onGround) {
 					if (!player.sneaking) {
 						velocity = -0.25;
