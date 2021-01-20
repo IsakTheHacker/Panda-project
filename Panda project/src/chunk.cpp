@@ -47,7 +47,7 @@ namespace game {
 					blocks.push_back(object);
 
 					//Tree generating
-					/*if (rand() % 50 == 49) {
+					if (rand() % 50 == 49) {
 						game::object object("data/assets/blockproperties/log.blockproperties", window, framework, false, false);
 						object.model.set_pos(j, k, object_z + 2);
 
@@ -55,10 +55,8 @@ namespace game {
 						object.model.set_tag("id", std::to_string(object.id));
 						object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
-						object.model.set_shader_auto();
-
 						blocks.push_back(object);
-					}*/
+					}
 				}
 			}
 		}
