@@ -104,3 +104,4 @@ assert-abort 0
 
 # My options
 textures-power-2 none
+dump-generated-shaders 1
