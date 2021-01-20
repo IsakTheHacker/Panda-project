@@ -116,10 +116,6 @@ int main(int argc, char* argv[]) {
 	game::runPyScript("data/scripts/makeDirectories.py");
 	game::runPyScript("data/scripts/createOptionsFile.py");
 
-	//Load config files
-	load_prc_file("data/Confauto.prc");
-	load_prc_file("data/Config.prc");
-
 	//Read options
 	std::map<std::string, std::string> options;
 	game::readOptions(options, "data/options.txt");
