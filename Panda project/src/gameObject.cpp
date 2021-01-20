@@ -185,14 +185,12 @@ namespace game {
 				}
 				if (subobjectOptions.find("texture") != subobjectOptions.end()) {
 					texture = TexturePool::get_global_ptr()->load_cube_map(subobjectOptions["texture"]);
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 				} else {
 					texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 				}
 
+				texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+				texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 				NodePath subobject = window->load_model(framework.get_models(), subobjectOptions["model"]);
 				if (subobjectOptions.find("texture") != subobjectOptions.end()) {
 					subobject.get_child(0).set_texture(texture, 1);
