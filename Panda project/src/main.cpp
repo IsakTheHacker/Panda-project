@@ -361,6 +361,9 @@ int main(int argc, char* argv[]) {
 	taskMgr->add(computePlayerZVelocity);
 	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("calculatePlayerZVelocity", task::setPlayerChunkPos, NULL);
 	taskMgr->add(setPlayerChunkPos);
+	std::tuple<WindowFramework*, PandaFramework, PerlinNoise3> tuple = { window, framework, perlinNoise };
+	PT(GenericAsyncTask) generateChunks = new GenericAsyncTask("calculatePlayerZVelocity", task::generateChunks, (void*)&tuple);
+	taskMgr->add(generateChunks);
 
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
@@ -402,21 +405,6 @@ int main(int argc, char* argv[]) {
 			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
 		}
 		entity.update();
-
-		// Checking if current chunk exists, generate if not.
-		if (game::chunk::loaded_chunks.find(std::pair<int, int>(player.chunk_x, player.chunk_y)) != game::chunk::loaded_chunks.end()) {
-			chunk_exists = true;
-		} else {
-			chunk_exists = false;
-		}
-
-		if (!chunk_exists && !keys["f5"]) {
-			game::chunk chunk(player.chunk_x, player.chunk_y);														//Create new chunk
-			chunk.generateChunk(window, framework, perlinNoise);													//Apply the generateChunk function on the new chunk
-			game::chunks.push_back(chunk);																			//Push the chunk to vector game::chunks
-			game::chunk::loaded_chunks.insert(std::pair<int, int>(player.chunk_x, player.chunk_y));
-			game::chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = game::chunks.size()-1;
-		}
 
 		if (mouseInGame) {
 			if (handInventoryIndex < 0) {
@@ -573,10 +561,10 @@ int main(int argc, char* argv[]) {
 		}
 
 		//Set text to the new values
-		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
+		/*text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
 		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
 		text3->set_text("Chunk X: " + std::to_string(player.chunk_x) + "\nChunk Y: " + std::to_string(player.chunk_y));
-		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
+		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));*/
 
 		if (mouseInGame) {
 			if (window->get_graphics_window()) {

@@ -48,4 +48,26 @@ namespace task {
 
 		return AsyncTask::DS_cont;		//Continue this task next frame
 	}
+
+	AsyncTask::DoneStatus generateChunks(GenericAsyncTask* task, void* data) {
+		std::tuple<WindowFramework*, PandaFramework, PerlinNoise3> tuple = *(std::tuple<WindowFramework*, PandaFramework, PerlinNoise3>*)data;
+		bool chunk_exists = true;
+
+		/*if (game::chunk::loaded_chunks.find(std::pair<int, int>(player.chunk_x, player.chunk_y)) != game::chunk::loaded_chunks.end()) {
+			chunk_exists = true;
+		} else {
+			chunk_exists = false;
+		}*/
+
+		//if (!chunk_exists && !keys["f5"]) {
+		//	game::chunk chunk(player.chunk_x, player.chunk_y);														//Create new chunk
+		//	chunk.generateChunk(std::get<0>(tuple), std::get<1>(tuple), std::get<2>(tuple));						//Apply the generateChunk function on the new chunk
+		//	game::chunks.push_back(chunk);																			//Push the chunk to vector game::chunks
+		//	game::chunk::loaded_chunks.insert(std::pair<int, int>(player.chunk_x, player.chunk_y));
+		//	game::chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = game::chunks.size() - 1;
+		//} else {
+		//	pass();
+		//}
+		return AsyncTask::DS_cont;		//Continue this task next frame
+	}
 }

@@ -9,7 +9,7 @@
   RescaleNormalAttrib:none
   ShadeModelAttrib:smooth
   ShaderAttrib:auto
-  TexMatrixAttrib: default(T:(pos -0.02 0 -15))
+  TexMatrixAttrib: default(T:(pos -0.29 0 -15))
   TextureAttrib:on default:stone-0^1
   TexGenAttrib: default(world_position)
 */
