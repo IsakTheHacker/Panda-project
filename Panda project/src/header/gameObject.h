@@ -61,6 +61,8 @@ namespace game {
 		bool onGround;
 		bool sneaking;
 		bool flying;
+		double velocity = 0.0;
+		double velocityModifier = 1.1;
 
 		Player(bool shouldLogInConsole = false, bool shouldLogToFile = false);
 		Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
