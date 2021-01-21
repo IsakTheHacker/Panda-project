@@ -36,6 +36,7 @@
     <ClCompile Include="src\gameFunctions.cpp" />
     <ClCompile Include="src\gameInventory.cpp" />
     <ClCompile Include="src\gameItem.cpp" />
+    <ClCompile Include="src\gameTasks.cpp" />
     <ClCompile Include="src\gameTimer.cpp" />
     <ClCompile Include="src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -74,6 +75,7 @@
     <ClInclude Include="src\header\gameInventory.h" />
     <ClInclude Include="src\header\gameItem.h" />
     <ClInclude Include="src\header\gameLanguage.h" />
+    <ClInclude Include="src\header\gameTasks.h" />
     <ClInclude Include="src\header\gameTimer.h" />
     <ClInclude Include="src\header\gameVars.h" />
     <ClInclude Include="src\header\keyDefinitions.h" />
