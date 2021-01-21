@@ -306,7 +306,6 @@ int main(int argc, char* argv[]) {
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
 	NodePath blockyC = blocky.attach_new_node(cSphere_node2);
-	blockyC.show();
 	
 	player.model.set_z(30);
 
