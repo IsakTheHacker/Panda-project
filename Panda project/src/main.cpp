@@ -356,6 +356,10 @@ int main(int argc, char* argv[]) {
 
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
+	//Add tasks
+	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, (void*)&panda);
+	taskMgr->add(computePlayerZVelocity);
+
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
 	double camera_y_speed = std::stof(options["camera_y_speed"]);
@@ -384,9 +388,6 @@ int main(int argc, char* argv[]) {
 	double heading;
 	double pitch;
 
-	double velocity = 0.0;
-	double velocityModifier = 1.1;
-
 	//Testing entities
 	game::entity entity("data/assets/entityproperties/test.entityproperties", window, framework, false);
 	entity.model.set_pos(0, 0, 15);
@@ -402,34 +403,6 @@ int main(int argc, char* argv[]) {
 			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
 		}
 		entity.update();
-
-		// Velocity computing (Z axis)
-		if (!player.flying) {
-			if (velocity == 0 && !player.onGround) {
-				velocity = 0.01;
-			} else {
-				if (velocity > 0) {
-					if (velocity < 1.25) {
-						velocity = velocity * velocityModifier;
-					}
-				} else if (velocity < 0) {
-					double value = (int)((double)player.model.get_z() * 100 + 0.5);
-					value = (double)value / 100;
-					double value2 = (int)((player.model.get_z() - velocity) * 100 + 0.5);
-					value2 = (double)value2 / 100;
-					if (value == value2) {
-						velocity = 0.01;
-					} else {
-						velocity = velocity / velocityModifier;
-					}
-				}
-			}
-			if (player.onGround) {
-				velocity = 0;
-			}
-			player.model.set_z(player.model.get_pos().get_z() - velocity);
-			panda.set_z(player.model.get_pos().get_z() - velocity);
-		}
 
 		// Checking if current chunk exists, generate if not.
 		if (player.model.get_x() < 0) {
@@ -701,16 +674,16 @@ int main(int argc, char* argv[]) {
 				std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - timepoint;
 				if (player.flying && duration.count() > 0.05 && duration.count() < 0.275) {
 					player.flying = false;
-					velocity = 0;
+					player.velocity = 0;
 				} else if (player.flying) {
 					player.model.set_z(player.model.get_pos().get_z() + z_speed);
 				} else if (!player.onGround && duration.count() > 0.05 && !player.flying) {
 					player.flying = true;
 				} else if (player.onGround) {
 					if (!player.sneaking) {
-						velocity = -0.25;
+						player.velocity = -0.25;
 					} else if (player.sneaking) {
-						velocity = -0.45;
+						player.velocity = -0.45;
 					}
 					player.onGround = false;
 				}
@@ -725,7 +698,7 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["r"]) {
 				player.model.set_z(30);
-				velocity = 0;
+				player.velocity = 0;
 			}
 			if (keys["f2"]) {
 				std::string filename = "screenshots/" + game::getConvertedDateTime() + ".png";
