@@ -8,7 +8,7 @@
   RescaleNormalAttrib:none
   ShadeModelAttrib:smooth
   ShaderAttrib:auto
-  TexMatrixAttrib: default(T:(pos -8 6 -2))
+  TexMatrixAttrib: default(T:(pos -8 -10 0))
   TextureAttrib:on default:log-0^1
   TexGenAttrib: default(world_position)
 */

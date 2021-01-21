@@ -359,6 +359,8 @@ int main(int argc, char* argv[]) {
 	//Add tasks
 	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, (void*)&panda);
 	taskMgr->add(computePlayerZVelocity);
+	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("calculatePlayerZVelocity", task::setPlayerChunkPos, NULL);
+	taskMgr->add(setPlayerChunkPos);
 
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
@@ -374,9 +376,6 @@ int main(int argc, char* argv[]) {
 
 	double center_x = 0.0;
 	double center_y = 0.0;
-
-	std::string chunk_x;
-	std::string chunk_y;
 
 	double sneak_distance = std::stod(options["sneak-distance"]);
 	bool chunk_exists = false;
@@ -405,28 +404,17 @@ int main(int argc, char* argv[]) {
 		entity.update();
 
 		// Checking if current chunk exists, generate if not.
-		if (player.model.get_x() < 0) {
-			chunk_x = std::to_string((int)(player.model.get_x() - game::chunk::chunksize) / game::chunk::chunksize);
-		} else {
-			chunk_x = std::to_string((int)player.model.get_x() / game::chunk::chunksize);
-		}
-		if (player.model.get_y() < 0) {
-			chunk_y = std::to_string((int)(player.model.get_y() - game::chunk::chunksize) / game::chunk::chunksize);
-		} else {
-			chunk_y = std::to_string((int)player.model.get_y() / game::chunk::chunksize);
-		}
-		
-		if (game::chunk::loaded_chunks.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::loaded_chunks.end()) {
+		if (game::chunk::loaded_chunks.find(std::pair<int, int>(player.chunk_x, player.chunk_y)) != game::chunk::loaded_chunks.end()) {
 			chunk_exists = true;
 		} else {
 			chunk_exists = false;
 		}
 
 		if (!chunk_exists && !keys["f5"]) {
-			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));																//Create new chunk
-			chunk.generateChunk(window, framework, perlinNoise);																	//Apply the generateChunk function on the new chunk
-			game::chunks.push_back(chunk);																							//Push the chunk to vector game::chunks
-			game::chunk::loaded_chunks.insert(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y)));
+			game::chunk chunk(player.chunk_x, player.chunk_y);														//Create new chunk
+			chunk.generateChunk(window, framework, perlinNoise);													//Apply the generateChunk function on the new chunk
+			game::chunks.push_back(chunk);																			//Push the chunk to vector game::chunks
+			game::chunk::loaded_chunks.insert(std::pair<int, int>(player.chunk_x, player.chunk_y));
 			game::chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = game::chunks.size()-1;
 		}
 
@@ -587,7 +575,7 @@ int main(int argc, char* argv[]) {
 		//Set text to the new values
 		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
 		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
-		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
+		text3->set_text("Chunk X: " + std::to_string(player.chunk_x) + "\nChunk Y: " + std::to_string(player.chunk_y));
 		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
 
 		if (mouseInGame) {

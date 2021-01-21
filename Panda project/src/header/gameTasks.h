@@ -6,8 +6,11 @@
 #include <nodePath.h>
 
 //My libraries
-#include <gameObject.h>
+#include "gameObject.h"
+#include "chunk.h"
 
 namespace task {
 	AsyncTask::DoneStatus computePlayerZVelocity(GenericAsyncTask* task, void* data);
+
+	AsyncTask::DoneStatus setPlayerChunkPos(GenericAsyncTask* task, void* data);
 }

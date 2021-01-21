@@ -27,7 +27,7 @@ namespace game {
 		//Static member variables
 		static std::set<std::pair<int, int>> loaded_chunks;
 		static std::map<std::pair<int, int>, int> index;
-		static unsigned int chunksize;
+		static int chunksize;
 
 		chunk(const std::vector<object>& objects, const int& x, const int& y);
 		chunk(const int& x, const int& y);

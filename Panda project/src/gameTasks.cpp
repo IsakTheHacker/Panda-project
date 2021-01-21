@@ -33,4 +33,19 @@ namespace task {
 
 		return AsyncTask::DS_cont;		//Continue this task next frame
 	}
+
+	AsyncTask::DoneStatus setPlayerChunkPos(GenericAsyncTask* task, void* data) {
+		if (player.model.get_x() < 0) {
+			player.chunk_x = (int)(player.model.get_x() - game::chunk::chunksize) / game::chunk::chunksize;
+		} else {
+			player.chunk_x = (int)player.model.get_x() / game::chunk::chunksize;
+		}
+		if (player.model.get_y() < 0) {
+			player.chunk_y = (int)(player.model.get_y() - game::chunk::chunksize) / game::chunk::chunksize;
+		} else {
+			player.chunk_y = (int)player.model.get_y() / game::chunk::chunksize;
+		}
+
+		return AsyncTask::DS_cont;		//Continue this task next frame
+	}
 }
