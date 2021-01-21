@@ -254,7 +254,7 @@ int main(int argc, char* argv[]) {
 
 	//Loading chunks
 	game::readOptions(universeOptions, universePath + "universe");
-	int chunksize = std::stoi(universeOptions["chunksize"]);
+	game::chunk::chunksize = std::stoi(universeOptions["chunksize"]);
 	unsigned long seed = std::stoul(universeOptions["seed"]);
 	bool ignore_lock = std::stoi(universeOptions["ignore-lock"]);
 	if (game::fileExists(universePath + "lock")) {
@@ -268,7 +268,7 @@ int main(int argc, char* argv[]) {
 		std::ofstream lockFile(universePath + "lock");
 		lockFile.close();
 	}
-	if (game::isOdd(chunksize)) {
+	if (game::isOdd(game::chunk::chunksize)) {
 		game::errorOut("Chunksize must be even, not odd!");
 		exit(1);
 	}
@@ -406,14 +406,14 @@ int main(int argc, char* argv[]) {
 
 		// Checking if current chunk exists, generate if not.
 		if (player.model.get_x() < 0) {
-			chunk_x = std::to_string((int)(player.model.get_x() - chunksize) / chunksize);
+			chunk_x = std::to_string((int)(player.model.get_x() - game::chunk::chunksize) / game::chunk::chunksize);
 		} else {
-			chunk_x = std::to_string((int)player.model.get_x() / chunksize);
+			chunk_x = std::to_string((int)player.model.get_x() / game::chunk::chunksize);
 		}
 		if (player.model.get_y() < 0) {
-			chunk_y = std::to_string((int)(player.model.get_y() - chunksize) / chunksize);
+			chunk_y = std::to_string((int)(player.model.get_y() - game::chunk::chunksize) / game::chunk::chunksize);
 		} else {
-			chunk_y = std::to_string((int)player.model.get_y() / chunksize);
+			chunk_y = std::to_string((int)player.model.get_y() / game::chunk::chunksize);
 		}
 		
 		if (game::chunk::loaded_chunks.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::loaded_chunks.end()) {
@@ -460,14 +460,14 @@ int main(int argc, char* argv[]) {
 			int block_chunk_x;
 			int block_chunk_y;
 			if (block.get_x() < 0) {
-				block_chunk_x = (int)(block.get_x() - chunksize) / chunksize;
+				block_chunk_x = (int)(block.get_x() - game::chunk::chunksize) / game::chunk::chunksize;
 			} else {
-				block_chunk_x = (int)block.get_x() / chunksize;
+				block_chunk_x = (int)block.get_x() / game::chunk::chunksize;
 			}
 			if (block.get_y() < 0) {
-				block_chunk_y = (int)(block.get_y() - chunksize) / chunksize;
+				block_chunk_y = (int)(block.get_y() - game::chunk::chunksize) / game::chunk::chunksize;
 			} else {
-				block_chunk_y = (int)block.get_y() / chunksize;
+				block_chunk_y = (int)block.get_y() / game::chunk::chunksize;
 			}
 
 			if (keys["mouse1"]) {
@@ -531,14 +531,14 @@ int main(int argc, char* argv[]) {
 					object.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
 
 					if (object.model.get_x() < 0) {
-						block_chunk_x = (int)(object.model.get_x() - chunksize) / chunksize;
+						block_chunk_x = (int)(object.model.get_x() - game::chunk::chunksize) / game::chunk::chunksize;
 					} else {
-						block_chunk_x = (int)object.model.get_x() / chunksize;
+						block_chunk_x = (int)object.model.get_x() / game::chunk::chunksize;
 					}
 					if (object.model.get_y() < 0) {
-						block_chunk_y = (int)(object.model.get_y() - chunksize) / chunksize;
+						block_chunk_y = (int)(object.model.get_y() - game::chunk::chunksize) / game::chunk::chunksize;
 					} else {
-						block_chunk_y = (int)object.model.get_y() / chunksize;
+						block_chunk_y = (int)object.model.get_y() / game::chunk::chunksize;
 					}
 
 					if (keys["r"]) {

@@ -232,6 +232,7 @@ namespace game {
 	//Initalize static members
 	std::set<std::pair<int, int>> chunk::loaded_chunks;
 	std::map<std::pair<int, int>, int> chunk::index;
+	unsigned int chunk::chunksize;
 	PerlinNoise3 chunk::perlinNoise;
 	WindowFramework* chunk::window;
 	PandaFramework* chunk::framework;

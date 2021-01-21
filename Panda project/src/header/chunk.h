@@ -22,9 +22,12 @@ namespace game {
 		int x;
 		int y;
 		std::vector<object> objects;
+		NodePath oneMesh;
+
+		//Static member variables
 		static std::set<std::pair<int, int>> loaded_chunks;
 		static std::map<std::pair<int, int>, int> index;
-		NodePath oneMesh;
+		static unsigned int chunksize;
 
 		chunk(const std::vector<object>& objects, const int& x, const int& y);
 		chunk(const int& x, const int& y);
