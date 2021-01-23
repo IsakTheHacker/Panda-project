@@ -142,6 +142,12 @@ int main(int argc, char* argv[]) {
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
+	if (window == nullptr) {
+		game::errorOut("Error while opening window. Quitting!");
+		game::waitForKeypress();
+		return 1;
+	}
+
 	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
 	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
 	window->get_render().set_shader_auto();
