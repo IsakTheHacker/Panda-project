@@ -361,7 +361,7 @@ int main(int argc, char* argv[]) {
 	taskMgr->add(computePlayerZVelocity);
 	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("calculatePlayerZVelocity", task::setPlayerChunkPos, NULL);
 	taskMgr->add(setPlayerChunkPos);
-	std::tuple<WindowFramework*, PandaFramework, PerlinNoise3> tuple = { window, framework, perlinNoise };
+	std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*> tuple = { window, &framework, &perlinNoise };
 	PT(GenericAsyncTask) generateChunks = new GenericAsyncTask("calculatePlayerZVelocity", task::generateChunks, (void*)&tuple);
 	taskMgr->add(generateChunks);
 
@@ -385,7 +385,7 @@ int main(int argc, char* argv[]) {
 
 	std::string sad = "Hello World";
 
-	NodePath block;
+	NodePath block("Block");
 
 	double heading;
 	double pitch;
@@ -561,10 +561,10 @@ int main(int argc, char* argv[]) {
 		}
 
 		//Set text to the new values
-		/*text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
+		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
 		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
 		text3->set_text("Chunk X: " + std::to_string(player.chunk_x) + "\nChunk Y: " + std::to_string(player.chunk_y));
-		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));*/
+		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
 
 		if (mouseInGame) {
 			if (window->get_graphics_window()) {
