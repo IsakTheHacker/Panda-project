@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_08EA351CC32F0B0F5E8BEBDC8837ADF6"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_10A0D9CC5D0441DA91E1ECFCB5FFF7C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -45,32 +39,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1B35308985390A52CE77630B92007C8A"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1BC9490494A9420CBB51DACFA524739A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_20763118A94782D2D628703080E309A9"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_21B250AF638744A9866508B0B9143807"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2298DDABEAA32BCD75E456023BB7D8E6"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -105,12 +81,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_41DB5DE35F0682840693A976CC2C56B9"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_42A6A97A21514E7CA6DB8DA43F3680F1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -123,12 +93,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_479953B5DFB9BE61345951BF0616549F"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_49A221D76FA64040A8EBF7736A896EA8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -137,12 +101,6 @@
         {
         "MsmKey" = "8:_4AAF5FC9514746C091A8C6F64198FAB9"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4AD5B58E1A68DBCEAEC6D283C059138A"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -171,18 +129,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6CB928980D083ECE0452C7302D0C8230"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6E90D452DE5E7D3FB5A4F5BB4245490E"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_7503EE377ECB471AA5A4B51B4649F909"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -197,12 +143,6 @@
         {
         "MsmKey" = "8:_8293E92B142043D8A8D07C65C3651D67"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_84E258FDC1B5355DE0E3178EB9FC262E"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -243,12 +183,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9C31C62F871B735A638F289A25A219A9"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9D6E8BF0A4174D5A91B7B48988E2459C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -273,12 +207,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A9334543CC30FE7395A9421BE8203D51"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A9DA341C5BA848A78DC9268A44DD19A8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -287,30 +215,6 @@
         {
         "MsmKey" = "8:_AD4ADDED4ABF4E7D92A56EAFF1BC8DFC"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B47D18CA578929D919CC88657C784F52"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B9BBB01EC9F4239CD7069751ACFE3EEB"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BAC897D2474414291E7C7F749A874178"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C958F821089220E73D515B6BA4ADA55A"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -365,18 +269,6 @@
         {
         "MsmKey" = "8:_FD9D54DC78494DE3AE53498B4FE14A4C"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FDA01DA5DA9370B62149BC021F501214"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FF32B6F994E2C423032C224606C0C2B4"
-        "OwnerKey" = "8:_9BACE30D0E0648ECB22492D08995C451"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -486,26 +378,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_08EA351CC32F0B0F5E8BEBDC8837ADF6"
-            {
-            "SourcePath" = "8:api-ms-win-crt-math-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-math-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_10A0D9CC5D0441DA91E1ECFCB5FFF7C7"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-3.png"
@@ -566,26 +438,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1B35308985390A52CE77630B92007C8A"
-            {
-            "SourcePath" = "8:api-ms-win-crt-locale-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-locale-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1BC9490494A9420CBB51DACFA524739A"
             {
             "SourcePath" = "8:..\\Panda project\\libp3dtoolconfig.dll"
@@ -606,26 +458,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20763118A94782D2D628703080E309A9"
-            {
-            "SourcePath" = "8:api-ms-win-crt-convert-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-convert-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_21B250AF638744A9866508B0B9143807"
             {
             "SourcePath" = "8:..\\Panda project\\libpandaegg.dll"
@@ -644,26 +476,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2298DDABEAA32BCD75E456023BB7D8E6"
-            {
-            "SourcePath" = "8:libp3dtool.dll"
-            "TargetName" = "8:libp3dtool.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_23797D784B15439C903A0C2578C27E48"
@@ -766,26 +578,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_41DB5DE35F0682840693A976CC2C56B9"
-            {
-            "SourcePath" = "8:VCRUNTIME140.dll"
-            "TargetName" = "8:VCRUNTIME140.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_42A6A97A21514E7CA6DB8DA43F3680F1"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-4.png"
@@ -826,26 +618,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_479953B5DFB9BE61345951BF0616549F"
-            {
-            "SourcePath" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_49A221D76FA64040A8EBF7736A896EA8"
             {
             "SourcePath" = "8:..\\Panda project\\data\\scripts\\makeDirectories.py"
@@ -884,26 +656,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4AD5B58E1A68DBCEAEC6D283C059138A"
-            {
-            "SourcePath" = "8:libp3dtoolconfig.dll"
-            "TargetName" = "8:libp3dtoolconfig.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_51E35FA591914C0FAD7A5F56EEF351C3"
@@ -986,46 +738,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6CB928980D083ECE0452C7302D0C8230"
-            {
-            "SourcePath" = "8:api-ms-win-crt-time-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-time-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E90D452DE5E7D3FB5A4F5BB4245490E"
-            {
-            "SourcePath" = "8:python38.dll"
-            "TargetName" = "8:python38.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7503EE377ECB471AA5A4B51B4649F909"
             {
             "SourcePath" = "8:..\\Panda project\\models\\egg\\blocky.egg"
@@ -1084,26 +796,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_84E258FDC1B5355DE0E3178EB9FC262E"
-            {
-            "SourcePath" = "8:MSVCP140.dll"
-            "TargetName" = "8:MSVCP140.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87EB3080C05247C39B8C85E7BD1CE7A6"
@@ -1206,26 +898,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C31C62F871B735A638F289A25A219A9"
-            {
-            "SourcePath" = "8:libp3framework.dll"
-            "TargetName" = "8:libp3framework.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9D6E8BF0A4174D5A91B7B48988E2459C"
             {
             "SourcePath" = "8:..\\Panda project\\libp3windisplay.dll"
@@ -1306,26 +978,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9334543CC30FE7395A9421BE8203D51"
-            {
-            "SourcePath" = "8:libpandaexpress.dll"
-            "TargetName" = "8:libpandaexpress.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9DA341C5BA848A78DC9268A44DD19A8"
             {
             "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\hand-inventory-all.png"
@@ -1364,86 +1016,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B47D18CA578929D919CC88657C784F52"
-            {
-            "SourcePath" = "8:api-ms-win-crt-conio-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-conio-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B9BBB01EC9F4239CD7069751ACFE3EEB"
-            {
-            "SourcePath" = "8:api-ms-win-crt-utility-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-utility-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BAC897D2474414291E7C7F749A874178"
-            {
-            "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C958F821089220E73D515B6BA4ADA55A"
-            {
-            "SourcePath" = "8:api-ms-win-crt-heap-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-heap-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB809E1618CE4064B4B275D8F71102D4"
@@ -1624,46 +1196,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FDA01DA5DA9370B62149BC021F501214"
-            {
-            "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF32B6F994E2C423032C224606C0C2B4"
-            {
-            "SourcePath" = "8:libpanda.dll"
-            "TargetName" = "8:libpanda.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -1900,7 +1432,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Panda Project"
         "ProductCode" = "8:{C86D25C8-98B6-412E-92FC-D4F8D733AB2C}"
-        "PackageCode" = "8:{524BCBBF-C349-4E7E-B940-7347EA187069}"
+        "PackageCode" = "8:{349061D2-ACE9-4D4E-9E99-B2FEECF7AA0B}"
         "UpgradeCode" = "8:{85F4E197-8AE8-4284-85E5-9F8BC2D8CBC2}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1908,7 +1440,7 @@
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:0.1.1"
-        "Manufacturer" = "8:Placeholder Company"
+        "Manufacturer" = "8:Isak_The_Hacker"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/IsakTheHacker/Panda-project"
         "Title" = "8:Panda Project Installer"
@@ -1916,7 +1448,7 @@
         "ARPCONTACT" = "8:Isak_The_Hacker"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:This is the official installer for The Panda Project!"
-        "ARPURLINFOABOUT" = "8:https://github.com/IsakTheHacker/Panda-project"
+        "ARPURLINFOABOUT" = "8:https://github.com/IsakTheHacker"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
