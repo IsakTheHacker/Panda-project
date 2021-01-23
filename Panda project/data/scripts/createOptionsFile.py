@@ -28,7 +28,8 @@ if not os.path.isfile("data/options.txt"):
 		"show_block-collisions=0",
 		"enable_pstats=0",
 		"pstat-host=localhost",
-		"save_newly_created_chunks=1"
+		"save_newly_created_chunks=1",
+		"player-name=Samurai"
 	]
 	try:
 		with open("data/options.txt","w") as optionsFile:

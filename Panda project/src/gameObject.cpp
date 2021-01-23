@@ -216,11 +216,9 @@ namespace game {
 	entity::entity(bool shouldLogInConsole, bool shouldLogToFile) : object { shouldLogInConsole, shouldLogToFile } {
 
 	}
-
 	entity::entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : object { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
 		
 	}
-
 	entity::~entity() {
 		
 	}
@@ -234,16 +232,16 @@ namespace game {
 		this->sneaking = false;
 		this->flying = false;
 	}
-
 	Player::Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
 		this->onGround = false;
 		this->sneaking = false;
 		this->flying = false;
+		this->playerName = (*Player::options)["player-name"];
 	}
-
 	Player::~Player() {
 
 	}
+	std::map<std::string, std::string>* Player::options;
 
 	void testIfPlayerOnGround(const Event* theEvent, void* data) {
 		bool in_out_pattern = (bool)data;

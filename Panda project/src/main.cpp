@@ -121,6 +121,7 @@ int main(int argc, char* argv[]) {
 	std::map<std::string, std::string> options;
 	game::readOptions(options, "data/options.txt");
 	game::chunk::options = &options;
+	game::Player::options = &options;
 	std::map<std::string, std::string> scripting_options;
 	game::readOptions(scripting_options, "data/scripting_options.txt");
 
@@ -560,6 +561,8 @@ int main(int argc, char* argv[]) {
 			// No targeted block
 			block.hide_bounds();
 		}
+
+		game::timingInfoOut(player.playerName);
 
 		//Set text to the new values
 		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));

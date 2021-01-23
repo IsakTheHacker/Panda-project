@@ -65,6 +65,10 @@ namespace game {
 		double velocityModifier = 1.1;
 		int chunk_x;
 		int chunk_y;
+		std::string playerName;
+
+		//Static member variables
+		static std::map<std::string, std::string>* options;
 
 		Player(bool shouldLogInConsole = false, bool shouldLogToFile = false);
 		Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
