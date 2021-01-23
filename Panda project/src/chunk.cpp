@@ -76,6 +76,7 @@ namespace game {
 			;
 			game::logOut(fancyDebugOutput);
 		}
+		this->saveChunk();		//Save chunk
 		return 0;
 	}
 	int chunk::saveChunk() const {
