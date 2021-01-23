@@ -296,6 +296,27 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			index.close();
+
+			//Load profiles
+			std::ifstream profile(universePath + "profiles/" + player.playerName + ".prof");
+			if (profile.fail()) {
+				game::warningOut("Could not find player profile. Creating one...");
+				std::ofstream createProfile(universePath + "profiles/" + player.playerName + ".prof");
+				createProfile << "x=" << player.model.get_x() << std::endl;
+				createProfile << "y=" << player.model.get_y() << std::endl;
+				createProfile << "z=" << player.model.get_z() << std::endl;
+				createProfile.close();
+			} else {
+				std::map<std::string, double> pos;
+				while (std::getline(profile, line)) {
+					pos[game::split(line, "=")[0]] = std::stod(game::split(line, "=")[1]);
+				}
+				player.model.set_x(pos["x"]);
+				player.model.set_y(pos["y"]);
+				player.model.set_z(pos["z"]);
+			}
+			profile.close();
+
 			terrainAnimationShouldRun = false;
 			terrain_animation_thread.join();
 		}
@@ -310,8 +331,6 @@ int main(int argc, char* argv[]) {
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
 	NodePath blockyC = blocky.attach_new_node(cSphere_node2);
 	
-	player.model.set_z(30);
-
 	NodePath panda("panda");
 	panda.set_scale(0.5);
 	panda.set_pos(0, 0, 0);
@@ -805,6 +824,9 @@ int main(int argc, char* argv[]) {
 
 		//Save profiles
 		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
+		profile << "x=" << player.model.get_x() << std::endl;
+		profile << "y=" << player.model.get_y() << std::endl;
+		profile << "z=" << player.model.get_z() << std::endl;
 		profile.close();
 
 		terrainAnimationShouldRun = false;
