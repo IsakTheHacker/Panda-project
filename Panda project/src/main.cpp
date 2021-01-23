@@ -581,8 +581,6 @@ int main(int argc, char* argv[]) {
 			block.hide_bounds();
 		}
 
-		game::timingInfoOut(player.playerName);
-
 		//Set text to the new values
 		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
 		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
