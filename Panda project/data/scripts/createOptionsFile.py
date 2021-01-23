@@ -27,7 +27,8 @@ if not os.path.isfile("data/options.txt"):
 		"show_ray-collisions=0",
 		"show_block-collisions=0",
 		"enable_pstats=0",
-		"pstat-host=localhost"
+		"pstat-host=localhost",
+		"save_newly_created_chunks=1"
 	]
 	try:
 		with open("data/options.txt","w") as optionsFile:

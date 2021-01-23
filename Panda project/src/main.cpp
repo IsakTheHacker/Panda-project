@@ -120,6 +120,7 @@ int main(int argc, char* argv[]) {
 	//Read options
 	std::map<std::string, std::string> options;
 	game::readOptions(options, "data/options.txt");
+	game::chunk::options = &options;
 	std::map<std::string, std::string> scripting_options;
 	game::readOptions(scripting_options, "data/scripting_options.txt");
 

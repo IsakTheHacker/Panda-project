@@ -76,7 +76,9 @@ namespace game {
 			;
 			game::logOut(fancyDebugOutput);
 		}
-		this->saveChunk();		//Save chunk
+		if (std::stoi((*this->options)["save_newly_created_chunks"])) {
+			this->saveChunk();		//Save chunk
+		}
 		return 0;
 	}
 	int chunk::saveChunk() const {
@@ -233,6 +235,7 @@ namespace game {
 	//Initalize static members
 	std::set<std::pair<int, int>> chunk::loaded_chunks;
 	std::map<std::pair<int, int>, int> chunk::index;
+	std::map<std::string, std::string>* chunk::options;
 	int chunk::chunksize;
 	PerlinNoise3 chunk::perlinNoise;
 	WindowFramework* chunk::window;

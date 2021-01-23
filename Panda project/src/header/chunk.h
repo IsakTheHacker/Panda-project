@@ -28,6 +28,7 @@ namespace game {
 		static std::set<std::pair<int, int>> loaded_chunks;
 		static std::map<std::pair<int, int>, int> index;
 		static int chunksize;
+		static std::map<std::string, std::string>* options;
 
 		chunk(const std::vector<object>& objects, const int& x, const int& y);
 		chunk(const int& x, const int& y);
