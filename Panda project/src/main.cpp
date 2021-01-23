@@ -802,6 +802,11 @@ int main(int argc, char* argv[]) {
 			chunk.saveChunk();
 		}
 		updateIndex.close();
+
+		//Save profiles
+		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
+		profile.close();
+
 		terrainAnimationShouldRun = false;
 		saving_animation_thread.join();
 	}
