@@ -390,10 +390,12 @@ int main(int argc, char* argv[]) {
 	//Add tasks
 	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, (void*)&panda);
 	taskMgr->add(computePlayerZVelocity);
-	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("calculatePlayerZVelocity", task::setPlayerChunkPos, NULL);
+
+	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("setPlayerChunkPos", task::setPlayerChunkPos, NULL);
 	taskMgr->add(setPlayerChunkPos);
+
 	std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*> tuple = { window, &framework, &perlinNoise };
-	PT(GenericAsyncTask) generateChunks = new GenericAsyncTask("calculatePlayerZVelocity", task::generateChunks, (void*)&tuple);
+	PT(GenericAsyncTask) generateChunks = new GenericAsyncTask("generateChunks", task::generateChunks, (void*)&tuple);
 	generateChunks->set_task_chain("generateChunksChain");
 	taskMgr->add(generateChunks);
 
@@ -415,8 +417,6 @@ int main(int argc, char* argv[]) {
 	double sneak_distance = std::stod(options["sneak-distance"]);
 	bool chunk_exists = false;
 
-	std::string sad = "Hello World";
-
 	NodePath block("Block");
 
 	double heading;
@@ -430,8 +430,7 @@ int main(int argc, char* argv[]) {
 	std::chrono::time_point<std::chrono::steady_clock> timepoint;
 
 	//Main loop
-	Thread* current_thread = Thread::get_current_thread();
-	while (framework.do_frame(current_thread) && shouldRun) {
+	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
 			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
