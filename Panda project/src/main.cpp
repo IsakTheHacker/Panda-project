@@ -383,6 +383,10 @@ int main(int argc, char* argv[]) {
 
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
+	//Add task chains
+	AsyncTaskChain* generateChunksChain = taskMgr->make_task_chain("generateChunksChain");
+	generateChunksChain->set_num_threads(1);
+
 	//Add tasks
 	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, (void*)&panda);
 	taskMgr->add(computePlayerZVelocity);
@@ -390,6 +394,7 @@ int main(int argc, char* argv[]) {
 	taskMgr->add(setPlayerChunkPos);
 	std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*> tuple = { window, &framework, &perlinNoise };
 	PT(GenericAsyncTask) generateChunks = new GenericAsyncTask("calculatePlayerZVelocity", task::generateChunks, (void*)&tuple);
+	generateChunks->set_task_chain("generateChunksChain");
 	taskMgr->add(generateChunks);
 
 	//Reading settings from settings map
