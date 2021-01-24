@@ -60,7 +60,6 @@ namespace task {
 		}
 
 		if (!chunk_exists && !keys["f5"]) {
-			game::timingInfoOut(std::to_string(player.chunk_x) + "   " + std::to_string(player.chunk_y) + "      " + std::to_string(player.model.get_x()) + "   " + std::to_string(player.model.get_y()) + "   " + std::to_string(player.model.get_z()));
 			game::chunk chunk(player.chunk_x, player.chunk_y);														//Create new chunk
 			chunk.generateChunk(std::get<0>(tuple), *std::get<1>(tuple), *std::get<2>(tuple));						//Apply the generateChunk function on the new chunk
 			game::chunks.push_back(chunk);																			//Push the chunk to vector game::chunks
