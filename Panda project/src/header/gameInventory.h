@@ -9,9 +9,9 @@
 namespace game {
 
 	class inventory {
-		private:
+	private:
 		std::vector<item> items;
-		public:
+	public:
 		unsigned int slots;
 		unsigned int maximumStackSize; //Set to 0 for infinite
 
@@ -38,6 +38,8 @@ namespace game {
 		//}
 
 		int remItem(const unsigned int& slot, const unsigned int& items = 1);
+		item getItem(const unsigned int& slot) const;
+		void setItem(const unsigned int& slot, item item);
 	};
 
 }

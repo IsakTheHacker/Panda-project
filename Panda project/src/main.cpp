@@ -33,6 +33,8 @@ std::string universePath = "universes/Test/";
 #include "gameObject.h"
 #include "gameTimer.h"
 #include "gameTasks.h"
+#include "gameInventory.h"
+#include "gameItem.h"
 
 game::Player player;
 
@@ -422,6 +424,17 @@ int main(int argc, char* argv[]) {
 	double heading;
 	double pitch;
 
+	//Initialize player inventories
+	game::inventory playerHandInventory(9, 1);
+	game::item item("data/assets/blockproperties/grass.blockproperties");
+	game::item item1("data/assets/blockproperties/rotational-complex.blockproperties");
+	game::item item2("data/assets/blockproperties/log.blockproperties");
+	game::item item3("data/assets/blockproperties/stone.blockproperties");
+	playerHandInventory.setItem(0, item);
+	playerHandInventory.setItem(1, item1);
+	playerHandInventory.setItem(2, item2);
+	playerHandInventory.setItem(3, item3);
+
 	//Testing entities
 	game::entity entity("data/assets/entityproperties/test.entityproperties", window, framework, false);
 	entity.model.set_pos(0, 0, 15);
@@ -510,29 +523,7 @@ int main(int argc, char* argv[]) {
 				if (mouseInGame) {
 					std::string configPath;
 
-					if (handInventoryIndex == 0) {
-						configPath = "data/assets/blockproperties/grass.blockproperties";
-					} else if (handInventoryIndex == 1) {
-						configPath = "data/assets/blockproperties/rotational-complex.blockproperties";
-					} else if (handInventoryIndex == 2) {
-						configPath = "data/assets/blockproperties/log.blockproperties";
-					} else if (handInventoryIndex == 3) {
-						configPath = "data/assets/blockproperties/stone.blockproperties";
-					} else if (handInventoryIndex == 4) {
-						configPath = "";
-					} else if (handInventoryIndex == 5) {
-						configPath = "";
-					} else if (handInventoryIndex == 6) {
-						configPath = "";
-					} else if (handInventoryIndex == 7) {
-						configPath = "";
-					} else if (handInventoryIndex == 8) {
-						configPath = "";
-					} else if (handInventoryIndex == 9) {
-						configPath = "";
-					} else if (handInventoryIndex == 10) {
-						configPath = "";
-					}
+					configPath = playerHandInventory.getItem(handInventoryIndex).configPath;
 
 					game::object object(configPath, window, framework, false, false);
 					object.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);

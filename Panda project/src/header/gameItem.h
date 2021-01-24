@@ -11,11 +11,11 @@
 namespace game {
 
 	class item {
-		private:
-		public:
+	private:
+	public:
 		std::string configPath;
 		unsigned int stackedItems;
-		std::map<std::string, std::string> options;
+		std::map<std::string, std::string> config;
 
 		item(const std::string& configPath, const unsigned int& stackedItems = 1);
 	};

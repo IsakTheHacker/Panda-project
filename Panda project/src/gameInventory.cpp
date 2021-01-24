@@ -13,4 +13,10 @@ namespace game {
 		this->items[slot] = emptyItem;
 		return 0;
 	}
+	item inventory::getItem(const unsigned int& slot) const {
+		return this->items[slot];
+	}
+	void inventory::setItem(const unsigned int& slot, item item) {
+		this->items[slot] = item;
+	}
 }
