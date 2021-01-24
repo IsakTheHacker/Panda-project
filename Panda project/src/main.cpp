@@ -826,6 +826,12 @@ int main(int argc, char* argv[]) {
 		profile << "x=" << player.model.get_x() << std::endl;
 		profile << "y=" << player.model.get_y() << std::endl;
 		profile << "z=" << player.model.get_z() << std::endl;
+
+		profile << "handInventory=";
+		for (size_t i = 0; i < playerHandInventory.slots; i++) {
+			profile << playerHandInventory.getItem(i).configPath << "|";
+		}
+
 		profile.close();
 
 		terrainAnimationShouldRun = false;
