@@ -263,6 +263,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Loading chunks
+	player.chunk_x = 0;
+	player.chunk_y = 0;
 	game::inventory playerHandInventory;
 	game::readOptions(universeOptions, universePath + "universe");
 	game::chunk::chunksize = std::stoi(universeOptions["chunksize"]);
