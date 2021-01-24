@@ -1,6 +1,10 @@
 #include "gameInventory.h"
 
 namespace game {
+	inventory::inventory() {		//Empty constructor
+		this->slots = 0;
+		this->maximumStackSize = 1;
+	}
 	inventory::inventory(const unsigned int& slots, const unsigned int& maximumStackSize) {
 		this->slots = slots;
 		this->maximumStackSize = maximumStackSize;
@@ -14,9 +18,17 @@ namespace game {
 		return 0;
 	}
 	item inventory::getItem(const unsigned int& slot) const {
-		return this->items[slot];
+		if (slot >= this->items.size()) {
+			return emptyItem;
+		} else {
+			return this->items[slot];
+		}
 	}
 	void inventory::setItem(const unsigned int& slot, item item) {
 		this->items[slot] = item;
+	}
+	void inventory::resize(const unsigned int& slots) {
+		this->items = std::vector<game::item>(slots, emptyItem);
+		this->slots = this->items.size();
 	}
 }

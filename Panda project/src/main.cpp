@@ -263,6 +263,9 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Loading chunks
+	player.chunk_x = 0;
+	player.chunk_y = 0;
+	game::inventory playerHandInventory;
 	game::readOptions(universeOptions, universePath + "universe");
 	game::chunk::chunksize = std::stoi(universeOptions["chunksize"]);
 	unsigned long seed = std::stoul(universeOptions["seed"]);
@@ -305,29 +308,48 @@ int main(int argc, char* argv[]) {
 			}
 			index.close();
 
-			//Load profiles
-			std::ifstream profile(universePath + "profiles/" + player.playerName + ".prof");
-			if (profile.fail()) {
-				game::warningOut("Could not find player profile. Creating one...");
-				std::ofstream createProfile(universePath + "profiles/" + player.playerName + ".prof");
-				createProfile << "x=" << player.model.get_x() << std::endl;
-				createProfile << "y=" << player.model.get_y() << std::endl;
-				createProfile << "z=" << player.model.get_z() << std::endl;
-				createProfile.close();
-			} else {
-				std::map<std::string, double> pos;
-				while (std::getline(profile, line)) {
-					pos[game::split(line, "=")[0]] = std::stod(game::split(line, "=")[1]);
-				}
-				player.model.set_x(pos["x"]);
-				player.model.set_y(pos["y"]);
-				player.model.set_z(pos["z"]);
-			}
-			profile.close();
-
 			terrainAnimationShouldRun = false;
 			terrain_animation_thread.join();
 		}
+
+		//Load profiles
+		std::ifstream profile(universePath + "profiles/" + player.playerName + ".prof");
+		if (profile.fail()) {
+			game::warningOut("Could not find player profile. Creating...");
+			std::ofstream createProfile(universePath + "profiles/" + player.playerName + ".prof");
+			createProfile << "x=" << player.model.get_x() << std::endl;
+			createProfile << "y=" << player.model.get_y() << std::endl;
+			createProfile << "z=" << player.model.get_z() << std::endl;
+			createProfile << "handInventory=" <<
+				"data/assets/blockproperties/grass.blockproperties|" <<
+				"data/assets/blockproperties/rotational-complex.blockproperties|" <<
+				"data/assets/blockproperties/log.blockproperties|" <<
+				"data/assets/blockproperties/stone.blockproperties|" <<
+				std::endl;
+			createProfile.close();
+			playerHandInventory.resize(4);
+			playerHandInventory.setItem(0, game::item("data/assets/blockproperties/grass.blockproperties", 1));
+			playerHandInventory.setItem(1, game::item("data/assets/blockproperties/rotational-complex.blockproperties", 1));
+			playerHandInventory.setItem(2, game::item("data/assets/blockproperties/log.blockproperties", 1));
+			playerHandInventory.setItem(3, game::item("data/assets/blockproperties/stone.blockproperties", 1));
+		} else {
+			std::map<std::string, std::string> vector;
+			std::string line;
+			while (std::getline(profile, line)) {
+				vector[game::split(line, "=")[0]] = game::split(line, "=")[1];
+			}
+			player.model.set_x(std::stod(vector["x"]));
+			player.model.set_y(std::stod(vector["y"]));
+			player.model.set_z(std::stod(vector["z"]));
+
+			std::vector<std::string> stringItems = game::split(vector["handInventory"], "|");
+			playerHandInventory.resize(stringItems.size());
+			for (size_t i = 0; i < stringItems.size(); i++) {
+				game::item item(stringItems[i], 1);
+				playerHandInventory.setItem(i, item);
+			}
+		}
+		profile.close();
 	}
 
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
@@ -424,17 +446,6 @@ int main(int argc, char* argv[]) {
 	double heading;
 	double pitch;
 
-	//Initialize player inventories
-	game::inventory playerHandInventory(9, 1);
-	game::item item("data/assets/blockproperties/grass.blockproperties");
-	game::item item1("data/assets/blockproperties/rotational-complex.blockproperties");
-	game::item item2("data/assets/blockproperties/log.blockproperties");
-	game::item item3("data/assets/blockproperties/stone.blockproperties");
-	playerHandInventory.setItem(0, item);
-	playerHandInventory.setItem(1, item1);
-	playerHandInventory.setItem(2, item2);
-	playerHandInventory.setItem(3, item3);
-
 	//Testing entities
 	game::entity entity("data/assets/entityproperties/test.entityproperties", window, framework, false);
 	entity.model.set_pos(0, 0, 15);
@@ -521,9 +532,7 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["mouse3"]) {
 				if (mouseInGame) {
-					std::string configPath;
-
-					configPath = playerHandInventory.getItem(handInventoryIndex).configPath;
+					std::string configPath = playerHandInventory.getItem(handInventoryIndex).configPath;
 
 					game::object object(configPath, window, framework, false, false);
 					object.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
@@ -831,6 +840,7 @@ int main(int argc, char* argv[]) {
 		for (size_t i = 0; i < playerHandInventory.slots; i++) {
 			profile << playerHandInventory.getItem(i).configPath << "|";
 		}
+		profile << std::endl;
 
 		profile.close();
 
