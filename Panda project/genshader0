@@ -9,7 +9,7 @@
   RescaleNormalAttrib:none
   ShadeModelAttrib:smooth
   ShaderAttrib:auto
-  TexMatrixAttrib: default(T:(pos -6 -14 2))
+  TexMatrixAttrib: default(T:(pos 0 -14 2))
   TextureAttrib:on default:grass-0^1
   TexGenAttrib: default(world_position)
 */

@@ -134,6 +134,7 @@ int main(int argc, char* argv[]) {
 	game::setHeading(options["console-heading"]);
 	game::logOut("Starting...");
 	game::userConfigOut("Panda3D version: " + PandaSystem::get_version_string());
+	game::userConfigOut("Running on " + PandaSystem::get_platform());
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
