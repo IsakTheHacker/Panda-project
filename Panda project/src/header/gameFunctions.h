@@ -157,6 +157,23 @@ namespace game {
 		return 0;
 	}
 
+	// Prints user configuration information to the console (purple)
+	template<typename T>
+	int userConfigOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
+		std::string text = std::to_string(input);
+		SetConsoleTextAttribute(h, 5 | FOREGROUND_INTENSITY);
+		if (!includeTime) {
+			std::cout << "User config info: " << text << "\n";
+		} else {
+			std::cout << getConvertedDateTime(false, true) << " User config info: " << text << "\n";
+		}
+		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		if (shouldLogToFile) {
+			logToFile("game.log", "User config info: " + text);
+		}
+		return 0;
+	}
+
 	// Prints unimportant logs to the console (white color)
 	template<typename T>
 	int logOut(T input, bool shouldLogToFile = false, bool includeTime = true) {

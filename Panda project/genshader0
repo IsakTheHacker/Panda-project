@@ -9,6 +9,7 @@
   RescaleNormalAttrib:none
   ShadeModelAttrib:smooth
   ShaderAttrib:auto
+  TexMatrixAttrib: default(T:(pos -14 -14 2))
   TextureAttrib:on default:grass-0^1
   TexGenAttrib: default(world_position)
 */
@@ -40,6 +41,7 @@ void fshader(
 	 in float4 l_eye_position : TEXCOORD1,
 	 in float3 l_eye_normal : TEXCOORD2,
 	 uniform samplerCUBE tex_0,
+	 uniform float4x4 texmat_0,
 	 uniform float4x4 attr_light0,
 	 uniform float4x4 attr_material,
 	 out float4 o_color : COLOR0,
@@ -48,6 +50,8 @@ void fshader(
 ) {
 	 float4 result;
 	 float4 texcoord0 = l_world_position;
+	 texcoord0 = mul(texmat_0, texcoord0);
+	 texcoord0.xyz /= texcoord0.w;
 	 // Fetch all textures.
 	 float4 tex0 = texCUBE(tex_0, texcoord0.xyz);
 	 // Correct the surface normal for interpolation effects

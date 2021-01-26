@@ -6,42 +6,33 @@
     render/alight
     render/my d_light
   MaterialAttrib:Material Material c(0.8 0.8 0.8 1) e(0 0 0 0) r0.4 m0 l0 t0
-  RescaleNormalAttrib:none
+  RescaleNormalAttrib:normalize
   ShadeModelAttrib:smooth
   ShaderAttrib:auto
-  TexMatrixAttrib: default(T:(pos 0 -2 2))
-  TextureAttrib:on default:grass-0^1
-  TexGenAttrib: default(world_position)
 */
 void vshader(
-	 uniform float4x4 trans_model_to_world,
-	 out float4 l_world_position : TEXCOORD0,
 	 uniform float4x4 trans_model_to_view,
-	 out float4 l_eye_position : TEXCOORD1,
+	 out float4 l_eye_position : TEXCOORD0,
 	 uniform float4x4 tpose_view_to_model,
-	 out float3 l_eye_normal : TEXCOORD2,
+	 out float3 l_eye_normal : TEXCOORD1,
 	 in float3 vtx_normal : ATTR2,
-	 out float4 l_hpos : TEXCOORD3,
+	 out float4 l_hpos : TEXCOORD2,
 	 in float4 vtx_position : ATTR0,
 	 out float4 l_position : POSITION,
 	 uniform float4x4 mat_modelproj
 ) {
 	 l_position = mul(mat_modelproj, vtx_position);
 	 l_hpos = l_position;
-	 l_world_position = mul(trans_model_to_world, vtx_position);
 	 l_eye_position = mul(trans_model_to_view, vtx_position);
 	 l_eye_normal = normalize(mul((float3x3)tpose_view_to_model, vtx_normal));
 }
 
 void fshader(
-	 in float4 l_hpos : TEXCOORD3,
+	 in float4 l_hpos : TEXCOORD2,
 	 in uniform float4 attr_fog,
 	 in uniform float4 attr_fogcolor,
-	 in float4 l_world_position : TEXCOORD0,
-	 in float4 l_eye_position : TEXCOORD1,
-	 in float3 l_eye_normal : TEXCOORD2,
-	 uniform samplerCUBE tex_0,
-	 uniform float4x4 texmat_0,
+	 in float4 l_eye_position : TEXCOORD0,
+	 in float3 l_eye_normal : TEXCOORD1,
 	 uniform float4x4 attr_light0,
 	 uniform float4x4 attr_material,
 	 out float4 o_color : COLOR0,
@@ -49,11 +40,7 @@ void fshader(
 	 uniform float4 attr_colorscale
 ) {
 	 float4 result;
-	 float4 texcoord0 = l_world_position;
-	 texcoord0 = mul(texmat_0, texcoord0);
-	 texcoord0.xyz /= texcoord0.w;
 	 // Fetch all textures.
-	 float4 tex0 = texCUBE(tex_0, texcoord0.xyz);
 	 // Correct the surface normal for interpolation effects
 	 l_eye_normal = normalize(l_eye_normal);
 	 // Begin view-space light calculations
@@ -81,7 +68,6 @@ void fshader(
 	 result = saturate(result);
 	 // End view-space light calculations
 	 result *= attr_colorscale;
-	 result.rgba *= tex0.rgba;
 	 tot_specular *= attr_material[3];
 	 result.rgb = result.rgb + tot_specular.rgb;
 	 result.rgb = lerp(attr_fogcolor.rgb, result.rgb, saturate(exp2(attr_fog.x * l_hpos.z * -1.442695f)));
