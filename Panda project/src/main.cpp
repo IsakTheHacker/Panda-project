@@ -711,7 +711,6 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["f2"]) {
 				std::string filename = "screenshots/" + game::getConvertedDateTime() + ".png";
-				game::warningOut(filename);
 				bool successful = window->get_graphics_window()->save_screenshot(filename, "");
 				if (successful) {
 					game::logOut("Saved screenshot: '" + filename + "' to the screenshots folder.");
