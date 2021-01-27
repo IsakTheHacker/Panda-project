@@ -17,7 +17,7 @@ namespace game {
 				line.erase(0, pos + delimiter.length());
 			}
 
-			options[token] = line;
+			config[token] = line;
 		}
 		this->configPath = configPath;
 		this->stackedItems = stackedItems;

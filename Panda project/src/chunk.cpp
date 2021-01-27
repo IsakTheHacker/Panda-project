@@ -20,7 +20,6 @@ namespace game {
 		return 0;
 	}
 	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise = chunk::perlinNoise) {
-		oneMesh = NodePath("");
 		int chunksize = std::stoi(universeOptions["chunksize"]);
 		int start_x = this->x * chunksize;
 		int start_y = this->y * chunksize;
@@ -45,13 +44,10 @@ namespace game {
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
-					object.model.set_shader_auto();
-					object.model.reparent_to(oneMesh);
-
 					blocks.push_back(object);
 
 					//Tree generating
-					/*if (rand() % 50 == 49) {
+					if (rand() % 50 == 49) {
 						game::object object("data/assets/blockproperties/log.blockproperties", window, framework, false, false);
 						object.model.set_pos(j, k, object_z + 2);
 
@@ -59,21 +55,19 @@ namespace game {
 						object.model.set_tag("id", std::to_string(object.id));
 						object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
-						object.model.set_shader_auto();
-
 						blocks.push_back(object);
-					}*/
+					}
 				}
 			}
 		}
 		this->objects = blocks;															//Push the generated blocks to vector objects of this chunk
 		this->loaded_chunks.insert(std::pair<int, int>(x, y));							//Register that this chunk has been generated
-		Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
+		/*Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
 		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 		oneMesh.get_child(0).get_child(1).get_child(0).set_texture(texture);
 		oneMesh.flatten_strong();
-		oneMesh.reparent_to(window->get_render());
+		oneMesh.reparent_to(window->get_render());*/
 		if (devMode) {
 			std::string fancyDebugOutput =
 				"Finished generating chunk:\n"
@@ -81,6 +75,9 @@ namespace game {
 				"    Chunk Objects Size: " + std::to_string(this->objects.size());
 			;
 			game::logOut(fancyDebugOutput);
+		}
+		if (std::stoi((*this->options)["save_newly_created_chunks"])) {
+			this->saveChunk();		//Save chunk
 		}
 		return 0;
 	}
@@ -223,8 +220,6 @@ namespace game {
 					object.model.set_tag("id", std::to_string(object.id));
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
-					object.model.set_shader_auto();
-
 					blocks.push_back(object);
 				}
 			}
@@ -240,6 +235,8 @@ namespace game {
 	//Initalize static members
 	std::set<std::pair<int, int>> chunk::loaded_chunks;
 	std::map<std::pair<int, int>, int> chunk::index;
+	std::map<std::string, std::string>* chunk::options;
+	int chunk::chunksize;
 	PerlinNoise3 chunk::perlinNoise;
 	WindowFramework* chunk::window;
 	PandaFramework* chunk::framework;

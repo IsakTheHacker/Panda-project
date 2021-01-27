@@ -79,7 +79,7 @@ namespace game {
 		current_id++;
 		object_quantity++;
 		this->configPath = configPath;
-		
+
 		if (knownConfigs.find(configPath) != knownConfigs.end()) {
 			config = knownConfigs[configPath];
 		} else {
@@ -102,9 +102,15 @@ namespace game {
 			knownConfigs[configPath] = config;		//Add to knownConfigs
 		}
 
-		model = NodePath("model");
+		if (configPath == "data/assets/playerproperties/standard.playerproperties") {
+			model = window->get_camera_group();
+		} else {
+			model = NodePath("model");
+		}
 
 		initConfig(window, framework);
+
+		model.reparent_to(window->get_render());
 
 		//Setting internal class variables
 		shouldLogInConsoleIntern = shouldLogInConsole;
@@ -154,11 +160,15 @@ namespace game {
 		if (config.find("collidable") != config.end()) {
 			if (std::stoi(config["collidable"]) == 1) {
 				CollisionNode* collisionNode = new CollisionNode("Box");
-				collisionNode->add_solid(new CollisionBox(0, std::stoi(config["collision-x"]), std::stoi(config["collision-y"]), std::stoi(config["collision-z"])));
+				collisionNode->add_solid(new CollisionBox(0, std::stod(config["collision-x"]), std::stod(config["collision-y"]), std::stod(config["collision-z"])));
 				this->collisionNodePath = model.attach_new_node(collisionNode);
 			}
 		} else {
 			config["collidable"] = "0";
+		}
+
+		if (config.find("hp") != config.end()) {
+			this->hp = std::stod(config["hp"]);
 		}
 
 		if (config.find("subobjects") != config.end()) {
@@ -175,14 +185,12 @@ namespace game {
 				}
 				if (subobjectOptions.find("texture") != subobjectOptions.end()) {
 					texture = TexturePool::get_global_ptr()->load_cube_map(subobjectOptions["texture"]);
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 				} else {
 					texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
-					texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-					texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 				}
 
+				texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+				texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 				NodePath subobject = window->load_model(framework.get_models(), subobjectOptions["model"]);
 				if (subobjectOptions.find("texture") != subobjectOptions.end()) {
 					subobject.get_child(0).set_texture(texture, 1);
@@ -205,45 +213,61 @@ namespace game {
 	std::map<std::string, std::map<std::string, std::string>> object::knownConfigs;
 
 	//Entity class
-	entity::entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : object { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
-		/*if (shouldLogInConsole) {
-			game::logOut("Succesfully created the player! id: " + std::to_string(id));
-		}
-		if (shouldLogToFile) {
-			logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
-		}*/
-	}
+	entity::entity(bool shouldLogInConsole, bool shouldLogToFile) : object { shouldLogInConsole, shouldLogToFile } {
 
+	}
+	entity::entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : object { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
+		
+	}
 	entity::~entity() {
-		/*if (shouldLogInConsoleIntern) {
-			game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
-		}
-		if (shouldLogToFileIntern) {
-			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
-		}*/
+		
 	}
 	void entity::update() {
 		this->model.set_x(this->model, 0.01);
 	}
 
 	//Player class
-	player::player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
-		this->camera = window->get_camera_group();
-		
-		/*if (shouldLogInConsole) {
-			game::logOut("Succesfully created the player! id: " + std::to_string(id));
-		}
-		if (shouldLogToFile) {
-			logToFile("game.log", "Log: Succesfully created the player! id: " + std::to_string(id));
-		}*/
+	Player::Player(bool shouldLogInConsole, bool shouldLogToFile) : entity { shouldLogInConsole, shouldLogToFile } {
+		this->onGround = false;
+		this->sneaking = false;
+		this->flying = false;
 	}
+	Player::Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) : entity { configPath, window, framework, shouldLogInConsole, shouldLogToFile } {
+		this->onGround = false;
+		this->sneaking = false;
+		this->flying = false;
+		this->playerName = (*Player::options)["player-name"];
+	}
+	Player::~Player() {
 
-	player::~player() {
-		/*if (shouldLogInConsoleIntern) {
-			game::logOut("Succesfully destroyed the player! id: " + std::to_string(id));
+	}
+	std::map<std::string, std::string>* Player::options;
+
+	void testIfPlayerOnGround(const Event* theEvent, void* data) {
+		bool in_out_pattern = (bool)data;
+
+		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
+		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
+		nassertv(entry != NULL);
+
+		if (!in_out_pattern) {
+			if (std::round(entry->get_into_node_path().get_parent().get_z()) <= std::round(entry->get_from_node_path().get_parent().get_z())) {
+				player.onGround = true;
+				player.flying = false;
+			} else {
+				player.onGround = false;
+			}
+		} else {
+			player.onGround = false;
 		}
-		if (shouldLogToFileIntern) {
-			logToFile("game.log", "Log: Succesfully destroyed the player! id: " + std::to_string(id));
-		}*/
+	}
+	void getCollidedNodePath(const Event* theEvent, void* data) {
+		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
+		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
+		nassertv(entry != NULL);
+
+		if (player.onGround) {
+			player.collidedNodePath = entry->get_into_node_path().get_parent();
+		}
 	}
 }

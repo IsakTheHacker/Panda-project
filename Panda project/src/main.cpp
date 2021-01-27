@@ -8,8 +8,9 @@
 #endif
 
 
-#include "pandaIncludes.h"
-//#include <direct.h>
+//C++ built-in libraries
+#include <map>
+#include <string>
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -22,6 +23,7 @@ std::string gamePath = "./";
 std::string universePath = "universes/Test/";
 
 //My libraries
+#include "pandaIncludes.h"
 #include "cppExtension.h"
 #include "gameVars.h"
 #include "gameFunctions.h"
@@ -29,20 +31,16 @@ std::string universePath = "universes/Test/";
 #include "constantVars.h"
 #include "chunk.h"
 #include "gameObject.h"
+#include "gameTimer.h"
+#include "gameTasks.h"
+#include "gameInventory.h"
+#include "gameItem.h"
+
+game::Player player;
 
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
 PT(ClockObject) globalClock = ClockObject::get_global_clock();
-PT(TextNode) text = new TextNode("textnode");
-WindowFramework* window;
-
-// Cool stuff
-PT(MouseWatcher) mouseWatcher;
-PT(CollisionRay) pickerRay;
-CollisionTraverser myTraverser = CollisionTraverser("ctraverser");
-PT(CollisionHandlerQueue) myHandler;
-PT(CollisionNode) pickerNode;
-NodePath pickerNP;
 
 #include "gameClasses.h"
 
@@ -83,22 +81,7 @@ void pauseMenu(WindowFramework* window) {
 }
 
 int main(int argc, char* argv[]) {
-
-	//if (PStatClient::is_connected()) {
-	//	PStatClient::disconnect();
-	//}
-
-	//std::string host = ""; // Empty = default config var value
-	//int port = -1; // -1 = default config var value
-	//if (!PStatClient::connect(host, port)) {
-	//	std::cout << "Could not connect to PStat server." << std::endl;
-	//}
-
-	//Set gamePath to the directory of executable
-	Filename exefile = argv[0];
-	//chdir(exefile.get_fullpath().substr(0, exefile.get_fullpath().find_last_of("\\") + 1).c_str());
-	//gamePath = exefile.get_fullpath().substr(0, exefile.get_fullpath().find_last_of("\\") + 1);
-
+	
 	//Checking if any arguments was given at startup
 	if (argc > 3) {
 		game::warningOut("Too many arguments was given, 1-2 arguments are allowed!");
@@ -127,86 +110,87 @@ int main(int argc, char* argv[]) {
 				}
 				game::errorOut(universePath);
 				ulink.close();
-				
 			}
 		}
 	}
 
-	//Starting debug input thread if game was started in devmode!
-	//std::thread debugInputThread(game::takeDebugInput);
-
-	//Creating folders and files
+	//Create folders and files
 	game::runPyScript("data/scripts/makeDirectories.py");
 	game::runPyScript("data/scripts/createOptionsFile.py");
 
-	//Loading config files
-	load_prc_file("data/Confauto.prc");
-	load_prc_file("data/Config.prc");
-
-	//Reading options
+	//Read options
 	std::map<std::string, std::string> options;
 	game::readOptions(options, "data/options.txt");
+	game::chunk::options = &options;
+	game::Player::options = &options;
 	std::map<std::string, std::string> scripting_options;
 	game::readOptions(scripting_options, "data/scripting_options.txt");
 
+	//Connect to PStats server if user wants to
+	if (std::stoi(options["enable_pstats"])) {
+		game::connectToPStats(options["pstat-host"]);
+	}
+
 	game::setHeading(options["console-heading"]);
 	game::logOut("Starting...");
-
+	game::userConfigOut("Panda3D version: " + PandaSystem::get_version_string());
+	game::userConfigOut("It was built on " + PandaSystem::get_build_date());
+	game::userConfigOut("Running on " + PandaSystem::get_platform());
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
 	// Open a new window framework and set the title
 	PandaFramework framework;
 	framework.open_framework(argc, argv);
-	framework.set_window_title("The Panda Project: Prealpha 0.1.1");
+	framework.set_window_title("The Panda Project: Prealpha 0.1.2");
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
-	game::Player player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
-	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
+	if (window == nullptr) {
+		game::errorOut("Error while opening window. Quitting!");
+		game::waitForKeypress();
+		return 1;
+	}
 
-	//Enable shader generation for the game
-	/*window->get_render().set_shader_auto();*/
+	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
+	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
+	window->get_render().set_shader_auto();
 
 	//Set default window instance to use for chunk class
 	game::chunk::setDefaultWindow(window);
 	game::chunk::setDefaultFramework(framework);
 
-	// Cool stuff
-	pickerNode = new CollisionNode("mouseRay");
-	pickerNP = player.camera.attach_new_node(pickerNode);
-	pickerNP.show();
-	pickerNP.show_bounds();
-	pickerNP.show_tight_bounds();
-	pickerNP.show_through();
-	pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());
-	pickerRay = new CollisionRay();
-	pickerNode->add_solid(pickerRay);
-	myHandler = new CollisionHandlerQueue();
-	myTraverser.add_collider(pickerNP, myHandler);
+	//Picker Ray
+	PT(CollisionHandlerQueue) myHandler = new CollisionHandlerQueue();			//Create Handler
+	CollisionTraverser myTraverser;												//Create Traverser
+	PT(CollisionNode) pickerNode = new CollisionNode("mouseRay");				//Create CollisionNode
+	PT(CollisionRay) pickerRay = new CollisionRay();							//Create CollisionRay
+	NodePath pickerNP = player.model.attach_new_node(pickerNode);				//Create NodePath for the attached new node
+	pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());	//Set from collide mask to use
+	pickerNode->add_solid(pickerRay);											//Add solid to CollisionNode
+	pickerNode->set_into_collide_mask(0);										//Disable into-collisions
+	myTraverser.add_collider(pickerNP, myHandler);								//Add collider to traverser
+	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 
-	//Setting up frame rate meter
+	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {
 		PT(FrameRateMeter) meter;
 		meter = new FrameRateMeter("frame_rate_meter");
 		meter->setup_window(window->get_graphics_window());
 	}
 
+	//Initialize fog
+	PT(Fog) fog = new Fog("Fog");
+	fog->set_color(25, 25, 25);
+	fog->set_exp_density(0.0001);
+	window->get_render().set_fog(fog);
+
 	//Mouse input
-	MouseWatcher* mouseWatcher = DCAST(MouseWatcher, window->get_mouse().node());
+	PT(MouseWatcher) mouseWatcher = DCAST(MouseWatcher, window->get_mouse().node());
 	WindowProperties props = window->get_graphics_window()->get_properties();
 	props.set_cursor_hidden(std::stoi(options["hidden_cursor"]));
 	props.set_mouse_mode(WindowProperties::M_relative);
 	window->get_graphics_window()->request_properties(props);
-
-
-	// This makes the ray's origin the camera and makes the ray point
-	// to the screen coordinates of the mouse.
-
-	//LPoint2 mpos = mouseWatcher->get_mouse();
-
-	pickerRay->set_from_lens(window->get_camera(0), 0, 0);
-	//pickerRay->set_from_lens(window->get_camera(0), mpos.get_x(), mpos.get_y());
 
 	// Change background color to black
 	window->get_graphics_window()->get_active_display_region(0)->set_clear_color(LColorf(0, 0, 0, 1));
@@ -281,8 +265,11 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Loading chunks
+	player.chunk_x = 0;
+	player.chunk_y = 0;
+	game::inventory playerHandInventory;
 	game::readOptions(universeOptions, universePath + "universe");
-	int chunksize = std::stoi(universeOptions["chunksize"]);
+	game::chunk::chunksize = std::stoi(universeOptions["chunksize"]);
 	unsigned long seed = std::stoul(universeOptions["seed"]);
 	bool ignore_lock = std::stoi(universeOptions["ignore-lock"]);
 	if (game::fileExists(universePath + "lock")) {
@@ -296,7 +283,7 @@ int main(int argc, char* argv[]) {
 		std::ofstream lockFile(universePath + "lock");
 		lockFile.close();
 	}
-	if (game::isOdd(chunksize)) {
+	if (game::isOdd(game::chunk::chunksize)) {
 		game::errorOut("Chunksize must be even, not odd!");
 		exit(1);
 	}
@@ -322,48 +309,69 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			index.close();
+
 			terrainAnimationShouldRun = false;
 			terrain_animation_thread.join();
 		}
+
+		//Load profiles
+		std::ifstream profile(universePath + "profiles/" + player.playerName + ".prof");
+		if (profile.fail()) {
+			game::warningOut("Could not find player profile. Creating...");
+			std::ofstream createProfile(universePath + "profiles/" + player.playerName + ".prof");
+			createProfile << "x=" << player.model.get_x() << std::endl;
+			createProfile << "y=" << player.model.get_y() << std::endl;
+			createProfile << "z=" << player.model.get_z() << std::endl;
+			createProfile << "handInventory=" <<
+				"data/assets/blockproperties/grass.blockproperties|" <<
+				"data/assets/blockproperties/rotational-complex.blockproperties|" <<
+				"data/assets/blockproperties/log.blockproperties|" <<
+				"data/assets/blockproperties/stone.blockproperties|" <<
+				std::endl;
+			createProfile.close();
+			playerHandInventory.resize(4);
+			playerHandInventory.setItem(0, game::item("data/assets/blockproperties/grass.blockproperties", 1));
+			playerHandInventory.setItem(1, game::item("data/assets/blockproperties/rotational-complex.blockproperties", 1));
+			playerHandInventory.setItem(2, game::item("data/assets/blockproperties/log.blockproperties", 1));
+			playerHandInventory.setItem(3, game::item("data/assets/blockproperties/stone.blockproperties", 1));
+		} else {
+			std::map<std::string, std::string> vector;
+			std::string line;
+			while (std::getline(profile, line)) {
+				vector[game::split(line, "=")[0]] = game::split(line, "=")[1];
+			}
+			player.model.set_x(std::stod(vector["x"]));
+			player.model.set_y(std::stod(vector["y"]));
+			player.model.set_z(std::stod(vector["z"]));
+
+			std::vector<std::string> stringItems = game::split(vector["handInventory"], "|");
+			playerHandInventory.resize(stringItems.size());
+			for (size_t i = 0; i < stringItems.size(); i++) {
+				game::item item(stringItems[i], 1);
+				playerHandInventory.setItem(i, item);
+			}
+		}
+		profile.close();
 	}
-
-	//
-	/*NodePath test = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
-	test.set_scale(0.5);
-	test.set_h(45);
-	test.set_p(45);
-	test.set_r(45);
-	test.reparent_to(window->get_aspect_2d());*/
-
 
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
 	blocky.set_scale(0.5);
-	blocky.set_pos(0, 0, 100);
+	blocky.set_pos(0, 0, 20);
 	blocky.reparent_to(window->get_render());
-	blocky.set_shader_off(10);
 
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
 	NodePath blockyC = blocky.attach_new_node(cSphere_node2);
-	blockyC.show();
 	
-	player.camera.set_z(30);
-
-	NodePath panda = NodePath("panda");
+	NodePath panda("panda");
 	panda.set_scale(0.5);
 	panda.set_pos(0, 0, 0);
 	panda.reparent_to(window->get_render());
 	panda.hide();
 
-
-	CollisionNode* cSphere_node = new CollisionNode("Sphere");
-	cSphere_node->add_solid(new CollisionBox(0, 0.8, 0.8, 3));
-	NodePath cameraC = player.camera.attach_new_node(cSphere_node);
-
 	CollisionHandlerPusher pusher;
 	pusher.add_in_pattern("Something");
 	pusher.add_out_pattern("Something2");
-	//pusher.add_again_pattern("%fn-into-%in");
 
 	framework.define_key("Something", "", game::testIfPlayerOnGround, 0);
 	framework.define_key("Something2", "", game::testIfPlayerOnGround, (void*)1);
@@ -371,16 +379,18 @@ int main(int argc, char* argv[]) {
 	framework.define_key("Something", "", game::getCollidedNodePath, 0);
 	framework.define_key("Something2", "", game::getCollidedNodePath, (void*)1);
 
-	//window->get_render().ls();
-
-	//CollisionHandlerQueue queue;
 	CollisionTraverser* traverser = new CollisionTraverser();
 
-	traverser->add_collider(cameraC, &pusher);
-	pusher.add_collider(cameraC, player.camera);
+	//Apply show collision settings
+	if (std::stoi(options["show_ray-collisions"])) {
+		myTraverser.show_collisions(window->get_render());
+	}
+	if (std::stoi(options["show_block-collisions"])) {
+		traverser->show_collisions(window->get_render());
+	}
 
-	traverser->traverse(window->get_render());
-	//traverser->show_collisions(window->get_render());
+	traverser->add_collider(player.collisionNodePath, &pusher);
+	pusher.add_collider(player.collisionNodePath, player.model);
 
 	//Lights
 	PT(AmbientLight) alight = new AmbientLight("alight");
@@ -397,27 +407,23 @@ int main(int argc, char* argv[]) {
 	dlnp.show_tight_bounds();
 	window->get_render().set_light(dlnp);
 
-	//PNMImage pnmImage("images/noise_0000.png");
-	//for (size_t i = 0; i < pnmImage.get_x_size(); i++) {
-	//	for (size_t j = 0; j < pnmImage.get_y_size(); j++) {
-	//		auto pixel = pnmImage.get_pixel(i, j);
-	//		//std::cout << "Pixel: " << i << "," << j << " " << pixel << std::endl;
-	//	}
-	//}
-
-	std::vector<double> doubles;
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
-	for (size_t i = 0; i < 100; i++) {
-		for (size_t j = 0; j < 100; j++) {
-			for (size_t k = 0; k < 100; k++) {
-				//std::cout << "Perlin: " << perlinNoise.noise(i, j, k) << std::endl;
-				doubles.push_back(perlinNoise.noise(i, j, k));
-			}
-		}
-	}
-	std::cout << *std::min_element(doubles.begin(), doubles.end()) << std::endl;
-	std::cout << *std::max_element(doubles.begin(), doubles.end()) << std::endl;
 
+	//Add task chains
+	AsyncTaskChain* generateChunksChain = taskMgr->make_task_chain("generateChunksChain");
+	generateChunksChain->set_num_threads(1);
+
+	//Add tasks
+	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, (void*)&panda);
+	taskMgr->add(computePlayerZVelocity);
+
+	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("setPlayerChunkPos", task::setPlayerChunkPos, NULL);
+	taskMgr->add(setPlayerChunkPos);
+
+	std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*> tuple = { window, &framework, &perlinNoise };
+	PT(GenericAsyncTask) generateChunks = new GenericAsyncTask("generateChunks", task::generateChunks, (void*)&tuple);
+	generateChunks->set_task_chain("generateChunksChain");
+	taskMgr->add(generateChunks);
 
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
@@ -434,97 +440,28 @@ int main(int argc, char* argv[]) {
 	double center_x = 0.0;
 	double center_y = 0.0;
 
-	double x = 0.0;
-	double y = 0.0;
-
-	std::string chunk_x;
-	std::string chunk_y;
-
 	double sneak_distance = std::stod(options["sneak-distance"]);
 	bool chunk_exists = false;
 
-	std::string sad = "Hello World";
-	/*myTraverser.show_collisions(window->get_render());
-
-	framework.show_collision_solids(window->get_render());*/
-
-	NodePath block;
+	NodePath block("Block");
 
 	double heading;
 	double pitch;
-
-	double velocity = 0.0;
-	double velocityModifier = 1.1;
 
 	//Testing entities
 	game::entity entity("data/assets/entityproperties/test.entityproperties", window, framework, false);
 	entity.model.set_pos(0, 0, 15);
 	entity.model.reparent_to(window->get_render());
 
+	std::chrono::time_point<std::chrono::steady_clock> timepoint;
 
 	//Main loop
-	Thread* current_thread = Thread::get_current_thread();
-	while (framework.do_frame(current_thread) && shouldRun) {
+	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
-			player.camera.set_pos(entity.model.get_x(), entity.model.get_y(), player.camera.get_z());
+			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
 		}
-
 		entity.update();
-
-		// Velocity computing (Z axis)
-		if (velocity == 0 && !player.onGround) {
-			velocity = 0.01;
-		} else {
-			if (velocity > 0) {
-				if (velocity < 1.25) {
-					velocity = velocity * velocityModifier;
-				}
-			} else if (velocity < 0) {
-				double value = (int)(player.camera.get_z() * 100 + 0.5);
-				value = (double)value / 100;
-				double value2 = (int)((player.camera.get_z() - velocity) * 100 + 0.5);
-				value2 = (double)value2 / 100;
-				if (value == value2) {
-					velocity = 0.01;
-				} else {
-					velocity = velocity / velocityModifier;
-				}
-			}
-		}
-		if (player.onGround) {
-			velocity = 0;
-		}
-		player.camera.set_z(player.camera.get_pos().get_z() - velocity);
-		panda.set_z(player.camera.get_pos().get_z() - velocity);
-
-		// Checking if current chunk exists, generate if not.
-		if (player.camera.get_x() < 0) {
-			chunk_x = std::to_string((int)(player.camera.get_x() - chunksize) / chunksize);
-		} else {
-			chunk_x = std::to_string((int)player.camera.get_x() / chunksize);
-		}
-		if (player.camera.get_y() < 0) {
-			chunk_y = std::to_string((int)(player.camera.get_y() - chunksize) / chunksize);
-		} else {
-			chunk_y = std::to_string((int)player.camera.get_y() / chunksize);
-		}
-		/*chunk_x = std::to_string((int)player.camera.get_x() / 16);
-		chunk_y = std::to_string((int)player.camera.get_y() / 16);*/
-		
-		if (game::chunk::loaded_chunks.find(std::pair<int, int>(std::stoi(chunk_x), std::stoi(chunk_y))) != game::chunk::loaded_chunks.end()) {
-			chunk_exists = true;
-		} else {
-			chunk_exists = false;
-		}
-
-		if (!chunk_exists && !keys["f5"]) {
-			game::chunk chunk(std::stoi(chunk_x), std::stoi(chunk_y));																//Create new chunk
-			chunk.generateChunk(window, framework, perlinNoise);																	//Apply the generateChunk function on the new chunk
-			game::chunks.push_back(chunk);																							//Push the chunk to vector game::chunks
-			game::chunk::loaded_chunks.insert(std::pair<int, int>(x, y));
-			game::chunk::index[std::pair<int, int>(chunk.x, chunk.y)] = game::chunks.size()-1;
-		}
 
 		if (mouseInGame) {
 			if (handInventoryIndex < 0) {
@@ -542,9 +479,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 
-		// check collisions, will call pusher collision handler
-		// if a collision is detected
-		traverser->traverse(window->get_render());
+		traverser->traverse(window->get_render());		//Check collisions and call pusher if a collision is detected
 
 		myTraverser.traverse(window->get_render());
 		if (myHandler->get_num_entries() > 0) {
@@ -558,14 +493,14 @@ int main(int argc, char* argv[]) {
 			int block_chunk_x;
 			int block_chunk_y;
 			if (block.get_x() < 0) {
-				block_chunk_x = (int)(block.get_x() - chunksize) / chunksize;
+				block_chunk_x = (int)(block.get_x() - game::chunk::chunksize) / game::chunk::chunksize;
 			} else {
-				block_chunk_x = (int)block.get_x() / chunksize;
+				block_chunk_x = (int)block.get_x() / game::chunk::chunksize;
 			}
 			if (block.get_y() < 0) {
-				block_chunk_y = (int)(block.get_y() - chunksize) / chunksize;
+				block_chunk_y = (int)(block.get_y() - game::chunk::chunksize) / game::chunk::chunksize;
 			} else {
-				block_chunk_y = (int)block.get_y() / chunksize;
+				block_chunk_y = (int)block.get_y() / game::chunk::chunksize;
 			}
 
 			if (keys["mouse1"]) {
@@ -599,46 +534,20 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["mouse3"]) {
 				if (mouseInGame) {
-					std::string configPath;
+					std::string configPath = playerHandInventory.getItem(handInventoryIndex).configPath;
 
-					if (handInventoryIndex == 0) {
-						configPath = "data/assets/blockproperties/grass.blockproperties";
-					} else if (handInventoryIndex == 1) {
-						configPath = "data/assets/blockproperties/rotational-complex.blockproperties";
-					} else if (handInventoryIndex == 2) {
-						configPath = "data/assets/blockproperties/log.blockproperties";
-					} else if (handInventoryIndex == 3) {
-						configPath = "data/assets/blockproperties/stone.blockproperties";
-					} else if (handInventoryIndex == 4) {
-						configPath = "";
-					} else if (handInventoryIndex == 5) {
-						configPath = "";
-					} else if (handInventoryIndex == 6) {
-						configPath = "";
-					} else if (handInventoryIndex == 7) {
-						configPath = "";
-					} else if (handInventoryIndex == 8) {
-						configPath = "";
-					} else if (handInventoryIndex == 9) {
-						configPath = "";
-					} else if (handInventoryIndex == 10) {
-						configPath = "";
-					}
+					game::object object(configPath, window, framework, false, false);
+					object.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
 
-
-
-					game::object obj(configPath, window, framework, false, false);
-					obj.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
-
-					if (obj.model.get_x() < 0) {
-						block_chunk_x = (int)(obj.model.get_x() - chunksize) / chunksize;
+					if (object.model.get_x() < 0) {
+						block_chunk_x = (int)(object.model.get_x() - game::chunk::chunksize) / game::chunk::chunksize;
 					} else {
-						block_chunk_x = (int)obj.model.get_x() / chunksize;
+						block_chunk_x = (int)object.model.get_x() / game::chunk::chunksize;
 					}
-					if (obj.model.get_y() < 0) {
-						block_chunk_y = (int)(obj.model.get_y() - chunksize) / chunksize;
+					if (object.model.get_y() < 0) {
+						block_chunk_y = (int)(object.model.get_y() - game::chunk::chunksize) / game::chunk::chunksize;
 					} else {
-						block_chunk_y = (int)obj.model.get_y() / chunksize;
+						block_chunk_y = (int)object.model.get_y() / game::chunk::chunksize;
 					}
 
 					if (keys["r"]) {
@@ -662,18 +571,18 @@ int main(int argc, char* argv[]) {
 							pitch = 0.5;
 							heading = 1;
 						}
-						obj.model.set_hpr(heading * 180, pitch * 180, 0);
+						object.model.set_hpr(heading * 180, pitch * 180, 0);
 					}
 
 					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];
 					
-					obj.model.set_tag("chunk", std::to_string(block_chunk_x) + "," + std::to_string(block_chunk_y));
-					obj.model.set_tag("id", std::to_string(obj.id));
-					obj.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
+					object.model.set_tag("chunk", std::to_string(block_chunk_x) + "," + std::to_string(block_chunk_y));
+					object.model.set_tag("id", std::to_string(object.id));
+					object.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
 
-					obj.model.set_shader_auto();
+					object.model.set_shader_auto();
 
-					chunk.objects.push_back(obj);
+					chunk.objects.push_back(object);
 					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;
 
 					keys["mouse3"] = false;
@@ -685,9 +594,9 @@ int main(int argc, char* argv[]) {
 		}
 
 		//Set text to the new values
-		text->set_text("X: " + std::to_string(player.camera.get_x()) + "\nY: " + std::to_string(player.camera.get_y()) + "\nZ: " + std::to_string(player.camera.get_z()));
-		text2->set_text("H: " + std::to_string(player.camera.get_h()) + "\nP: " + std::to_string(player.camera.get_p()) + "\nR: " + std::to_string(player.camera.get_r()));
-		text3->set_text("Chunk X: " + chunk_x + "\nChunk Y: " + chunk_y);
+		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
+		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
+		text3->set_text("Chunk X: " + std::to_string(player.chunk_x) + "\nChunk Y: " + std::to_string(player.chunk_y));
 		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
 
 		if (mouseInGame) {
@@ -696,34 +605,31 @@ int main(int argc, char* argv[]) {
 					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 					center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 
-					x = window->get_graphics_window()->get_pointer(0).get_x();
-					y = window->get_graphics_window()->get_pointer(0).get_y();
-
-					double move_x = std::floor(center_x - x);
-					double move_y = std::floor(center_y - y);
+					double move_x = std::floor(center_x - window->get_graphics_window()->get_pointer(0).get_x());
+					double move_y = std::floor(center_y - window->get_graphics_window()->get_pointer(0).get_y());
 
 					if (keys["v"]) {
 						offset_r += move_x / camera_x_speed;
 
 						if (offset_r < 90 && offset_r > -90) {
-							player.camera.set_r(offset_r);
+							player.model.set_r(offset_r);
 						} else {
 							offset_r -= move_x / 5;
 						}
 					} else {
 						offset_h += move_x / camera_x_speed;
-						player.camera.set_h(std::fmod(offset_h, 360));
+						player.model.set_h(std::fmod(offset_h, 360));
 
 						// Reset rotation
 						offset_r = 0;
-						player.camera.set_r(offset_r);
+						player.model.set_r(offset_r);
 					}
 
 					offset_p += move_y / camera_y_speed;
 					panda.set_h(std::fmod(offset_h, 360));
 
 					//Adjust the collision box so its pitch doesn't change
-					cameraC.set_p(offset_p - offset_p * 2);
+					player.collisionNodePath.set_p(offset_p - offset_p * 2);
 
 					//Adjust the collision box so its rotation doesn't change
 					//cameraC.set_r(offset_r - offset_r * 2);
@@ -731,7 +637,7 @@ int main(int argc, char* argv[]) {
 
 					if (!keys["v"]) {
 						if (offset_p < 90 && offset_p > -90) {
-							player.camera.set_p(offset_p);
+							player.model.set_p(offset_p);
 						} else {
 							offset_p -= move_y / 5;
 						}
@@ -743,46 +649,56 @@ int main(int argc, char* argv[]) {
 
 
 			if (keys["w"]) {
-				player.camera.set_y(panda, 0 + y_speed);
+				player.model.set_y(panda, 0 + y_speed);
 				panda.set_y(panda, 0 + y_speed);
 			}
 			if (keys["s"]) {
-				player.camera.set_y(panda, 0 - y_speed);
+				player.model.set_y(panda, 0 - y_speed);
 				panda.set_y(panda, 0 - y_speed);
 			}
 			if (keys["a"]) {
-				player.camera.set_x(player.camera, 0 - x_speed);
-				panda.set_x(player.camera, 0 - x_speed);
+				player.model.set_x(player.model, 0 - x_speed);
+				panda.set_x(player.model, 0 - x_speed);
 			}
 			if (keys["d"]) {
-				player.camera.set_x(player.camera, 0 + x_speed);
-				panda.set_x(player.camera, 0 + x_speed);
+				player.model.set_x(player.model, 0 + x_speed);
+				panda.set_x(player.model, 0 + x_speed);
 			}
 			if (keys["lshift"]) {
-				if (player.onGround && !player.sneaking) {
+				if (player.flying) {
+					player.model.set_z(player.model.get_pos().get_z() - z_speed);
+				} else if (player.onGround && !player.sneaking) {
 					player.sneaking = true;
-					cameraC.set_z(cameraC.get_z() + sneak_distance);
-					player.camera.set_z(player.camera.get_pos().get_z() - sneak_distance);
+					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance);
+					player.model.set_z(player.model.get_pos().get_z() - sneak_distance);
 				}
 			} else if (!keys["lshift"]) {
 				if (player.onGround && player.sneaking) {
 					player.sneaking = false;
-					cameraC.set_z(cameraC.get_z() - sneak_distance);
-					player.camera.set_z(player.camera.get_pos().get_z() + sneak_distance);
+					player.collisionNodePath.set_z(player.collisionNodePath.get_z() - sneak_distance);
+					player.model.set_z(player.model.get_pos().get_z() + sneak_distance);
 				}
 			}
 			if (keys["space"]) {
-				if (player.onGround) {
+				std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - timepoint;
+				if (player.flying && duration.count() > 0.05 && duration.count() < 0.275) {
+					player.flying = false;
+					player.velocity = 0;
+				} else if (player.flying) {
+					player.model.set_z(player.model.get_pos().get_z() + z_speed);
+				} else if (!player.onGround && duration.count() > 0.05 && !player.flying) {
+					player.flying = true;
+				} else if (player.onGround) {
 					if (!player.sneaking) {
-						velocity = -0.25;
+						player.velocity = -0.25;
 					} else if (player.sneaking) {
-						velocity = -0.45;
+						player.velocity = -0.45;
 					}
 					player.onGround = false;
 				}
+				timepoint = std::chrono::high_resolution_clock::now();
 			}
 			if (keys["q"]) {
-				/*game::saveChunk(game::chunks[0]);*/
 				for (std::pair<int, int> pair : game::chunk::loaded_chunks) {
 					std::cout << pair.first << "	" << pair.second << std::endl;
 				}
@@ -790,12 +706,11 @@ int main(int argc, char* argv[]) {
 				keys["q"] = false;
 			}
 			if (keys["r"]) {
-				player.camera.set_z(30);
-				velocity = 0;
+				player.model.set_z(30);
+				player.velocity = 0;
 			}
 			if (keys["f2"]) {
 				std::string filename = "screenshots/" + game::getConvertedDateTime() + ".png";
-				game::warningOut(filename);
 				bool successful = window->get_graphics_window()->save_screenshot(filename, "");
 				if (successful) {
 					game::logOut("Saved screenshot: '" + filename + "' to the screenshots folder.");
@@ -833,24 +748,24 @@ int main(int argc, char* argv[]) {
 					offset_r += move_x / camera_x_speed;
 
 					if (offset_r < 90 && offset_r > -90) {
-						player.camera.set_r(offset_r);
+						player.model.set_r(offset_r);
 					} else {
 						offset_r -= move_x / 5;
 					}
 				} else {
 					offset_h += move_x / camera_x_speed;
-					player.camera.set_h(offset_h);
+					player.model.set_h(offset_h);
 
 					// Reset rotation
 					offset_r = 0;
-					player.camera.set_r(offset_r);
+					player.model.set_r(offset_r);
 				}
 
 				offset_p += move_y / camera_y_speed;
 				panda.set_h(offset_h);
 
 				//Adjust the collision box so its pitch doesn't change
-				cameraC.set_p(offset_p - offset_p * 2);
+				player.collisionNodePath.set_p(offset_p - offset_p * 2);
 
 				//Adjust the collision box so its rotation doesn't change
 				//cameraC.set_r(offset_r - offset_r * 2);
@@ -858,7 +773,7 @@ int main(int argc, char* argv[]) {
 
 				if (!keys["v"]) {
 					if (offset_p < 90 && offset_p > -90) {
-						player.camera.set_p(offset_p);
+						player.model.set_p(offset_p);
 					} else {
 						offset_p -= move_y / 5;
 					}
@@ -871,9 +786,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		if (keys["e"]) {
-			/*game::winds.push_back(game::windObject(window, framework, 0.1, 0.2, 0, 0.1, 1, 1, 1, true));
-			game::winds[game::winds.size() - 1].model.set_pos(floor(camera.get_x()), floor(camera.get_y()), floor(camera.get_z()));*/
-
 			if (e_inventory.is_hidden()) {
 				e_inventory.show();
 				cursor.hide();
@@ -906,18 +818,6 @@ int main(int argc, char* argv[]) {
 		//Reset mouse clicks
 		keys["mouse1"] = false;
 		keys["mouse3"] = false;
-
-		//Border checking
-		/*if (options["lower_border"] != "none" && options["lower_border"] != "null") {
-			if (camera.get_pos().get_z() < std::stof(options["lower_border"])) {
-				camera.set_z(std::stof(options["lower_border"]));
-			}
-		}
-		if (options["upper_border"] != "none" && options["upper_border"] != "null") {
-			if (camera.get_pos().get_z() > std::stof(options["upper_border"])) {
-				camera.set_z(std::stof(options["upper_border"]));
-			}
-		}*/
 	}
 
 	//Saving chunks
@@ -930,6 +830,21 @@ int main(int argc, char* argv[]) {
 			chunk.saveChunk();
 		}
 		updateIndex.close();
+
+		//Save profiles
+		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
+		profile << "x=" << player.model.get_x() << std::endl;
+		profile << "y=" << player.model.get_y() << std::endl;
+		profile << "z=" << player.model.get_z() << std::endl;
+
+		profile << "handInventory=";
+		for (size_t i = 0; i < playerHandInventory.slots; i++) {
+			profile << playerHandInventory.getItem(i).configPath << "|";
+		}
+		profile << std::endl;
+
+		profile.close();
+
 		terrainAnimationShouldRun = false;
 		saving_animation_thread.join();
 	}
@@ -937,7 +852,6 @@ int main(int argc, char* argv[]) {
 	std::remove(filename.c_str());
 
 	framework.close_framework();
-	//debugInputThread.detach();
 	game::logOut("Closing...");
 
 	if (!std::stoi(options["close_console_without_input"])) {

@@ -291,6 +291,20 @@ namespace game {
 		}
 	}
 
+	bool connectToPStats(std::string host, int port) {
+		if (PStatClient::is_connected()) {
+			PStatClient::disconnect();
+		}
+
+		if (!PStatClient::connect(host, port)) {
+			game::warningOut("Could not connect to PStat server.");
+			return false;
+		} else {
+			game::importantInfoOut("Successfully connected to PStat server!");
+			return true;
+		}
+	}
+
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
 	}
@@ -313,32 +327,6 @@ namespace game {
 		if (mouseInGame) {
 			int& indexModification = *((int*)data);
 			handInventoryIndex += indexModification;
-		}
-	}
-	void testIfPlayerOnGround(const Event* theEvent, void* data) {
-		bool in_out_pattern = (bool)data;
-
-		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
-		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
-		nassertv(entry != NULL);
-
-		if (!in_out_pattern) {
-			if (std::round(entry->get_into_node_path().get_parent().get_z()) <= std::round(entry->get_from_node_path().get_parent().get_z())) {
-				playerOnGround = true;
-			} else {
-				playerOnGround = false;
-			}
-		} else {
-			playerOnGround = false;
-		}
-	}
-	void getCollidedNodePath(const Event* theEvent, void* data) {
-		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();
-		PT(CollisionEntry) entry = DCAST(CollisionEntry, value);
-		nassertv(entry != NULL);
-
-		if (playerOnGround) {
-			collidedNodePath = entry->get_into_node_path().get_parent();
 		}
 	}
 }

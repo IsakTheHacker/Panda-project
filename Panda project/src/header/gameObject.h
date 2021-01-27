@@ -32,6 +32,7 @@ namespace game {
 		std::string configPath = "";
 		std::map<std::string, std::string> config;
 		NodePath collisionNodePath;
+		double hp = 1;
 
 		object(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		object(WindowFramework*& window, PandaFramework& framework, std::vector<NodePath> subobjects, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
@@ -46,6 +47,7 @@ namespace game {
 	// Entity class
 	class entity : public object {
 	public:
+		entity(bool shouldLogInConsole = false, bool shouldLogToFile = false);
 		entity(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~entity();
 
@@ -53,15 +55,33 @@ namespace game {
 	};
 
 	// Player class
-	class player : public entity {
+	class Player : public entity {
 	public:
-		NodePath camera;
+		NodePath collidedNodePath;
+		bool onGround;
+		bool sneaking;
+		bool flying;
+		double velocity = 0.0;
+		double velocityModifier = 1.1;
+		int chunk_x;
+		int chunk_y;
+		std::string playerName;
 
-		player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
-		~player();
+		//Static member variables
+		static std::map<std::string, std::string>* options;
+
+		Player(bool shouldLogInConsole = false, bool shouldLogToFile = false);
+		Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+		~Player();
 	};
+
+
+	void testIfPlayerOnGround(const Event* theEvent, void* data);
+	void getCollidedNodePath(const Event* theEvent, void* data);
 
 	//Creating vectors for the classes
 	extern std::vector<entity> entities;
 	//extern std::vector<player> players;
 }
+
+extern game::Player player;

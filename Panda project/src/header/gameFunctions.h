@@ -13,7 +13,6 @@
 #include <stdio.h>
 #include <chrono>
 #include <vector>
-#include <filesystem>
 #include <string>
 
 //JSON library
@@ -23,6 +22,9 @@ using json = nlohmann::json;
 //Python library
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
+
+//Panda3D libraries
+#include <pStatClient.h>
 
 //My libraries
 #include "cppExtension.h"
@@ -138,6 +140,40 @@ namespace game {
 		return 0;
 	}
 
+	// Prints timer information to the console (blue color)
+	template<typename T>
+	int timingInfoOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
+		std::string text = std::to_string(input);
+		SetConsoleTextAttribute(h, 1 | FOREGROUND_INTENSITY);
+		if (!includeTime) {
+			std::cout << "Timing info: " << text << "\n";
+		} else {
+			std::cout << getConvertedDateTime(false, true) << " Timing info: " << text << "\n";
+		}
+		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		if (shouldLogToFile) {
+			logToFile("game.log", "Timing info: " + text);
+		}
+		return 0;
+	}
+
+	// Prints user configuration information to the console (purple)
+	template<typename T>
+	int userConfigOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
+		std::string text = std::to_string(input);
+		SetConsoleTextAttribute(h, 5 | FOREGROUND_INTENSITY);
+		if (!includeTime) {
+			std::cout << "User config info: " << text << "\n";
+		} else {
+			std::cout << getConvertedDateTime(false, true) << " User config info: " << text << "\n";
+		}
+		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		if (shouldLogToFile) {
+			logToFile("game.log", "User config info: " + text);
+		}
+		return 0;
+	}
+
 	// Prints unimportant logs to the console (white color)
 	template<typename T>
 	int logOut(T input, bool shouldLogToFile = false, bool includeTime = true) {
@@ -187,11 +223,22 @@ namespace game {
 	/// <returns> Parsed value </returns>
 	int parsePositive(int value);
 
+	/// <summary> Checks if a value is odd or not. </summary>
+	/// <param name="value">- Input integer</param>
+	/// <returns> True if odd, false if not. </returns>
 	bool isOdd(const int& value);
 
+	/// <summary> Checks if a value is even or not. </summary>
+	/// <param name="value">- Input integer</param>
+	/// <returns> True if even, false if not. </returns>
 	bool isEven(const int& value);
 
+	/// <summary> Checks if a file exists. </summary>
+	/// <param name="path">- The path to your file</param>
+	/// <returns> True if file exists, false if it doesn't. </returns>
 	bool fileExists(const std::string& path);
+
+	bool connectToPStats(std::string host = "localhost", int port = -1);
 
 	// Executes a Python script
 	int runPyScript(const std::string& path);
@@ -218,6 +265,4 @@ namespace game {
 	void key_up(const Event* theEvent, void* data);
 	void key_swap(const Event* theEvent, void* data);
 	void wheel_roll(const Event* theEvent, void* data);
-	void testIfPlayerOnGround(const Event* theEvent, void* data);
-	void getCollidedNodePath(const Event* theEvent, void* data);
 }
