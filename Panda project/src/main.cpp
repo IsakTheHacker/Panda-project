@@ -119,8 +119,21 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Create folders and files
-	game::runPyScript("data/scripts/makeDirectories.py");
-	game::runPyScript("data/scripts/createOptionsFile.py");
+	fs::create_directory("data");
+	fs::create_directory("screenshots");
+	if (!game::fileExists("data/options.txt")) {
+		std::ofstream file("data/options.txt");
+		std::string newLine = "\n";
+		for (size_t i = 0; i < game::optionLines.size(); i++) {
+			if (i == game::optionLines.size() - 1) {
+				newLine = "";
+			}
+			file << game::optionLines[i] << newLine;
+		}
+		file.close();
+	}
+	/*game::runPyScript("data/scripts/makeDirectories.py");
+	game::runPyScript("data/scripts/createOptionsFile.py");*/
 
 	//Read options
 	std::map<std::string, std::string> options;
