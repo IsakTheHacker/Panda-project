@@ -116,6 +116,7 @@
     <None Include="data\scripts\buildcounter.bat">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
