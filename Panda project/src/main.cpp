@@ -12,6 +12,10 @@
 #include <map>
 #include <string>
 
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING		//Experimental filesystem header
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+
 int handInventoryIndex;
 std::map<std::string, bool> keys;
 std::map<std::string, std::string> universeOptions;
