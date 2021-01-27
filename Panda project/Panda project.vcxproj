@@ -88,6 +88,7 @@
   <ItemGroup>
     <None Include="..\.gitattributes" />
     <None Include="..\.gitignore" />
+    <None Include="..\README.md" />
     <None Include="cpp.hint" />
     <None Include="data\scripts\buildcounter.bat" />
     <None Include="data\scripts\createOptionsFile.py" />
