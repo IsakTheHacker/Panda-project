@@ -21,25 +21,31 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_10A0D9CC5D0441DA91E1ECFCB5FFF7C7"
+        "MsmKey" = "8:_0465FCD23CC34F5BA0EC36ACDD2C0E2D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_15554CEB9DAB445A98A3DB792C68A9E4"
+        "MsmKey" = "8:_0DD0C784A46442FAA969BC4B61463440"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_158A121CA09A4E1083159BD4C78CF9AB"
+        "MsmKey" = "8:_146DD4D1C2A34A6B813EB0C50EACA516"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_1BC9490494A9420CBB51DACFA524739A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1F2A93476E244757934DAC7E9EC5552A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -57,7 +63,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_25F61FB02DCB45FCA2526F61FDB8EC60"
+        "MsmKey" = "8:_2A57768D20E24591BB6058E478B618F8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -69,25 +75,43 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2F07F2B6EBF94A2D95D9E018788DBD65"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3279236254D642A9BCDD99D18664BF46"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3826FBE706864C84865FCE861EE5699A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3DD49C58BC2B4C0DBA37090D97C88753"
+        "MsmKey" = "8:_3D01C0B8AD424F4695AB9395A7DB6465"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_42A6A97A21514E7CA6DB8DA43F3680F1"
+        "MsmKey" = "8:_3D21980AABB54B3F90E02370A624CFFB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_42FF7B8586BC49A481847B86580492A9"
+        "MsmKey" = "8:_40CA92079A534C248313FA479DBFED4B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_48A709BB91734146AA9D8E6644CA0915"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -99,19 +123,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_4A88AECBE0E948FFB4BD8A1301F64113"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4AAF5FC9514746C091A8C6F64198FAB9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_51E35FA591914C0FAD7A5F56EEF351C3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_58F933C8E3524EB98804014053A48F14"
+        "MsmKey" = "8:_58A145584ADA491B9A5596F125C9B8BC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -123,13 +147,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_69F8AC82E2F248A9A6781B9F8AEE3FAA"
+        "MsmKey" = "8:_5E64C386BB5640B28DEAE94640C72FF9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7503EE377ECB471AA5A4B51B4649F909"
+        "MsmKey" = "8:_5EE10F13A91D4DF6B4CC97D76AB5A0F7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_60172E73EE3D411F874EBC64237A31A1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_60B768D54BCD44D391D288B4802564A4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -141,7 +177,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8293E92B142043D8A8D07C65C3651D67"
+        "MsmKey" = "8:_7A22D1B83E1B42769CF9B5788581980A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -153,7 +189,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_88D904A3BE044853AC5F34A9E3618DE1"
+        "MsmKey" = "8:_8A97529D018A4A59945713E15867FCFF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -165,13 +201,31 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_92F3D9C2D980496396884BF355230976"
+        "MsmKey" = "8:_90E9004F42394A398E5713B1420586E5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_94A0EF710F4F4748BF78DBA07CDB2A0C"
+        "MsmKey" = "8:_91E33EE3275C4FDBA19DF8E760497C4E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_93A7C3D104E04AEDAE8905692799400A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_946C91E71C0144F296C744E8D93AB3C2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_99F917E5E31E404BB1E9D00FB56B8F92"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -183,19 +237,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_9C66E39358344FCB99CDC2124AE3D188"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9D6E8BF0A4174D5A91B7B48988E2459C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9F98C10959D2441E843FEC7C74310F12"
+        "MsmKey" = "8:_9D92751F52314BEE966D3D914D6B28FA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A047BA47A8E5435CBAD6F1CB1F2960EB"
+        "MsmKey" = "8:_9FF7D6BEDD9D408199219909C90FE308"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -207,13 +267,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A9DA341C5BA848A78DC9268A44DD19A8"
+        "MsmKey" = "8:_A8BE1DE4DB6047A18AC1247223A602CD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_AD4ADDED4ABF4E7D92A56EAFF1BC8DFC"
+        "MsmKey" = "8:_ACF95A09DF1347969D576F6E42092919"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BD4DC28CC2E64DF6A4D6497EF56CE405"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C5CCF4C287344508B56ACCD0736425EB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -225,25 +297,67 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D5EE0389511D40A292E6EEEA6E89C65A"
+        "MsmKey" = "8:_CC4BA167D7FF475EAC825D89C08156D1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DBBB2F05ED5F43D09D6756DBDAF893C4"
+        "MsmKey" = "8:_CD06A04D36B544C2917F7F6D66DBD0C3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E069A5C1D6ED40A288C913DE34365FF9"
+        "MsmKey" = "8:_D3E4C17A70A349B7ADE5C0C03845C5C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F05D87010D86479398A6872D520A3867"
+        "MsmKey" = "8:_D4973F467957451B8DD05DEBA1C78ABD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D75359D1D66B4F9FB6C6273130677D1B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D932D56676D54F07AA9F4AB2AF5D23E0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DA2BB464C8FB4C4F8F221E2F11FF0DAB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E0A4B96F03724954848AACB36C4C280F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E55880D1DC8F488395B6DA1E24F525EC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E5FAF81E0E394D6892C59717954BA03F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EC96489285024329B385CDE169FD6E55"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -255,13 +369,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F5980572406E47A89F81CAECADB1B5F3"
+        "MsmKey" = "8:_F311065C17EC448DB77C398D4119C708"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_FD759FE891F04AF5870A3D453A073F90"
+        "MsmKey" = "8:_F334C2A718A84C3BB7A03B01E88E56DF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -378,12 +492,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_10A0D9CC5D0441DA91E1ECFCB5FFF7C7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0465FCD23CC34F5BA0EC36ACDD2C0E2D"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-3.png"
-            "TargetName" = "8:grass-3.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\log-3.png"
+            "TargetName" = "8:log-3.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -398,12 +512,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_15554CEB9DAB445A98A3DB792C68A9E4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0DD0C784A46442FAA969BC4B61463440"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\egg\\simple_house.egg"
-            "TargetName" = "8:simple_house.egg"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-5.png"
+            "TargetName" = "8:rotational-complex-5.png"
             "Tag" = "8:"
-            "Folder" = "8:_63C99BF8DCAD4B9BBB34582D040816F3"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -418,12 +532,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_158A121CA09A4E1083159BD4C78CF9AB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_146DD4D1C2A34A6B813EB0C50EACA516"
             {
-            "SourcePath" = "8:..\\Panda project\\python38.dll"
-            "TargetName" = "8:python38.dll"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-2.png"
+            "TargetName" = "8:rotational-complex-2.png"
             "Tag" = "8:"
-            "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -444,6 +558,26 @@
             "TargetName" = "8:libp3dtoolconfig.dll"
             "Tag" = "8:"
             "Folder" = "8:_32F53070E80643D4B3F8D19EDEF47D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F2A93476E244757934DAC7E9EC5552A"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\stone-3.png"
+            "TargetName" = "8:stone-3.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -498,12 +632,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_25F61FB02DCB45FCA2526F61FDB8EC60"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2A57768D20E24591BB6058E478B618F8"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-1.png"
-            "TargetName" = "8:grass-1.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-5.png"
+            "TargetName" = "8:grass-5.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -538,6 +672,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F07F2B6EBF94A2D95D9E018788DBD65"
+            {
+            "SourcePath" = "8:..\\Panda project\\data\\assets\\playerproperties\\standard.playerproperties"
+            "TargetName" = "8:standard.playerproperties"
+            "Tag" = "8:"
+            "Folder" = "8:_46A29D146E83439D8ACE7873E4E0FC36"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3279236254D642A9BCDD99D18664BF46"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-1.png"
+            "TargetName" = "8:grass-1.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3826FBE706864C84865FCE861EE5699A"
             {
             "SourcePath" = "8:..\\Panda project\\data\\options.txt"
@@ -558,12 +732,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3DD49C58BC2B4C0DBA37090D97C88753"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D01C0B8AD424F4695AB9395A7DB6465"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-0.png"
-            "TargetName" = "8:grass-0.png"
+            "SourcePath" = "8:..\\Panda project\\models\\egg\\block_outline.egg"
+            "TargetName" = "8:block_outline.egg"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_29E6ACC65E1247C09904718CD62907D5"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -578,12 +752,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_42A6A97A21514E7CA6DB8DA43F3680F1"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D21980AABB54B3F90E02370A624CFFB"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-4.png"
-            "TargetName" = "8:grass-4.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-4.png"
+            "TargetName" = "8:rotational-complex-4.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -598,12 +772,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_42FF7B8586BC49A481847B86580492A9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_40CA92079A534C248313FA479DBFED4B"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\egg\\block.egg"
-            "TargetName" = "8:block.egg"
+            "SourcePath" = "8:..\\Panda project\\data\\assets\\blockproperties\\rotational-complex.blockproperties"
+            "TargetName" = "8:rotational-complex.blockproperties"
             "Tag" = "8:"
-            "Folder" = "8:_63C99BF8DCAD4B9BBB34582D040816F3"
+            "Folder" = "8:_8CB3C6A636314578A96082909BA9D6F9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_48A709BB91734146AA9D8E6644CA0915"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\log-2.png"
+            "TargetName" = "8:log-2.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -638,6 +832,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4A88AECBE0E948FFB4BD8A1301F64113"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-1.png"
+            "TargetName" = "8:rotational-complex-1.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4AAF5FC9514746C091A8C6F64198FAB9"
             {
             "SourcePath" = "8:..\\Panda project\\cg.dll"
@@ -658,32 +872,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_51E35FA591914C0FAD7A5F56EEF351C3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_58A145584ADA491B9A5596F125C9B8BC"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-2.png"
-            "TargetName" = "8:grass-2.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-0.png"
+            "TargetName" = "8:grass-0.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_58F933C8E3524EB98804014053A48F14"
-            {
-            "SourcePath" = "8:..\\Panda project\\data\\assets\\blockproperties\\rotational-complex.blockproperties"
-            "TargetName" = "8:rotational-complex.blockproperties"
-            "Tag" = "8:"
-            "Folder" = "8:_0A32381248EE4E158488A52C80DE5819"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -718,12 +912,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69F8AC82E2F248A9A6781B9F8AEE3FAA"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5E64C386BB5640B28DEAE94640C72FF9"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-2.png"
-            "TargetName" = "8:rotational-complex-2.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\stone-4.png"
+            "TargetName" = "8:stone-4.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -738,12 +932,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7503EE377ECB471AA5A4B51B4649F909"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5EE10F13A91D4DF6B4CC97D76AB5A0F7"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\egg\\blocky.egg"
-            "TargetName" = "8:blocky.egg"
+            "SourcePath" = "8:..\\Panda project\\models\\egg\\tree_trunk.egg"
+            "TargetName" = "8:tree_trunk.egg"
             "Tag" = "8:"
-            "Folder" = "8:_63C99BF8DCAD4B9BBB34582D040816F3"
+            "Folder" = "8:_29E6ACC65E1247C09904718CD62907D5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_60172E73EE3D411F874EBC64237A31A1"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\crosshair.png"
+            "TargetName" = "8:crosshair.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_60B768D54BCD44D391D288B4802564A4"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\log-5.png"
+            "TargetName" = "8:log-5.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -778,12 +1012,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8293E92B142043D8A8D07C65C3651D67"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A22D1B83E1B42769CF9B5788581980A"
             {
-            "SourcePath" = "8:..\\Panda project\\data\\assets\\blockproperties\\grass.blockproperties"
-            "TargetName" = "8:grass.blockproperties"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\hand-inventory-highlighted.png"
+            "TargetName" = "8:hand-inventory-highlighted.png"
             "Tag" = "8:"
-            "Folder" = "8:_0A32381248EE4E158488A52C80DE5819"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -818,12 +1052,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_88D904A3BE044853AC5F34A9E3618DE1"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A97529D018A4A59945713E15867FCFF"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-1.png"
-            "TargetName" = "8:rotational-complex-1.png"
+            "SourcePath" = "8:..\\Panda project\\models\\egg\\block.egg"
+            "TargetName" = "8:block.egg"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_29E6ACC65E1247C09904718CD62907D5"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -858,12 +1092,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_92F3D9C2D980496396884BF355230976"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90E9004F42394A398E5713B1420586E5"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-3.png"
-            "TargetName" = "8:rotational-complex-3.png"
+            "SourcePath" = "8:..\\Panda project\\etc\\Config.prc"
+            "TargetName" = "8:Config.prc"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_59AB566E3BFF40458C8111522B4D9A61"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -878,12 +1112,92 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_94A0EF710F4F4748BF78DBA07CDB2A0C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_91E33EE3275C4FDBA19DF8E760497C4E"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-5.png"
-            "TargetName" = "8:grass-5.png"
+            "SourcePath" = "8:..\\Panda project\\universes\\Test\\universe"
+            "TargetName" = "8:universe"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_ED90EF6FFE154911BA5BA34152F4069D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_93A7C3D104E04AEDAE8905692799400A"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\stone-0.png"
+            "TargetName" = "8:stone-0.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_946C91E71C0144F296C744E8D93AB3C2"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\egg\\blocky.egg"
+            "TargetName" = "8:blocky.egg"
+            "Tag" = "8:"
+            "Folder" = "8:_29E6ACC65E1247C09904718CD62907D5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_99F917E5E31E404BB1E9D00FB56B8F92"
+            {
+            "SourcePath" = "8:..\\Panda project\\data\\assets\\blockproperties\\stone.blockproperties"
+            "TargetName" = "8:stone.blockproperties"
+            "Tag" = "8:"
+            "Folder" = "8:_8CB3C6A636314578A96082909BA9D6F9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C66E39358344FCB99CDC2124AE3D188"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-0.png"
+            "TargetName" = "8:rotational-complex-0.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -918,12 +1232,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9F98C10959D2441E843FEC7C74310F12"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9D92751F52314BEE966D3D914D6B28FA"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\crosshair.png"
-            "TargetName" = "8:crosshair.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\hand-inventory-all.png"
+            "TargetName" = "8:hand-inventory-all.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -938,12 +1252,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A047BA47A8E5435CBAD6F1CB1F2960EB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9FF7D6BEDD9D408199219909C90FE308"
             {
-            "SourcePath" = "8:..\\Panda project\\universes\\Test\\universe"
-            "TargetName" = "8:universe"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\stone-1.png"
+            "TargetName" = "8:stone-1.png"
             "Tag" = "8:"
-            "Folder" = "8:_ABF8782CF7234A4B8B64BD4AB55EFB31"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -978,12 +1292,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9DA341C5BA848A78DC9268A44DD19A8"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A8BE1DE4DB6047A18AC1247223A602CD"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\hand-inventory-all.png"
-            "TargetName" = "8:hand-inventory-all.png"
+            "SourcePath" = "8:..\\Panda project\\models\\egg\\half_block_wedge_base.egg"
+            "TargetName" = "8:half_block_wedge_base.egg"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_29E6ACC65E1247C09904718CD62907D5"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -998,12 +1312,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AD4ADDED4ABF4E7D92A56EAFF1BC8DFC"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ACF95A09DF1347969D576F6E42092919"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-0.png"
-            "TargetName" = "8:rotational-complex-0.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\inventory.png"
+            "TargetName" = "8:inventory.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BD4DC28CC2E64DF6A4D6497EF56CE405"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-4.png"
+            "TargetName" = "8:grass-4.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C5CCF4C287344508B56ACCD0736425EB"
+            {
+            "SourcePath" = "8:..\\Panda project\\data\\assets\\blockproperties\\grass.blockproperties"
+            "TargetName" = "8:grass.blockproperties"
+            "Tag" = "8:"
+            "Folder" = "8:_8CB3C6A636314578A96082909BA9D6F9"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1038,12 +1392,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D5EE0389511D40A292E6EEEA6E89C65A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC4BA167D7FF475EAC825D89C08156D1"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\egg\\block_outline.egg"
-            "TargetName" = "8:block_outline.egg"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\stone-5.png"
+            "TargetName" = "8:stone-5.png"
             "Tag" = "8:"
-            "Folder" = "8:_63C99BF8DCAD4B9BBB34582D040816F3"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1058,12 +1412,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DBBB2F05ED5F43D09D6756DBDAF893C4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD06A04D36B544C2917F7F6D66DBD0C3"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\egg\\half_block_wedge_base.egg"
-            "TargetName" = "8:half_block_wedge_base.egg"
+            "SourcePath" = "8:..\\Panda project\\models\\egg\\half_block_wedge_incline.egg"
+            "TargetName" = "8:half_block_wedge_incline.egg"
             "Tag" = "8:"
-            "Folder" = "8:_63C99BF8DCAD4B9BBB34582D040816F3"
+            "Folder" = "8:_29E6ACC65E1247C09904718CD62907D5"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1078,12 +1432,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E069A5C1D6ED40A288C913DE34365FF9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D3E4C17A70A349B7ADE5C0C03845C5C1"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\hand-inventory-highlighted.png"
-            "TargetName" = "8:hand-inventory-highlighted.png"
+            "SourcePath" = "8:..\\Panda project\\data\\assets\\entityproperties\\test.entityproperties"
+            "TargetName" = "8:test.entityproperties"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_C0DCF8C5EFCB4D7FBF011D4861E4B2BD"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1098,12 +1452,152 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F05D87010D86479398A6872D520A3867"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D4973F467957451B8DD05DEBA1C78ABD"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-4.png"
-            "TargetName" = "8:rotational-complex-4.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\log-0.png"
+            "TargetName" = "8:log-0.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D75359D1D66B4F9FB6C6273130677D1B"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\egg\\simple_house.egg"
+            "TargetName" = "8:simple_house.egg"
+            "Tag" = "8:"
+            "Folder" = "8:_29E6ACC65E1247C09904718CD62907D5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D932D56676D54F07AA9F4AB2AF5D23E0"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\stone-2.png"
+            "TargetName" = "8:stone-2.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DA2BB464C8FB4C4F8F221E2F11FF0DAB"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-2.png"
+            "TargetName" = "8:grass-2.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0A4B96F03724954848AACB36C4C280F"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\grass-3.png"
+            "TargetName" = "8:grass-3.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E55880D1DC8F488395B6DA1E24F525EC"
+            {
+            "SourcePath" = "8:..\\Panda project\\etc\\Confauto.prc"
+            "TargetName" = "8:Confauto.prc"
+            "Tag" = "8:"
+            "Folder" = "8:_59AB566E3BFF40458C8111522B4D9A61"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E5FAF81E0E394D6892C59717954BA03F"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\log-1.png"
+            "TargetName" = "8:log-1.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EC96489285024329B385CDE169FD6E55"
+            {
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\log-4.png"
+            "TargetName" = "8:log-4.png"
+            "Tag" = "8:"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1138,12 +1632,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5980572406E47A89F81CAECADB1B5F3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F311065C17EC448DB77C398D4119C708"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-5.png"
-            "TargetName" = "8:rotational-complex-5.png"
+            "SourcePath" = "8:..\\Panda project\\models\\textures\\png\\rotational-complex-3.png"
+            "TargetName" = "8:rotational-complex-3.png"
             "Tag" = "8:"
-            "Folder" = "8:_E2C46AE24444467EB401B81DFCFEBB38"
+            "Folder" = "8:_4505524F763F49578D1C15A41FFF70BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1158,12 +1652,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FD759FE891F04AF5870A3D453A073F90"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F334C2A718A84C3BB7A03B01E88E56DF"
             {
-            "SourcePath" = "8:..\\Panda project\\models\\egg\\half_block_wedge_incline.egg"
-            "TargetName" = "8:half_block_wedge_incline.egg"
+            "SourcePath" = "8:..\\Panda project\\data\\assets\\blockproperties\\log.blockproperties"
+            "TargetName" = "8:log.blockproperties"
             "Tag" = "8:"
-            "Folder" = "8:_63C99BF8DCAD4B9BBB34582D040816F3"
+            "Folder" = "8:_8CB3C6A636314578A96082909BA9D6F9"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1248,6 +1742,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_59AB566E3BFF40458C8111522B4D9A61"
+                    {
+                    "Name" = "8:etc"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_D08673292D604ABF90B62733359090CB"
+                        "Folders"
+                        {
+                        }
+                    }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_5C5ED47CF92340B999FD5B08F81D0204"
                     {
                     "Name" = "8:data"
@@ -1268,22 +1773,44 @@
                                 {
                                 }
                             }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_C7128532FCA8424EA13158AC1B3734FD"
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_677C1E8D00324A80BBB0EA27EC6A0020"
                             {
                             "Name" = "8:assets"
                             "AlwaysCreate" = "11:FALSE"
                             "Condition" = "8:"
                             "Transitive" = "11:FALSE"
-                            "Property" = "8:_97D52B5DAC8544E3BA8A1D461E711466"
+                            "Property" = "8:_88CA28625F3C4D858C02B6E249C9FE96"
                                 "Folders"
                                 {
-                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_0A32381248EE4E158488A52C80DE5819"
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_46A29D146E83439D8ACE7873E4E0FC36"
+                                    {
+                                    "Name" = "8:playerproperties"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_42651E118A50454DA7246CD7899AC67D"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_8CB3C6A636314578A96082909BA9D6F9"
                                     {
                                     "Name" = "8:blockproperties"
                                     "AlwaysCreate" = "11:FALSE"
                                     "Condition" = "8:"
                                     "Transitive" = "11:FALSE"
-                                    "Property" = "8:_46429FB590A34AACB4C7E715735A74AE"
+                                    "Property" = "8:_59744F1252224CB39ADDD5F8C20612E7"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_C0DCF8C5EFCB4D7FBF011D4861E4B2BD"
+                                    {
+                                    "Name" = "8:entityproperties"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_E8807EFC85144E6A80936D02BDA335A1"
                                         "Folders"
                                         {
                                         }
@@ -1312,33 +1839,33 @@
                     "Property" = "8:_7839C25607A040E8B57DE0CB21523538"
                         "Folders"
                         {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_63C99BF8DCAD4B9BBB34582D040816F3"
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_29E6ACC65E1247C09904718CD62907D5"
                             {
                             "Name" = "8:egg"
                             "AlwaysCreate" = "11:FALSE"
                             "Condition" = "8:"
                             "Transitive" = "11:FALSE"
-                            "Property" = "8:_3C8B774AD72842459D1FDFCAC43C6AAC"
+                            "Property" = "8:_7B64A640834E49F88836A8A41CBDF210"
                                 "Folders"
                                 {
                                 }
                             }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_9ADD5626455D4E1DBEEB6969C8B4DACC"
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_48C585EF20CF45AA8EB857A6D9A63544"
                             {
                             "Name" = "8:textures"
                             "AlwaysCreate" = "11:FALSE"
                             "Condition" = "8:"
                             "Transitive" = "11:FALSE"
-                            "Property" = "8:_26FFB72C5FAA4580953BB2FC34695E4B"
+                            "Property" = "8:_4ABCD33BC7DF4CA283C2C8D6B538BE0B"
                                 "Folders"
                                 {
-                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_E2C46AE24444467EB401B81DFCFEBB38"
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_4505524F763F49578D1C15A41FFF70BE"
                                     {
                                     "Name" = "8:png"
                                     "AlwaysCreate" = "11:FALSE"
                                     "Condition" = "8:"
                                     "Transitive" = "11:FALSE"
-                                    "Property" = "8:_C8B9C4350F7843CE97A41E4A5E26CECA"
+                                    "Property" = "8:_A04B6573C4B44005BAA31F71A9FEA0EF"
                                         "Folders"
                                         {
                                         }
@@ -1356,15 +1883,26 @@
                     "Property" = "8:_1797F5D6C8984A99A7F13002834FFECD"
                         "Folders"
                         {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_ABF8782CF7234A4B8B64BD4AB55EFB31"
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_ED90EF6FFE154911BA5BA34152F4069D"
                             {
                             "Name" = "8:Test"
                             "AlwaysCreate" = "11:FALSE"
                             "Condition" = "8:"
                             "Transitive" = "11:FALSE"
-                            "Property" = "8:_3008D09F024A4BC1A16CFBE445FA0780"
+                            "Property" = "8:_37ED03D03527482F9A6B0BC1C8A94C31"
                                 "Folders"
                                 {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_C9B0EF658B8946A1A6AD0B7F773C6015"
+                                    {
+                                    "Name" = "8:profiles"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_A2304174102F4546B94E0BCF6754320C"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1404,7 +1942,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_467BFC9D516A4CB084A4CD246D5875B5"
                     {
-                    "Name" = "8:Placeholder Company"
+                    "Name" = "8:Isak_The_Hacker"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
