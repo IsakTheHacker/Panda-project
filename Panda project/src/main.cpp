@@ -12,6 +12,10 @@
 #include <map>
 #include <string>
 
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING		//Experimental filesystem header
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+
 int handInventoryIndex;
 std::map<std::string, bool> keys;
 std::map<std::string, std::string> universeOptions;
@@ -115,8 +119,21 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Create folders and files
-	game::runPyScript("data/scripts/makeDirectories.py");
-	game::runPyScript("data/scripts/createOptionsFile.py");
+	fs::create_directory("data");
+	fs::create_directory("screenshots");
+	if (!game::fileExists("data/options.txt")) {
+		std::ofstream file("data/options.txt");
+		std::string newLine = "\n";
+		for (size_t i = 0; i < game::optionLines.size(); i++) {
+			if (i == game::optionLines.size() - 1) {
+				newLine = "";
+			}
+			file << game::optionLines[i] << newLine;
+		}
+		file.close();
+	}
+	/*game::runPyScript("data/scripts/makeDirectories.py");
+	game::runPyScript("data/scripts/createOptionsFile.py");*/
 
 	//Read options
 	std::map<std::string, std::string> options;
@@ -142,7 +159,7 @@ int main(int argc, char* argv[]) {
 	// Open a new window framework and set the title
 	PandaFramework framework;
 	framework.open_framework(argc, argv);
-	framework.set_window_title("The Panda Project: Prealpha 0.1.2");
+	framework.set_window_title("The Panda Project: Prealpha 0.1.3");
 
 	// Open the window
 	WindowFramework* window = framework.open_window();

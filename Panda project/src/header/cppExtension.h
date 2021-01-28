@@ -5,8 +5,8 @@
 
 int pass();
 
-char stoc(std::string input);
+char stoc(const std::string& input);
 
 namespace std {
-	string to_string(string input);
+	string to_string(const string& input);
 }
