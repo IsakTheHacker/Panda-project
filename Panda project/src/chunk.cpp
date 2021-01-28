@@ -48,14 +48,42 @@ namespace game {
 
 					//Tree generating
 					if (rand() % 50 == 49) {
-						game::object object("data/assets/blockproperties/log.blockproperties", window, framework, false, false);
-						object.model.set_pos(j, k, object_z + 2);
+						for (size_t i = 2; i < 10; i += 2) {		//Trunk
+							game::object object("data/assets/blockproperties/log.blockproperties", window, framework, false, false);
+							object.model.set_pos(j, k, object_z + i);
 
-						object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
-						object.model.set_tag("id", std::to_string(object.id));
-						object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+							object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
+							object.model.set_tag("id", std::to_string(object.id));
+							object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
-						blocks.push_back(object);
+							blocks.push_back(object);
+						}
+
+						//Leaves
+						for (int x = -2; x < 4; x += 2) {		//Trunk
+							for (int y = -2; y < 4; y += 2) {
+								game::object object("data/assets/blockproperties/stone.blockproperties", window, framework, false, false);
+								object.model.set_pos(j + x, k + y, object_z + 10);
+
+								object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
+								object.model.set_tag("id", std::to_string(object.id));
+								object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+
+								blocks.push_back(object);
+							}
+						}
+						for (int x = 0; x < 2; x += 2) {		//Trunk
+							for (int y = 0; y < 2; y += 2) {
+								game::object object("data/assets/blockproperties/stone.blockproperties", window, framework, false, false);
+								object.model.set_pos(j + x, k + y, object_z + 12);
+
+								object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
+								object.model.set_tag("id", std::to_string(object.id));
+								object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+
+								blocks.push_back(object);
+							}
+						}
 					}
 				}
 			}

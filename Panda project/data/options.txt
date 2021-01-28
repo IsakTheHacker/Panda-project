@@ -22,5 +22,5 @@ show_ray-collisions=0
 show_block-collisions=0
 enable_pstats=0
 pstat-host=localhost
-save_newly_created_chunks=1
+save_newly_created_chunks=0
 player-name=Samurai
