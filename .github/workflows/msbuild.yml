@@ -35,7 +35,7 @@ jobs:
     
     - name: PreBuild
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: echo ${{env.GITHUB_WORKSPACE}}
+      run: echo "${{env.GITHUB_WORKSPACE}}"
     
     - name: PreBuild
       working-directory: ${{env.GITHUB_WORKSPACE}}
