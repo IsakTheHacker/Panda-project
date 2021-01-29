@@ -26,11 +26,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - uses: panda3d/panda3d@v1.10.8
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1
+      
+    - name: Panda3D
+      uses: panda3d/panda3d@v1.10.8
 
     #- name: Restore NuGet packages
       #working-directory: ${{env.GITHUB_WORKSPACE}}
