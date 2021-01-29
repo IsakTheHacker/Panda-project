@@ -5,12 +5,13 @@ on:
     branches:
     - main
     - dev
+    - MSBuild
 
   workflow_dispatch:
 
 env:
   # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: ".\Panda Project\"
+  SOLUTION_FILE_PATH: "./Panda Project/"
 
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
