@@ -151,7 +151,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\bin;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>$(ProjectDir)src\header;$(ProjectDir)src\header\external;$(ProjectDir)src\header\external\panda;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)src\header;$(ProjectDir)src\header\external;$(ProjectDir)src\header\external\panda;$(ProjectDir)src\header\external\python;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\lib;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
@@ -160,7 +160,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(ProjectDir)src\header;$(ProjectDir)src\header\external;$(ProjectDir)src\header\external\panda;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)src\header;$(ProjectDir)src\header\external;$(ProjectDir)src\header\external\panda;$(ProjectDir)src\header\external\python;$(IncludePath)</IncludePath>
     <ExecutablePath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\bin;$(ExecutablePath)</ExecutablePath>
     <ReferencePath>$(VC_ReferencesPath_x64);</ReferencePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
@@ -168,7 +168,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)src\header;$(ProjectDir)src\header\external;$(ProjectDir)src\header\external\panda;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)src\header;$(ProjectDir)src\header\external;$(ProjectDir)src\header\external\panda;$(ProjectDir)src\header\external\python;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
@@ -176,7 +176,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)src\header;$(ProjectDir)src\header\external;$(ProjectDir)src\header\external\panda;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)src\header;$(ProjectDir)src\header\external;$(ProjectDir)src\header\external\panda;$(ProjectDir)src\header\external\python;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Administrator\Documents\Panda3d Build\panda3d-1.10.7 Opti\built_x64\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
