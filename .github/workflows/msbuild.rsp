@@ -1,1 +1,3 @@
 -noLogo
+-flp1:warningsonly;logfile=msbuild.wrn
+-flp2:errorsonly;logfile=msbuild.err
