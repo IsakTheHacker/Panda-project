@@ -1,6 +1,12 @@
 name: MSBuild
 
-on: [push]
+on:
+  push:
+    branches:
+    - main
+    - dev
+
+  workflow_dispatch:
 
 env:
   # Path to the solution file relative to the root of the project.
@@ -13,6 +19,7 @@ env:
 
 jobs:
   build:
+    name: Build project! xD
     runs-on: windows-latest
 
     steps:
@@ -21,9 +28,9 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1
 
-    - name: Restore NuGet packages
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+    #- name: Restore NuGet packages
+      #working-directory: ${{env.GITHUB_WORKSPACE}}
+      #run: nuget restore ${{env.SOLUTION_FILE_PATH}}
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
