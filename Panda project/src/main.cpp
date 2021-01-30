@@ -39,6 +39,8 @@ std::string universePath = "universes/Test/";
 #include "gameTasks.h"
 #include "gameInventory.h"
 #include "gameItem.h"
+#include <pgButton.h>
+#include <mouseButton.h>
 
 game::Player player;
 
@@ -82,6 +84,11 @@ void pauseMenu(WindowFramework* window) {
 		window->get_graphics_window()->request_properties(props);
 		mouseInGame = true;
 	}
+}
+void GUI_Callback_Button_Clicked(const Event* ev, void* data) {
+	PGButton* button = (PGButton*)data;
+	// Your action here
+	std::cout << button->get_name() << " has been pressed.\n";
 }
 
 int main(int argc, char* argv[]) {
@@ -188,6 +195,30 @@ int main(int argc, char* argv[]) {
 	pickerNode->set_into_collide_mask(0);										//Disable into-collisions
 	myTraverser.add_collider(pickerNP, myHandler);								//Add collider to traverser
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
+
+
+	//Experimental GUI
+	PT(PGButton) my_button;
+	my_button = new PGButton("MyButton");
+	my_button->setup("Quit and save", 0);
+	PT(Texture) button_ready = TexturePool::load_texture("button.png");
+	PT(Texture) button_rollover = TexturePool::load_texture("button_active.png");
+	PT(Texture) button_pressed = TexturePool::load_texture("button_pressed.png");
+	PT(Texture) button_inactive = TexturePool::load_texture("button_inactive.png");
+
+	PGFrameStyle MyStyle = my_button->get_frame_style(0); // frame_style(0): ready state
+	MyStyle.set_type(PGFrameStyle::T_bevel_in);
+
+	MyStyle.set_texture(button_ready);    my_button->set_frame_style(0, MyStyle);
+	MyStyle.set_texture(button_rollover); my_button->set_frame_style(1, MyStyle);
+	MyStyle.set_texture(button_pressed);  my_button->set_frame_style(2, MyStyle);
+	MyStyle.set_texture(button_inactive); my_button->set_frame_style(3, MyStyle);
+
+	NodePath defbutNP = window->get_aspect_2d().attach_new_node(my_button);
+	defbutNP.set_scale(0.1);
+
+	framework.define_key(my_button->get_click_event(MouseButton::one()), "button press", GUI_Callback_Button_Clicked, my_button);
+
 
 	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {
