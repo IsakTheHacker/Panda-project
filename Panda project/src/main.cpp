@@ -206,16 +206,17 @@ int main(int argc, char* argv[]) {
 	PT(Texture) button_pressed = TexturePool::load_texture("button_pressed.png");
 	PT(Texture) button_inactive = TexturePool::load_texture("button_inactive.png");
 
-	PGFrameStyle MyStyle = my_button->get_frame_style(0); // frame_style(0): ready state
-	MyStyle.set_type(PGFrameStyle::T_bevel_in);
+	//PGFrameStyle MyStyle = my_button->get_frame_style(0); // frame_style(0): ready state
+	//MyStyle.set_type(PGFrameStyle::T_bevel_in);
 
-	MyStyle.set_texture(button_ready);    my_button->set_frame_style(0, MyStyle);
+	/*MyStyle.set_texture(button_ready);    my_button->set_frame_style(0, MyStyle);
 	MyStyle.set_texture(button_rollover); my_button->set_frame_style(1, MyStyle);
 	MyStyle.set_texture(button_pressed);  my_button->set_frame_style(2, MyStyle);
-	MyStyle.set_texture(button_inactive); my_button->set_frame_style(3, MyStyle);
+	MyStyle.set_texture(button_inactive); my_button->set_frame_style(3, MyStyle);*/
 
 	NodePath defbutNP = window->get_aspect_2d().attach_new_node(my_button);
-	defbutNP.set_scale(0.1);
+	defbutNP.set_scale(0.5);
+	defbutNP.set_pos(0 - defbutNP.get_sx() / 2, 0 - defbutNP.get_sy() / 2, 0);
 
 	framework.define_key(my_button->get_click_event(MouseButton::one()), "button press", GUI_Callback_Button_Clicked, my_button);
 
