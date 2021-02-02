@@ -41,6 +41,7 @@
     </ClCompile>
     <ClCompile Include="src\gameClasses.cpp" />
     <ClCompile Include="src\gameFunctions.cpp" />
+    <ClCompile Include="src\gameGui.cpp" />
     <ClCompile Include="src\gameInventory.cpp" />
     <ClCompile Include="src\gameItem.cpp" />
     <ClCompile Include="src\gameTasks.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="src\header\external\json.hpp" />
     <ClInclude Include="src\header\gameClasses.h" />
     <ClInclude Include="src\header\gameFunctions.h" />
+    <ClInclude Include="src\header\gameGui.h" />
     <ClInclude Include="src\header\gameInventory.h" />
     <ClInclude Include="src\header\gameItem.h" />
     <ClInclude Include="src\header\gameLanguage.h" />
