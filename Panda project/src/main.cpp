@@ -196,29 +196,37 @@ int main(int argc, char* argv[]) {
 	myTraverser.add_collider(pickerNP, myHandler);								//Add collider to traverser
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 
-
 	//Experimental GUI
-	PT(PGButton) my_button;
-	my_button = new PGButton("MyButton");
-	my_button->setup("Quit and save", 0);
-	PT(Texture) button_ready = TexturePool::load_texture("button.png");
-	PT(Texture) button_rollover = TexturePool::load_texture("button_active.png");
-	PT(Texture) button_pressed = TexturePool::load_texture("button_pressed.png");
-	PT(Texture) button_inactive = TexturePool::load_texture("button_inactive.png");
+	PT(PGButton) my_button = new PGButton("MyButton");
+	PGFrameStyle MyStyle = my_button->get_frame_style(0); // frame_style(0): ready state
+	
+	PT(Texture) button_ready = TexturePool::load_texture(gamePath + "models/textures/png/regular-button.png");
+	PT(Texture) button_rollover = TexturePool::load_texture(gamePath + "models/textures/png/regular-button.png");
+	PT(Texture) button_pressed = TexturePool::load_texture(gamePath + "models/textures/png/regular-button.png");
+	PT(Texture) button_inactive = TexturePool::load_texture(gamePath + "models/textures/png/regular-button.png");
+	
+	CardMaker cm("cardMaker");
+	PT(PandaNode) readyCard = cm.generate();
+	PT(PandaNode) pressCard = cm.generate();
+	PT(PandaNode) rollCard = cm.generate();
+	PT(PandaNode) inactCard = cm.generate();
 
-	//PGFrameStyle MyStyle = my_button->get_frame_style(0); // frame_style(0): ready state
-	//MyStyle.set_type(PGFrameStyle::T_bevel_in);
+	// create node paths
+	NodePath readyPath(readyCard);
+	readyPath.set_texture(button_ready);
+	NodePath pressPath(pressCard);
+	pressPath.set_texture(button_rollover);
+	NodePath rollPath(rollCard);
+	rollPath.set_texture(button_pressed);
+	NodePath inactPath(inactCard);
+	inactPath.set_texture(button_inactive);
 
-	/*MyStyle.set_texture(button_ready);    my_button->set_frame_style(0, MyStyle);
-	MyStyle.set_texture(button_rollover); my_button->set_frame_style(1, MyStyle);
-	MyStyle.set_texture(button_pressed);  my_button->set_frame_style(2, MyStyle);
-	MyStyle.set_texture(button_inactive); my_button->set_frame_style(3, MyStyle);*/
-
-	NodePath defbutNP = window->get_aspect_2d().attach_new_node(my_button);
-	defbutNP.set_scale(0.5);
-	defbutNP.set_pos(0 - defbutNP.get_sx() / 2, 0 - defbutNP.get_sy() / 2, 0);
+	my_button->setup(readyPath, pressPath, rollPath, inactPath);
+	// Set the button frame size.
 
 	framework.define_key(my_button->get_click_event(MouseButton::one()), "button press", GUI_Callback_Button_Clicked, my_button);
+
+	NodePath defbutNP = window->get_aspect_2d().attach_new_node(my_button);
 
 
 	//Set up frame rate meter
