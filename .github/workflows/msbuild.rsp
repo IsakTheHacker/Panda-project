@@ -2,4 +2,4 @@
 -flp1:warningsonly;logfile="./.github/workflows/msbuild.wrn"
 -flp2:errorsonly;logfile="./.github/workflows/msbuild.err"
 -consoleLoggerParameters:ShowTimestamp;ErrorsOnly
--noWarn:MSB2039;MSB3861;C2039;C3861
+-noWarn:MSB2039;MSB3861;C2039;C3861;2039;3861
