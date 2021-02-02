@@ -212,7 +212,7 @@ namespace game {
 	}
 
 	int setTexture(NodePath& object, const std::string& path) {
-		Texture* texture = TexturePool::load_texture(path);
+		PT(Texture) texture = TexturePool::load_texture(path);
 		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 		object.set_texture(texture);
