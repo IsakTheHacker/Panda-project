@@ -13,9 +13,10 @@
 namespace game {
 	class button {
 	private:
-		PT(PGButton) pgButton = new PGButton("MyButton");
 		CardMaker cardMaker = CardMaker("cardMaker");
 	public:
+		PT(PGButton) pgButton = new PGButton("MyButton");
+
 		button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction);
 		~button();
 	};
