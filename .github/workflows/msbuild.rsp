@@ -4,3 +4,4 @@
 -consoleLoggerParameters:ShowTimestamp;ErrorsOnly
 -noWarn:MSB2039;MSB3861;C2039;C3861;2039;3861
 -p:NoWarn=3861
+-p:WarningLevel=0
