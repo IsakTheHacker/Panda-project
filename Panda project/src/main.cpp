@@ -198,42 +198,7 @@ int main(int argc, char* argv[]) {
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 
 	//Experimental GUI
-	PT(PGButton) my_button = new PGButton("MyButton");
-	
-	CardMaker cm("cardMaker");
-	PT(PandaNode) readyCard = cm.generate();
-	PT(PandaNode) pressCard = cm.generate();
-	PT(PandaNode) rollCard = cm.generate();
-	PT(PandaNode) inactCard = cm.generate();
-
-	// create node paths
-	NodePath readyPath(readyCard);
-	game::setTexture(readyPath, gamePath + "models/textures/png/regular-button.png");
-	readyPath.set_transparency(TransparencyAttrib::M_binary);
-	NodePath pressPath(pressCard);
-	game::setTexture(pressPath, gamePath + "models/textures/png/regular-button.png");
-	pressPath.set_transparency(TransparencyAttrib::M_binary);
-	NodePath rollPath(rollCard);
-	game::setTexture(rollPath, gamePath + "models/textures/png/regular-button.png");
-	rollPath.set_transparency(TransparencyAttrib::M_binary);
-	NodePath inactPath(inactCard);
-	game::setTexture(inactPath, gamePath + "models/textures/png/regular-button.png");
-	inactPath.set_transparency(TransparencyAttrib::M_binary);
-
-	my_button->setup(readyPath, pressPath, rollPath, inactPath);
-	framework.define_key(my_button->get_click_event(MouseButton::one()), "button press", GUI_Callback_Button_Clicked, my_button);
-
-	NodePath defbutNP = window->get_aspect_2d().attach_new_node(my_button);
-	defbutNP.set_sx(0.64);
-	defbutNP.set_sz(0.16);
-	defbutNP.set_pos(0 - defbutNP.get_sx() / 2, 0, 0 - defbutNP.get_sz() / 2);
-
-	//Set up text for the button
-	PT(TextNode) textNode = new TextNode("textNode");
-	textNode->set_text("Quit and save");
-	NodePath textNP = window->get_aspect_2d().attach_new_node(textNode);
-	textNP.set_scale(0.07);
-	textNP.set_pos((0 - textNode->get_width() * 0.07) / 2, 0, (0 - textNode->get_height() * 0.07 * 0.64) / 2);
+	game::button button(framework, GUI_Callback_Button_Clicked);
 
 	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {

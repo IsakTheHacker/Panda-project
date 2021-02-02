@@ -1,7 +1,7 @@
 #include "gameGui.h"
 
 namespace game {
-	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction{
+	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction) {
 
 		WindowFramework* window = framework.get_window(0);
 
