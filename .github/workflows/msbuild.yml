@@ -30,6 +30,10 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore "${{env.SOLUTION_FILE_PATH}}"
     
+    - name: Print help!
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /?
+    
     - name: Build Project!
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} "@${{env.WORKFLOW_PATH}}" "${{env.SOLUTION_FILE_PATH}}"
