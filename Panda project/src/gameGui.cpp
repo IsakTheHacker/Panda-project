@@ -1,7 +1,7 @@
 #include "gameGui.h"
 
 namespace game {
-	button::button(PandaFramework& framework) {
+	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction{
 
 		WindowFramework* window = framework.get_window(0);
 
@@ -28,7 +28,7 @@ namespace game {
 
 
 		pgButton->setup(readyNodePath, pressNodePath, rollNodePath, inactNodePath);
-		//framework.define_key(pgButton->get_click_event(MouseButton::one()), "button press", GUI_Callback_Button_Clicked, pgButton);
+		framework.define_key(pgButton->get_click_event(MouseButton::one()), "button press", callbackFunction, pgButton);
 
 		NodePath defbutNP = window->get_aspect_2d().attach_new_node(pgButton);
 		defbutNP.set_sx(0.64);
