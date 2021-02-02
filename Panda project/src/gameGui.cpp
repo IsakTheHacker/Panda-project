@@ -30,10 +30,10 @@ namespace game {
 		pgButton->setup(readyNodePath, pressNodePath, rollNodePath, inactNodePath);
 		framework.define_key(pgButton->get_click_event(MouseButton::one()), "button press", callbackFunction, pgButton);
 
-		NodePath defbutNP = window->get_aspect_2d().attach_new_node(pgButton);
-		defbutNP.set_sx(0.64);
-		defbutNP.set_sz(0.16);
-		defbutNP.set_pos(0 - defbutNP.get_sx() / 2, 0, 0 - defbutNP.get_sz() / 2);
+		pgButtonNP = window->get_aspect_2d().attach_new_node(pgButton);
+		pgButtonNP.set_sx(0.64);
+		pgButtonNP.set_sz(0.16);
+		pgButtonNP.set_pos(0 - pgButtonNP.get_sx() / 2, 0, 0 - pgButtonNP.get_sz() / 2);
 
 		//Set up text for the button
 		PT(TextNode) textNode = new TextNode("textNode");
