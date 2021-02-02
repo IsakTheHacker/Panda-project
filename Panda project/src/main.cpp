@@ -214,12 +214,16 @@ int main(int argc, char* argv[]) {
 	// create node paths
 	NodePath readyPath(readyCard);
 	readyPath.set_texture(button_ready);
+	readyPath.set_transparency(TransparencyAttrib::M_binary);
 	NodePath pressPath(pressCard);
 	pressPath.set_texture(button_rollover);
+	pressPath.set_transparency(TransparencyAttrib::M_binary);
 	NodePath rollPath(rollCard);
 	rollPath.set_texture(button_pressed);
+	rollPath.set_transparency(TransparencyAttrib::M_binary);
 	NodePath inactPath(inactCard);
 	inactPath.set_texture(button_inactive);
+	inactPath.set_transparency(TransparencyAttrib::M_binary);
 
 	my_button->setup(readyPath, pressPath, rollPath, inactPath);
 	// Set the button frame size.
