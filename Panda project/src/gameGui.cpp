@@ -36,9 +36,8 @@ namespace game {
 		pgButtonNP.set_pos(0 - pgButtonNP.get_sx() / 2, 0, 0 - pgButtonNP.get_sz() / 2);
 
 		//Set up text for the button
-		PT(TextNode) textNode = new TextNode("textNode");
 		textNode->set_text("Quit and save");
-		NodePath textNP = window->get_aspect_2d().attach_new_node(textNode);
+		textNP = window->get_aspect_2d().attach_new_node(textNode);
 		textNP.set_scale(0.07);
 		textNP.set_pos((0 - textNode->get_width() * 0.07) / 2, 0, (0 - textNode->get_height() * 0.07 * 0.64) / 2);
 	}

@@ -18,6 +18,9 @@ namespace game {
 		PT(PGButton) pgButton = new PGButton("pgButton");
 		NodePath pgButtonNP = NodePath("pgButtonNP");
 
+		PT(TextNode) textNode = new TextNode("textNode");
+		NodePath textNP = NodePath("textNP");
+
 		button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction);
 		~button();
 	};
