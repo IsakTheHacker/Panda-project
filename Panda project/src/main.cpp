@@ -200,11 +200,6 @@ int main(int argc, char* argv[]) {
 	PT(PGButton) my_button = new PGButton("MyButton");
 	PGFrameStyle MyStyle = my_button->get_frame_style(0); // frame_style(0): ready state
 	
-	PT(Texture) button_ready = TexturePool::load_texture(gamePath + "models/textures/png/regular-button.png");
-	PT(Texture) button_rollover = TexturePool::load_texture(gamePath + "models/textures/png/regular-button.png");
-	PT(Texture) button_pressed = TexturePool::load_texture(gamePath + "models/textures/png/regular-button.png");
-	PT(Texture) button_inactive = TexturePool::load_texture(gamePath + "models/textures/png/regular-button.png");
-	
 	CardMaker cm("cardMaker");
 	PT(PandaNode) readyCard = cm.generate();
 	PT(PandaNode) pressCard = cm.generate();
@@ -213,21 +208,19 @@ int main(int argc, char* argv[]) {
 
 	// create node paths
 	NodePath readyPath(readyCard);
-	readyPath.set_texture(button_ready);
+	game::setTexture(readyPath, gamePath + "models/textures/png/regular-button.png");
 	readyPath.set_transparency(TransparencyAttrib::M_binary);
 	NodePath pressPath(pressCard);
-	pressPath.set_texture(button_rollover);
+	game::setTexture(pressPath, gamePath + "models/textures/png/regular-button.png");
 	pressPath.set_transparency(TransparencyAttrib::M_binary);
 	NodePath rollPath(rollCard);
-	rollPath.set_texture(button_pressed);
+	game::setTexture(rollPath, gamePath + "models/textures/png/regular-button.png");
 	rollPath.set_transparency(TransparencyAttrib::M_binary);
 	NodePath inactPath(inactCard);
-	inactPath.set_texture(button_inactive);
+	game::setTexture(inactPath, gamePath + "models/textures/png/regular-button.png");
 	inactPath.set_transparency(TransparencyAttrib::M_binary);
 
 	my_button->setup(readyPath, pressPath, rollPath, inactPath);
-	// Set the button frame size.
-
 	framework.define_key(my_button->get_click_event(MouseButton::one()), "button press", GUI_Callback_Button_Clicked, my_button);
 
 	NodePath defbutNP = window->get_aspect_2d().attach_new_node(my_button);
