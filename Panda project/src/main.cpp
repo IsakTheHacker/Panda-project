@@ -39,6 +39,7 @@ std::string universePath = "universes/Test/";
 #include "gameTasks.h"
 #include "gameInventory.h"
 #include "gameItem.h"
+#include "gameGui.h"
 #include <pgButton.h>
 #include <mouseButton.h>
 
@@ -198,7 +199,6 @@ int main(int argc, char* argv[]) {
 
 	//Experimental GUI
 	PT(PGButton) my_button = new PGButton("MyButton");
-	PGFrameStyle MyStyle = my_button->get_frame_style(0); // frame_style(0): ready state
 	
 	CardMaker cm("cardMaker");
 	PT(PandaNode) readyCard = cm.generate();
