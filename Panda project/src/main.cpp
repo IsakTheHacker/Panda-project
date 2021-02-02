@@ -227,7 +227,7 @@ int main(int argc, char* argv[]) {
 	framework.define_key(my_button->get_click_event(MouseButton::one()), "button press", GUI_Callback_Button_Clicked, my_button);
 
 	NodePath defbutNP = window->get_aspect_2d().attach_new_node(my_button);
-	defbutNP.set_pos(0 - defbutNP.get_sx() / 2, 0 - defbutNP.get_sy() / 2, 0);
+	defbutNP.set_pos(0 - defbutNP.get_sx() / 2, 0, 0 - defbutNP.get_sz() / 2);
 
 	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {
