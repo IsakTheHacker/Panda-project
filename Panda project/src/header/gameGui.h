@@ -21,7 +21,8 @@ namespace game {
 		PT(TextNode) textNode = new TextNode("textNode");
 		NodePath textNP = NodePath("textNP");
 
-		button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction);
+		button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y, PN_stdfloat textX, PN_stdfloat textY);
+		button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y);
 		~button();
 	};
 }

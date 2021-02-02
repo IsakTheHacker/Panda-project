@@ -1,7 +1,7 @@
 #include "gameGui.h"
 
 namespace game {
-	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction) {
+	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y, PN_stdfloat textX, PN_stdfloat textY) {
 
 		WindowFramework* window = framework.get_window(0);
 
@@ -33,13 +33,16 @@ namespace game {
 		pgButtonNP = window->get_aspect_2d().attach_new_node(pgButton);
 		pgButtonNP.set_sx(0.64);
 		pgButtonNP.set_sz(0.16);
-		pgButtonNP.set_pos(0 - pgButtonNP.get_sx() / 2, 0, 0 - pgButtonNP.get_sz() / 2);
+		pgButtonNP.set_pos(x - pgButtonNP.get_sx() / 2, 0, y - pgButtonNP.get_sz() / 2);
 
 		//Set up text for the button
 		textNode->set_text("Quit and save");
 		textNP = window->get_aspect_2d().attach_new_node(textNode);
 		textNP.set_scale(0.07);
-		textNP.set_pos((0 - textNode->get_width() * 0.07) / 2, 0, (0 - textNode->get_height() * 0.07 * 0.64) / 2);
+		textNP.set_pos((textX - textNode->get_width() * 0.07) / 2, 0, (textY - textNode->get_height() * 0.07 * 0.64) / 2);
+	}
+	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y) {
+		button(framework, callbackFunction, x, y, x, y);
 	}
 
 	button::~button() {
