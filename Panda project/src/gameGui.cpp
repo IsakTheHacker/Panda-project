@@ -1,6 +1,15 @@
 #include "gameGui.h"
 
 namespace game {
+	void button::hide() {
+		this->pgButtonNP.hide();
+		this->textNP.hide();
+	}
+	void button::show() {
+		this->pgButtonNP.show();
+		this->textNP.show();
+	}
+
 	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y, PN_stdfloat textX, PN_stdfloat textY, std::string text) {
 
 		WindowFramework* window = framework.get_window(0);
