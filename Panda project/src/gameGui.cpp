@@ -19,7 +19,7 @@ namespace game {
 		pressNodePath.set_transparency(TransparencyAttrib::M_binary);
 
 		NodePath rollNodePath(rollCard);
-		game::setTexture(rollNodePath, gamePath + "models/textures/png/regular-button.png");
+		game::setTexture(rollNodePath, gamePath + "models/textures/png/regular-button-hover.png");
 		rollNodePath.set_transparency(TransparencyAttrib::M_binary);
 
 		NodePath inactNodePath(inactCard);
