@@ -80,10 +80,7 @@ framework.define_key("f4-up", "f4-key", game::key_up, (void*)&game::f4);
 framework.define_key("f5", "f5-key", game::key_swap, (void*)&game::f5);
 
 //Esc-key
-game::pauseMenuEventParameters parameters;
-parameters.window = window;
-parameters.mouseWatcher = mouseWatcher;
-framework.define_key("escape", "Esc-key", pauseMenu, (void*)&parameters);
+framework.define_key("escape", "Esc-key", game::key_swap, (void*)&game::esc);
 
 //Mouse button 1
 framework.define_key("mouse1", "Mouse1-button", game::key_down, (void*)&game::mouse1);

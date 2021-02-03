@@ -51,25 +51,24 @@ PT(ClockObject) globalClock = ClockObject::get_global_clock();
 
 #include "gameClasses.h"
 
-void pauseMenu(const Event* theEvent, void* data) {
-	game::pauseMenuEventParameters* parameters = (game::pauseMenuEventParameters*)data;
+void pauseMenu(WindowFramework* window) {
 	
 	if (mouseInGame) {
 		mouseInGame = false;
 
 		//Set cursor shown
-		WindowProperties props = parameters->window->get_graphics_window()->get_properties();
+		WindowProperties props = window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(false);
-		parameters->window->get_graphics_window()->request_properties(props);
+		window->get_graphics_window()->request_properties(props);
 	} else {
-		double center_x = parameters->window->get_graphics_window()->get_x_size() / static_cast<double>(2);
-		double center_y = parameters->window->get_graphics_window()->get_y_size() / static_cast<double>(2);
-		parameters->window->get_graphics_window()->move_pointer(0, center_x, center_y);
+		double center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
+		double center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
+		window->get_graphics_window()->move_pointer(0, center_x, center_y);
 		
 		//Set cursor hidden
-		WindowProperties props = parameters->window->get_graphics_window()->get_properties();
+		WindowProperties props = window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(true);
-		parameters->window->get_graphics_window()->request_properties(props);
+		window->get_graphics_window()->request_properties(props);
 
 		mouseInGame = true;
 	}
@@ -823,6 +822,10 @@ int main(int argc, char* argv[]) {
 				game::importantInfoOut("Crashing game...");
 				exit(1);			// Code 1 is used because we crashed the game
 			}
+		}
+		if (keys["escape"]) {
+			pauseMenu(window);
+			keys["escape"] = false;
 		}
 		if (keys["e"]) {
 			if (e_inventory.is_hidden()) {
