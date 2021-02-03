@@ -207,8 +207,11 @@ int main(int argc, char* argv[]) {
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 
 	//Experimental GUI
-	game::button returnToGameButton(framework, GUI_Callback_Button_Clicked, 0, 0.15, "Return to game");
-	game::button quitSaveButton(framework, GUI_Callback_Button_Clicked, 0, -0.15, "Quit and save");
+	game::button returnToGameButton(framework, GUI_Callback_Button_Clicked, 0, 0.15, 0, 0.15, "Return to game");
+	returnToGameButton.hide();
+
+	game::button quitSaveButton(framework, GUI_Callback_Button_Clicked, 0, -0.15, 0, -0.15, "Quit and save");
+	quitSaveButton.hide();
 
 	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {
@@ -825,6 +828,13 @@ int main(int argc, char* argv[]) {
 		}
 		if (keys["escape"]) {
 			pauseMenu(window);
+			if (mouseInGame) {
+				quitSaveButton.hide();
+				returnToGameButton.hide();
+			} else {
+				quitSaveButton.show();
+				returnToGameButton.show();
+			}
 			keys["escape"] = false;
 		}
 		if (keys["e"]) {
