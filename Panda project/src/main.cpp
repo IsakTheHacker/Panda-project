@@ -210,7 +210,7 @@ int main(int argc, char* argv[]) {
 	game::button returnToGameButton(framework, GUI_Callback_Button_Clicked, 0, 0.15, 0, 0.15, "Return to game");
 	returnToGameButton.hide();
 
-	game::button quitSaveButton(framework, GUI_Callback_Button_Clicked, 0, -0.15, 0, -0.15, "Quit and save");
+	game::button quitSaveButton(framework, game::exitGame, 0, -0.15, 0, -0.15, "Quit and save");
 	quitSaveButton.hide();
 
 	//Set up frame rate meter
