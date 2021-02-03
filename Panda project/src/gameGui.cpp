@@ -1,7 +1,7 @@
 #include "gameGui.h"
 
 namespace game {
-	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y, PN_stdfloat textX, PN_stdfloat textY) {
+	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y, PN_stdfloat textX, PN_stdfloat textY, std::string text) {
 
 		WindowFramework* window = framework.get_window(0);
 
@@ -36,13 +36,13 @@ namespace game {
 		pgButtonNP.set_pos(x - pgButtonNP.get_sx() / 2, 0, y - pgButtonNP.get_sz() / 2);
 
 		//Set up text for the button
-		textNode->set_text("Quit and save");
+		textNode->set_text(text);
 		textNP = window->get_aspect_2d().attach_new_node(textNode);
 		textNP.set_scale(0.07);
-		textNP.set_pos((textX - textNode->get_width() * 0.07) / 2, 0, (textY - textNode->get_height() * 0.07 * 0.64) / 2);
+		textNP.set_pos(textX - ((textNode->get_width() * 0.07) / 2), 0, textY - ((textNode->get_height() * 0.07 * 0.64) / 2));
 	}
-	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y) {
-		button(framework, callbackFunction, x, y, x, y);
+	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y, std::string text) {
+		button(framework, callbackFunction, x, y, x, y, text);
 	}
 
 	button::~button() {
