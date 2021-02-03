@@ -56,6 +56,8 @@ void pauseMenu(const Event* theEvent, void* data) {
 	
 	if (mouseInGame) {
 		mouseInGame = false;
+
+		//Set cursor shown
 		WindowProperties props = parameters->window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(false);
 		parameters->window->get_graphics_window()->request_properties(props);
@@ -63,16 +65,21 @@ void pauseMenu(const Event* theEvent, void* data) {
 		double center_x = parameters->window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 		double center_y = parameters->window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 		parameters->window->get_graphics_window()->move_pointer(0, center_x, center_y);
+		
+		//Set cursor hidden
 		WindowProperties props = parameters->window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(true);
 		parameters->window->get_graphics_window()->request_properties(props);
+
 		mouseInGame = true;
 	}
 }
-void pauseMenu(WindowFramework* window) {
+void inventoryMenu(WindowFramework* window) {
 
 	if (mouseInGame) {
 		mouseInGame = false;
+		
+		//Set cursor shown
 		WindowProperties props = window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(false);
 		window->get_graphics_window()->request_properties(props);
@@ -80,9 +87,12 @@ void pauseMenu(WindowFramework* window) {
 		double center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 		double center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 		window->get_graphics_window()->move_pointer(0, center_x, center_y);
+		
+		//Set cursor hidden
 		WindowProperties props = window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(true);
 		window->get_graphics_window()->request_properties(props);
+
 		mouseInGame = true;
 	}
 }
@@ -826,7 +836,7 @@ int main(int argc, char* argv[]) {
 				text2->set_overall_hidden(true);
 				text3->set_overall_hidden(true);
 				fovText->set_overall_hidden(true);
-				pauseMenu(window);
+				inventoryMenu(window);
 			} else {
 				e_inventory.hide();
 				cursor.show();
@@ -838,7 +848,7 @@ int main(int argc, char* argv[]) {
 				text2->set_overall_hidden(false);
 				text3->set_overall_hidden(false);
 				fovText->set_overall_hidden(false);
-				pauseMenu(window);
+				inventoryMenu(window);
 			}
 
 			keys["e"] = false;
