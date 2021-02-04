@@ -51,7 +51,7 @@ namespace game {
 		textNP.set_pos(textX - ((textNode->get_width() * 0.07) / 2), 0, textY - ((textNode->get_height() * 0.07 * 0.64) / 2));
 	}
 	button::button(PandaFramework& framework, EventHandler::EventCallbackFunction callbackFunction, PN_stdfloat x, PN_stdfloat y, std::string text) {
-		button(framework, callbackFunction, x, y, x, y, text);
+		this->button::button(framework, callbackFunction, x, y, x, y, text);
 	}
 
 	button::~button() {
