@@ -28,6 +28,7 @@ using json = nlohmann::json;
 
 //My libraries
 #include "cppExtension.h"
+#include "constantVars.h"
 #include "gameVars.h"
 #include "pandaIncludes.h"
 

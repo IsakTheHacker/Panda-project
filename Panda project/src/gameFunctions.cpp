@@ -330,6 +330,6 @@ namespace game {
 		}
 	}
 	void unpause(const Event* theEvent, void* data) {
-		mouseInGame = false;
+		key_swap(0, (void*)&game::esc);
 	}
 }

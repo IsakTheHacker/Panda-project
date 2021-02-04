@@ -207,7 +207,7 @@ int main(int argc, char* argv[]) {
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 
 	//Experimental GUI
-	game::button returnToGameButton(framework, GUI_Callback_Button_Clicked, 0, 0.15, 0, 0.15, "Return to game");
+	game::button returnToGameButton(framework, game::unpause, 0, 0.15, 0, 0.15, "Return to game");
 	returnToGameButton.hide();
 
 	game::button quitSaveButton(framework, game::exitGame, 0, -0.15, 0, -0.15, "Quit and save");
