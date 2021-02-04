@@ -265,4 +265,5 @@ namespace game {
 	void key_up(const Event* theEvent, void* data);
 	void key_swap(const Event* theEvent, void* data);
 	void wheel_roll(const Event* theEvent, void* data);
+	void unpause(const Event* theEvent, void* data);
 }

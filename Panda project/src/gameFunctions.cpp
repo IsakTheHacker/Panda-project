@@ -329,4 +329,7 @@ namespace game {
 			handInventoryIndex += indexModification;
 		}
 	}
+	void unpause(const Event* theEvent, void* data) {
+		mouseInGame = false;
+	}
 }
