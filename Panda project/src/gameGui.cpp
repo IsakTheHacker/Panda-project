@@ -24,7 +24,7 @@ namespace game {
 		readyNodePath.set_transparency(TransparencyAttrib::M_binary);
 
 		NodePath pressNodePath(pressCard);
-		game::setTexture(pressNodePath, gamePath + "models/textures/png/regular-button.png");
+		game::setTexture(pressNodePath, gamePath + "models/textures/png/regular-button-pressed.png");
 		pressNodePath.set_transparency(TransparencyAttrib::M_binary);
 
 		NodePath rollNodePath(rollCard);
