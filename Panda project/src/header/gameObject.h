@@ -59,6 +59,8 @@ namespace game {
 	class Player : public entity {
 	public:
 		NodePath collidedNodePath;
+		NodePath firstPerson = NodePath("firstPerson");
+		NodePath thirdPerson = NodePath("thirdPerson");
 		bool onGround;
 		bool sneaking;
 		bool flying;

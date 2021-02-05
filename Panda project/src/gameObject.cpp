@@ -102,11 +102,7 @@ namespace game {
 			knownConfigs[configPath] = config;		//Add to knownConfigs
 		}
 
-		if (configPath == "data/assets/playerproperties/standard.playerproperties") {
-			model = window->get_camera_group();
-		} else {
-			model = NodePath("model");
-		}
+		model = NodePath("model");
 
 		initConfig(window, framework);
 
@@ -237,6 +233,14 @@ namespace game {
 		this->sneaking = false;
 		this->flying = false;
 		this->playerName = (*Player::options)["player-name"];
+
+		//Add first person camera
+		firstPerson = window->make_camera();
+		firstPerson.reparent_to(model);
+
+		//Add third person camera
+		thirdPerson = window->make_camera();
+		thirdPerson.reparent_to(model);
 	}
 	Player::~Player() {
 

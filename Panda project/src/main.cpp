@@ -187,7 +187,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
-	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
+	((Camera*)player.firstPerson.node())->get_lens()->set_fov(std::stod(options["fov"]));
 	window->get_render().set_shader_auto();
 
 	//Set default window instance to use for chunk class
@@ -212,6 +212,8 @@ int main(int argc, char* argv[]) {
 
 	game::button quitSaveButton(framework, game::exitGame, 0, -0.15, 0, -0.15, "Quit and save");
 	quitSaveButton.hide();
+
+	player.model.ls();
 
 	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {
@@ -700,10 +702,12 @@ int main(int argc, char* argv[]) {
 			if (keys["a"]) {
 				player.model.set_x(player.model, 0 - x_speed);
 				panda.set_x(player.model, 0 - x_speed);
+				window->get_display_region_3d()->set_camera(player.firstPerson);
 			}
 			if (keys["d"]) {
 				player.model.set_x(player.model, 0 + x_speed);
 				panda.set_x(player.model, 0 + x_speed);
+				window->get_display_region_3d()->set_camera(player.thirdPerson);
 			}
 			if (keys["lshift"]) {
 				if (player.flying) {
