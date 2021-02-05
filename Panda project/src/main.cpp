@@ -703,12 +703,10 @@ int main(int argc, char* argv[]) {
 			if (keys["a"]) {
 				player.model.set_x(player.model, 0 - x_speed);
 				panda.set_x(player.model, 0 - x_speed);
-				window->get_display_region_3d()->set_camera(player.firstPerson);
 			}
 			if (keys["d"]) {
 				player.model.set_x(player.model, 0 + x_speed);
 				panda.set_x(player.model, 0 + x_speed);
-				window->get_display_region_3d()->set_camera(player.thirdPerson);
 			}
 			if (keys["lshift"]) {
 				if (player.flying) {
