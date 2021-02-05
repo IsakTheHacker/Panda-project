@@ -185,10 +185,11 @@ int main(int argc, char* argv[]) {
 		game::waitForKeypress();
 		return 1;
 	}
+	window->get_render().set_shader_auto();
 
 	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
 	DCAST(Camera, player.firstPerson.node())->get_lens()->set_fov(std::stod(options["fov"]));
-	window->get_render().set_shader_auto();
+	window->get_display_region_3d()->set_camera(player.firstPerson);
 
 	//Set default window instance to use for chunk class
 	game::chunk::setDefaultWindow(window);
