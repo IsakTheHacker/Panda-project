@@ -880,16 +880,19 @@ int main(int argc, char* argv[]) {
 	{
 		//Save profiles
 		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
-		profile << "x=" << player.model.get_x() << std::endl;
-		profile << "y=" << player.model.get_y() << std::endl;
-		profile << "z=" << player.model.get_z() << std::endl;
-		profile << "handInventory=";
-		for (size_t i = 0; i < playerHandInventory.slots; i++) {
-			profile << playerHandInventory.getItem(i).configPath << "|";
+		if (profile.fail()) {
+			game::errorOut("Failed to create player profile. The path was: " + universePath + "profiles/" + player.playerName + ".prof" + "!");
+		} else {
+			profile << "x=" << player.model.get_x() << std::endl;
+			profile << "y=" << player.model.get_y() << std::endl;
+			profile << "z=" << player.model.get_z() << std::endl;
+			profile << "handInventory=";
+			for (size_t i = 0; i < playerHandInventory.slots; i++) {
+				profile << playerHandInventory.getItem(i).configPath << "|";
+			}
+			profile << std::endl;
 		}
-		profile << std::endl;
 		profile.close();
-
 
 		//Save universe
 		std::ofstream updateIndex(universePath + "index", std::ios::out | std::ios::trunc);
