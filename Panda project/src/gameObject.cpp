@@ -236,10 +236,12 @@ namespace game {
 
 		//Add first person camera
 		firstPerson = window->make_camera();
+		firstPerson.node()->set_name("firstPerson");
 		firstPerson.reparent_to(model);
 
 		//Add third person camera
 		thirdPerson = window->make_camera();
+		thirdPerson.node()->set_name("thirdPerson");
 		thirdPerson.reparent_to(model);
 	}
 	Player::~Player() {
