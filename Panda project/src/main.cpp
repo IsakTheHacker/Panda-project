@@ -187,7 +187,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
-	((Camera*)player.firstPerson.node())->get_lens()->set_fov(std::stod(options["fov"]));
+	DCAST(Camera, player.firstPerson.node())->get_lens()->set_fov(std::stod(options["fov"]));
 	window->get_render().set_shader_auto();
 
 	//Set default window instance to use for chunk class
