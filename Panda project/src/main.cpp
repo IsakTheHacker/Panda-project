@@ -878,6 +878,20 @@ int main(int argc, char* argv[]) {
 
 	//Saving chunks
 	{
+		//Save profiles
+		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
+		profile << "x=" << player.model.get_x() << std::endl;
+		profile << "y=" << player.model.get_y() << std::endl;
+		profile << "z=" << player.model.get_z() << std::endl;
+		profile << "handInventory=";
+		for (size_t i = 0; i < playerHandInventory.slots; i++) {
+			profile << playerHandInventory.getItem(i).configPath << "|";
+		}
+		profile << std::endl;
+		profile.close();
+
+
+		//Save universe
 		std::ofstream updateIndex(universePath + "index", std::ios::out | std::ios::trunc);
 		terrainAnimationShouldRun = true;
 		std::thread saving_animation_thread(game::terrainAnimation, "Saving universe");
@@ -886,20 +900,6 @@ int main(int argc, char* argv[]) {
 			chunk.saveChunk();
 		}
 		updateIndex.close();
-
-		//Save profiles
-		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
-		profile << "x=" << player.model.get_x() << std::endl;
-		profile << "y=" << player.model.get_y() << std::endl;
-		profile << "z=" << player.model.get_z() << std::endl;
-
-		profile << "handInventory=";
-		for (size_t i = 0; i < playerHandInventory.slots; i++) {
-			profile << playerHandInventory.getItem(i).configPath << "|";
-		}
-		profile << std::endl;
-
-		profile.close();
 
 		terrainAnimationShouldRun = false;
 		saving_animation_thread.join();
