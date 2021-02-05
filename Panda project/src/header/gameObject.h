@@ -64,8 +64,8 @@ namespace game {
 		bool flying;
 		double velocity = 0.0;
 		double velocityModifier = 1.1;
-		int chunk_x;
-		int chunk_y;
+		int chunk_x = 0;
+		int chunk_y = 0;
 		std::string playerName;
 
 		//Static member variables
