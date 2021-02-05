@@ -443,14 +443,18 @@ int main(int argc, char* argv[]) {
 	NodePath alnp = window->get_render().attach_new_node(alight);
 	window->get_render().set_light(alnp);
 
-	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
-	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
-	//d_light->set_shadow_caster(true, 512, 512);
-	NodePath dlnp = window->get_render().attach_new_node(d_light);
-	dlnp.set_hpr(0, -90, 0);
-	dlnp.set_pos(0, 0, 100);
-	dlnp.show_tight_bounds();
-	window->get_render().set_light(dlnp);
+	//PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
+	//d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
+	////d_light->set_shadow_caster(true, 512, 512);
+	//NodePath dlnp = window->get_render().attach_new_node(d_light);
+	//dlnp.set_hpr(0, -90, 0);
+	//dlnp.set_pos(0, 0, 100);
+	//dlnp.show_tight_bounds();
+	//window->get_render().set_light(dlnp);
+
+	PT(PointLight) plight = new PointLight("plight");
+	NodePath plnp = window->get_render().attach_new_node(plight);
+	window->get_render().set_light(plnp);
 
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
@@ -500,8 +504,16 @@ int main(int argc, char* argv[]) {
 
 	std::chrono::time_point<std::chrono::steady_clock> timepoint;
 
+	double light_X = 0;
+
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
+
+
+		plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
+		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
+
+		light_X += globalClock->get_dt();
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
 			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
