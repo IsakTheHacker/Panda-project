@@ -241,6 +241,8 @@ namespace game {
 
 	bool connectToPStats(std::string host = "localhost", int port = -1);
 
+	bool mkdir(std::string path);
+
 	// Executes a Python script
 	int runPyScript(const std::string& path);
 

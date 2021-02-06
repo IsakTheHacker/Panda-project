@@ -107,7 +107,7 @@ void GUI_Callback_Button_Clicked(const Event* ev, void* data) {
 }
 
 int main(int argc, char* argv[]) {
-	
+
 	//Checking if any arguments was given at startup
 	if (argc > 3) {
 		game::warningOut("Too many arguments was given, 1-2 arguments are allowed!");
@@ -296,6 +296,8 @@ int main(int argc, char* argv[]) {
 	e_inventory.set_transparency(TransparencyAttrib::M_binary);
 	e_inventory.reparent_to(window->get_aspect_2d());
 	e_inventory.hide();
+
+	game::mkdir(universePath + "Hello World");
 
 	//Loading chunks
 	player.chunk_x = 0;

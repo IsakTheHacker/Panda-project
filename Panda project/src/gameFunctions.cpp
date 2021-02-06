@@ -305,6 +305,12 @@ namespace game {
 		}
 	}
 
+	bool mkdir(std::string path) {
+		Filename dir;
+		dir.set_dirname(path);
+		return dir.mkdir();
+	}
+
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
 	}
