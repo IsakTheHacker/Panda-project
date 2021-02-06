@@ -385,6 +385,7 @@ int main(int argc, char* argv[]) {
 	//Hotbar
 	std::vector<NodePath> inventory;
 	std::vector<NodePath> tool;
+	std::vector<NodePath> place;
 	CardMaker hand_inventory("hand_inventory");
 	for (int i = -5; i < 6; i++) {
 		NodePath hand_inventoryNode = NodePath("slot");
@@ -399,7 +400,7 @@ int main(int argc, char* argv[]) {
 		card.reparent_to(hand_inventoryNode);
 
 		NodePath something = window->load_model(framework.get_models(), "models/egg/block.egg");
-		something.set_pos_hpr(0 + something.get_sx() / 2, 0, 0 + something.get_sz() / 2, 0, 0, 0);
+		something.set_pos_hpr(0 + something.get_sx() / 2, 0, 0 + something.get_sz() / 2, -112.5, -45, 45);
 		something.set_scale(0.3);
 
 		Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
@@ -407,9 +408,10 @@ int main(int argc, char* argv[]) {
 		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 		something.set_texture(texture);
 		something.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
-		something.set_tex_projector(TextureStage::get_default(), window->get_render(), something);
+		something.set_tex_projector(TextureStage::get_default(), window->get_render_2d(), something);
 
 		something.reparent_to(hand_inventoryNode);
+		place.push_back(something);
 
 		if (i == -5) {
 			i++;
@@ -528,6 +530,28 @@ int main(int argc, char* argv[]) {
 
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
+
+		if (keys["w"]) { 
+			for (auto p : place) {
+				p.set_h(p, 2);
+			}
+		}
+		if (keys["s"]) {
+			for (auto p : place) {
+				p.set_h(p, -2);
+			}
+			std::cout << place[0].get_hpr() << std::endl;
+		}
+		if (keys["a"]) {
+			for (auto p : place) {
+				p.set_p(p, 2);
+			}
+		}
+		if (keys["d"]) {
+			for (auto p : place) {
+				p.set_p(p, -2);
+			}
+		}
 
 
 		plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
