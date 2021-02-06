@@ -167,6 +167,13 @@ namespace game {
 			this->hp = std::stod(config["hp"]);
 		}
 
+		if (config.find("plights") != config.end()) {
+			PT(PointLight) plight = new PointLight("plight");
+			NodePath plnp = model.attach_new_node(plight);
+			window->get_render().set_light(plnp);
+			lights.push_back(plnp);
+		}
+
 		if (config.find("subobjects") != config.end()) {
 			std::vector<NodePath> subobjects;
 

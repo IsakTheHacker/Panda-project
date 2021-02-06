@@ -4,3 +4,4 @@ collision-y=1
 collision-z=1
 subobjects=texture:models/textures/png/grass-#.png|model:models/egg/block.egg
 hp=10
+plights=placeholder

@@ -194,7 +194,7 @@ namespace game {
 	template<typename listType, typename funcType>
 	void forEach(const listType& list, funcType function) {
 		for (auto value : list) {
-			function(value, false, true);
+			function(value);
 		}
 	}
 	template<typename listType>			//Overload to be used if no function was specified

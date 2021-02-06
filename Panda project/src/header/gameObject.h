@@ -2,6 +2,7 @@
 
 //C++ built-in libraries
 #include <string>
+#include <memory>
 
 //Panda3D libraries
 #include <nodePath.h>
@@ -20,7 +21,7 @@ namespace game {
 		bool shouldLogToFileIntern;
 		bool modelNotFound;
 		static std::map<std::string, std::map<std::string, std::string>> knownConfigs;
-
+		
 		void initConfig(WindowFramework*& window, PandaFramework& framework);
 	public:
 		bool empty = false;
@@ -32,6 +33,7 @@ namespace game {
 		std::string configPath = "";
 		std::map<std::string, std::string> config;
 		NodePath collisionNodePath;
+		std::vector<NodePath> lights;
 		double hp = 1;
 		double temperature = 0;
 
