@@ -12,10 +12,6 @@
 #include <map>
 #include <string>
 
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING		//Experimental filesystem header
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
-
 #include "nodePath.h"
 
 int handInventoryIndex;
@@ -141,8 +137,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Create folders and files
-	fs::create_directory("data");
-	fs::create_directory("screenshots");
+	game::mkdir("data");
+	game::mkdir("screenshots");
 	if (!game::fileExists("data/options.txt")) {
 		std::ofstream file("data/options.txt");
 		std::string newLine = "\n";
@@ -297,8 +293,6 @@ int main(int argc, char* argv[]) {
 	e_inventory.reparent_to(window->get_aspect_2d());
 	e_inventory.hide();
 
-	game::mkdir(universePath + "Hello World");
-
 	//Loading chunks
 	player.chunk_x = 0;
 	player.chunk_y = 0;
@@ -353,7 +347,7 @@ int main(int argc, char* argv[]) {
 		std::ifstream profile(universePath + "profiles/" + player.playerName + ".prof");
 		if (profile.fail()) {
 			game::warningOut("Could not find player profile. Creating...");
-			fs::create_directory(universePath + "profiles");
+			game::mkdir(universePath + "profiles");
 			std::ofstream createProfile(universePath + "profiles/" + player.playerName + ".prof");
 			createProfile << "x=" << player.model.get_x() << std::endl;
 			createProfile << "y=" << player.model.get_y() << std::endl;
@@ -937,7 +931,7 @@ int main(int argc, char* argv[]) {
 	//Saving chunks
 	{
 		//Save profiles
-		fs::create_directory(universePath + "profiles");
+		game::mkdir(universePath + "profiles");
 		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
 		if (profile.fail()) {
 			game::errorOut("Failed to create player profile. The path was: " + universePath + "profiles/" + player.playerName + ".prof" + "!");
