@@ -342,6 +342,7 @@ int main(int argc, char* argv[]) {
 		std::ifstream profile(universePath + "profiles/" + player.playerName + ".prof");
 		if (profile.fail()) {
 			game::warningOut("Could not find player profile. Creating...");
+			fs::create_directory(universePath + "profiles");
 			std::ofstream createProfile(universePath + "profiles/" + player.playerName + ".prof");
 			createProfile << "x=" << player.model.get_x() << std::endl;
 			createProfile << "y=" << player.model.get_y() << std::endl;
@@ -917,6 +918,7 @@ int main(int argc, char* argv[]) {
 	//Saving chunks
 	{
 		//Save profiles
+		fs::create_directory(universePath + "profiles");
 		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
 		if (profile.fail()) {
 			game::errorOut("Failed to create player profile. The path was: " + universePath + "profiles/" + player.playerName + ".prof" + "!");
