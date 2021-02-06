@@ -475,9 +475,9 @@ int main(int argc, char* argv[]) {
 	//dlnp.show_tight_bounds();
 	//window->get_render().set_light(dlnp);
 
-	PT(PointLight) plight = new PointLight("plight");
+	/*PT(PointLight) plight = new PointLight("plight");
 	NodePath plnp = window->get_render().attach_new_node(plight);
-	window->get_render().set_light(plnp);
+	window->get_render().set_light(plnp);*/
 
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
@@ -532,7 +532,7 @@ int main(int argc, char* argv[]) {
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
 
-		plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
+		//plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 
 		light_X += globalClock->get_dt();
