@@ -106,7 +106,7 @@ namespace game {
 
 		initConfig(window, framework);
 
-		model.reparent_to(window->get_render());
+		model.reparent_to(rbcnp);
 
 		//Setting internal class variables
 		shouldLogInConsoleIntern = shouldLogInConsole;
