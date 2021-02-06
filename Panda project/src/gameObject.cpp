@@ -169,6 +169,7 @@ namespace game {
 
 		if (config.find("plights") != config.end()) {
 			PT(PointLight) plight = new PointLight("plight");
+			plight->set_attenuation(LVecBase3(1, 0, 1));
 			NodePath plnp = model.attach_new_node(plight);
 			window->get_render().set_light(plnp);
 			lights.push_back(plnp);
