@@ -821,7 +821,9 @@ int main(int argc, char* argv[]) {
 				keys["f4"] = false;
 			}
 			if (keys["f6"]) {
-				
+				SceneGraphAnalyzer sga;
+				sga.add_node(window->get_render().node());
+				sga.write(std::cerr);
 				keys["f6"] = false;
 			}
 
