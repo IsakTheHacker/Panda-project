@@ -16,6 +16,8 @@
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 
+#include "nodePath.h"
+
 int handInventoryIndex;
 std::map<std::string, bool> keys;
 std::map<std::string, std::string> universeOptions;
@@ -25,6 +27,7 @@ bool devMode = false;
 bool mouseInGame = true;
 std::string gamePath = "./";
 std::string universePath = "universes/Test/";
+NodePath rbcnp = NodePath("rbcnp");
 
 //My libraries
 #include "pandaIncludes.h"
@@ -40,8 +43,10 @@ std::string universePath = "universes/Test/";
 #include "gameInventory.h"
 #include "gameItem.h"
 #include "gameGui.h"
+
 #include <pgButton.h>
 #include <mouseButton.h>
+#include <rigidBodyCombiner.h>
 
 game::Player player;
 
@@ -186,6 +191,10 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	window->get_render().set_shader_auto();
+
+	//Create RigidBodyCombiner
+	PT(RigidBodyCombiner) rbc = new RigidBodyCombiner("rbc");
+	rbcnp = NodePath(rbc);
 
 	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
 	DCAST(Camera, player.firstPerson.node())->get_lens()->set_fov(std::stod(options["fov"]));
