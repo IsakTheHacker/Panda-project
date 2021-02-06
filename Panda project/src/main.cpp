@@ -820,6 +820,10 @@ int main(int argc, char* argv[]) {
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()+10);
 				keys["f4"] = false;
 			}
+			if (keys["f6"]) {
+				
+				keys["f6"] = false;
+			}
 
 			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
 				double move_y = 0.0;
