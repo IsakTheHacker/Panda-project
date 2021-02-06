@@ -28,6 +28,7 @@ using json = nlohmann::json;
 
 //My libraries
 #include "cppExtension.h"
+#include "constantVars.h"
 #include "gameVars.h"
 #include "pandaIncludes.h"
 
@@ -193,7 +194,7 @@ namespace game {
 	template<typename listType, typename funcType>
 	void forEach(const listType& list, funcType function) {
 		for (auto value : list) {
-			function(value, false, true);
+			function(value);
 		}
 	}
 	template<typename listType>			//Overload to be used if no function was specified
@@ -240,6 +241,8 @@ namespace game {
 
 	bool connectToPStats(std::string host = "localhost", int port = -1);
 
+	bool mkdir(std::string path);
+
 	// Executes a Python script
 	int runPyScript(const std::string& path);
 
@@ -265,4 +268,5 @@ namespace game {
 	void key_up(const Event* theEvent, void* data);
 	void key_swap(const Event* theEvent, void* data);
 	void wheel_roll(const Event* theEvent, void* data);
+	void unpause(const Event* theEvent, void* data);
 }

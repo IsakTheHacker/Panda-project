@@ -102,14 +102,11 @@ namespace game {
 			knownConfigs[configPath] = config;		//Add to knownConfigs
 		}
 
-		if (configPath == "data/assets/playerproperties/standard.playerproperties") {
-			model = window->get_camera_group();
-		} else {
-			model = NodePath("model");
-		}
+		model = NodePath("model");
 
 		initConfig(window, framework);
 
+		//model.reparent_to(rbcnp);
 		model.reparent_to(window->get_render());
 
 		//Setting internal class variables
@@ -169,6 +166,14 @@ namespace game {
 
 		if (config.find("hp") != config.end()) {
 			this->hp = std::stod(config["hp"]);
+		}
+
+		if (config.find("plights") != config.end()) {
+			PT(PointLight) plight = new PointLight("plight");
+			plight->set_attenuation(LVecBase3(0, 0, 0.01));
+			NodePath plnp = model.attach_new_node(plight);
+			window->get_render().set_light(plnp);
+			lights.push_back(plnp);
 		}
 
 		if (config.find("subobjects") != config.end()) {
@@ -237,6 +242,16 @@ namespace game {
 		this->sneaking = false;
 		this->flying = false;
 		this->playerName = (*Player::options)["player-name"];
+
+		//Add first person camera
+		firstPerson = window->make_camera();
+		firstPerson.node()->set_name("firstPerson");
+		firstPerson.reparent_to(model);
+
+		//Add third person camera
+		thirdPerson = window->make_camera();
+		thirdPerson.node()->set_name("thirdPerson");
+		thirdPerson.reparent_to(model);
 	}
 	Player::~Player() {
 

@@ -12,9 +12,7 @@
 #include <map>
 #include <string>
 
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING		//Experimental filesystem header
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+#include "nodePath.h"
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -25,6 +23,7 @@ bool devMode = false;
 bool mouseInGame = true;
 std::string gamePath = "./";
 std::string universePath = "universes/Test/";
+NodePath rbcnp = NodePath("rbcnp");
 
 //My libraries
 #include "pandaIncludes.h"
@@ -39,6 +38,11 @@ std::string universePath = "universes/Test/";
 #include "gameTasks.h"
 #include "gameInventory.h"
 #include "gameItem.h"
+#include "gameGui.h"
+
+#include <pgButton.h>
+#include <mouseButton.h>
+#include <rigidBodyCombiner.h>
 
 game::Player player;
 
@@ -48,28 +52,12 @@ PT(ClockObject) globalClock = ClockObject::get_global_clock();
 
 #include "gameClasses.h"
 
-void pauseMenu(const Event* theEvent, void* data) {
-	game::pauseMenuEventParameters* parameters = (game::pauseMenuEventParameters*)data;
+void pauseMenu(WindowFramework* window) {
 	
 	if (mouseInGame) {
 		mouseInGame = false;
-		WindowProperties props = parameters->window->get_graphics_window()->get_properties();
-		props.set_cursor_hidden(false);
-		parameters->window->get_graphics_window()->request_properties(props);
-	} else {
-		double center_x = parameters->window->get_graphics_window()->get_x_size() / static_cast<double>(2);
-		double center_y = parameters->window->get_graphics_window()->get_y_size() / static_cast<double>(2);
-		parameters->window->get_graphics_window()->move_pointer(0, center_x, center_y);
-		WindowProperties props = parameters->window->get_graphics_window()->get_properties();
-		props.set_cursor_hidden(true);
-		parameters->window->get_graphics_window()->request_properties(props);
-		mouseInGame = true;
-	}
-}
-void pauseMenu(WindowFramework* window) {
 
-	if (mouseInGame) {
-		mouseInGame = false;
+		//Set cursor shown
 		WindowProperties props = window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(false);
 		window->get_graphics_window()->request_properties(props);
@@ -77,15 +65,45 @@ void pauseMenu(WindowFramework* window) {
 		double center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 		double center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 		window->get_graphics_window()->move_pointer(0, center_x, center_y);
+		
+		//Set cursor hidden
 		WindowProperties props = window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(true);
 		window->get_graphics_window()->request_properties(props);
+
 		mouseInGame = true;
 	}
 }
+void inventoryMenu(WindowFramework* window) {
+
+	if (mouseInGame) {
+		mouseInGame = false;
+		
+		//Set cursor shown
+		WindowProperties props = window->get_graphics_window()->get_properties();
+		props.set_cursor_hidden(false);
+		window->get_graphics_window()->request_properties(props);
+	} else {
+		double center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
+		double center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
+		window->get_graphics_window()->move_pointer(0, center_x, center_y);
+		
+		//Set cursor hidden
+		WindowProperties props = window->get_graphics_window()->get_properties();
+		props.set_cursor_hidden(true);
+		window->get_graphics_window()->request_properties(props);
+
+		mouseInGame = true;
+	}
+}
+void GUI_Callback_Button_Clicked(const Event* ev, void* data) {
+	PGButton* button = (PGButton*)data;
+	// Your action here
+	std::cout << button->get_name() << " has been pressed.\n";
+}
 
 int main(int argc, char* argv[]) {
-	
+
 	//Checking if any arguments was given at startup
 	if (argc > 3) {
 		game::warningOut("Too many arguments was given, 1-2 arguments are allowed!");
@@ -119,8 +137,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Create folders and files
-	fs::create_directory("data");
-	fs::create_directory("screenshots");
+	game::mkdir("data");
+	game::mkdir("screenshots");
 	if (!game::fileExists("data/options.txt")) {
 		std::ofstream file("data/options.txt");
 		std::string newLine = "\n";
@@ -168,10 +186,15 @@ int main(int argc, char* argv[]) {
 		game::waitForKeypress();
 		return 1;
 	}
+	window->get_render().set_shader_auto();
+
+	//Create RigidBodyCombiner
+	PT(RigidBodyCombiner) rbc = new RigidBodyCombiner("rbc");
+	rbcnp = NodePath(rbc);
 
 	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
-	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
-	window->get_render().set_shader_auto();
+	DCAST(Camera, player.firstPerson.node())->get_lens()->set_fov(std::stod(options["fov"]));
+	window->get_display_region_3d()->set_camera(player.firstPerson);
 
 	//Set default window instance to use for chunk class
 	game::chunk::setDefaultWindow(window);
@@ -188,6 +211,15 @@ int main(int argc, char* argv[]) {
 	pickerNode->set_into_collide_mask(0);										//Disable into-collisions
 	myTraverser.add_collider(pickerNP, myHandler);								//Add collider to traverser
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
+
+	//Experimental GUI
+	game::button returnToGameButton(framework, game::unpause, 0, 0.15, 0, 0.15, "Return to game");
+	returnToGameButton.hide();
+
+	game::button quitSaveButton(framework, game::exitGame, 0, -0.15, 0, -0.15, "Quit and save");
+	quitSaveButton.hide();
+
+	player.model.ls();
 
 	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {
@@ -261,26 +293,6 @@ int main(int argc, char* argv[]) {
 	e_inventory.reparent_to(window->get_aspect_2d());
 	e_inventory.hide();
 
-	std::vector<NodePath> inventory;
-	std::vector<NodePath> tool;
-
-	for (int i = -5; i < 6; i++) {
-		CardMaker hand_inventory("hand_inventory" + i);
-		NodePath hand_inventoryNode(hand_inventory.generate());
-		game::setTexture(hand_inventoryNode, gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
-		hand_inventoryNode.set_sx(0.2);
-		hand_inventoryNode.set_sz(0.2);
-		hand_inventoryNode.set_pos(i/static_cast<float>(5) - hand_inventoryNode.get_sx() / 2, 0, -0.85 - hand_inventoryNode.get_sz() / 2);
-		hand_inventoryNode.set_transparency(TransparencyAttrib::M_alpha);
-		hand_inventoryNode.reparent_to(window->get_aspect_2d());
-		if (i == -5) {
-			i++;
-			tool.push_back(hand_inventoryNode);
-		} else {
-			inventory.push_back(hand_inventoryNode);
-		}
-	}
-
 	//Loading chunks
 	player.chunk_x = 0;
 	player.chunk_y = 0;
@@ -335,6 +347,7 @@ int main(int argc, char* argv[]) {
 		std::ifstream profile(universePath + "profiles/" + player.playerName + ".prof");
 		if (profile.fail()) {
 			game::warningOut("Could not find player profile. Creating...");
+			game::mkdir(universePath + "profiles");
 			std::ofstream createProfile(universePath + "profiles/" + player.playerName + ".prof");
 			createProfile << "x=" << player.model.get_x() << std::endl;
 			createProfile << "y=" << player.model.get_y() << std::endl;
@@ -344,13 +357,17 @@ int main(int argc, char* argv[]) {
 				"data/assets/blockproperties/rotational-complex.blockproperties|" <<
 				"data/assets/blockproperties/log.blockproperties|" <<
 				"data/assets/blockproperties/stone.blockproperties|" <<
+				"data/assets/blockproperties/leaves.blockproperties|" <<
+				"data/assets/blockproperties/lightblock.blockproperties|" <<
 				std::endl;
 			createProfile.close();
-			playerHandInventory.resize(4);
+			playerHandInventory.resize(6);
 			playerHandInventory.setItem(0, game::item("data/assets/blockproperties/grass.blockproperties", 1));
 			playerHandInventory.setItem(1, game::item("data/assets/blockproperties/rotational-complex.blockproperties", 1));
 			playerHandInventory.setItem(2, game::item("data/assets/blockproperties/log.blockproperties", 1));
 			playerHandInventory.setItem(3, game::item("data/assets/blockproperties/stone.blockproperties", 1));
+			playerHandInventory.setItem(4, game::item("data/assets/blockproperties/leaves.blockproperties", 1));
+			playerHandInventory.setItem(5, game::item("data/assets/blockproperties/lightblock.blockproperties", 1));
 		} else {
 			std::map<std::string, std::string> vector;
 			std::string line;
@@ -369,6 +386,45 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		profile.close();
+	}
+
+	//Hotbar
+	std::vector<NodePath> inventory;
+	std::vector<NodePath> tool;
+	std::vector<NodePath> place;
+	CardMaker hand_inventory("hand_inventory");
+	for (int i = -5; i < 6; i++) {
+		NodePath hand_inventoryNode = NodePath("slot");
+		hand_inventoryNode.set_sx(0.2);
+		hand_inventoryNode.set_sz(0.2);
+		hand_inventoryNode.set_pos(i / static_cast<float>(5) - hand_inventoryNode.get_sx() / 2, 0, -0.85 - hand_inventoryNode.get_sz() / 2);
+		hand_inventoryNode.reparent_to(window->get_aspect_2d());
+
+		NodePath card = NodePath(hand_inventory.generate());
+		game::setTexture(card, gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
+		card.set_transparency(TransparencyAttrib::M_alpha);
+		card.reparent_to(hand_inventoryNode);
+
+		NodePath something = window->load_model(framework.get_models(), "models/egg/block.egg");
+		something.set_pos_hpr(0 + something.get_sx() / 2, 0, 0 + something.get_sz() / 2, -112.5, -45, 45);
+		something.set_scale(0.3);
+
+		Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
+		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+		something.set_texture(texture);
+		something.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
+		something.set_tex_projector(TextureStage::get_default(), window->get_render_2d(), something);
+
+		something.reparent_to(hand_inventoryNode);
+		place.push_back(something);
+
+		if (i == -5) {
+			i++;
+			tool.push_back(card);
+		} else {
+			inventory.push_back(card);
+		}
 	}
 
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
@@ -415,14 +471,18 @@ int main(int argc, char* argv[]) {
 	NodePath alnp = window->get_render().attach_new_node(alight);
 	window->get_render().set_light(alnp);
 
-	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
-	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
-	//d_light->set_shadow_caster(true, 512, 512);
-	NodePath dlnp = window->get_render().attach_new_node(d_light);
-	dlnp.set_hpr(0, -90, 0);
-	dlnp.set_pos(0, 0, 100);
-	dlnp.show_tight_bounds();
-	window->get_render().set_light(dlnp);
+	//PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
+	//d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
+	////d_light->set_shadow_caster(true, 512, 512);
+	//NodePath dlnp = window->get_render().attach_new_node(d_light);
+	//dlnp.set_hpr(0, -90, 0);
+	//dlnp.set_pos(0, 0, 100);
+	//dlnp.show_tight_bounds();
+	//window->get_render().set_light(dlnp);
+
+	/*PT(PointLight) plight = new PointLight("plight");
+	NodePath plnp = window->get_render().attach_new_node(plight);
+	window->get_render().set_light(plnp);*/
 
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
@@ -472,8 +532,15 @@ int main(int argc, char* argv[]) {
 
 	std::chrono::time_point<std::chrono::steady_clock> timepoint;
 
+	double light_X = 0;
+
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
+
+		//plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
+		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
+
+		light_X += globalClock->get_dt();
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
 			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
@@ -524,6 +591,9 @@ int main(int argc, char* argv[]) {
 				if (mouseInGame) {
 					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];		//Get chunk containing the block
 					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();									//Remove node
+					for (NodePath value : chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].lights) {						//Remove lights
+						window->get_render().clear_light(value);
+					}
 					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);						//Replace game::object with empty game::object
 					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;					//Save chunk changes in vector "chunks"
 					keys["mouse1"] = false;
@@ -599,6 +669,8 @@ int main(int argc, char* argv[]) {
 
 					object.model.set_shader_auto();
 
+					object.model.ls();
+
 					chunk.objects.push_back(object);
 					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;
 
@@ -614,7 +686,7 @@ int main(int argc, char* argv[]) {
 		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
 		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
 		text3->set_text("Chunk X: " + std::to_string(player.chunk_x) + "\nChunk Y: " + std::to_string(player.chunk_y));
-		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
+		fovText->set_text("VFov: " + std::to_string(DCAST(Camera, player.firstPerson.node())->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(DCAST(Camera, player.firstPerson.node())->get_lens()->get_hfov()));
 
 		if (mouseInGame) {
 			if (window->get_graphics_window()) {
@@ -744,6 +816,14 @@ int main(int argc, char* argv[]) {
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()+10);
 				keys["f4"] = false;
 			}
+			if (keys["f6"]) {
+				SceneGraphAnalyzer sga;
+				sga.add_node(window->get_render().node());
+				SetConsoleTextAttribute(h, 3 | FOREGROUND_INTENSITY);
+				sga.write(std::cerr);
+				SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+				keys["f6"] = false;
+			}
 
 			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
 				double move_y = 0.0;
@@ -802,6 +882,17 @@ int main(int argc, char* argv[]) {
 				exit(1);			// Code 1 is used because we crashed the game
 			}
 		}
+		if (keys["escape"]) {
+			pauseMenu(window);
+			if (mouseInGame) {
+				quitSaveButton.hide();
+				returnToGameButton.hide();
+			} else {
+				quitSaveButton.show();
+				returnToGameButton.show();
+			}
+			keys["escape"] = false;
+		}
 		if (keys["e"]) {
 			if (e_inventory.is_hidden()) {
 				e_inventory.show();
@@ -814,7 +905,7 @@ int main(int argc, char* argv[]) {
 				text2->set_overall_hidden(true);
 				text3->set_overall_hidden(true);
 				fovText->set_overall_hidden(true);
-				pauseMenu(window);
+				inventoryMenu(window);
 			} else {
 				e_inventory.hide();
 				cursor.show();
@@ -826,7 +917,7 @@ int main(int argc, char* argv[]) {
 				text2->set_overall_hidden(false);
 				text3->set_overall_hidden(false);
 				fovText->set_overall_hidden(false);
-				pauseMenu(window);
+				inventoryMenu(window);
 			}
 
 			keys["e"] = false;
@@ -839,6 +930,24 @@ int main(int argc, char* argv[]) {
 
 	//Saving chunks
 	{
+		//Save profiles
+		game::mkdir(universePath + "profiles");
+		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
+		if (profile.fail()) {
+			game::errorOut("Failed to create player profile. The path was: " + universePath + "profiles/" + player.playerName + ".prof" + "!");
+		} else {
+			profile << "x=" << player.model.get_x() << std::endl;
+			profile << "y=" << player.model.get_y() << std::endl;
+			profile << "z=" << player.model.get_z() << std::endl;
+			profile << "handInventory=";
+			for (size_t i = 0; i < playerHandInventory.slots; i++) {
+				profile << playerHandInventory.getItem(i).configPath << "|";
+			}
+			profile << std::endl;
+		}
+		profile.close();
+
+		//Save universe
 		std::ofstream updateIndex(universePath + "index", std::ios::out | std::ios::trunc);
 		terrainAnimationShouldRun = true;
 		std::thread saving_animation_thread(game::terrainAnimation, "Saving universe");
@@ -847,20 +956,6 @@ int main(int argc, char* argv[]) {
 			chunk.saveChunk();
 		}
 		updateIndex.close();
-
-		//Save profiles
-		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
-		profile << "x=" << player.model.get_x() << std::endl;
-		profile << "y=" << player.model.get_y() << std::endl;
-		profile << "z=" << player.model.get_z() << std::endl;
-
-		profile << "handInventory=";
-		for (size_t i = 0; i < playerHandInventory.slots; i++) {
-			profile << playerHandInventory.getItem(i).configPath << "|";
-		}
-		profile << std::endl;
-
-		profile.close();
 
 		terrainAnimationShouldRun = false;
 		saving_animation_thread.join();

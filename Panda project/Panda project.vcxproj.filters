@@ -95,6 +95,9 @@
     <ClInclude Include="src\header\gameTasks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\header\gameGui.h">
+      <Filter>Header Files\Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="src\gameTasks.cpp">
       <Filter>Source Files\C++ files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameGui.cpp">
+      <Filter>Source Files\C++ files\Classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
