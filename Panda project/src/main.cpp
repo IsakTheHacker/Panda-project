@@ -823,7 +823,9 @@ int main(int argc, char* argv[]) {
 			if (keys["f6"]) {
 				SceneGraphAnalyzer sga;
 				sga.add_node(window->get_render().node());
+				SetConsoleTextAttribute(h, 3 | FOREGROUND_INTENSITY);
 				sga.write(std::cerr);
+				SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
 				keys["f6"] = false;
 			}
 
