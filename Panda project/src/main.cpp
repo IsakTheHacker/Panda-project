@@ -288,26 +288,6 @@ int main(int argc, char* argv[]) {
 	e_inventory.reparent_to(window->get_aspect_2d());
 	e_inventory.hide();
 
-	std::vector<NodePath> inventory;
-	std::vector<NodePath> tool;
-
-	for (int i = -5; i < 6; i++) {
-		CardMaker hand_inventory("hand_inventory" + i);
-		NodePath hand_inventoryNode(hand_inventory.generate());
-		game::setTexture(hand_inventoryNode, gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
-		hand_inventoryNode.set_sx(0.2);
-		hand_inventoryNode.set_sz(0.2);
-		hand_inventoryNode.set_pos(i/static_cast<float>(5) - hand_inventoryNode.get_sx() / 2, 0, -0.85 - hand_inventoryNode.get_sz() / 2);
-		hand_inventoryNode.set_transparency(TransparencyAttrib::M_alpha);
-		hand_inventoryNode.reparent_to(window->get_aspect_2d());
-		if (i == -5) {
-			i++;
-			tool.push_back(hand_inventoryNode);
-		} else {
-			inventory.push_back(hand_inventoryNode);
-		}
-	}
-
 	//Loading chunks
 	player.chunk_x = 0;
 	player.chunk_y = 0;
@@ -400,6 +380,43 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		profile.close();
+	}
+
+	//Hotbar
+	std::vector<NodePath> inventory;
+	std::vector<NodePath> tool;
+	CardMaker hand_inventory("hand_inventory");
+	for (int i = -5; i < 6; i++) {
+		NodePath hand_inventoryNode = NodePath("slot");
+		hand_inventoryNode.set_sx(0.2);
+		hand_inventoryNode.set_sz(0.2);
+		hand_inventoryNode.set_pos(i / static_cast<float>(5) - hand_inventoryNode.get_sx() / 2, 0, -0.85 - hand_inventoryNode.get_sz() / 2);
+		hand_inventoryNode.reparent_to(window->get_aspect_2d());
+
+		NodePath card = NodePath(hand_inventory.generate());
+		game::setTexture(card, gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
+		card.set_transparency(TransparencyAttrib::M_alpha);
+		card.reparent_to(hand_inventoryNode);
+
+		NodePath something = window->load_model(framework.get_models(), "models/egg/block.egg");
+		something.set_pos_hpr(0 + something.get_sx() / 2, 0, 0 + something.get_sz() / 2, 0, 0, 0);
+		something.set_scale(0.3);
+
+		Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
+		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+		something.set_texture(texture);
+		something.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
+		something.set_tex_projector(TextureStage::get_default(), window->get_render(), something);
+
+		something.reparent_to(hand_inventoryNode);
+
+		if (i == -5) {
+			i++;
+			tool.push_back(card);
+		} else {
+			inventory.push_back(card);
+		}
 	}
 
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
