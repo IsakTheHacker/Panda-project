@@ -531,29 +531,6 @@ int main(int argc, char* argv[]) {
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
 
-		if (keys["w"]) { 
-			for (auto p : place) {
-				p.set_h(p, 2);
-			}
-		}
-		if (keys["s"]) {
-			for (auto p : place) {
-				p.set_h(p, -2);
-			}
-			std::cout << place[0].get_hpr() << std::endl;
-		}
-		if (keys["a"]) {
-			for (auto p : place) {
-				p.set_p(p, 2);
-			}
-		}
-		if (keys["d"]) {
-			for (auto p : place) {
-				p.set_p(p, -2);
-			}
-		}
-
-
 		plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 
