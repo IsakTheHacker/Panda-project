@@ -107,7 +107,7 @@ namespace game {
 		if (std::stoi((*this->options)["save_newly_created_chunks"])) {
 			this->saveChunk();		//Save chunk
 		}
-		DCAST(RigidBodyCombiner, rbcnp.node())->collect();
+		//DCAST(RigidBodyCombiner, rbcnp.node())->collect();
 		return 0;
 	}
 	int chunk::saveChunk() const {
