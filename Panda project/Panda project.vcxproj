@@ -347,6 +347,30 @@ copy /Y "$(TargetDir)$(ProjectName).$(OutputType)" "$(ProjectDir)$(ProjectName).
       </Message>
     </PreLinkEvent>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Linux-Debug|Win32'">
+    <ClCompile>
+      <UndefinePreprocessorDefinitions>_WIN64;_WIN32;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+      <PreprocessorDefinitions>__linux__</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Linux-Debug|x64'">
+    <ClCompile>
+      <UndefinePreprocessorDefinitions>_WIN64;_WIN32;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+      <PreprocessorDefinitions>__linux__</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Linux-Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>__linux__</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>_WIN64;_WIN32;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Linux-Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>__linux__</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>_WIN64;_WIN32;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
