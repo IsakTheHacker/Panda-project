@@ -138,7 +138,12 @@ namespace game {
 				//int x_value = ((parsePositive(object.model.get_x()) - parsePositive(start_x)) / 2);
 				int y_value = parsePositive((object.model.get_y() - start_y) / 2);
 				//int y_value = ((parsePositive(object.model.get_y()) - parsePositive(start_y)) / 2);
-				z_levels[object.model.get_z()][x_value][y_value] = object;
+				try {
+					z_levels.at(object.model.get_z()).at(x_value).at(y_value) = object;
+				} catch (const std::out_of_range& outOfRange) {
+					game::errorOut(std::string("Could not save universe! Out of range error: ") + outOfRange.what());
+					return 1;
+				}
 				//z_levels[object.model.get_z()][x + object.model.get_x() - 1][y + object.model.get_y() - 1] = object;
 			}
 		}
