@@ -30,9 +30,6 @@
     <Filter Include="Git">
       <UniqueIdentifier>{b3ec0fdf-a1f3-4b8e-b2c5-edc3549cd19f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Crap">
-      <UniqueIdentifier>{34d6fb8e-0616-4b68-96ce-a9338bbad0ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Classes">
       <UniqueIdentifier>{3113ba28-0c93-4f91-bee3-82e433f30b0a}</UniqueIdentifier>
     </Filter>
@@ -154,9 +151,6 @@
     </ClCompile>
     <ClCompile Include="src\testing\Testing area.cpp">
       <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
-    <ClCompile Include="src\crap\main.cpp">
-      <Filter>Crap</Filter>
     </ClCompile>
     <ClCompile Include="src\gameFunctions.cpp">
       <Filter>Source Files\C++ files</Filter>

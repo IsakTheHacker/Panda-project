@@ -49,12 +49,6 @@
     </ClCompile>
     <ClCompile Include="src\chunk.cpp" />
     <ClCompile Include="src\cppExtension.cpp" />
-    <ClCompile Include="src\crap\main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="src\gameClasses.cpp" />
     <ClCompile Include="src\gameFunctions.cpp" />
     <ClCompile Include="src\gameGui.cpp" />
