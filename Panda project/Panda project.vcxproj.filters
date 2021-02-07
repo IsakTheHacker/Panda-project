@@ -137,9 +137,6 @@
     <ClCompile Include="src\testing\Collision example.cpp">
       <Filter>Source Files\C++ files\Testing...</Filter>
     </ClCompile>
-    <ClCompile Include="src\testing\Collision.cpp">
-      <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
     <ClCompile Include="src\testing\Physicsexample.cpp">
       <Filter>Source Files\C++ files\Testing...</Filter>
     </ClCompile>
