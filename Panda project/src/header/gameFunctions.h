@@ -31,6 +31,7 @@ using json = nlohmann::json;
 #include "cppExtension.h"
 #include "constantVars.h"
 #include "gameVars.h"
+#include "platformPicker.h"
 
 //Including necessary Windows libraries
 #include <Windows.h>
