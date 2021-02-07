@@ -184,7 +184,7 @@ int main(int argc, char* argv[]) {
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
-	//Testing the color of the log function output
+	//Testing the color of log functions
 	game::errorOut("This is an error message.");
 	game::importantInfoOut("This is an important message.");
 	game::logOut("This is a log message.");
@@ -837,9 +837,9 @@ int main(int argc, char* argv[]) {
 			if (keys["f6"]) {
 				SceneGraphAnalyzer sga;
 				sga.add_node(window->get_render().node());
-				SetConsoleTextAttribute(h, 3 | FOREGROUND_INTENSITY);
+				game::setTextColor(color::FG_LIGHTCYAN);
 				sga.write(std::cerr);
-				SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+				game::setTextColor(color::FG_WHITE);
 				keys["f6"] = false;
 			}
 
