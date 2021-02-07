@@ -63,7 +63,7 @@ Global
 		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Linux-Debug|ARM.Build.0 = Linux-Release|x64
 		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Linux-Debug|ARM64.ActiveCfg = Linux-Release|x64
 		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Linux-Debug|ARM64.Build.0 = Linux-Release|x64
-		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Linux-Debug|x64.ActiveCfg = Linux-Release|x64
+		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Linux-Debug|x64.ActiveCfg = Debug|x64
 		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Linux-Debug|x86.ActiveCfg = Linux-Release|Win32
 		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Linux-Release|ARM.ActiveCfg = Linux-Release|Win32
 		{1EA3B4B7-2E9E-4E28-832F-75E29E069A0B}.Linux-Release|ARM64.ActiveCfg = Linux-Release|Win32
