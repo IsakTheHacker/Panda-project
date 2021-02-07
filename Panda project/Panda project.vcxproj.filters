@@ -39,6 +39,9 @@
     <Filter Include="Source Files\C++ files\Classes">
       <UniqueIdentifier>{4b38116b-e94a-4804-a5a1-c750d5d6f730}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\C++ files\Platform specific">
+      <UniqueIdentifier>{13da5d16-2c80-408e-88cf-52ac362d2475}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\header\linuxPlatform.h">
@@ -184,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="src\gameGui.cpp">
       <Filter>Source Files\C++ files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win32Platform.cpp">
+      <Filter>Source Files\C++ files\Platform specific</Filter>
+    </ClCompile>
+    <ClCompile Include="src\linuxPlatform.cpp">
+      <Filter>Source Files\C++ files\Platform specific</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

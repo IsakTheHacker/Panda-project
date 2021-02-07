@@ -46,6 +46,7 @@
     <ClCompile Include="src\gameItem.cpp" />
     <ClCompile Include="src\gameTasks.cpp" />
     <ClCompile Include="src\gameTimer.cpp" />
+    <ClCompile Include="src\linuxPlatform.cpp" />
     <ClCompile Include="src\main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -93,6 +94,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\win32Platform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\header\chunk.h" />
