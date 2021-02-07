@@ -6,4 +6,7 @@ namespace game {
 		return SetConsoleTitle((LPCWSTR)title.c_str());
 	}
 
+	bool setTextColor(HANDLE handle, unsigned short color) {
+		return SetConsoleTextAttribute(handle, color);
+	}
 }

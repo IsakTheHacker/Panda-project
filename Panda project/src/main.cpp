@@ -184,6 +184,10 @@ int main(int argc, char* argv[]) {
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
+	game::setTextColor(h, 6 | FOREGROUND_INTENSITY);
+	std::cout << "Hello World!" << std::endl;
+	game::setTextColor(h, 7 | FOREGROUND_INTENSITY);
+
 	// Open a new window framework and set the title
 	PandaFramework framework;
 	framework.open_framework(argc, argv);

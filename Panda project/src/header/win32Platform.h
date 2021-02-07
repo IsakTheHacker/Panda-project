@@ -8,7 +8,10 @@
 
 namespace game {
 
-	// Sets the console title
+	//Sets the console title
 	bool setConsoleTitle(std::wstring title);
+
+	//Changes the text color
+	bool setTextColor(HANDLE handle, unsigned short color);
 
 }
