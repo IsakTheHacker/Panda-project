@@ -6,6 +6,8 @@
 //Include Windows library
 #include <Windows.h>
 
+extern HANDLE h;
+
 namespace color {
 
 	//Foreground colors

@@ -40,10 +40,7 @@ using json = nlohmann::json;
 #include "platformPicker.h"
 
 //Including necessary Windows libraries
-#include <Windows.h>
 #include <conio.h>
-
-extern HANDLE h;
 
 namespace game {
 

@@ -1,7 +1,5 @@
 #include "gameFunctions.h"
 
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
 namespace game {
 
 	void terrainAnimation(const std::string& message) {

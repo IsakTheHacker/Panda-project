@@ -1,5 +1,7 @@
 #include "win32Platform.h"
 
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
 namespace game {
 
 	bool setConsoleTitle(std::wstring title) {
