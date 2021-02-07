@@ -5,8 +5,12 @@
 #include <memory>
 
 //Panda3D libraries
-#include <nodePath.h>
-#include <pandaFramework.h>
+#include "nodePath.h"
+#include "pandaFramework.h"
+#include "collisionNode.h"
+#include "collisionBox.h"
+#include "collisionEntry.h"
+#include "pointLight.h"
 
 //My libraries
 #include "gameFunctions.h"

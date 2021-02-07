@@ -6,9 +6,15 @@
 #include <vector>
 #include <fstream>
 
+//Panda3D libraries
+#include "windowFramework.h"
+#include "mouseWatcher.h"
+#include "collisionRay.h"
+#include "collisionNode.h"
+#include "collisionBox.h"
+
 //My libraries
 #include "gameFunctions.h"
-#include "pandaIncludes.h"
 
 namespace game {
 

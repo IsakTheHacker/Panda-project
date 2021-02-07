@@ -4,8 +4,7 @@
 #include "pgButton.h"
 #include "cardMaker.h"
 #include "mouseButton.h"
-
-#include "pandaIncludes.h"
+#include "pandaFramework.h"
 
 //My libraries
 #include "gameFunctions.h"

@@ -12,7 +12,20 @@
 #include <map>
 #include <string>
 
+//Panda3D libraries
+#include "pgButton.h"
+#include "mouseButton.h"
+#include "rigidBodyCombiner.h"
+#include "rigidBodyCombiner.h"
 #include "nodePath.h"
+#include "pandaSystem.h"
+#include "collisionHandlerQueue.h"
+#include "collisionHandlerPusher.h"
+#include "collisionRay.h"
+#include "collisionSphere.h"
+#include "ambientLight.h"
+#include "mouseWatcher.h"
+#include "texturePool.h"
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -26,7 +39,6 @@ std::string universePath = "universes/Test/";
 NodePath rbcnp = NodePath("rbcnp");
 
 //My libraries
-#include "pandaIncludes.h"
 #include "cppExtension.h"
 #include "gameVars.h"
 #include "gameFunctions.h"
@@ -40,9 +52,6 @@ NodePath rbcnp = NodePath("rbcnp");
 #include "gameItem.h"
 #include "gameGui.h"
 
-#include <pgButton.h>
-#include <mouseButton.h>
-#include <rigidBodyCombiner.h>
 
 game::Player player;
 

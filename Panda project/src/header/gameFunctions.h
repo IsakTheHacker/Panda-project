@@ -24,13 +24,13 @@ using json = nlohmann::json;
 #include <Python.h>
 
 //Panda3D libraries
-#include <pStatClient.h>
+#include "pStatClient.h"
+#include "texturePool.h"
 
 //My libraries
 #include "cppExtension.h"
 #include "constantVars.h"
 #include "gameVars.h"
-#include "pandaIncludes.h"
 
 //Including necessary Windows libraries
 #include <Windows.h>
