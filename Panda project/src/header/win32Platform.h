@@ -9,8 +9,6 @@
 namespace game {
 
 	// Sets the console title
-	bool setConsoleTitle(std::string title) {
-		return SetConsoleTitle((LPCWSTR)title.c_str());
-	}
+	bool setConsoleTitle(std::string title);
 
 }
