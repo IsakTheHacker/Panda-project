@@ -58,5 +58,6 @@ namespace game {
 
 	//Changes the text color
 	bool setTextColor(HANDLE handle, unsigned short color);
+	bool setTextColor(unsigned short color);
 
 }

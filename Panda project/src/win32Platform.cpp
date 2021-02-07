@@ -11,4 +11,7 @@ namespace game {
 	bool setTextColor(HANDLE handle, unsigned short color) {
 		return SetConsoleTextAttribute(handle, color);
 	}
+	bool setTextColor(unsigned short color) {
+		return SetConsoleTextAttribute(h, color);
+	}
 }
