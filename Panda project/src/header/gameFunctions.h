@@ -46,9 +46,6 @@ namespace game {
 	// Waits for input
 	void waitForKeypress();
 
-	// Sets the console title
-	int setConsoleTitle(const char* title);
-
 	// Sets the console heading
 	int setHeading(const std::string& heading);
 

@@ -22,10 +22,6 @@ namespace game {
 		getch();
 	}
 
-	int setConsoleTitle(const char* title) {
-		return 0;
-	}
-
 	int setHeading(const std::string& heading) {
 		std::cout << "\n\n" << heading << std::endl;
 		for (int i = 0; i < heading.length(); i++) {
