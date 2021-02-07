@@ -176,6 +176,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	game::setHeading(options["console-heading"]);
+	game::setConsoleTitle(L"Panda Project: Console");
 	game::logOut("Starting...");
 	game::userConfigOut("Panda3D version: " + PandaSystem::get_version_string());
 	game::userConfigOut("It was built on " + PandaSystem::get_build_date());

@@ -9,6 +9,6 @@
 namespace game {
 
 	// Sets the console title
-	bool setConsoleTitle(std::string title);
+	bool setConsoleTitle(std::wstring title);
 
 }

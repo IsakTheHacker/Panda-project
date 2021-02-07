@@ -2,7 +2,7 @@
 
 namespace game {
 
-	bool setConsoleTitle(std::string title) {
+	bool setConsoleTitle(std::wstring title) {
 		return SetConsoleTitle((LPCWSTR)title.c_str());
 	}
 
