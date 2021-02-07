@@ -184,9 +184,13 @@ int main(int argc, char* argv[]) {
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
-	game::setTextColor(h, 6 | FOREGROUND_INTENSITY);
-	std::cout << "Hello World!" << std::endl;
-	game::setTextColor(h, 7 | FOREGROUND_INTENSITY);
+	//Testing the color of the log function output
+	game::errorOut("This is an error message.");
+	game::importantInfoOut("This is an important message.");
+	game::logOut("This is a log message.");
+	game::timingInfoOut("This is a timing info message.");
+	game::userConfigOut("This is a user info message.");
+	game::warningOut("This is a warning message.");
 
 	// Open a new window framework and set the title
 	PandaFramework framework;
