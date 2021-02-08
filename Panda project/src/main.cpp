@@ -106,11 +106,6 @@ void inventoryMenu(WindowFramework* window) {
 		mouseInGame = true;
 	}
 }
-void GUI_Callback_Button_Clicked(const Event* ev, void* data) {
-	PGButton* button = (PGButton*)data;
-	// Your action here
-	std::cout << button->get_name() << " has been pressed.\n";
-}
 
 int main(int argc, char* argv[]) {
 
