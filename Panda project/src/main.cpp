@@ -498,10 +498,6 @@ int main(int argc, char* argv[]) {
 	//dlnp.show_tight_bounds();
 	//window->get_render().set_light(dlnp);
 
-	/*PT(PointLight) plight = new PointLight("plight");
-	NodePath plnp = window->get_render().attach_new_node(plight);
-	window->get_render().set_light(plnp);*/
-
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
 	//Add task chains
