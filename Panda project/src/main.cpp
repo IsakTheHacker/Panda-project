@@ -604,9 +604,7 @@ int main(int argc, char* argv[]) {
 
 		particle_sys_mgr.do_particles(ClockObject::get_global_clock()->get_dt(), particle_sys);
 
-		//plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
-
 		light_X += ClockObject::get_global_clock()->get_dt();
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
