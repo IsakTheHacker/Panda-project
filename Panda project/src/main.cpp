@@ -62,9 +62,6 @@ NodePath rbcnp = NodePath("rbcnp");
 
 game::Player player;
 
-// Global stuff
-PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
-
 #include "gameClasses.h"
 
 void pauseMenu(WindowFramework* window) {
@@ -559,20 +556,20 @@ int main(int argc, char* argv[]) {
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
 	//Add task chains
-	AsyncTaskChain* generateChunksChain = taskMgr->make_task_chain("generateChunksChain");
+	AsyncTaskChain* generateChunksChain = AsyncTaskManager::get_global_ptr()->make_task_chain("generateChunksChain");
 	generateChunksChain->set_num_threads(1);
 
 	//Add tasks
 	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, (void*)&panda);
-	taskMgr->add(computePlayerZVelocity);
+	AsyncTaskManager::get_global_ptr()->add(computePlayerZVelocity);
 
 	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("setPlayerChunkPos", task::setPlayerChunkPos, NULL);
-	taskMgr->add(setPlayerChunkPos);
+	AsyncTaskManager::get_global_ptr()->add(setPlayerChunkPos);
 
 	std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*> tuple = { window, &framework, &perlinNoise };
 	PT(GenericAsyncTask) generateChunks = new GenericAsyncTask("generateChunks", task::generateChunks, (void*)&tuple);
 	generateChunks->set_task_chain("generateChunksChain");
-	taskMgr->add(generateChunks);
+	AsyncTaskManager::get_global_ptr()->add(generateChunks);
 
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
