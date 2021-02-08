@@ -26,6 +26,7 @@
 #include "ambientLight.h"
 #include "mouseWatcher.h"
 #include "texturePool.h"
+#include "directionalLight.h"
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -489,14 +490,14 @@ int main(int argc, char* argv[]) {
 	NodePath alnp = window->get_render().attach_new_node(alight);
 	window->get_render().set_light(alnp);
 
-	//PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
-	//d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
-	////d_light->set_shadow_caster(true, 512, 512);
-	//NodePath dlnp = window->get_render().attach_new_node(d_light);
-	//dlnp.set_hpr(0, -90, 0);
-	//dlnp.set_pos(0, 0, 100);
-	//dlnp.show_tight_bounds();
-	//window->get_render().set_light(dlnp);
+	PT(DirectionalLight) d_light = new DirectionalLight("my d_light");
+	d_light->set_color(LColor(0.8, 0.8, 0.5, 1));
+	//d_light->set_shadow_caster(true, 512, 512);
+	NodePath dlnp = window->get_render().attach_new_node(d_light);
+	dlnp.set_hpr(0, -90, 0);
+	dlnp.set_pos(0, 0, 100);
+	dlnp.show_tight_bounds();
+	window->get_render().set_light(dlnp);
 
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
