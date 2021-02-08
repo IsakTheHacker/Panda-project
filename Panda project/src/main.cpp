@@ -805,20 +805,20 @@ int main(int argc, char* argv[]) {
 
 
 			if (keys["w"]) {
-				player.model.set_y(panda, 0 + y_speed);
-				panda.set_y(panda, 0 + y_speed);
+				player.model.set_y(panda, y_speed * ClockObject::get_global_clock()->get_dt());
+				panda.set_y(panda, y_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["s"]) {
-				player.model.set_y(panda, 0 - y_speed);
-				panda.set_y(panda, 0 - y_speed);
+				player.model.set_y(panda, - y_speed * ClockObject::get_global_clock()->get_dt());
+				panda.set_y(panda, - y_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["a"]) {
-				player.model.set_x(player.model, 0 - x_speed);
-				panda.set_x(player.model, 0 - x_speed);
+				player.model.set_x(player.model, - x_speed * ClockObject::get_global_clock()->get_dt());
+				panda.set_x(player.model, - x_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["d"]) {
-				player.model.set_x(player.model, 0 + x_speed);
-				panda.set_x(player.model, 0 + x_speed);
+				player.model.set_x(player.model, x_speed * ClockObject::get_global_clock()->get_dt());
+				panda.set_x(player.model, x_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["lshift"]) {
 				if (player.flying) {
