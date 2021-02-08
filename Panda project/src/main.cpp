@@ -471,10 +471,10 @@ int main(int argc, char* argv[]) {
 	//pt_particle_rend->set_ignore_scale(false);
 
 	PT(ParticleSystem) particle_sys = new ParticleSystem();
-	particle_sys->set_pool_size(100);
-	particle_sys->set_birth_rate(0.1);
+	particle_sys->set_pool_size(1024);
+	particle_sys->set_birth_rate(0.01);
 	particle_sys->set_litter_size(10);
-	particle_sys->set_litter_spread(0);
+	particle_sys->set_litter_spread(2);
 	particle_sys->set_local_velocity_flag(true);
 	//particle_sys->set_spawn_on_death_flag(true); // this caused an exception!!
 	particle_sys->set_system_grows_older_flag(true);
