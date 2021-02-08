@@ -822,17 +822,17 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["lshift"]) {
 				if (player.flying) {
-					player.model.set_z(player.model.get_pos().get_z() - z_speed);
+					player.model.set_z(player.model.get_pos().get_z() - z_speed * ClockObject::get_global_clock()->get_dt());
 				} else if (player.onGround && !player.sneaking) {
 					player.sneaking = true;
-					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance);
-					player.model.set_z(player.model.get_pos().get_z() - sneak_distance);
+					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance * ClockObject::get_global_clock()->get_dt());
+					player.model.set_z(player.model.get_pos().get_z() - sneak_distance * ClockObject::get_global_clock()->get_dt());
 				}
 			} else if (!keys["lshift"]) {
 				if (player.onGround && player.sneaking) {
 					player.sneaking = false;
-					player.collisionNodePath.set_z(player.collisionNodePath.get_z() - sneak_distance);
-					player.model.set_z(player.model.get_pos().get_z() + sneak_distance);
+					player.collisionNodePath.set_z(player.collisionNodePath.get_z() - sneak_distance * ClockObject::get_global_clock()->get_dt());
+					player.model.set_z(player.model.get_pos().get_z() + sneak_distance * ClockObject::get_global_clock()->get_dt());
 				}
 			}
 			if (keys["space"]) {
@@ -841,7 +841,7 @@ int main(int argc, char* argv[]) {
 					player.flying = false;
 					player.velocity = 0;
 				} else if (player.flying) {
-					player.model.set_z(player.model.get_pos().get_z() + z_speed);
+					player.model.set_z(player.model.get_pos().get_z() + z_speed * ClockObject::get_global_clock()->get_dt());
 				} else if (!player.onGround && duration.count() > 0.05 && !player.flying) {
 					player.flying = true;
 				} else if (player.onGround) {
