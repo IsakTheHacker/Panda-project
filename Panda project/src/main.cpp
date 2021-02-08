@@ -28,6 +28,12 @@
 #include "texturePool.h"
 #include "directionalLight.h"
 
+#include "particleSystem.h"
+#include "sphereVolumeEmitter.h"
+#include "pointParticleFactory.h"
+#include "pointParticleRenderer.h"
+#include "particleSystemManager.h"
+
 int handInventoryIndex;
 std::map<std::string, bool> keys;
 std::map<std::string, std::string> universeOptions;
@@ -441,6 +447,63 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
+
+	//Particles
+	PT(PointParticleFactory) pt_particle_factory = new PointParticleFactory();
+	pt_particle_factory->set_lifespan_base(0.5);
+	pt_particle_factory->set_lifespan_spread(0);
+	pt_particle_factory->set_mass_base(1.0);
+	pt_particle_factory->set_mass_spread(0);
+	pt_particle_factory->set_terminal_velocity_base(400);
+	pt_particle_factory->set_terminal_velocity_spread(1);
+
+	PT(SphereVolumeEmitter) sphere_emitter = new SphereVolumeEmitter;
+	sphere_emitter->set_emission_type(SphereVolumeEmitter::ET_RADIATE);
+	sphere_emitter->set_radius(3.0);
+	// negative values emit the particles toward the sphere center
+	sphere_emitter->set_amplitude(1);
+	sphere_emitter->set_amplitude_spread(0);
+	sphere_emitter->set_offset_force(LVector3(0, 0, 0));
+	sphere_emitter->set_explicit_launch_vector(LVector3(1, 0, 0));
+	sphere_emitter->set_radiate_origin(LPoint3(0, 0, 0));
+
+	PT(PointParticleRenderer) pt_particle_rend = new PointParticleRenderer();
+	pt_particle_rend->set_alpha_mode(BaseParticleRenderer::PR_ALPHA_OUT);
+	pt_particle_rend->set_user_alpha(1);
+	pt_particle_rend->set_point_size(2.0);
+	pt_particle_rend->set_start_color(LColor(1, 0, 0, 1)); // alpha value is ignored
+	pt_particle_rend->set_end_color(LColor(1, 1, 0, 1));
+	pt_particle_rend->set_blend_type(PointParticleRenderer::PointParticleBlendType::PP_BLEND_LIFE);
+	pt_particle_rend->set_blend_method(BaseParticleRenderer::ParticleRendererBlendMethod::PP_BLEND_LINEAR);
+	//pt_particle_rend->set_color_blend_mode(ColorBlendAttrib::Mode::M_inv_subtract);
+	//pt_particle_rend->set_ignore_scale(false);
+
+	PT(ParticleSystem) particle_sys = new ParticleSystem();
+	particle_sys->set_pool_size(100);
+	particle_sys->set_birth_rate(0.1);
+	particle_sys->set_litter_size(10);
+	particle_sys->set_litter_spread(0);
+	particle_sys->set_local_velocity_flag(true);
+	//particle_sys->set_spawn_on_death_flag(true); // this caused an exception!!
+	particle_sys->set_system_grows_older_flag(true);
+	particle_sys->set_system_lifespan(3.0);
+	particle_sys->set_active_system_flag(true);
+	// use it to advance system age, or start at some age
+	//particle_sys->set_system_age(5.0);
+	// system_age is updated only when set_system_grows_older_flag(true);
+	// get_system_age() returns 0 unless system_grows_older_flag is set
+
+	particle_sys->set_factory(pt_particle_factory);
+	particle_sys->set_renderer(pt_particle_rend);
+	particle_sys->set_emitter(sphere_emitter);
+	// if spawn and render parents should be different
+	//particle_sys->set_spawn_render_node_path(window->get_render());
+	particle_sys->set_render_parent(window->get_render());
+
+	ParticleSystemManager particle_sys_mgr;
+	particle_sys_mgr.attach_particlesystem(particle_sys);
+
+
 	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
 	blocky.set_scale(0.5);
 	blocky.set_pos(0, 0, 20);
@@ -546,6 +609,8 @@ int main(int argc, char* argv[]) {
 
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
+
+		particle_sys_mgr.do_particles(ClockObject::get_global_clock()->get_dt(), particle_sys);
 
 		//plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
