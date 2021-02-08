@@ -28,7 +28,7 @@
 #include "texturePool.h"
 #include "directionalLight.h"
 
-#include "particleSystem.h"
+#include "particleSystem.h"			//Particles
 #include "sphereVolumeEmitter.h"
 #include "pointParticleFactory.h"
 #include "pointParticleRenderer.h"
@@ -58,11 +58,9 @@ NodePath rbcnp = NodePath("rbcnp");
 #include "gameInventory.h"
 #include "gameItem.h"
 #include "gameGui.h"
-
+#include "gameClasses.h"
 
 game::Player player;
-
-#include "gameClasses.h"
 
 void pauseMenu(WindowFramework* window) {
 	
@@ -157,8 +155,6 @@ int main(int argc, char* argv[]) {
 		}
 		file.close();
 	}
-	/*game::runPyScript("data/scripts/makeDirectories.py");
-	game::runPyScript("data/scripts/createOptionsFile.py");*/
 
 	//Read options
 	std::map<std::string, std::string> options;
