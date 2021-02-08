@@ -64,7 +64,6 @@ game::Player player;
 
 // Global stuff
 PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
-PT(ClockObject) globalClock = ClockObject::get_global_clock();
 
 #include "gameClasses.h"
 
@@ -615,7 +614,7 @@ int main(int argc, char* argv[]) {
 		//plnp.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 
-		light_X += globalClock->get_dt();
+		light_X += ClockObject::get_global_clock()->get_dt();
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
 			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
