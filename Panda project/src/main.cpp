@@ -655,12 +655,16 @@ int main(int argc, char* argv[]) {
 			if (keys["mouse1"]) {
 				if (mouseInGame) {
 					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];		//Get chunk containing the block
-					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();									//Remove node
-					for (NodePath value : chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].lights) {						//Remove lights
-						window->get_render().clear_light(value);
+					try {
+						chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();									//Remove node
+						for (NodePath value : chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].lights) {						//Remove lights
+							window->get_render().clear_light(value);
+						}
+						chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);						//Replace game::object with empty game::object
+						game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;					//Save chunk changes in vector "chunks"
+					} catch (const std::invalid_argument& invalidArgument) {
+						game::errorOut(std::string("Could not remove block! Invalid argument error: ") + invalidArgument.what());
 					}
-					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);						//Replace game::object with empty game::object
-					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;					//Save chunk changes in vector "chunks"
 					keys["mouse1"] = false;
 				}
 			}
