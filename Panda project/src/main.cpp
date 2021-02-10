@@ -329,6 +329,8 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 	{
+
+		//Load universe
 		std::ifstream index(universePath + "index");
 		if (index.fail()) {
 			game::warningOut("Could not find an index file for the universe. Creating one...");
@@ -602,6 +604,7 @@ int main(int argc, char* argv[]) {
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
 
+		//Update particles
 		particle_sys_mgr.do_particles(ClockObject::get_global_clock()->get_dt(), particle_sys);
 
 		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
@@ -612,6 +615,7 @@ int main(int argc, char* argv[]) {
 		}
 		entity.update();
 
+		//Update hotbar cards
 		if (mouseInGame) {
 			if (handInventoryIndex < 0) {
 				handInventoryIndex = 8;
@@ -758,6 +762,8 @@ int main(int argc, char* argv[]) {
 		fovText->set_text("VFov: " + std::to_string(DCAST(Camera, player.firstPerson.node())->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(DCAST(Camera, player.firstPerson.node())->get_lens()->get_hfov()));
 
 		if (mouseInGame) {
+
+			//Camera management
 			if (window->get_graphics_window()) {
 				if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
 					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
