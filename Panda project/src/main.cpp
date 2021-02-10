@@ -569,6 +569,9 @@ int main(int argc, char* argv[]) {
 	generateChunks->set_task_chain("generateChunksChain");
 	AsyncTaskManager::get_global_ptr()->add(generateChunks);
 
+	PT(GenericAsyncTask) updateHotbar = new GenericAsyncTask("updateHotbar", task::updateHotbar, (void*)&inventory);
+	AsyncTaskManager::get_global_ptr()->add(updateHotbar);
+
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
 	double camera_y_speed = std::stof(options["camera_y_speed"]);
@@ -614,23 +617,6 @@ int main(int argc, char* argv[]) {
 			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
 		}
 		entity.update();
-
-		//Update hotbar cards
-		if (mouseInGame) {
-			if (handInventoryIndex < 0) {
-				handInventoryIndex = 8;
-			} else if (handInventoryIndex > 8) {
-				handInventoryIndex = 0;
-			}
-
-			for (int i = 0; i < 9; i++) {
-				if (i == handInventoryIndex) {
-					game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-highlighted.png");
-				} else if (i != handInventoryIndex) {
-					game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
-				}
-			}
-		}
 
 		traverser->traverse(window->get_render());		//Check collisions and call pusher if a collision is detected
 
