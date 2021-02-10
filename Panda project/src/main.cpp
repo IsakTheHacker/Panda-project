@@ -498,14 +498,16 @@ int main(int argc, char* argv[]) {
 	particle_sys_mgr.attach_particlesystem(particle_sys);
 
 
-	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
-	blocky.set_scale(0.5);
-	blocky.set_pos(0, 0, 20);
-	blocky.reparent_to(window->get_render());
+
+	game::entity blocky("data/assets/entityproperties/test.entityproperties", window, framework, false);
+	blocky.model = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
+	blocky.model.set_scale(0.5);
+	blocky.model.set_pos(0, 0, 20);
+	blocky.model.reparent_to(window->get_render());
 
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
-	NodePath blockyC = blocky.attach_new_node(cSphere_node2);
+	NodePath blockyC = blocky.model.attach_new_node(cSphere_node2);
 	
 	NodePath panda("panda");
 	panda.set_scale(0.5);
@@ -610,7 +612,7 @@ int main(int argc, char* argv[]) {
 		//Update particles
 		particle_sys_mgr.do_particles(ClockObject::get_global_clock()->get_dt(), particle_sys);
 
-		blocky.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
+		blocky.model.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 		light_X += ClockObject::get_global_clock()->get_dt();
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
