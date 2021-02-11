@@ -41,7 +41,7 @@ namespace game {
 					if (object_z < 1) {
 						object = game::object("data/assets/blockproperties/sand.blockproperties", window, framework, false, false);
 						if (object_z < 0) {
-							for (int u = object_z + 2; u < 1; u++) {
+							for (int u = object_z + 2; u < 1; u += 2) {
 								game::object water("data/assets/blockproperties/water.blockproperties", window, framework, false, false);
 								water.model.set_pos(j, k, u);
 

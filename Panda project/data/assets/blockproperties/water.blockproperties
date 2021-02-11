@@ -1,6 +1,3 @@
-collidable=1
-collision-x=1
-collision-y=1
-collision-z=1
+collidable=0
 subobjects=texture:models/textures/png/water-#.png|model:models/egg/block.egg
-transparency=0.9
+transparency=0.5
