@@ -38,6 +38,12 @@ namespace game {
 					object_z = std::round(object_z * 50 / 2) * 2;
 
 					game::object object("data/assets/blockproperties/grass.blockproperties", window, framework, false, false);
+					if (object_z < -1) {
+						object = game::object("data/assets/blockproperties/stone.blockproperties", window, framework, false, false);
+					} else if (object_z < 1) {
+						object = game::object("data/assets/blockproperties/sand.blockproperties", window, framework, false, false);
+					}
+
 					object.model.set_pos(j, k, object_z);
 
 					object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
