@@ -228,7 +228,7 @@ int main(int argc, char* argv[]) {
 	game::button returnToGameButton(framework, game::unpause, 0, 0.30, 0, 0.30, "Return to game");
 	returnToGameButton.hide();
 
-	game::button generateUniverse(framework, game::unpause, 0, 0, 0, 0, "Generate universe");
+	game::button generateUniverse(framework, epass, 0, 0, 0, 0, "Generate universe");
 	generateUniverse.hide();
 
 	game::button quitSaveButton(framework, game::exitGame, 0, -0.30, 0, -0.30, "Quit and save");
