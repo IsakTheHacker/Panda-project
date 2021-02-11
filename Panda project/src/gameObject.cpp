@@ -107,7 +107,6 @@ namespace game {
 		initConfig(window, framework);
 
 		//model.reparent_to(rbcnp);
-		game::timingInfoOut(parent.get_name());
 		if (parent.get_name() == "__unspecifiedParent__") {
 			parent = window->get_render();
 		}
