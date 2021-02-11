@@ -959,10 +959,12 @@ int main(int argc, char* argv[]) {
 				quitSaveButton.hide();
 				generateUniverse.hide();
 				returnToGameButton.hide();
+				cursor.show();
 			} else {
 				quitSaveButton.show();
 				generateUniverse.show();
 				returnToGameButton.show();
+				cursor.hide();
 			}
 			keys["escape"] = false;
 		}
