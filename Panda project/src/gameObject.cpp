@@ -171,6 +171,11 @@ namespace game {
 			this->hp = std::stod(config["hp"]);
 		}
 
+		if (config.find("transparency") != config.end()) {
+			model.set_transparency(TransparencyAttrib::M_alpha);
+			model.set_alpha_scale(std::stod(config["transparency"]));
+		}
+
 		if (config.find("plights") != config.end()) {
 			PT(PointLight) plight = new PointLight("plight");
 			plight->set_attenuation(LVecBase3(0, 0, 0.01));

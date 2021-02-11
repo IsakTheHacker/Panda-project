@@ -3,3 +3,4 @@ collision-x=1
 collision-y=1
 collision-z=1
 subobjects=texture:models/textures/png/grass-#.png|model:models/egg/block.egg
+transparency=0.5
