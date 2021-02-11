@@ -74,7 +74,7 @@ namespace game {
 			logToFile("game.log", "Log: Succesfully created object: " + std::to_string(id));
 		}
 	}
-	object::object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) {
+	object::object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile, NodePath parent) {
 		id = current_id;
 		current_id++;
 		object_quantity++;
@@ -107,7 +107,11 @@ namespace game {
 		initConfig(window, framework);
 
 		//model.reparent_to(rbcnp);
-		model.reparent_to(window->get_render());
+		game::timingInfoOut(parent.get_name());
+		if (parent.get_name() == "__unspecifiedParent__") {
+			parent = window->get_render();
+		}
+		model.reparent_to(parent);
 
 		//Setting internal class variables
 		shouldLogInConsoleIntern = shouldLogInConsole;
