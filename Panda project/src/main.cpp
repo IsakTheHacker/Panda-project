@@ -225,10 +225,13 @@ int main(int argc, char* argv[]) {
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 
 	//Experimental GUI
-	game::button returnToGameButton(framework, game::unpause, 0, 0.15, 0, 0.15, "Return to game");
+	game::button returnToGameButton(framework, game::unpause, 0, 0.30, 0, 0.30, "Return to game");
 	returnToGameButton.hide();
 
-	game::button quitSaveButton(framework, game::exitGame, 0, -0.15, 0, -0.15, "Quit and save");
+	game::button generateUniverse(framework, game::unpause, 0, 0, 0, 0, "Generate universe");
+	generateUniverse.hide();
+
+	game::button quitSaveButton(framework, game::exitGame, 0, -0.30, 0, -0.30, "Quit and save");
 	quitSaveButton.hide();
 
 	player.model.ls();
@@ -954,9 +957,11 @@ int main(int argc, char* argv[]) {
 			pauseMenu(window);
 			if (mouseInGame) {
 				quitSaveButton.hide();
+				generateUniverse.hide();
 				returnToGameButton.hide();
 			} else {
 				quitSaveButton.show();
+				generateUniverse.show();
 				returnToGameButton.show();
 			}
 			keys["escape"] = false;
