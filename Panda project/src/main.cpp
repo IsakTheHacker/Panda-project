@@ -422,7 +422,7 @@ int main(int argc, char* argv[]) {
 		card.reparent_to(hand_inventoryNode);
 
 		NodePath something = window->load_model(framework.get_models(), "models/egg/block.egg");
-		something.set_pos_hpr(0 + something.get_sx() / 2, 0, 0 + something.get_sz() / 2, -112.5, -45, 45);
+		something.set_pos_hpr(0 + something.get_sx() / 2, 0, 0 + something.get_sz() / 2, 0, 0, 0);
 		something.set_scale(0.3);
 
 		Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
