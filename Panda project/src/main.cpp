@@ -421,18 +421,17 @@ int main(int argc, char* argv[]) {
 		card.set_transparency(TransparencyAttrib::M_alpha);
 		card.reparent_to(hand_inventoryNode);
 
-		NodePath something = window->load_model(framework.get_models(), "models/egg/block.egg");
-		something.set_pos_hpr(0 + something.get_sx() / 2, 0, 0 + something.get_sz() / 2, 0, 0, 0);
-		something.set_scale(0.3);
+		game::object something(playerHandInventory.getItem(i + 3).configPath, window, framework, false, false, hand_inventoryNode);
+		something.model.set_pos_hpr(0 + something.model.get_sx() / 2, 0, 0 + something.model.get_sz() / 2, 0, 0, 0);
+		something.model.set_scale(0.3);
 
 		Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
 		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-		something.set_texture(texture);
-		something.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
-		something.set_tex_projector(TextureStage::get_default(), window->get_render_2d(), something);
+		something.model.set_texture(texture);
+		something.model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
+		something.model.set_tex_projector(TextureStage::get_default(), window->get_render_2d(), something);
 
-		something.reparent_to(hand_inventoryNode);
 		place.push_back(something);
 
 		if (i == -5) {
