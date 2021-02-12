@@ -27,6 +27,10 @@ namespace game {
 	void inventory::setItem(const unsigned int& slot, item item) {
 		this->items[slot] = item;
 	}
+	void inventory::appendItem(item item) {
+		this->items.push_back(item);
+		this->slots = this->items.size();
+	}
 	void inventory::resize(const unsigned int& slots) {
 		this->items = std::vector<game::item>(slots, emptyItem);
 		this->slots = this->items.size();

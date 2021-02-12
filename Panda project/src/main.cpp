@@ -380,15 +380,14 @@ int main(int argc, char* argv[]) {
 				"data/assets/blockproperties/water.blockproperties|" <<
 				std::endl;
 			createProfile.close();
-			playerHandInventory.resize(8);
-			playerHandInventory.setItem(0, game::item("data/assets/blockproperties/grass.blockproperties", 1));
-			playerHandInventory.setItem(1, game::item("data/assets/blockproperties/rotational-complex.blockproperties", 1));
-			playerHandInventory.setItem(2, game::item("data/assets/blockproperties/log.blockproperties", 1));
-			playerHandInventory.setItem(3, game::item("data/assets/blockproperties/stone.blockproperties", 1));
-			playerHandInventory.setItem(4, game::item("data/assets/blockproperties/leaves.blockproperties", 1));
-			playerHandInventory.setItem(5, game::item("data/assets/blockproperties/lightblock.blockproperties", 1));
-			playerHandInventory.setItem(6, game::item("data/assets/blockproperties/sand.blockproperties", 1));
-			playerHandInventory.setItem(7, game::item("data/assets/blockproperties/water.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/grass.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/rotational-complex.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/log.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/stone.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/leaves.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/lightblock.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/sand.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/water.blockproperties", 1));
 		} else {
 			std::map<std::string, std::string> vector;
 			std::string line;
