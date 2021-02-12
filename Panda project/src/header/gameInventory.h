@@ -23,6 +23,7 @@ namespace game {
 		void setItem(const unsigned int& slot, item item);
 		void appendItem(item item);
 		void resize(const unsigned int& slots);
+		std::vector<item> getItems();
 	};
 
 }

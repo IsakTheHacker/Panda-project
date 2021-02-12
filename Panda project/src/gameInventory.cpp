@@ -35,4 +35,7 @@ namespace game {
 		this->items = std::vector<game::item>(slots, emptyItem);
 		this->slots = this->items.size();
 	}
+	std::vector<item> inventory::getItems() {
+		return this->items;
+	}
 }
