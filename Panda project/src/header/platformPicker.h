@@ -7,3 +7,5 @@
 #include "linuxPlatform.h"
 
 #endif
+
+//Useful page: https://stackoverflow.com/questions/4605842/how-to-identify-platform-compiler-from-preprocessor-macros

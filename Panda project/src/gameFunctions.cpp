@@ -1,7 +1,5 @@
 #include "gameFunctions.h"
 
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
 namespace game {
 
 	void terrainAnimation(const std::string& message) {
@@ -20,10 +18,6 @@ namespace game {
 	void waitForKeypress() {
 		std::cout << "\nPress any key to exit...\n";
 		getch();
-	}
-
-	int setConsoleTitle(const char* title) {
-		return 0;
 	}
 
 	int setHeading(const std::string& heading) {

@@ -30,14 +30,14 @@
     <Filter Include="Git">
       <UniqueIdentifier>{b3ec0fdf-a1f3-4b8e-b2c5-edc3549cd19f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Crap">
-      <UniqueIdentifier>{34d6fb8e-0616-4b68-96ce-a9338bbad0ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Classes">
       <UniqueIdentifier>{3113ba28-0c93-4f91-bee3-82e433f30b0a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\C++ files\Classes">
       <UniqueIdentifier>{4b38116b-e94a-4804-a5a1-c750d5d6f730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\C++ files\Platform specific">
+      <UniqueIdentifier>{13da5d16-2c80-408e-88cf-52ac362d2475}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +137,6 @@
     <ClCompile Include="src\testing\Collision example.cpp">
       <Filter>Source Files\C++ files\Testing...</Filter>
     </ClCompile>
-    <ClCompile Include="src\testing\Collision.cpp">
-      <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
     <ClCompile Include="src\testing\Physicsexample.cpp">
       <Filter>Source Files\C++ files\Testing...</Filter>
     </ClCompile>
@@ -151,9 +148,6 @@
     </ClCompile>
     <ClCompile Include="src\testing\Testing area.cpp">
       <Filter>Source Files\C++ files\Testing...</Filter>
-    </ClCompile>
-    <ClCompile Include="src\crap\main.cpp">
-      <Filter>Crap</Filter>
     </ClCompile>
     <ClCompile Include="src\gameFunctions.cpp">
       <Filter>Source Files\C++ files</Filter>
@@ -184,6 +178,12 @@
     </ClCompile>
     <ClCompile Include="src\gameGui.cpp">
       <Filter>Source Files\C++ files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win32Platform.cpp">
+      <Filter>Source Files\C++ files\Platform specific</Filter>
+    </ClCompile>
+    <ClCompile Include="src\linuxPlatform.cpp">
+      <Filter>Source Files\C++ files\Platform specific</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

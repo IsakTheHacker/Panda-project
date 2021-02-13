@@ -68,4 +68,25 @@ namespace task {
 		}
 		return AsyncTask::DS_cont;		//Continue this task next frame
 	}
+
+	AsyncTask::DoneStatus updateHotbar(GenericAsyncTask* task, void* data) {
+		std::vector<NodePath> hotbar = *(std::vector<NodePath>*)data;
+
+		if (mouseInGame) {
+			if (handInventoryIndex < 0) {
+				handInventoryIndex = 8;
+			} else if (handInventoryIndex > 8) {
+				handInventoryIndex = 0;
+			}
+			for (int i = 0; i < 9; i++) {
+				if (i == handInventoryIndex) {
+					game::setTexture(hotbar[i], gamePath + (std::string)"models/textures/png/hand-inventory-highlighted.png");
+				} else if (i != handInventoryIndex) {
+					game::setTexture(hotbar[i], gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
+				}
+			}
+		}
+
+		return AsyncTask::DS_cont;
+	}
 }

@@ -15,4 +15,6 @@ namespace task {
 	AsyncTask::DoneStatus setPlayerChunkPos(GenericAsyncTask* task, void* data);
 
 	AsyncTask::DoneStatus generateChunks(GenericAsyncTask* task, void* data);
+
+	AsyncTask::DoneStatus updateHotbar(GenericAsyncTask* task, void* data);
 }

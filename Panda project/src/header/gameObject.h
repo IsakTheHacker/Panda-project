@@ -5,8 +5,12 @@
 #include <memory>
 
 //Panda3D libraries
-#include <nodePath.h>
-#include <pandaFramework.h>
+#include "nodePath.h"
+#include "pandaFramework.h"
+#include "collisionNode.h"
+#include "collisionBox.h"
+#include "collisionEntry.h"
+#include "pointLight.h"
 
 //My libraries
 #include "gameFunctions.h"
@@ -39,7 +43,7 @@ namespace game {
 
 		object(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		object(WindowFramework*& window, PandaFramework& framework, std::vector<NodePath> subobjects, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
-		object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+		object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false, NodePath parent = NodePath("__unspecifiedParent__"));
 		object(bool shouldLogInConsole = false, bool shouldLogToFile = false);		//Empty game::object constructor
 		~object();
 
