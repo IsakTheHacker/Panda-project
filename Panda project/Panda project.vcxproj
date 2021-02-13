@@ -285,7 +285,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libp3framework.lib;libpanda.lib;libpandaexpress.lib;libp3dtool.lib;libp3dtoolconfig.lib;libp3direct.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Administrator\AppData\Local\Programs\Python\Python38\libs;C:\Users\Administrator\AppData\Local\Programs\Python\Python38\Lib;$(ProjectDir)src\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)src\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
