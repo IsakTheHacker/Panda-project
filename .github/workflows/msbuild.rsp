@@ -7,3 +7,4 @@
 -p:WarningLevel=0
 -p:Configuration=Release
 -p:Platform=x64
+-p:AdditionalLibPaths="./Panda Project/src/lib/"
