@@ -1,4 +1,4 @@
 -noLogo
--flp1:warningsonly;logfile="./.github/workflows/msbuild.wrn"
--flp2:errorsonly;logfile="./.github/workflows/msbuild.err"
--consoleLoggerParameters:ShowTimestamp;ErrorsOnly
+-consoleLoggerParameters:ShowTimestamp
+-p:Configuration=Release
+-p:Platform=x64

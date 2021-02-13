@@ -13,6 +13,7 @@ env:
   SOLUTION_FILE_PATH: "./Panda Project/Panda project.vcxproj" #Path to the solution file relative to the root of the project.
   WORKFLOW_PATH: "./.github/workflows/msbuild.rsp"
   BUILD_CONFIGURATION: Release  #Configuration type for build.
+  BUILD_PLATFORM: x64 #Platform for build.
 
 jobs:
   build:
@@ -32,4 +33,4 @@ jobs:
     
     - name: Build Project!
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} "@${{env.WORKFLOW_PATH}}" "${{env.SOLUTION_FILE_PATH}}"
+      run: msbuild /m "@${{env.WORKFLOW_PATH}}" "${{env.SOLUTION_FILE_PATH}}"
