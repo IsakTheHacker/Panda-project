@@ -21,21 +21,26 @@ using json = nlohmann::json;
 
 //Python library
 #define PY_SSIZE_T_CLEAN
-#include <Python.h>
+#ifdef _DEBUG
+	#undef _DEBUG
+	#include <python.h>
+	#define _DEBUG
+#else
+	#include <python.h>
+#endif
 
 //Panda3D libraries
-#include <pStatClient.h>
+#include "pStatClient.h"
+#include "texturePool.h"
 
 //My libraries
 #include "cppExtension.h"
+#include "constantVars.h"
 #include "gameVars.h"
-#include "pandaIncludes.h"
+#include "platformPicker.h"
 
 //Including necessary Windows libraries
-#include <Windows.h>
 #include <conio.h>
-
-extern HANDLE h;
 
 namespace game {
 
@@ -44,9 +49,6 @@ namespace game {
 
 	// Waits for input
 	void waitForKeypress();
-
-	// Sets the console title
-	int setConsoleTitle(const char* title);
 
 	// Sets the console heading
 	int setHeading(const std::string& heading);
@@ -93,13 +95,13 @@ namespace game {
 	template<typename T>
 	int errorOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
 		std::string text = std::to_string(input);
-		SetConsoleTextAttribute(h, 4 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_LIGHTRED);
 		if (!includeTime) {
 			std::cout << "Error: " << text << "\n";
 		} else {
 			std::cout << getConvertedDateTime(false, true) << " Error: " << text << "\n";
 		}
-		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_WHITE);
 		if (shouldLogToFile) {
 			logToFile("game.log", "Error: " + text);
 		}
@@ -110,13 +112,13 @@ namespace game {
 	template<typename T>
 	int warningOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
 		std::string text = std::to_string(input);
-		SetConsoleTextAttribute(h, 6 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_YELLOW);
 		if (!includeTime) {
 			std::cout << "Warning: " << text << "\n";
 		} else {
 			std::cout << getConvertedDateTime(false, true) << " Warning: " << text << "\n";
 		}
-		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_WHITE);
 		if (shouldLogToFile) {
 			logToFile("game.log", "Warning: " + text);
 		}
@@ -127,13 +129,13 @@ namespace game {
 	template<typename T>
 	int importantInfoOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
 		std::string text = std::to_string(input);
-		SetConsoleTextAttribute(h, 2 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_LIGHTGREEN);
 		if (!includeTime) {
 			std::cout << "Important info: " << text << "\n";
 		} else {
 			std::cout << getConvertedDateTime(false, true) << " Important info: " << text << "\n";
 		}
-		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_WHITE);
 		if (shouldLogToFile) {
 			logToFile("game.log", "Important info: " + text);
 		}
@@ -144,13 +146,13 @@ namespace game {
 	template<typename T>
 	int timingInfoOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
 		std::string text = std::to_string(input);
-		SetConsoleTextAttribute(h, 1 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_LIGHTBLUE);
 		if (!includeTime) {
 			std::cout << "Timing info: " << text << "\n";
 		} else {
 			std::cout << getConvertedDateTime(false, true) << " Timing info: " << text << "\n";
 		}
-		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_WHITE);
 		if (shouldLogToFile) {
 			logToFile("game.log", "Timing info: " + text);
 		}
@@ -161,13 +163,13 @@ namespace game {
 	template<typename T>
 	int userConfigOut(T input, bool shouldLogToFile = true, bool includeTime = true) {
 		std::string text = std::to_string(input);
-		SetConsoleTextAttribute(h, 5 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_LIGHTMAGENTA);
 		if (!includeTime) {
 			std::cout << "User config info: " << text << "\n";
 		} else {
 			std::cout << getConvertedDateTime(false, true) << " User config info: " << text << "\n";
 		}
-		SetConsoleTextAttribute(h, 7 | FOREGROUND_INTENSITY);
+		setTextColor(color::FG_WHITE);
 		if (shouldLogToFile) {
 			logToFile("game.log", "User config info: " + text);
 		}
@@ -193,7 +195,7 @@ namespace game {
 	template<typename listType, typename funcType>
 	void forEach(const listType& list, funcType function) {
 		for (auto value : list) {
-			function(value, false, true);
+			function(value);
 		}
 	}
 	template<typename listType>			//Overload to be used if no function was specified
@@ -240,6 +242,8 @@ namespace game {
 
 	bool connectToPStats(std::string host = "localhost", int port = -1);
 
+	bool mkdir(std::string path);
+
 	// Executes a Python script
 	int runPyScript(const std::string& path);
 
@@ -265,4 +269,5 @@ namespace game {
 	void key_up(const Event* theEvent, void* data);
 	void key_swap(const Event* theEvent, void* data);
 	void wheel_roll(const Event* theEvent, void* data);
+	void unpause(const Event* theEvent, void* data);
 }

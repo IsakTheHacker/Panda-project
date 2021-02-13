@@ -38,6 +38,62 @@ namespace game {
 					object_z = std::round(object_z * 50 / 2) * 2;
 
 					game::object object("data/assets/blockproperties/grass.blockproperties", window, framework, false, false);
+					if (object_z < 1) {
+						object = game::object("data/assets/blockproperties/sand.blockproperties", window, framework, false, false);
+						if (object_z < 0) {
+							for (int u = object_z + 2; u < 1; u += 2) {
+								game::object water("data/assets/blockproperties/water.blockproperties", window, framework, false, false);
+								water.model.set_pos(j, k, u);
+
+								water.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
+								water.model.set_tag("id", std::to_string(water.id));
+								water.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+
+								blocks.push_back(water);
+							}
+						}
+					} else {
+						//Tree generating
+						if (rand() % 50 == 49) {
+							for (size_t i = 2; i < 10; i += 2) {		//Trunk
+								game::object object("data/assets/blockproperties/log.blockproperties", window, framework, false, false);
+								object.model.set_pos(j, k, object_z + i);
+
+								object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
+								object.model.set_tag("id", std::to_string(object.id));
+								object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+
+								blocks.push_back(object);
+							}
+
+							//Leaves
+							for (int x = -2; x < 4; x += 2) {		//Trunk
+								for (int y = -2; y < 4; y += 2) {
+									game::object object("data/assets/blockproperties/stone.blockproperties", window, framework, false, false);
+									object.model.set_pos(j + x, k + y, object_z + 10);
+
+									object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
+									object.model.set_tag("id", std::to_string(object.id));
+									object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+
+									blocks.push_back(object);
+								}
+							}
+							for (int x = 0; x < 2; x += 2) {		//Trunk
+								for (int y = 0; y < 2; y += 2) {
+									game::object object("data/assets/blockproperties/stone.blockproperties", window, framework, false, false);
+									object.model.set_pos(j + x, k + y, object_z + 12);
+
+									object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
+									object.model.set_tag("id", std::to_string(object.id));
+									object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
+
+									blocks.push_back(object);
+								}
+							}
+						}
+					}
+
 					object.model.set_pos(j, k, object_z);
 
 					object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
@@ -45,18 +101,6 @@ namespace game {
 					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
 
 					blocks.push_back(object);
-
-					//Tree generating
-					if (rand() % 50 == 49) {
-						game::object object("data/assets/blockproperties/log.blockproperties", window, framework, false, false);
-						object.model.set_pos(j, k, object_z + 2);
-
-						object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
-						object.model.set_tag("id", std::to_string(object.id));
-						object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
-
-						blocks.push_back(object);
-					}
 				}
 			}
 		}
@@ -79,6 +123,7 @@ namespace game {
 		if (std::stoi((*this->options)["save_newly_created_chunks"])) {
 			this->saveChunk();		//Save chunk
 		}
+		//DCAST(RigidBodyCombiner, rbcnp.node())->collect();
 		return 0;
 	}
 	int chunk::saveChunk() const {
@@ -109,7 +154,12 @@ namespace game {
 				//int x_value = ((parsePositive(object.model.get_x()) - parsePositive(start_x)) / 2);
 				int y_value = parsePositive((object.model.get_y() - start_y) / 2);
 				//int y_value = ((parsePositive(object.model.get_y()) - parsePositive(start_y)) / 2);
-				z_levels[object.model.get_z()][x_value][y_value] = object;
+				try {
+					z_levels.at(object.model.get_z()).at(x_value).at(y_value) = object;
+				} catch (const std::out_of_range& outOfRange) {
+					game::errorOut(std::string("Could not save universe! Out of range error: ") + outOfRange.what());
+					return 1;
+				}
 				//z_levels[object.model.get_z()][x + object.model.get_x() - 1][y + object.model.get_y() - 1] = object;
 			}
 		}

@@ -2,10 +2,15 @@
 
 //C++ built-in libraries
 #include <string>
+#include <memory>
 
 //Panda3D libraries
-#include <nodePath.h>
-#include <pandaFramework.h>
+#include "nodePath.h"
+#include "pandaFramework.h"
+#include "collisionNode.h"
+#include "collisionBox.h"
+#include "collisionEntry.h"
+#include "pointLight.h"
 
 //My libraries
 #include "gameFunctions.h"
@@ -20,7 +25,7 @@ namespace game {
 		bool shouldLogToFileIntern;
 		bool modelNotFound;
 		static std::map<std::string, std::map<std::string, std::string>> knownConfigs;
-
+		
 		void initConfig(WindowFramework*& window, PandaFramework& framework);
 	public:
 		bool empty = false;
@@ -32,12 +37,13 @@ namespace game {
 		std::string configPath = "";
 		std::map<std::string, std::string> config;
 		NodePath collisionNodePath;
+		std::vector<NodePath> lights;
 		double hp = 1;
 		double temperature = 0;
 
 		object(WindowFramework*& window, PandaFramework& framework, std::string modelpath, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		object(WindowFramework*& window, PandaFramework& framework, std::vector<NodePath> subobjects, bool collidable = true, bool shouldLogInConsole = true, bool shouldLogToFile = false);
-		object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
+		object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false, NodePath parent = NodePath("__unspecifiedParent__"));
 		object(bool shouldLogInConsole = false, bool shouldLogToFile = false);		//Empty game::object constructor
 		~object();
 
@@ -59,13 +65,15 @@ namespace game {
 	class Player : public entity {
 	public:
 		NodePath collidedNodePath;
+		NodePath firstPerson = NodePath("firstPerson");
+		NodePath thirdPerson = NodePath("thirdPerson");
 		bool onGround;
 		bool sneaking;
 		bool flying;
 		double velocity = 0.0;
 		double velocityModifier = 1.1;
-		int chunk_x;
-		int chunk_y;
+		int chunk_x = 0;
+		int chunk_y = 0;
 		std::string playerName;
 
 		//Static member variables

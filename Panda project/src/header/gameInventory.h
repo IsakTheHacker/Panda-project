@@ -21,7 +21,9 @@ namespace game {
 		int remItem(const unsigned int& slot, const unsigned int& items = 1);
 		item getItem(const unsigned int& slot) const;
 		void setItem(const unsigned int& slot, item item);
+		void appendItem(item item);
 		void resize(const unsigned int& slots);
+		std::vector<item> getItems();
 	};
 
 }

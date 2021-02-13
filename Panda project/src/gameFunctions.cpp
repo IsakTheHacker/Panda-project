@@ -1,7 +1,5 @@
 #include "gameFunctions.h"
 
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
 namespace game {
 
 	void terrainAnimation(const std::string& message) {
@@ -20,10 +18,6 @@ namespace game {
 	void waitForKeypress() {
 		std::cout << "\nPress any key to exit...\n";
 		getch();
-	}
-
-	int setConsoleTitle(const char* title) {
-		return 0;
 	}
 
 	int setHeading(const std::string& heading) {
@@ -212,7 +206,7 @@ namespace game {
 	}
 
 	int setTexture(NodePath& object, const std::string& path) {
-		Texture* texture = TexturePool::load_texture(path);
+		PT(Texture) texture = TexturePool::load_texture(path);
 		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
 		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
 		object.set_texture(texture);
@@ -305,6 +299,12 @@ namespace game {
 		}
 	}
 
+	bool mkdir(std::string path) {
+		Filename dir;
+		dir.set_dirname(path);
+		return dir.mkdir();
+	}
+
 	void runPyScript(const Event* theEvent, void* data) {
 		game::runPyScript("C:\\dev\\Panda project\\Panda project\\src\\module.py");
 	}
@@ -328,5 +328,8 @@ namespace game {
 			int& indexModification = *((int*)data);
 			handInventoryIndex += indexModification;
 		}
+	}
+	void unpause(const Event* theEvent, void* data) {
+		key_swap(0, (void*)&game::esc);
 	}
 }

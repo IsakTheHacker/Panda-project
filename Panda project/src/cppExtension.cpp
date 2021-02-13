@@ -3,6 +3,7 @@
 int pass() {
 	return 0;
 }
+void epass(const Event* theEvent, void* data) {}
 
 char stoc(const std::string& input) {
 	char output = input[0];

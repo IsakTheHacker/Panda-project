@@ -74,7 +74,7 @@ namespace game {
 			logToFile("game.log", "Log: Succesfully created object: " + std::to_string(id));
 		}
 	}
-	object::object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile) {
+	object::object(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole, bool shouldLogToFile, NodePath parent) {
 		id = current_id;
 		current_id++;
 		object_quantity++;
@@ -102,15 +102,15 @@ namespace game {
 			knownConfigs[configPath] = config;		//Add to knownConfigs
 		}
 
-		if (configPath == "data/assets/playerproperties/standard.playerproperties") {
-			model = window->get_camera_group();
-		} else {
-			model = NodePath("model");
-		}
+		model = NodePath("model");
 
 		initConfig(window, framework);
 
-		model.reparent_to(window->get_render());
+		//model.reparent_to(rbcnp);
+		if (parent.get_name() == "__unspecifiedParent__") {
+			parent = window->get_render();
+		}
+		model.reparent_to(parent);
 
 		//Setting internal class variables
 		shouldLogInConsoleIntern = shouldLogInConsole;
@@ -169,6 +169,19 @@ namespace game {
 
 		if (config.find("hp") != config.end()) {
 			this->hp = std::stod(config["hp"]);
+		}
+
+		if (config.find("transparency") != config.end()) {
+			model.set_transparency(TransparencyAttrib::M_alpha);
+			model.set_alpha_scale(std::stod(config["transparency"]));
+		}
+
+		if (config.find("plights") != config.end()) {
+			PT(PointLight) plight = new PointLight("plight");
+			plight->set_attenuation(LVecBase3(0, 0, 0.01));
+			NodePath plnp = model.attach_new_node(plight);
+			window->get_render().set_light(plnp);
+			lights.push_back(plnp);
 		}
 
 		if (config.find("subobjects") != config.end()) {
@@ -237,6 +250,16 @@ namespace game {
 		this->sneaking = false;
 		this->flying = false;
 		this->playerName = (*Player::options)["player-name"];
+
+		//Add first person camera
+		firstPerson = window->make_camera();
+		firstPerson.node()->set_name("firstPerson");
+		firstPerson.reparent_to(model);
+
+		//Add third person camera
+		thirdPerson = window->make_camera();
+		thirdPerson.node()->set_name("thirdPerson");
+		thirdPerson.reparent_to(model);
 	}
 	Player::~Player() {
 

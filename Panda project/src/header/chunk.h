@@ -7,6 +7,7 @@
 //Panda3D libraries
 #include <perlinNoise3.h>
 #include <pandaFramework.h>
+#include <rigidBodyCombiner.h>
 
 //My libraries
 #include "gameObject.h"

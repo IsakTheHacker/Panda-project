@@ -1,0 +1,3 @@
+collidable=0
+subobjects=texture:models/textures/png/water-#.png|model:models/egg/block.egg
+transparency=0.5

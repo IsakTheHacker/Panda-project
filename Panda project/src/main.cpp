@@ -12,9 +12,27 @@
 #include <map>
 #include <string>
 
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING		//Experimental filesystem header
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+//Panda3D libraries
+#include "pgButton.h"
+#include "mouseButton.h"
+#include "rigidBodyCombiner.h"
+#include "rigidBodyCombiner.h"
+#include "nodePath.h"
+#include "pandaSystem.h"
+#include "collisionHandlerQueue.h"
+#include "collisionHandlerPusher.h"
+#include "collisionRay.h"
+#include "collisionSphere.h"
+#include "ambientLight.h"
+#include "mouseWatcher.h"
+#include "texturePool.h"
+#include "directionalLight.h"
+
+#include "particleSystem.h"			//Particles
+#include "sphereVolumeEmitter.h"
+#include "pointParticleFactory.h"
+#include "pointParticleRenderer.h"
+#include "particleSystemManager.h"
 
 int handInventoryIndex;
 std::map<std::string, bool> keys;
@@ -25,9 +43,9 @@ bool devMode = false;
 bool mouseInGame = true;
 std::string gamePath = "./";
 std::string universePath = "universes/Test/";
+NodePath rbcnp = NodePath("rbcnp");
 
 //My libraries
-#include "pandaIncludes.h"
 #include "cppExtension.h"
 #include "gameVars.h"
 #include "gameFunctions.h"
@@ -39,37 +57,17 @@ std::string universePath = "universes/Test/";
 #include "gameTasks.h"
 #include "gameInventory.h"
 #include "gameItem.h"
+#include "gameGui.h"
+#include "gameClasses.h"
 
 game::Player player;
 
-// Global stuff
-PT(AsyncTaskManager) taskMgr = AsyncTaskManager::get_global_ptr();
-PT(ClockObject) globalClock = ClockObject::get_global_clock();
-
-#include "gameClasses.h"
-
-void pauseMenu(const Event* theEvent, void* data) {
-	game::pauseMenuEventParameters* parameters = (game::pauseMenuEventParameters*)data;
+void pauseMenu(WindowFramework* window) {
 	
 	if (mouseInGame) {
 		mouseInGame = false;
-		WindowProperties props = parameters->window->get_graphics_window()->get_properties();
-		props.set_cursor_hidden(false);
-		parameters->window->get_graphics_window()->request_properties(props);
-	} else {
-		double center_x = parameters->window->get_graphics_window()->get_x_size() / static_cast<double>(2);
-		double center_y = parameters->window->get_graphics_window()->get_y_size() / static_cast<double>(2);
-		parameters->window->get_graphics_window()->move_pointer(0, center_x, center_y);
-		WindowProperties props = parameters->window->get_graphics_window()->get_properties();
-		props.set_cursor_hidden(true);
-		parameters->window->get_graphics_window()->request_properties(props);
-		mouseInGame = true;
-	}
-}
-void pauseMenu(WindowFramework* window) {
 
-	if (mouseInGame) {
-		mouseInGame = false;
+		//Set cursor shown
 		WindowProperties props = window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(false);
 		window->get_graphics_window()->request_properties(props);
@@ -77,15 +75,40 @@ void pauseMenu(WindowFramework* window) {
 		double center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
 		double center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
 		window->get_graphics_window()->move_pointer(0, center_x, center_y);
+		
+		//Set cursor hidden
 		WindowProperties props = window->get_graphics_window()->get_properties();
 		props.set_cursor_hidden(true);
 		window->get_graphics_window()->request_properties(props);
+
+		mouseInGame = true;
+	}
+}
+void inventoryMenu(WindowFramework* window) {
+
+	if (mouseInGame) {
+		mouseInGame = false;
+		
+		//Set cursor shown
+		WindowProperties props = window->get_graphics_window()->get_properties();
+		props.set_cursor_hidden(false);
+		window->get_graphics_window()->request_properties(props);
+	} else {
+		double center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
+		double center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
+		window->get_graphics_window()->move_pointer(0, center_x, center_y);
+		
+		//Set cursor hidden
+		WindowProperties props = window->get_graphics_window()->get_properties();
+		props.set_cursor_hidden(true);
+		window->get_graphics_window()->request_properties(props);
+
 		mouseInGame = true;
 	}
 }
 
 int main(int argc, char* argv[]) {
-	
+
 	//Checking if any arguments was given at startup
 	if (argc > 3) {
 		game::warningOut("Too many arguments was given, 1-2 arguments are allowed!");
@@ -119,8 +142,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Create folders and files
-	fs::create_directory("data");
-	fs::create_directory("screenshots");
+	game::mkdir("data");
+	game::mkdir("screenshots");
 	if (!game::fileExists("data/options.txt")) {
 		std::ofstream file("data/options.txt");
 		std::string newLine = "\n";
@@ -132,8 +155,6 @@ int main(int argc, char* argv[]) {
 		}
 		file.close();
 	}
-	/*game::runPyScript("data/scripts/makeDirectories.py");
-	game::runPyScript("data/scripts/createOptionsFile.py");*/
 
 	//Read options
 	std::map<std::string, std::string> options;
@@ -149,6 +170,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	game::setHeading(options["console-heading"]);
+	game::setConsoleTitle(L"The Panda Project: Console window");
 	game::logOut("Starting...");
 	game::userConfigOut("Panda3D version: " + PandaSystem::get_version_string());
 	game::userConfigOut("It was built on " + PandaSystem::get_build_date());
@@ -156,10 +178,18 @@ int main(int argc, char* argv[]) {
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
+	//Testing the color of log functions
+	game::errorOut("This is an error message.");
+	game::importantInfoOut("This is an important message.");
+	game::logOut("This is a log message.");
+	game::timingInfoOut("This is a timing info message.");
+	game::userConfigOut("This is a user info message.");
+	game::warningOut("This is a warning message.");
+
 	// Open a new window framework and set the title
 	PandaFramework framework;
 	framework.open_framework(argc, argv);
-	framework.set_window_title("The Panda Project: Prealpha 0.1.3");
+	framework.set_window_title("The Panda Project: Prealpha 0.1.5");
 
 	// Open the window
 	WindowFramework* window = framework.open_window();
@@ -168,10 +198,15 @@ int main(int argc, char* argv[]) {
 		game::waitForKeypress();
 		return 1;
 	}
+	window->get_render().set_shader_auto();
+
+	//Create RigidBodyCombiner
+	PT(RigidBodyCombiner) rbc = new RigidBodyCombiner("rbc");
+	rbcnp = NodePath(rbc);
 
 	player = game::Player("data/assets/playerproperties/standard.playerproperties", window, framework, false, false);
-	window->get_camera(0)->get_lens()->set_fov(std::stod(options["fov"]));
-	window->get_render().set_shader_auto();
+	DCAST(Camera, player.firstPerson.node())->get_lens()->set_fov(std::stod(options["fov"]));
+	window->get_display_region_3d()->set_camera(player.firstPerson);
 
 	//Set default window instance to use for chunk class
 	game::chunk::setDefaultWindow(window);
@@ -188,6 +223,18 @@ int main(int argc, char* argv[]) {
 	pickerNode->set_into_collide_mask(0);										//Disable into-collisions
 	myTraverser.add_collider(pickerNP, myHandler);								//Add collider to traverser
 	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
+
+	//Experimental GUI
+	game::button returnToGameButton(framework, game::unpause, 0, 0.30, 0, 0.30, "Return to game");
+	returnToGameButton.hide();
+
+	game::button generateUniverse(framework, epass, 0, 0, 0, 0, "Generate universe");
+	generateUniverse.hide();
+
+	game::button quitSaveButton(framework, game::exitGame, 0, -0.30, 0, -0.30, "Quit and save");
+	quitSaveButton.hide();
+
+	player.model.ls();
 
 	//Set up frame rate meter
 	if (!std::stoi(options["hide_fps"])) {
@@ -261,26 +308,6 @@ int main(int argc, char* argv[]) {
 	e_inventory.reparent_to(window->get_aspect_2d());
 	e_inventory.hide();
 
-	std::vector<NodePath> inventory;
-	std::vector<NodePath> tool;
-
-	for (int i = -5; i < 6; i++) {
-		CardMaker hand_inventory("hand_inventory" + i);
-		NodePath hand_inventoryNode(hand_inventory.generate());
-		game::setTexture(hand_inventoryNode, gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
-		hand_inventoryNode.set_sx(0.2);
-		hand_inventoryNode.set_sz(0.2);
-		hand_inventoryNode.set_pos(i/static_cast<float>(5) - hand_inventoryNode.get_sx() / 2, 0, -0.85 - hand_inventoryNode.get_sz() / 2);
-		hand_inventoryNode.set_transparency(TransparencyAttrib::M_alpha);
-		hand_inventoryNode.reparent_to(window->get_aspect_2d());
-		if (i == -5) {
-			i++;
-			tool.push_back(hand_inventoryNode);
-		} else {
-			inventory.push_back(hand_inventoryNode);
-		}
-	}
-
 	//Loading chunks
 	player.chunk_x = 0;
 	player.chunk_y = 0;
@@ -305,6 +332,8 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 	{
+
+		//Load universe
 		std::ifstream index(universePath + "index");
 		if (index.fail()) {
 			game::warningOut("Could not find an index file for the universe. Creating one...");
@@ -335,6 +364,7 @@ int main(int argc, char* argv[]) {
 		std::ifstream profile(universePath + "profiles/" + player.playerName + ".prof");
 		if (profile.fail()) {
 			game::warningOut("Could not find player profile. Creating...");
+			game::mkdir(universePath + "profiles");
 			std::ofstream createProfile(universePath + "profiles/" + player.playerName + ".prof");
 			createProfile << "x=" << player.model.get_x() << std::endl;
 			createProfile << "y=" << player.model.get_y() << std::endl;
@@ -344,13 +374,20 @@ int main(int argc, char* argv[]) {
 				"data/assets/blockproperties/rotational-complex.blockproperties|" <<
 				"data/assets/blockproperties/log.blockproperties|" <<
 				"data/assets/blockproperties/stone.blockproperties|" <<
+				"data/assets/blockproperties/leaves.blockproperties|" <<
+				"data/assets/blockproperties/lightblock.blockproperties|" <<
+				"data/assets/blockproperties/sand.blockproperties|" <<
+				"data/assets/blockproperties/water.blockproperties|" <<
 				std::endl;
 			createProfile.close();
-			playerHandInventory.resize(4);
-			playerHandInventory.setItem(0, game::item("data/assets/blockproperties/grass.blockproperties", 1));
-			playerHandInventory.setItem(1, game::item("data/assets/blockproperties/rotational-complex.blockproperties", 1));
-			playerHandInventory.setItem(2, game::item("data/assets/blockproperties/log.blockproperties", 1));
-			playerHandInventory.setItem(3, game::item("data/assets/blockproperties/stone.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/grass.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/rotational-complex.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/log.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/stone.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/leaves.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/lightblock.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/sand.blockproperties", 1));
+			playerHandInventory.appendItem(game::item("data/assets/blockproperties/water.blockproperties", 1));
 		} else {
 			std::map<std::string, std::string> vector;
 			std::string line;
@@ -371,14 +408,111 @@ int main(int argc, char* argv[]) {
 		profile.close();
 	}
 
-	NodePath blocky = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
-	blocky.set_scale(0.5);
-	blocky.set_pos(0, 0, 20);
-	blocky.reparent_to(window->get_render());
+	//Hotbar
+	std::vector<NodePath> inventory;
+	std::vector<NodePath> tool;
+	std::vector<NodePath> place;
+	CardMaker hand_inventory("hand_inventory");
+	for (int i = -5; i < 6; i++) {
+		NodePath hand_inventoryNode = NodePath("slot");
+		hand_inventoryNode.set_sx(0.2);
+		hand_inventoryNode.set_sz(0.2);
+		hand_inventoryNode.set_pos(i / static_cast<float>(5) - hand_inventoryNode.get_sx() / 2, 0, -0.85 - hand_inventoryNode.get_sz() / 2);
+		hand_inventoryNode.reparent_to(window->get_aspect_2d());
+
+		NodePath card = NodePath(hand_inventory.generate());
+		game::setTexture(card, gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
+		card.set_transparency(TransparencyAttrib::M_alpha);
+		card.reparent_to(hand_inventoryNode);
+
+		game::object something(playerHandInventory.getItem(i + 3).configPath, window, framework, false, false, hand_inventoryNode);
+		something.model.set_pos_hpr(0 + something.model.get_sx() / 2, 0, 0 + something.model.get_sz() / 2, 0, 0, 0);
+		something.model.set_scale(0.3);
+
+		Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
+		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
+		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
+		something.model.set_texture(texture);
+		something.model.set_tex_gen(TextureStage::get_default(), RenderAttrib::M_world_position);
+		something.model.set_tex_projector(TextureStage::get_default(), window->get_render_2d(), something);
+
+		place.push_back(something);
+
+		if (i == -5) {
+			i++;
+			tool.push_back(card);
+		} else {
+			inventory.push_back(card);
+		}
+	}
+
+
+	//Particles
+	PT(PointParticleFactory) pt_particle_factory = new PointParticleFactory();
+	pt_particle_factory->set_lifespan_base(0.5);
+	pt_particle_factory->set_lifespan_spread(0);
+	pt_particle_factory->set_mass_base(1.0);
+	pt_particle_factory->set_mass_spread(0);
+	pt_particle_factory->set_terminal_velocity_base(400);
+	pt_particle_factory->set_terminal_velocity_spread(1);
+
+	PT(SphereVolumeEmitter) sphere_emitter = new SphereVolumeEmitter;
+	sphere_emitter->set_emission_type(SphereVolumeEmitter::ET_RADIATE);
+	sphere_emitter->set_radius(3.0);
+	// negative values emit the particles toward the sphere center
+	sphere_emitter->set_amplitude(1);
+	sphere_emitter->set_amplitude_spread(0);
+	sphere_emitter->set_offset_force(LVector3(0, 0, 0));
+	sphere_emitter->set_explicit_launch_vector(LVector3(1, 0, 0));
+	sphere_emitter->set_radiate_origin(LPoint3(0, 0, 0));
+
+	PT(PointParticleRenderer) pt_particle_rend = new PointParticleRenderer();
+	pt_particle_rend->set_alpha_mode(BaseParticleRenderer::PR_ALPHA_OUT);
+	pt_particle_rend->set_user_alpha(1);
+	pt_particle_rend->set_point_size(2.0);
+	pt_particle_rend->set_start_color(LColor(1, 0, 0, 1)); // alpha value is ignored
+	pt_particle_rend->set_end_color(LColor(1, 1, 0, 1));
+	pt_particle_rend->set_blend_type(PointParticleRenderer::PointParticleBlendType::PP_BLEND_LIFE);
+	pt_particle_rend->set_blend_method(BaseParticleRenderer::ParticleRendererBlendMethod::PP_BLEND_LINEAR);
+	//pt_particle_rend->set_color_blend_mode(ColorBlendAttrib::Mode::M_inv_subtract);
+	//pt_particle_rend->set_ignore_scale(false);
+
+	PT(ParticleSystem) particle_sys = new ParticleSystem();
+	particle_sys->set_pool_size(1024);
+	particle_sys->set_birth_rate(0.01);
+	particle_sys->set_litter_size(10);
+	particle_sys->set_litter_spread(2);
+	particle_sys->set_local_velocity_flag(true);
+	//particle_sys->set_spawn_on_death_flag(true); // this caused an exception!!
+	particle_sys->set_system_grows_older_flag(true);
+	particle_sys->set_system_lifespan(3.0);
+	particle_sys->set_active_system_flag(true);
+	// use it to advance system age, or start at some age
+	//particle_sys->set_system_age(5.0);
+	// system_age is updated only when set_system_grows_older_flag(true);
+	// get_system_age() returns 0 unless system_grows_older_flag is set
+
+	particle_sys->set_factory(pt_particle_factory);
+	particle_sys->set_renderer(pt_particle_rend);
+	particle_sys->set_emitter(sphere_emitter);
+	// if spawn and render parents should be different
+	//particle_sys->set_spawn_render_node_path(window->get_render());
+	particle_sys->set_render_parent(window->get_render());
+
+	ParticleSystemManager particle_sys_mgr;
+	particle_sys_mgr.attach_particlesystem(particle_sys);
+
+
+
+	game::entity blocky("data/assets/entityproperties/test.entityproperties", window, framework, false);
+	blocky.model = window->load_model(framework.get_models(), gamePath + (std::string)"models/egg/blocky.egg");
+	blocky.model.set_scale(0.5);
+	blocky.model.set_pos(0, 0, 20);
+	blocky.model.reparent_to(window->get_render());
 
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
-	NodePath blockyC = blocky.attach_new_node(cSphere_node2);
+	NodePath blockyC = blocky.model.attach_new_node(cSphere_node2);
 	
 	NodePath panda("panda");
 	panda.set_scale(0.5);
@@ -427,20 +561,23 @@ int main(int argc, char* argv[]) {
 	PerlinNoise3 perlinNoise(128, 128, 128, 256, seed);
 
 	//Add task chains
-	AsyncTaskChain* generateChunksChain = taskMgr->make_task_chain("generateChunksChain");
+	AsyncTaskChain* generateChunksChain = AsyncTaskManager::get_global_ptr()->make_task_chain("generateChunksChain");
 	generateChunksChain->set_num_threads(1);
 
 	//Add tasks
 	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, (void*)&panda);
-	taskMgr->add(computePlayerZVelocity);
+	AsyncTaskManager::get_global_ptr()->add(computePlayerZVelocity);
 
 	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("setPlayerChunkPos", task::setPlayerChunkPos, NULL);
-	taskMgr->add(setPlayerChunkPos);
+	AsyncTaskManager::get_global_ptr()->add(setPlayerChunkPos);
 
 	std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*> tuple = { window, &framework, &perlinNoise };
 	PT(GenericAsyncTask) generateChunks = new GenericAsyncTask("generateChunks", task::generateChunks, (void*)&tuple);
 	generateChunks->set_task_chain("generateChunksChain");
-	taskMgr->add(generateChunks);
+	AsyncTaskManager::get_global_ptr()->add(generateChunks);
+
+	PT(GenericAsyncTask) updateHotbar = new GenericAsyncTask("updateHotbar", task::updateHotbar, (void*)&inventory);
+	AsyncTaskManager::get_global_ptr()->add(updateHotbar);
 
 	//Reading settings from settings map
 	double camera_x_speed = std::stof(options["camera_x_speed"]);
@@ -472,29 +609,21 @@ int main(int argc, char* argv[]) {
 
 	std::chrono::time_point<std::chrono::steady_clock> timepoint;
 
+	double light_X = 0;
+
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
+
+		//Update particles
+		particle_sys_mgr.do_particles(ClockObject::get_global_clock()->get_dt(), particle_sys);
+
+		blocky.model.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
+		light_X += ClockObject::get_global_clock()->get_dt();
 
 		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
 			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
 		}
 		entity.update();
-
-		if (mouseInGame) {
-			if (handInventoryIndex < 0) {
-				handInventoryIndex = 8;
-			} else if (handInventoryIndex > 8) {
-				handInventoryIndex = 0;
-			}
-
-			for (int i = 0; i < 9; i++) {
-				if (i == handInventoryIndex) {
-					game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-highlighted.png");
-				} else if (i != handInventoryIndex) {
-					game::setTexture(inventory[i], gamePath + (std::string)"models/textures/png/hand-inventory-all.png");
-				}
-			}
-		}
 
 		traverser->traverse(window->get_render());		//Check collisions and call pusher if a collision is detected
 
@@ -523,9 +652,16 @@ int main(int argc, char* argv[]) {
 			if (keys["mouse1"]) {
 				if (mouseInGame) {
 					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];		//Get chunk containing the block
-					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();									//Remove node
-					chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);						//Replace game::object with empty game::object
-					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;					//Save chunk changes in vector "chunks"
+					try {
+						chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();									//Remove node
+						for (NodePath value : chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].lights) {						//Remove lights
+							window->get_render().clear_light(value);
+						}
+						chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);						//Replace game::object with empty game::object
+						game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;					//Save chunk changes in vector "chunks"
+					} catch (const std::invalid_argument& invalidArgument) {
+						game::errorOut(std::string("Could not remove block! Invalid argument error: ") + invalidArgument.what());
+					}
 					keys["mouse1"] = false;
 				}
 			}
@@ -599,6 +735,8 @@ int main(int argc, char* argv[]) {
 
 					object.model.set_shader_auto();
 
+					object.model.ls();
+
 					chunk.objects.push_back(object);
 					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;
 
@@ -614,9 +752,11 @@ int main(int argc, char* argv[]) {
 		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
 		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
 		text3->set_text("Chunk X: " + std::to_string(player.chunk_x) + "\nChunk Y: " + std::to_string(player.chunk_y));
-		fovText->set_text("VFov: " + std::to_string(window->get_camera(0)->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(window->get_camera(0)->get_lens()->get_hfov()));
+		fovText->set_text("VFov: " + std::to_string(DCAST(Camera, player.firstPerson.node())->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(DCAST(Camera, player.firstPerson.node())->get_lens()->get_hfov()));
 
 		if (mouseInGame) {
+
+			//Camera management
 			if (window->get_graphics_window()) {
 				if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
 					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
@@ -666,34 +806,38 @@ int main(int argc, char* argv[]) {
 
 
 			if (keys["w"]) {
-				player.model.set_y(panda, 0 + y_speed);
-				panda.set_y(panda, 0 + y_speed);
+				player.model.set_y(panda, y_speed * ClockObject::get_global_clock()->get_dt());
+				panda.set_y(panda, y_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["s"]) {
-				player.model.set_y(panda, 0 - y_speed);
-				panda.set_y(panda, 0 - y_speed);
+				player.model.set_y(panda, - y_speed * ClockObject::get_global_clock()->get_dt());
+				panda.set_y(panda, - y_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["a"]) {
-				player.model.set_x(player.model, 0 - x_speed);
-				panda.set_x(player.model, 0 - x_speed);
+				player.model.set_x(player.model, - x_speed * ClockObject::get_global_clock()->get_dt());
+				panda.set_x(player.model, - x_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["d"]) {
-				player.model.set_x(player.model, 0 + x_speed);
-				panda.set_x(player.model, 0 + x_speed);
+				player.model.set_x(player.model, x_speed * ClockObject::get_global_clock()->get_dt());
+				panda.set_x(player.model, x_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["lshift"]) {
 				if (player.flying) {
-					player.model.set_z(player.model.get_pos().get_z() - z_speed);
+					player.model.set_z(player.model.get_pos().get_z() - z_speed * ClockObject::get_global_clock()->get_dt());
 				} else if (player.onGround && !player.sneaking) {
 					player.sneaking = true;
-					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance);
-					player.model.set_z(player.model.get_pos().get_z() - sneak_distance);
+					y_speed -= 10;
+					x_speed -= 3;
+					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance * ClockObject::get_global_clock()->get_dt());
+					player.model.set_z(player.model.get_pos().get_z() - sneak_distance * ClockObject::get_global_clock()->get_dt());
 				}
 			} else if (!keys["lshift"]) {
 				if (player.onGround && player.sneaking) {
 					player.sneaking = false;
-					player.collisionNodePath.set_z(player.collisionNodePath.get_z() - sneak_distance);
-					player.model.set_z(player.model.get_pos().get_z() + sneak_distance);
+					y_speed += 10;
+					x_speed += 3;
+					player.collisionNodePath.set_z(player.collisionNodePath.get_z() - sneak_distance * ClockObject::get_global_clock()->get_dt());
+					player.model.set_z(player.model.get_pos().get_z() + sneak_distance * ClockObject::get_global_clock()->get_dt());
 				}
 			}
 			if (keys["space"]) {
@@ -702,7 +846,7 @@ int main(int argc, char* argv[]) {
 					player.flying = false;
 					player.velocity = 0;
 				} else if (player.flying) {
-					player.model.set_z(player.model.get_pos().get_z() + z_speed);
+					player.model.set_z(player.model.get_pos().get_z() + z_speed * ClockObject::get_global_clock()->get_dt());
 				} else if (!player.onGround && duration.count() > 0.05 && !player.flying) {
 					player.flying = true;
 				} else if (player.onGround) {
@@ -743,6 +887,14 @@ int main(int argc, char* argv[]) {
 			if (keys["f4"]) {		//Increase FOV
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()+10);
 				keys["f4"] = false;
+			}
+			if (keys["f6"]) {
+				SceneGraphAnalyzer sga;
+				sga.add_node(window->get_render().node());
+				game::setTextColor(color::FG_LIGHTCYAN);
+				sga.write(std::cerr);
+				game::setTextColor(color::FG_WHITE);
+				keys["f6"] = false;
 			}
 
 			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
@@ -802,6 +954,21 @@ int main(int argc, char* argv[]) {
 				exit(1);			// Code 1 is used because we crashed the game
 			}
 		}
+		if (keys["escape"]) {
+			pauseMenu(window);
+			if (mouseInGame) {
+				quitSaveButton.hide();
+				generateUniverse.hide();
+				returnToGameButton.hide();
+				cursor.show();
+			} else {
+				quitSaveButton.show();
+				generateUniverse.show();
+				returnToGameButton.show();
+				cursor.hide();
+			}
+			keys["escape"] = false;
+		}
 		if (keys["e"]) {
 			if (e_inventory.is_hidden()) {
 				e_inventory.show();
@@ -814,7 +981,7 @@ int main(int argc, char* argv[]) {
 				text2->set_overall_hidden(true);
 				text3->set_overall_hidden(true);
 				fovText->set_overall_hidden(true);
-				pauseMenu(window);
+				inventoryMenu(window);
 			} else {
 				e_inventory.hide();
 				cursor.show();
@@ -826,7 +993,7 @@ int main(int argc, char* argv[]) {
 				text2->set_overall_hidden(false);
 				text3->set_overall_hidden(false);
 				fovText->set_overall_hidden(false);
-				pauseMenu(window);
+				inventoryMenu(window);
 			}
 
 			keys["e"] = false;
@@ -839,28 +1006,34 @@ int main(int argc, char* argv[]) {
 
 	//Saving chunks
 	{
+		//Save profiles
+		game::mkdir(universePath + "profiles");
+		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
+		if (profile.fail()) {
+			game::errorOut("Failed to create player profile. The path was: " + universePath + "profiles/" + player.playerName + ".prof" + "!");
+		} else {
+			profile << "x=" << player.model.get_x() << std::endl;
+			profile << "y=" << player.model.get_y() << std::endl;
+			profile << "z=" << player.model.get_z() << std::endl;
+			profile << "handInventory=";
+			for (size_t i = 0; i < playerHandInventory.slots; i++) {
+				profile << playerHandInventory.getItem(i).configPath << "|";
+			}
+			profile << std::endl;
+		}
+		profile.close();
+
+		//Save universe
 		std::ofstream updateIndex(universePath + "index", std::ios::out | std::ios::trunc);
 		terrainAnimationShouldRun = true;
 		std::thread saving_animation_thread(game::terrainAnimation, "Saving universe");
 		for (game::chunk chunk : game::chunks) {
 			updateIndex << chunk.x << "." << chunk.y << ".chunk" << std::endl;
-			chunk.saveChunk();
+			if (chunk.saveChunk()) {
+				break;					//Chunk failed to save correctly!
+			}
 		}
 		updateIndex.close();
-
-		//Save profiles
-		std::ofstream profile(universePath + "profiles/" + player.playerName + ".prof", std::ios::out | std::ios::trunc);
-		profile << "x=" << player.model.get_x() << std::endl;
-		profile << "y=" << player.model.get_y() << std::endl;
-		profile << "z=" << player.model.get_z() << std::endl;
-
-		profile << "handInventory=";
-		for (size_t i = 0; i < playerHandInventory.slots; i++) {
-			profile << playerHandInventory.getItem(i).configPath << "|";
-		}
-		profile << std::endl;
-
-		profile.close();
 
 		terrainAnimationShouldRun = false;
 		saving_animation_thread.join();
