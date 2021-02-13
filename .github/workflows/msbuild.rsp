@@ -5,5 +5,5 @@
 -noWarn:MSB2039;MSB3861;C2039;C3861;2039;3861
 -p:NoWarn=3861
 -p:WarningLevel=0
--p:Configuration=${{env.BUILD_CONFIGURATION}}
--p:Platform=${{env.BUILD_PLATFORM}}
+-p:Configuration=Release
+-p:Platform=x64
