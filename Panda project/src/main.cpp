@@ -156,6 +156,9 @@ int main(int argc, char* argv[]) {
 		file.close();
 	}
 
+	std::string string = game::emptyItem;
+	std::cout << string << std::endl;
+
 	//Read options
 	std::map<std::string, std::string> options;
 	game::readOptions(options, "data/options.txt");
