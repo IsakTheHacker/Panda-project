@@ -614,6 +614,8 @@ int main(int argc, char* argv[]) {
 
 	double light_X = 0;
 
+	std::cout << (std::string)playerHandInventory << std::endl;
+
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
 

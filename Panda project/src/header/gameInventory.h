@@ -24,6 +24,8 @@ namespace game {
 		void appendItem(item item);
 		void resize(const unsigned int& slots);
 		std::vector<item> getItems();
+
+		operator std::string();
 	};
 
 }
