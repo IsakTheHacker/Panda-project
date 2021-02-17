@@ -156,9 +156,6 @@ int main(int argc, char* argv[]) {
 		file.close();
 	}
 
-	std::string string = game::emptyItem;
-	std::cout << string << std::endl;
-
 	//Read options
 	std::map<std::string, std::string> options;
 	game::readOptions(options, "data/options.txt");
@@ -613,8 +610,6 @@ int main(int argc, char* argv[]) {
 	std::chrono::time_point<std::chrono::steady_clock> timepoint;
 
 	double light_X = 0;
-
-	std::cout << (std::string)playerHandInventory << std::endl;
 
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
