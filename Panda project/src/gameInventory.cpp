@@ -38,4 +38,17 @@ namespace game {
 	std::vector<item> inventory::getItems() {
 		return this->items;
 	}
+	inventory::operator std::string() {
+		std::string stringifiedItems;
+		for (item item : items) {
+			stringifiedItems += std::to_string("\n        ");
+			stringifiedItems += item;
+		}
+		std::string stringObject =
+			"Stringobject of game::inventory:\n"
+			"    Slots: " + std::to_string(slots) + "\n"
+			"    Items: " + stringifiedItems + ""
+		;
+		return stringObject;
+	}
 }

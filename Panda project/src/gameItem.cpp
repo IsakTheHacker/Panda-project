@@ -23,5 +23,14 @@ namespace game {
 		this->stackedItems = stackedItems;
 	}
 
+	item::operator std::string() {
+		std::string stringObject =
+			"Stringobject of game::item:\n"
+			"    Config Path: " + std::to_string(configPath) + "\n"
+			"    Stacked Items: " + std::to_string(stackedItems) + ""
+		;
+		return stringObject;
+	}
+
 	item emptyItem("emptyItem", 0);
 }

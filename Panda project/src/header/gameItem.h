@@ -18,6 +18,8 @@ namespace game {
 		std::map<std::string, std::string> config;
 
 		item(const std::string& configPath, const unsigned int& stackedItems = 1);
+
+		operator std::string();
 	};
 
 	extern item emptyItem;
