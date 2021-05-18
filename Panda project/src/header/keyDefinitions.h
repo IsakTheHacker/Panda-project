@@ -105,3 +105,14 @@ framework.define_key("shift-wheel_up", "Wheel rolled upwards", game::wheel_roll,
 //Mouse wheel down
 framework.define_key("wheel_down", "Wheel rolled downwards", game::wheel_roll, (void*)&game::wheel_down);
 framework.define_key("shift-wheel_down", "Wheel rolled downwards", game::wheel_roll, (void*)&game::wheel_down);
+
+//Number keys
+framework.define_key("1", "1-key", game::set_hotbar_slot, (void*)&game::num0);
+framework.define_key("2", "2-key", game::set_hotbar_slot, (void*)&game::num1);
+framework.define_key("3", "3-key", game::set_hotbar_slot, (void*)&game::num2);
+framework.define_key("4", "4-key", game::set_hotbar_slot, (void*)&game::num3);
+framework.define_key("5", "5-key", game::set_hotbar_slot, (void*)&game::num4);
+framework.define_key("6", "6-key", game::set_hotbar_slot, (void*)&game::num5);
+framework.define_key("7", "7-key", game::set_hotbar_slot, (void*)&game::num6);
+framework.define_key("8", "8-key", game::set_hotbar_slot, (void*)&game::num7);
+framework.define_key("9", "9-key", game::set_hotbar_slot, (void*)&game::num8);

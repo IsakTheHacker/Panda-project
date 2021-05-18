@@ -329,6 +329,12 @@ namespace game {
 			handInventoryIndex += indexModification;
 		}
 	}
+	void set_hotbar_slot(const Event* theEvent, void* data) {
+		if (mouseInGame) {
+			int& index = *((int*)data);
+			handInventoryIndex = index;
+		}
+	}
 	void unpause(const Event* theEvent, void* data) {
 		key_swap(0, (void*)&game::esc);
 	}

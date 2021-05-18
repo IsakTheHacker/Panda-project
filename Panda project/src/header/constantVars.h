@@ -25,6 +25,16 @@ namespace game {
 	const std::string mouse3 = "mouse3";
 	const std::string esc = "escape";
 
+	const int num0 = 0;
+	const int num1 = 1;
+	const int num2 = 2;
+	const int num3 = 3;
+	const int num4 = 4;
+	const int num5 = 5;
+	const int num6 = 6;
+	const int num7 = 7;
+	const int num8 = 8;
+
 	const int wheel_up = -1;
 	const int wheel_down = 1;
 
