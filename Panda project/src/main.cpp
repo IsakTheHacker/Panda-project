@@ -217,7 +217,7 @@ int main(int argc, char* argv[]) {
 	CollisionTraverser myTraverser;												//Create Traverser
 	PT(CollisionNode) pickerNode = new CollisionNode("mouseRay");				//Create CollisionNode
 	PT(CollisionRay) pickerRay = new CollisionRay();							//Create CollisionRay
-	NodePath pickerNP = player.model.attach_new_node(pickerNode);				//Create NodePath for the attached new node
+	NodePath pickerNP = player.firstPerson.attach_new_node(pickerNode);			//Create NodePath for the attached new node
 	pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());	//Set from collide mask to use
 	pickerNode->add_solid(pickerRay);											//Add solid to CollisionNode
 	pickerNode->set_into_collide_mask(0);										//Disable into-collisions
@@ -513,12 +513,6 @@ int main(int argc, char* argv[]) {
 	CollisionNode* cSphere_node2 = new CollisionNode("Sphere");
 	cSphere_node2->add_solid(new CollisionSphere(0, 0, 0, 4));
 	NodePath blockyC = blocky.model.attach_new_node(cSphere_node2);
-	
-	NodePath panda("panda");
-	panda.set_scale(0.5);
-	panda.set_pos(0, 0, 0);
-	panda.reparent_to(window->get_render());
-	panda.hide();
 
 	CollisionHandlerPusher pusher;
 	pusher.add_in_pattern("Something");
@@ -565,7 +559,7 @@ int main(int argc, char* argv[]) {
 	generateChunksChain->set_num_threads(1);
 
 	//Add tasks
-	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, (void*)&panda);
+	PT(GenericAsyncTask) computePlayerZVelocity = new GenericAsyncTask("calculatePlayerZVelocity", task::computePlayerZVelocity, NULL);
 	AsyncTaskManager::get_global_ptr()->add(computePlayerZVelocity);
 
 	PT(GenericAsyncTask) setPlayerChunkPos = new GenericAsyncTask("setPlayerChunkPos", task::setPlayerChunkPos, NULL);
@@ -783,10 +777,9 @@ int main(int argc, char* argv[]) {
 					}
 
 					offset_p += move_y / camera_y_speed;
-					panda.set_h(std::fmod(offset_h, 360));
 
 					//Adjust the collision box so its pitch doesn't change
-					player.collisionNodePath.set_p(offset_p - offset_p * 2);
+					//player.collisionNodePath.set_p(offset_p - offset_p * 2);
 
 					//Adjust the collision box so its rotation doesn't change
 					//cameraC.set_r(offset_r - offset_r * 2);
@@ -794,7 +787,7 @@ int main(int argc, char* argv[]) {
 
 					if (!keys["v"]) {
 						if (offset_p < 90 && offset_p > -90) {
-							player.model.set_p(offset_p);
+							player.firstPerson.set_p(offset_p);
 						} else {
 							offset_p -= move_y / 5;
 						}
@@ -806,38 +799,32 @@ int main(int argc, char* argv[]) {
 
 
 			if (keys["w"]) {
-				player.model.set_y(panda, y_speed * ClockObject::get_global_clock()->get_dt());
-				panda.set_y(panda, y_speed * ClockObject::get_global_clock()->get_dt());
+				player.model.set_y(player.model, y_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["s"]) {
-				player.model.set_y(panda, - y_speed * ClockObject::get_global_clock()->get_dt());
-				panda.set_y(panda, - y_speed * ClockObject::get_global_clock()->get_dt());
+				player.model.set_y(player.model, - y_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["a"]) {
 				player.model.set_x(player.model, - x_speed * ClockObject::get_global_clock()->get_dt());
-				panda.set_x(player.model, - x_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["d"]) {
 				player.model.set_x(player.model, x_speed * ClockObject::get_global_clock()->get_dt());
-				panda.set_x(player.model, x_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["lshift"]) {
 				if (player.flying) {
 					player.model.set_z(player.model.get_pos().get_z() - z_speed * ClockObject::get_global_clock()->get_dt());
 				} else if (player.onGround && !player.sneaking) {
 					player.sneaking = true;
-					y_speed -= 10;
-					x_speed -= 3;
-					player.collisionNodePath.set_z(player.collisionNodePath.get_z() + sneak_distance * ClockObject::get_global_clock()->get_dt());
-					player.model.set_z(player.model.get_pos().get_z() - sneak_distance * ClockObject::get_global_clock()->get_dt());
+					y_speed /= 2;
+					x_speed /= 2;
+					player.firstPerson.set_z(player.firstPerson.get_z() - sneak_distance * ClockObject::get_global_clock()->get_dt());
 				}
 			} else if (!keys["lshift"]) {
 				if (player.onGround && player.sneaking) {
 					player.sneaking = false;
-					y_speed += 10;
-					x_speed += 3;
-					player.collisionNodePath.set_z(player.collisionNodePath.get_z() - sneak_distance * ClockObject::get_global_clock()->get_dt());
-					player.model.set_z(player.model.get_pos().get_z() + sneak_distance * ClockObject::get_global_clock()->get_dt());
+					y_speed *= 2;
+					x_speed *= 2;
+					player.firstPerson.set_z(player.firstPerson.get_z() + sneak_distance * ClockObject::get_global_clock()->get_dt());
 				}
 			}
 			if (keys["space"]) {
@@ -931,7 +918,6 @@ int main(int argc, char* argv[]) {
 				}
 
 				offset_p += move_y / camera_y_speed;
-				panda.set_h(offset_h);
 
 				//Adjust the collision box so its pitch doesn't change
 				player.collisionNodePath.set_p(offset_p - offset_p * 2);

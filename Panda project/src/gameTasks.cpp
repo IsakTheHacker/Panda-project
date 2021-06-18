@@ -2,8 +2,6 @@
 
 namespace task {
 	AsyncTask::DoneStatus computePlayerZVelocity(GenericAsyncTask* task, void* data) {
-		NodePath panda = *(NodePath*)data;
-
 		if (!player.flying) {
 			if (player.velocity == 0 && !player.onGround) {
 				player.velocity = 0.01;
@@ -28,7 +26,6 @@ namespace task {
 				player.velocity = 0;
 			}
 			player.model.set_z(player.model.get_pos().get_z() - player.velocity);
-			panda.set_z(player.model.get_pos().get_z() - player.velocity);
 		}
 
 		return AsyncTask::DS_cont;		//Continue this task next frame
