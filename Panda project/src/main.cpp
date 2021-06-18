@@ -68,7 +68,7 @@ void pauseMenu(WindowFramework* window) {
 		mouseInGame = false;
 
 		//Set cursor shown
-		WindowProperties props = window->get_graphics_window()->get_properties();
+		WindowProperties props;
 		props.set_cursor_hidden(false);
 		window->get_graphics_window()->request_properties(props);
 	} else {
@@ -77,7 +77,7 @@ void pauseMenu(WindowFramework* window) {
 		window->get_graphics_window()->move_pointer(0, center_x, center_y);
 		
 		//Set cursor hidden
-		WindowProperties props = window->get_graphics_window()->get_properties();
+		WindowProperties props;
 		props.set_cursor_hidden(true);
 		window->get_graphics_window()->request_properties(props);
 
@@ -90,7 +90,7 @@ void inventoryMenu(WindowFramework* window) {
 		mouseInGame = false;
 		
 		//Set cursor shown
-		WindowProperties props = window->get_graphics_window()->get_properties();
+		WindowProperties props;
 		props.set_cursor_hidden(false);
 		window->get_graphics_window()->request_properties(props);
 	} else {
@@ -99,7 +99,7 @@ void inventoryMenu(WindowFramework* window) {
 		window->get_graphics_window()->move_pointer(0, center_x, center_y);
 		
 		//Set cursor hidden
-		WindowProperties props = window->get_graphics_window()->get_properties();
+		WindowProperties props;
 		props.set_cursor_hidden(true);
 		window->get_graphics_window()->request_properties(props);
 
