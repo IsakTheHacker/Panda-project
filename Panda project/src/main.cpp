@@ -763,7 +763,7 @@ int main(int argc, char* argv[]) {
 						offset_r += move_x / camera_x_speed;
 
 						if (offset_r < 90 && offset_r > -90) {
-							player.model.set_r(offset_r);
+							player.firstPerson.set_r(offset_r);
 						} else {
 							offset_r -= move_x / 5;
 						}
@@ -773,7 +773,7 @@ int main(int argc, char* argv[]) {
 
 						// Reset rotation
 						offset_r = 0;
-						player.model.set_r(offset_r);
+						player.firstPerson.set_r(offset_r);
 					}
 
 					offset_p += move_y / camera_y_speed;
@@ -811,9 +811,7 @@ int main(int argc, char* argv[]) {
 				player.model.set_x(player.model, x_speed * ClockObject::get_global_clock()->get_dt());
 			}
 			if (keys["lshift"]) {
-				if (player.flying) {
-					player.model.set_z(player.model.get_pos().get_z() - z_speed * ClockObject::get_global_clock()->get_dt());
-				} else if (player.onGround && !player.sneaking) {
+				if (player.onGround && !player.sneaking) {
 					player.sneaking = true;
 					y_speed /= 2;
 					x_speed /= 2;
@@ -828,15 +826,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			if (keys["space"]) {
-				std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - timepoint;
-				if (player.flying && duration.count() > 0.05 && duration.count() < 0.275) {
-					player.flying = false;
-					player.velocity = 0;
-				} else if (player.flying) {
-					player.model.set_z(player.model.get_pos().get_z() + z_speed * ClockObject::get_global_clock()->get_dt());
-				} else if (!player.onGround && duration.count() > 0.05 && !player.flying) {
-					player.flying = true;
-				} else if (player.onGround) {
+				if (player.onGround) {
 					if (!player.sneaking) {
 						player.velocity = -0.25;
 					} else if (player.sneaking) {
@@ -844,7 +834,6 @@ int main(int argc, char* argv[]) {
 					}
 					player.onGround = false;
 				}
-				timepoint = std::chrono::high_resolution_clock::now();
 			}
 			if (keys["q"]) {
 				for (std::pair<int, int> pair : game::chunk::loaded_chunks) {
