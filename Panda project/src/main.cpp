@@ -525,7 +525,6 @@ int main(int argc, char* argv[]) {
 
 	double offset_h = 0.0;
 	double offset_p = 0.0;
-	double offset_r = 0.0;
 
 	double center_x = 0.0;
 	double center_y = 0.0;
@@ -693,22 +692,8 @@ int main(int argc, char* argv[]) {
 					double move_x = std::floor(center_x - window->get_graphics_window()->get_pointer(0).get_x());
 					double move_y = std::floor(center_y - window->get_graphics_window()->get_pointer(0).get_y());
 
-					if (keys["v"]) {
-						offset_r += move_x / camera_x_speed;
-
-						if (offset_r < 90 && offset_r > -90) {
-							player.firstPerson.set_r(offset_r);
-						} else {
-							offset_r -= move_x / 5;
-						}
-					} else {
-						offset_h += move_x / camera_x_speed;
-						player.model.set_h(std::fmod(offset_h, 360));
-
-						// Reset rotation
-						offset_r = 0;
-						player.firstPerson.set_r(offset_r);
-					}
+					offset_h += move_x / camera_x_speed;
+					player.model.set_h(std::fmod(offset_h, 360));
 
 					offset_p += move_y / camera_y_speed;
 
@@ -719,14 +704,11 @@ int main(int argc, char* argv[]) {
 					//cameraC.set_r(offset_r - offset_r * 2);
 					//Not fixed yet
 
-					if (!keys["v"]) {
-						if (offset_p < 90 && offset_p > -90) {
-							player.firstPerson.set_p(offset_p);
-						} else {
-							offset_p -= move_y / 5;
-						}
+					if (offset_p < 90 && offset_p > -90) {
+						player.firstPerson.set_p(offset_p);
+					} else {
+						offset_p -= move_y / 5;
 					}
-
 					window->get_graphics_window()->move_pointer(0, center_x, center_y);		//Reset pointer to 0, 0
 				}
 			}
@@ -823,22 +805,8 @@ int main(int argc, char* argv[]) {
 					move_x -= 3.0;
 				}
 
-				if (keys["v"]) {
-					offset_r += move_x / camera_x_speed;
-
-					if (offset_r < 90 && offset_r > -90) {
-						player.model.set_r(offset_r);
-					} else {
-						offset_r -= move_x / 5;
-					}
-				} else {
-					offset_h += move_x / camera_x_speed;
-					player.model.set_h(offset_h);
-
-					// Reset rotation
-					offset_r = 0;
-					player.model.set_r(offset_r);
-				}
+				offset_h += move_x / camera_x_speed;
+				player.model.set_h(offset_h);
 
 				offset_p += move_y / camera_y_speed;
 
@@ -849,12 +817,10 @@ int main(int argc, char* argv[]) {
 				//cameraC.set_r(offset_r - offset_r * 2);
 				//Not fixed yet
 
-				if (!keys["v"]) {
-					if (offset_p < 90 && offset_p > -90) {
-						player.model.set_p(offset_p);
-					} else {
-						offset_p -= move_y / 5;
-					}
+				if (offset_p < 90 && offset_p > -90) {
+					player.model.set_p(offset_p);
+				} else {
+					offset_p -= move_y / 5;
 				}
 			}
 		} else {
