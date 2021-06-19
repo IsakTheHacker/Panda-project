@@ -553,11 +553,6 @@ int main(int argc, char* argv[]) {
 		blocky.model.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 		light_X += ClockObject::get_global_clock()->get_dt();
 
-		if ((player.collidedNodePath == entity.model) && (player.onGround)) {
-			player.model.set_pos(entity.model.get_x(), entity.model.get_y(), player.model.get_z());
-		}
-		entity.update();
-
 		traverser->traverse(window->get_render());		//Check collisions and call pusher if a collision is detected
 
 		myTraverser.traverse(window->get_render());
