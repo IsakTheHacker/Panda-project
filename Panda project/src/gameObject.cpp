@@ -251,6 +251,9 @@ namespace game {
 		this->flying = false;
 		this->playerName = (*Player::options)["player-name"];
 
+		camera_x_speed = std::stof((*Player::options)["camera_x_speed"]);
+		camera_y_speed = std::stof((*Player::options)["camera_y_speed"]);
+
 		//Add first person camera
 		firstPerson = window->make_camera();
 		firstPerson.node()->set_name("firstPerson");
@@ -259,12 +262,51 @@ namespace game {
 		//Add third person camera
 		thirdPerson = window->make_camera();
 		thirdPerson.node()->set_name("thirdPerson");
+		thirdPerson.set_pos(thirdPerson, 0, -15, 7.5);
 		thirdPerson.reparent_to(model);
 	}
 	Player::~Player() {
 
 	}
+	void Player::doCameraControl(WindowFramework* window) {
+		if (window->get_display_region_3d()->get_camera() == thirdPerson) {
+			thirdPerson.look_at(model);
+		} else if (window->get_display_region_3d()->get_camera() == firstPerson) {
+			if (mouseInGame && window->get_graphics_window()) {
+				if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
+					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
+					center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
+
+					double move_x = std::floor(center_x - window->get_graphics_window()->get_pointer(0).get_x());
+					double move_y = std::floor(center_y - window->get_graphics_window()->get_pointer(0).get_y());
+
+					offset_h += move_x / camera_x_speed;
+					player.model.set_h(std::fmod(offset_h, 360));
+
+					offset_p += move_y / camera_y_speed;
+
+					if (offset_p < 90 && offset_p > -90) {
+						player.firstPerson.set_p(offset_p);
+					} else {
+						offset_p -= move_y / 5;
+					}
+					window->get_graphics_window()->move_pointer(0, center_x, center_y);		//Reset pointer to 0, 0
+				}
+			}
+		} else {
+			game::errorOut("Camera error!");
+		}
+	}
+	void Player::setThirdPersonCamera(WindowFramework* window) {
+		window->get_display_region_3d()->set_camera(thirdPerson);
+		game::logOut("Switched to third person style camera.");
+	}
+	void Player::setFirstPersonCamera(WindowFramework* window) {
+		window->get_display_region_3d()->set_camera(firstPerson);
+		game::logOut("Switched to first person camera!");
+	}
 	std::map<std::string, std::string>* Player::options;
+
 
 	void testIfPlayerOnGround(const Event* theEvent, void* data) {
 		bool in_out_pattern = (bool)data;

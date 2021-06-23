@@ -516,18 +516,10 @@ int main(int argc, char* argv[]) {
 	AsyncTaskManager::get_global_ptr()->add(updateHotbar);
 
 	//Reading settings from settings map
-	double camera_x_speed = std::stof(options["camera_x_speed"]);
-	double camera_y_speed = std::stof(options["camera_y_speed"]);
 
 	double x_speed = std::stof(options["x_speed"]);
 	double y_speed = std::stof(options["y_speed"]);
 	double z_speed = std::stof(options["z_speed"]);
-
-	double offset_h = 0.0;
-	double offset_p = 0.0;
-
-	double center_x = 0.0;
-	double center_y = 0.0;
 
 	double sneak_distance = std::stod(options["sneak-distance"]);
 	bool chunk_exists = false;
@@ -548,6 +540,8 @@ int main(int argc, char* argv[]) {
 
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
+
+		player.doCameraControl(window);
 
 		blocky.model.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
 		light_X += ClockObject::get_global_clock()->get_dt();
@@ -683,37 +677,6 @@ int main(int argc, char* argv[]) {
 
 		if (mouseInGame) {
 
-			//Camera management
-			if (window->get_graphics_window()) {
-				if (window->get_graphics_window()->get_pointer(0).get_in_window()) {
-					center_x = window->get_graphics_window()->get_x_size() / static_cast<double>(2);
-					center_y = window->get_graphics_window()->get_y_size() / static_cast<double>(2);
-
-					double move_x = std::floor(center_x - window->get_graphics_window()->get_pointer(0).get_x());
-					double move_y = std::floor(center_y - window->get_graphics_window()->get_pointer(0).get_y());
-
-					offset_h += move_x / camera_x_speed;
-					player.model.set_h(std::fmod(offset_h, 360));
-
-					offset_p += move_y / camera_y_speed;
-
-					//Adjust the collision box so its pitch doesn't change
-					//player.collisionNodePath.set_p(offset_p - offset_p * 2);
-
-					//Adjust the collision box so its rotation doesn't change
-					//cameraC.set_r(offset_r - offset_r * 2);
-					//Not fixed yet
-
-					if (offset_p < 90 && offset_p > -90) {
-						player.firstPerson.set_p(offset_p);
-					} else {
-						offset_p -= move_y / 5;
-					}
-					window->get_graphics_window()->move_pointer(0, center_x, center_y);		//Reset pointer to 0, 0
-				}
-			}
-
-
 			if (keys["w"]) {
 				player.model.set_y(player.model, y_speed * ClockObject::get_global_clock()->get_dt());
 			}
@@ -774,10 +737,12 @@ int main(int argc, char* argv[]) {
 			}
 			if (keys["f3"]) {		//Decrease FOV
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()-10);
+				player.setFirstPersonCamera(window);
 				keys["f3"] = false;
 			}
 			if (keys["f4"]) {		//Increase FOV
 				window->get_camera(0)->get_lens()->set_fov(window->get_camera(0)->get_lens()->get_fov()+10);
+				player.setThirdPersonCamera(window);
 				keys["f4"] = false;
 			}
 			if (keys["f6"]) {
@@ -789,7 +754,7 @@ int main(int argc, char* argv[]) {
 				keys["f6"] = false;
 			}
 
-			if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
+			/*if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
 				double move_y = 0.0;
 				double move_x = 0.0;
 				if (keys["arrow_up"]) {
@@ -810,19 +775,12 @@ int main(int argc, char* argv[]) {
 
 				offset_p += move_y / camera_y_speed;
 
-				//Adjust the collision box so its pitch doesn't change
-				player.collisionNodePath.set_p(offset_p - offset_p * 2);
-
-				//Adjust the collision box so its rotation doesn't change
-				//cameraC.set_r(offset_r - offset_r * 2);
-				//Not fixed yet
-
 				if (offset_p < 90 && offset_p > -90) {
 					player.model.set_p(offset_p);
 				} else {
 					offset_p -= move_y / 5;
 				}
-			}
+			}*/
 		} else {
 			if (keys["q"]) {		//Crash game
 				game::importantInfoOut("Crashing game...");

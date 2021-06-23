@@ -76,12 +76,25 @@ namespace game {
 		int chunk_y = 0;
 		std::string playerName;
 
+		double offset_h = 0.0;
+		double offset_p = 0.0;
+
+		double center_x = 0.0;
+		double center_y = 0.0;
+
+		double camera_x_speed;
+		double camera_y_speed;
+
 		//Static member variables
 		static std::map<std::string, std::string>* options;
 
 		Player(bool shouldLogInConsole = false, bool shouldLogToFile = false);
 		Player(std::string configPath, WindowFramework*& window, PandaFramework& framework, bool shouldLogInConsole = true, bool shouldLogToFile = false);
 		~Player();
+
+		void doCameraControl(WindowFramework* window);
+		void setThirdPersonCamera(WindowFramework* window);
+		void setFirstPersonCamera(WindowFramework* window);
 	};
 
 
