@@ -264,6 +264,17 @@ namespace game {
 		thirdPerson.node()->set_name("thirdPerson");
 		thirdPerson.set_pos(thirdPerson, 0, -15, 7.5);
 		thirdPerson.reparent_to(model);
+
+		//Picker Ray
+		pickerHandler = new CollisionHandlerQueue();								//Create Handler
+		PT(CollisionNode) pickerNode = new CollisionNode("mouseRay");				//Create CollisionNode
+		PT(CollisionRay) pickerRay = new CollisionRay();							//Create CollisionRay
+		NodePath pickerNP = firstPerson.attach_new_node(pickerNode);			//Create NodePath for the attached new node
+		pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());	//Set from collide mask to use
+		pickerNode->add_solid(pickerRay);											//Add solid to CollisionNode
+		pickerNode->set_into_collide_mask(0);										//Disable into-collisions
+		pickerTraverser.add_collider(pickerNP, pickerHandler);						//Add collider to traverser
+		pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 	}
 	Player::~Player() {
 

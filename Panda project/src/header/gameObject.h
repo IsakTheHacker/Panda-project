@@ -11,6 +11,8 @@
 #include "collisionBox.h"
 #include "collisionEntry.h"
 #include "pointLight.h"
+#include "collisionHandlerQueue.h"
+#include "collisionRay.h"
 
 //My libraries
 #include "gameFunctions.h"
@@ -84,6 +86,9 @@ namespace game {
 
 		double camera_x_speed;
 		double camera_y_speed;
+
+		PT(CollisionHandlerQueue) pickerHandler;
+		CollisionTraverser pickerTraverser;
 
 		//Static member variables
 		static std::map<std::string, std::string>* options;

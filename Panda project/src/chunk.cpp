@@ -27,8 +27,6 @@ namespace game {
 		std::vector<object> blocks;
 		std::vector<NodePath> subobjects;
 
-		//game::warningOut(object);
-
 		for (size_t i = 1; i < 2; i++) {
 			for (int j = start_x; j < start_x + chunksize; j += 2) {
 				for (int k = start_y; k < start_y + chunksize; k += 2) {

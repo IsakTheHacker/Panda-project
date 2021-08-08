@@ -178,14 +178,6 @@ int main(int argc, char* argv[]) {
 	game::listOptions(options);
 	game::listOptions(scripting_options, "Scripting options:");
 
-	//Testing the color of log functions
-	game::errorOut("This is an error message.");
-	game::importantInfoOut("This is an important message.");
-	game::logOut("This is a log message.");
-	game::timingInfoOut("This is a timing info message.");
-	game::userConfigOut("This is a user info message.");
-	game::warningOut("This is a warning message.");
-
 	// Open a new window framework and set the title
 	PandaFramework framework;
 	framework.open_framework(argc, argv);
@@ -211,18 +203,6 @@ int main(int argc, char* argv[]) {
 	//Set default window instance to use for chunk class
 	game::chunk::setDefaultWindow(window);
 	game::chunk::setDefaultFramework(framework);
-
-	//Picker Ray
-	PT(CollisionHandlerQueue) myHandler = new CollisionHandlerQueue();			//Create Handler
-	CollisionTraverser myTraverser;												//Create Traverser
-	PT(CollisionNode) pickerNode = new CollisionNode("mouseRay");				//Create CollisionNode
-	PT(CollisionRay) pickerRay = new CollisionRay();							//Create CollisionRay
-	NodePath pickerNP = player.firstPerson.attach_new_node(pickerNode);			//Create NodePath for the attached new node
-	pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());	//Set from collide mask to use
-	pickerNode->add_solid(pickerRay);											//Add solid to CollisionNode
-	pickerNode->set_into_collide_mask(0);										//Disable into-collisions
-	myTraverser.add_collider(pickerNP, myHandler);								//Add collider to traverser
-	pickerRay->set_from_lens(window->get_camera(0), 0, 0);						//Adjust pickerRay with set_from_lens method
 
 	//Experimental GUI
 	game::button returnToGameButton(framework, game::unpause, 0, 0.30, 0, 0.30, "Return to game");
@@ -470,7 +450,7 @@ int main(int argc, char* argv[]) {
 
 	//Apply show collision settings
 	if (std::stoi(options["show_ray-collisions"])) {
-		myTraverser.show_collisions(window->get_render());
+		player.pickerTraverser.show_collisions(window->get_render());
 	}
 	if (std::stoi(options["show_block-collisions"])) {
 		traverser->show_collisions(window->get_render());
@@ -548,12 +528,12 @@ int main(int argc, char* argv[]) {
 
 		traverser->traverse(window->get_render());		//Check collisions and call pusher if a collision is detected
 
-		myTraverser.traverse(window->get_render());
-		if (myHandler->get_num_entries() > 0) {
-			myHandler->sort_entries();
+		player.pickerTraverser.traverse(window->get_render());
+		if (player.pickerHandler->get_num_entries() > 0) {
+			player.pickerHandler->sort_entries();
 			block.hide_bounds();
-			CollisionEntry* entry = myHandler->get_entry(0);
-			block = myHandler->get_entry(0)->get_into_node_path().get_parent().get_parent();
+			CollisionEntry* entry = player.pickerHandler->get_entry(0);
+			block = player.pickerHandler->get_entry(0)->get_into_node_path().get_parent().get_parent();
 			LVector3 surface = entry->get_surface_normal(window->get_render());
 			block.show_tight_bounds();
 
