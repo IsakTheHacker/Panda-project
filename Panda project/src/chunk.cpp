@@ -10,7 +10,7 @@ namespace game {
 		this->x = x;
 		this->y = y;
 	}
-	chunk::chunk(std::string path, const int& x, const int& y, WindowFramework*& window, PandaFramework& framework) {
+	chunk::chunk(std::string path, const int& x, const int& y, WindowFramework* window, PandaFramework& framework) {
 		this->x = x;
 		this->y = x;
 		readChunk(window, framework, path, x, y);
@@ -19,109 +19,88 @@ namespace game {
 		chunk::objects.clear();
 		return 0;
 	}
-	int chunk::generateChunk(WindowFramework*& window, PandaFramework& framework, const PerlinNoise3& perlinNoise = chunk::perlinNoise) {
+	//You can't normalize inline so this is a helper function
+	LVector3 normalized(double x, double y, double z) {
+		LVector3 myVec(x, y, z);
+		myVec.normalize();
+		return myVec;
+	}
+	PT(Geom) makeSquare(double x1, double x2, double z1, double z2, double y1, double y2) {
+		CPT(GeomVertexFormat) format = GeomVertexFormat::get_v3n3cpt2();
+		PT(GeomVertexData) vdata = new GeomVertexData("square", format, Geom::UH_dynamic);
+
+		GeomVertexWriter vertex(vdata, "vertex");
+		GeomVertexWriter normal(vdata, "normal");
+		GeomVertexWriter color(vdata, "color");
+		GeomVertexWriter texcoord(vdata, "texcoord");
+
+		if (x1 != x2) {
+			vertex.add_data3(x1, y1, z1);
+			vertex.add_data3(x2, y1, z1);
+			vertex.add_data3(x2, y2, z2);
+			vertex.add_data3(x1, y2, z2);
+
+			normal.add_data3(normalized(2 * x1 - 1, 2 * y1 - 1, 2 * z1 - 1));
+			normal.add_data3(normalized(2 * x2 - 1, 2 * y1 - 1, 2 * z1 - 1));
+			normal.add_data3(normalized(2 * x2 - 1, 2 * y2 - 1, 2 * z2 - 1));
+			normal.add_data3(normalized(2 * x1 - 1, 2 * y2 - 1, 2 * z2 - 1));
+		} else {
+			vertex.add_data3(x1, y1, z1);
+			vertex.add_data3(x2, y2, z1);
+			vertex.add_data3(x2, y2, z2);
+			vertex.add_data3(x1, y1, z2);
+
+			normal.add_data3(normalized(2 * x1 - 1, 2 * y1 - 1, 2 * z1 - 1));
+			normal.add_data3(normalized(2 * x2 - 1, 2 * y2 - 1, 2 * z1 - 1));
+			normal.add_data3(normalized(2 * x2 - 1, 2 * y2 - 1, 2 * z2 - 1));
+			normal.add_data3(normalized(2 * x1 - 1, 2 * y1 - 1, 2 * z2 - 1));
+		}
+
+		//Adding different colors to the vertex for visibility
+		color.add_data4f(1.0, 0.0, 0.0, 1.0);
+		color.add_data4f(0.0, 1.0, 0.0, 1.0);
+		color.add_data4f(0.0, 0.0, 1.0, 1.0);
+		color.add_data4f(1.0, 0.0, 1.0, 1.0);
+
+		texcoord.add_data2f(0.0, 1.0);
+		texcoord.add_data2f(0.0, 0.0);
+		texcoord.add_data2f(1.0, 0.0);
+		texcoord.add_data2f(1.0, 1.0);
+
+		//Quads aren't directly supported by the Geom interface
+		//you might be interested in the CardMaker class if you are
+		//interested in rectangle though
+		PT(GeomTriangles) tris = new GeomTriangles(Geom::UH_dynamic);
+		tris->add_vertices(0, 1, 3);
+		tris->add_vertices(1, 2, 3);
+
+		PT(Geom) square = new Geom(vdata);
+		square->add_primitive(tris);
+		return square;
+	}
+	int chunk::generateChunk(WindowFramework* window, PandaFramework& framework, const PerlinNoise3& perlinNoise = chunk::perlinNoise) {
 		int chunksize = std::stoi(universeOptions["chunksize"]);
 		int start_x = this->x * chunksize;
 		int start_y = this->y * chunksize;
 
-		std::vector<object> blocks;
-		std::vector<NodePath> subobjects;
-
-		for (size_t i = 1; i < 2; i++) {
-			for (int j = start_x; j < start_x + chunksize; j += 2) {
-				for (int k = start_y; k < start_y + chunksize; k += 2) {
-
-					double object_z = (int)(perlinNoise.noise(j, k, i) * 100 + 0.5);
-					object_z = (double)object_z / 100;
-					object_z = std::round(object_z * 50 / 2) * 2;
-
-					game::object object("data/assets/blockproperties/grass.blockproperties", window, framework, false, false);
-					if (object_z < 1) {
-						object = game::object("data/assets/blockproperties/sand.blockproperties", window, framework, false, false);
-						if (object_z < 0) {
-							for (int u = object_z + 2; u < 1; u += 2) {
-								game::object water("data/assets/blockproperties/water.blockproperties", window, framework, false, false);
-								water.model.set_pos(j, k, u);
-
-								water.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
-								water.model.set_tag("id", std::to_string(water.id));
-								water.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
-
-								blocks.push_back(water);
-							}
-						}
-					} else {
-						//Tree generating
-						if (rand() % 50 == 49) {
-							for (size_t i = 2; i < 10; i += 2) {		//Trunk
-								game::object object("data/assets/blockproperties/log.blockproperties", window, framework, false, false);
-								object.model.set_pos(j, k, object_z + i);
-
-								object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
-								object.model.set_tag("id", std::to_string(object.id));
-								object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
-
-								blocks.push_back(object);
-							}
-
-							//Leaves
-							for (int x = -2; x < 4; x += 2) {		//Trunk
-								for (int y = -2; y < 4; y += 2) {
-									game::object object("data/assets/blockproperties/stone.blockproperties", window, framework, false, false);
-									object.model.set_pos(j + x, k + y, object_z + 10);
-
-									object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
-									object.model.set_tag("id", std::to_string(object.id));
-									object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
-
-									blocks.push_back(object);
-								}
-							}
-							for (int x = 0; x < 2; x += 2) {		//Trunk
-								for (int y = 0; y < 2; y += 2) {
-									game::object object("data/assets/blockproperties/stone.blockproperties", window, framework, false, false);
-									object.model.set_pos(j + x, k + y, object_z + 12);
-
-									object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
-									object.model.set_tag("id", std::to_string(object.id));
-									object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
-
-									blocks.push_back(object);
-								}
-							}
-						}
-					}
-
-					object.model.set_pos(j, k, object_z);
-
-					object.model.set_tag("chunk", std::to_string(this->x) + "," + std::to_string(this->y));
-					object.model.set_tag("id", std::to_string(object.id));
-					object.model.set_tag("chunkObjectId", std::to_string(blocks.size()));
-
-					blocks.push_back(object);
-				}
-			}
-		}
-		this->objects = blocks;															//Push the generated blocks to vector objects of this chunk
-		this->loaded_chunks.insert(std::pair<int, int>(x, y));							//Register that this chunk has been generated
-		/*Texture* texture = TexturePool::get_global_ptr()->load_cube_map("models/textures/png/grass-#.png");
-		texture->set_minfilter(SamplerState::FilterType::FT_nearest);
-		texture->set_magfilter(SamplerState::FilterType::FT_nearest);
-		oneMesh.get_child(0).get_child(1).get_child(0).set_texture(texture);
-		oneMesh.flatten_strong();
-		oneMesh.reparent_to(window->get_render());*/
-		if (devMode) {
-			std::string fancyDebugOutput =
-				"Finished generating chunk:\n"
-				"    XY: " + std::to_string(start_x) + ", " + std::to_string(start_y) + "\n"
-				"    Chunk Objects Size: " + std::to_string(this->objects.size());
-			;
-			game::logOut(fancyDebugOutput);
-		}
-		if (std::stoi((*this->options)["save_newly_created_chunks"])) {
-			this->saveChunk();		//Save chunk
-		}
-		//DCAST(RigidBodyCombiner, rbcnp.node())->collect();
+		//Note: it isn't particularly efficient to make every face as a separate Geom.
+		//instead, it would be better to create one Geom holding all of the faces.
+		PT(Geom) square0 = game::makeSquare(-1, -1, -1, 1, -1, 1);
+		PT(Geom) square1 = game::makeSquare(-1, 1, -1, 1, 1, 1);
+		PT(Geom) square2 = game::makeSquare(-1, 1, 1, 1, -1, 1);
+		PT(Geom) square3 = game::makeSquare(-1, 1, -1, 1, -1, -1);
+		PT(Geom) square4 = game::makeSquare(-1, -1, -1, -1, 1, 1);
+		PT(Geom) square5 = game::makeSquare(1, -1, -1, 1, 1, 1);
+		PT(GeomNode) snode = new GeomNode("square");
+		snode->add_geom(square0);
+		snode->add_geom(square1);
+		snode->add_geom(square2);
+		snode->add_geom(square3);
+		snode->add_geom(square4);
+		snode->add_geom(square5);
+		NodePath cube = window->get_render().attach_new_node(snode);
+		//cube.set_two_sided(true);
+		cube.set_pos(start_x, start_y, 10);
 		return 0;
 	}
 	int chunk::saveChunk() const {
@@ -203,7 +182,7 @@ namespace game {
 
 		return 0;
 	}
-	int chunk::readChunk(WindowFramework*& window, PandaFramework& framework, std::string path, int x, int y) {
+	int chunk::readChunk(WindowFramework* window, PandaFramework& framework, std::string path, int x, int y) {
 		int chunksize = std::stoi(universeOptions["chunksize"]);
 
 		if (game::chunk::loaded_chunks.find(std::pair<int, int>(x, y)) != game::chunk::loaded_chunks.end()) {

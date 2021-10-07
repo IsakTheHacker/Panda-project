@@ -518,142 +518,51 @@ int main(int argc, char* argv[]) {
 
 	double light_X = 0;
 
+
+	//Note: it isn't particularly efficient to make every face as a separate Geom.
+	//instead, it would be better to create one Geom holding all of the faces.
+	PT(Geom) square0 = game::makeSquare(-1, -1, -1, 1, -1, 1);
+	PT(Geom) square1 = game::makeSquare(-1, 1, -1, 1, 1, 1);
+	PT(Geom) square2 = game::makeSquare(-1, 1, 1, 1, -1, 1);
+	PT(Geom) square3 = game::makeSquare(-1, 1, -1, 1, -1, -1);
+	PT(Geom) square4 = game::makeSquare(-1, -1, -1, -1, 1, 1);
+	PT(Geom) square5 = game::makeSquare(1, -1, -1, 1, 1, 1);
+	GeomNode snode("square");
+	snode.add_geom(square0);
+	snode.add_geom(square1);
+	snode.add_geom(square2);
+	snode.add_geom(square3);
+	snode.add_geom(square4);
+	snode.add_geom(square5);
+	NodePath cube = window->get_render().attach_new_node(DCAST(PandaNode, &snode));
+	cube.set_two_sided(true);
+	cube.set_pos(5, 5, 10);
+
+	//Note: it isn't particularly efficient to make every face as a separate Geom.
+	//instead, it would be better to create one Geom holding all of the faces.
+	PT(Geom) square01 = game::makeSquare(-1, -1, -1, 1, -1, 1);
+	PT(Geom) square11 = game::makeSquare(-1, 1, -1, 1, 1, 1);
+	PT(Geom) square21 = game::makeSquare(-1, 1, 1, 1, -1, 1);
+	PT(Geom) square31 = game::makeSquare(-1, 1, -1, 1, -1, -1);
+	PT(Geom) square41 = game::makeSquare(-1, -1, -1, -1, 1, 1);
+	PT(Geom) square51 = game::makeSquare(1, -1, -1, 1, 1, 1);
+	GeomNode snode1("square");
+	snode1.add_geom(square01);
+	snode1.add_geom(square11);
+	snode1.add_geom(square21);
+	snode1.add_geom(square31);
+	snode1.add_geom(square41);
+	snode1.add_geom(square51);
+	NodePath cube1 = window->get_render().attach_new_node(DCAST(PandaNode, &snode1));
+	cube1.set_pos(-5, 5, 10);
+
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
 
 		player.doCameraControl(window);
 
-		blocky.model.set_pos(cos(light_X)*10, sin(light_X)*10, 5);
-		light_X += ClockObject::get_global_clock()->get_dt();
-
-		traverser->traverse(window->get_render());		//Check collisions and call pusher if a collision is detected
-
-		player.pickerTraverser.traverse(window->get_render());
-		if (player.pickerHandler->get_num_entries() > 0) {
-			player.pickerHandler->sort_entries();
-			block.hide_bounds();
-			CollisionEntry* entry = player.pickerHandler->get_entry(0);
-			block = player.pickerHandler->get_entry(0)->get_into_node_path().get_parent().get_parent();
-			LVector3 surface = entry->get_surface_normal(window->get_render());
-			block.show_tight_bounds();
-
-			int block_chunk_x;
-			int block_chunk_y;
-			if (block.get_x() < 0) {
-				block_chunk_x = (int)(block.get_x() - game::chunk::chunksize) / game::chunk::chunksize;
-			} else {
-				block_chunk_x = (int)block.get_x() / game::chunk::chunksize;
-			}
-			if (block.get_y() < 0) {
-				block_chunk_y = (int)(block.get_y() - game::chunk::chunksize) / game::chunk::chunksize;
-			} else {
-				block_chunk_y = (int)block.get_y() / game::chunk::chunksize;
-			}
-
-			if (keys["mouse1"]) {
-				if (mouseInGame) {
-					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];		//Get chunk containing the block
-					try {
-						chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].model.remove_node();									//Remove node
-						for (NodePath value : chunk.objects[std::stoull(block.get_tag("chunkObjectId"))].lights) {						//Remove lights
-							window->get_render().clear_light(value);
-						}
-						chunk.objects[std::stoull(block.get_tag("chunkObjectId"))] = game::object(false, false);						//Replace game::object with empty game::object
-						game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;					//Save chunk changes in vector "chunks"
-					} catch (const std::invalid_argument& invalidArgument) {
-						game::errorOut(std::string("Could not remove block! Invalid argument error: ") + invalidArgument.what());
-					}
-					keys["mouse1"] = false;
-				}
-			}
-			if (keys["mouse2"]) {
-				vector_string tagkeys;
-				std::string formatted_values;
-				block.get_tag_keys(tagkeys);
-				if (tagkeys.size() > 0) {
-					for (std::string key : tagkeys) {
-						formatted_values.append("\n        " + key + ": " + block.get_tag(key));
-					}
-				} else {
-					formatted_values = "none";
-				}
-				std::string blockInfo =
-					"Information about block:\n"
-					"    XYZ: " + std::to_string(block.get_x()) + ", " + std::to_string(block.get_y()) + ", " + std::to_string(block.get_z()) + "\n"
-					"    Chunk XY: " + std::to_string(block_chunk_x) + ", " + std::to_string(block_chunk_y) + "\n"
-					"    Tags: " + formatted_values
-				;
-				game::logOut(blockInfo);
-				keys["mouse2"] = false;
-			}
-			if (keys["mouse3"]) {
-				if (mouseInGame) {
-					std::string configPath = playerHandInventory.getItem(handInventoryIndex).configPath;
-
-					game::object object(configPath, window, framework, false, false);
-					object.model.set_pos(block.get_x() + surface.get_x() * 2, block.get_y() + surface.get_y() * 2, block.get_z() + surface.get_z() * 2);
-
-					if (object.model.get_x() < 0) {
-						block_chunk_x = (int)(object.model.get_x() - game::chunk::chunksize) / game::chunk::chunksize;
-					} else {
-						block_chunk_x = (int)object.model.get_x() / game::chunk::chunksize;
-					}
-					if (object.model.get_y() < 0) {
-						block_chunk_y = (int)(object.model.get_y() - game::chunk::chunksize) / game::chunk::chunksize;
-					} else {
-						block_chunk_y = (int)object.model.get_y() / game::chunk::chunksize;
-					}
-
-					if (keys["r"]) {
-
-						if (surface.get_z() == -1) {
-							pitch = 1;
-						} else {
-							pitch = 0;
-						}
-
-						if (surface.get_x() == -1) {
-							pitch = 0.5;
-							heading = -0.5;
-						} else if (surface.get_x() == 1) {
-							pitch = 0.5;
-							heading = 0.5;
-						} else if (surface.get_y() == -1) {
-							pitch = 0.5;
-							heading = 0;
-						} else if (surface.get_y() == 1) {
-							pitch = 0.5;
-							heading = 1;
-						}
-						object.model.set_hpr(heading * 180, pitch * 180, 0);
-					}
-
-					game::chunk chunk = game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]];
-					
-					object.model.set_tag("chunk", std::to_string(block_chunk_x) + "," + std::to_string(block_chunk_y));
-					object.model.set_tag("id", std::to_string(object.id));
-					object.model.set_tag("chunkObjectId", std::to_string(chunk.objects.size()));
-
-					object.model.set_shader_auto();
-
-					object.model.ls();
-
-					chunk.objects.push_back(object);
-					game::chunks[game::chunk::index[std::pair<int, int>(block_chunk_x, block_chunk_y)]] = chunk;
-
-					keys["mouse3"] = false;
-				}
-			}
-		} else {
-			// No targeted block
-			block.hide_bounds();
-		}
-
-		//Set text to the new values
-		text->set_text("X: " + std::to_string(player.model.get_x()) + "\nY: " + std::to_string(player.model.get_y()) + "\nZ: " + std::to_string(player.model.get_z()));
-		text2->set_text("H: " + std::to_string(player.model.get_h()) + "\nP: " + std::to_string(player.model.get_p()) + "\nR: " + std::to_string(player.model.get_r()));
-		text3->set_text("Chunk X: " + std::to_string(player.chunk_x) + "\nChunk Y: " + std::to_string(player.chunk_y));
-		fovText->set_text("VFov: " + std::to_string(DCAST(Camera, player.firstPerson.node())->get_lens()->get_vfov()) + "\nHFov: " + std::to_string(DCAST(Camera, player.firstPerson.node())->get_lens()->get_hfov()));
+		//game::chunk chunk(player.chunk_x, player.chunk_y);		//Create new chunk
+		//chunk.generateChunk(window, framework, perlinNoise);	//Apply the generateChunk function on the new chunk
 
 		if (mouseInGame) {
 
@@ -734,33 +643,7 @@ int main(int argc, char* argv[]) {
 				keys["f6"] = false;
 			}
 
-			/*if (keys["arrow_up"] || keys["arrow_down"] || keys["arrow_left"] || keys["arrow_right"]) {
-				double move_y = 0.0;
-				double move_x = 0.0;
-				if (keys["arrow_up"]) {
-					move_y += 3.0;
-				}
-				if (keys["arrow_down"]) {
-					move_y -= 3.0;
-				}
-				if (keys["arrow_left"]) {
-					move_x += 3.0;
-				}
-				if (keys["arrow_right"]) {
-					move_x -= 3.0;
-				}
-
-				offset_h += move_x / camera_x_speed;
-				player.model.set_h(offset_h);
-
-				offset_p += move_y / camera_y_speed;
-
-				if (offset_p < 90 && offset_p > -90) {
-					player.model.set_p(offset_p);
-				} else {
-					offset_p -= move_y / 5;
-				}
-			}*/
+			
 		} else {
 			if (keys["q"]) {		//Crash game
 				game::importantInfoOut("Crashing game...");
@@ -781,35 +664,6 @@ int main(int argc, char* argv[]) {
 				cursor.hide();
 			}
 			keys["escape"] = false;
-		}
-		if (keys["e"]) {
-			if (e_inventory.is_hidden()) {
-				e_inventory.show();
-				cursor.hide();
-				for (NodePath handInventoryNode : inventory) {
-					handInventoryNode.hide();
-				}
-				tool[0].hide();
-				text->set_overall_hidden(true);
-				text2->set_overall_hidden(true);
-				text3->set_overall_hidden(true);
-				fovText->set_overall_hidden(true);
-				inventoryMenu(window);
-			} else {
-				e_inventory.hide();
-				cursor.show();
-				for (NodePath handInventoryNode : inventory) {
-					handInventoryNode.show();
-				}
-				tool[0].show();
-				text->set_overall_hidden(false);
-				text2->set_overall_hidden(false);
-				text3->set_overall_hidden(false);
-				fovText->set_overall_hidden(false);
-				inventoryMenu(window);
-			}
-
-			keys["e"] = false;
 		}
 
 		//Reset mouse clicks

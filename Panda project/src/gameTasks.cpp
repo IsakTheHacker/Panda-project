@@ -47,8 +47,9 @@ namespace task {
 	}
 
 	AsyncTask::DoneStatus generateChunks(GenericAsyncTask* task, void* data) {
+		std::cout << "Test\n";
 		std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*> tuple = *(std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*>*)data;
-		bool chunk_exists = true;
+		bool chunk_exists;
 
 		if (game::chunk::loaded_chunks.find(std::pair<int, int>(player.chunk_x, player.chunk_y)) != game::chunk::loaded_chunks.end()) {
 			chunk_exists = true;
