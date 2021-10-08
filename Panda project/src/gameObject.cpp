@@ -269,7 +269,7 @@ namespace game {
 		pickerHandler = new CollisionHandlerQueue();								//Create Handler
 		PT(CollisionNode) pickerNode = new CollisionNode("mouseRay");				//Create CollisionNode
 		PT(CollisionRay) pickerRay = new CollisionRay();							//Create CollisionRay
-		NodePath pickerNP = firstPerson.attach_new_node(pickerNode);			//Create NodePath for the attached new node
+		NodePath pickerNP = firstPerson.attach_new_node(pickerNode);				//Create NodePath for the attached new node
 		pickerNode->set_from_collide_mask(GeomNode::get_default_collide_mask());	//Set from collide mask to use
 		pickerNode->add_solid(pickerRay);											//Add solid to CollisionNode
 		pickerNode->set_into_collide_mask(0);										//Disable into-collisions
@@ -320,6 +320,8 @@ namespace game {
 
 
 	void testIfPlayerOnGround(const Event* theEvent, void* data) {
+		std::cout << player.onGround << std::endl;
+
 		bool in_out_pattern = (bool)data;
 
 		TypedWritableReferenceCount* value = theEvent->get_parameter(0).get_ptr();

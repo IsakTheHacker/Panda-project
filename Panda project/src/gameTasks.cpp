@@ -47,7 +47,6 @@ namespace task {
 	}
 
 	AsyncTask::DoneStatus generateChunks(GenericAsyncTask* task, void* data) {
-		std::cout << "Test\n";
 		std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*> tuple = *(std::tuple<WindowFramework*, PandaFramework*, PerlinNoise3*>*)data;
 		bool chunk_exists;
 

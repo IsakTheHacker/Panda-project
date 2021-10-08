@@ -518,44 +518,6 @@ int main(int argc, char* argv[]) {
 
 	double light_X = 0;
 
-
-	//Note: it isn't particularly efficient to make every face as a separate Geom.
-	//instead, it would be better to create one Geom holding all of the faces.
-	PT(Geom) square0 = game::makeSquare(-1, -1, -1, 1, -1, 1);
-	PT(Geom) square1 = game::makeSquare(-1, 1, -1, 1, 1, 1);
-	PT(Geom) square2 = game::makeSquare(-1, 1, 1, 1, -1, 1);
-	PT(Geom) square3 = game::makeSquare(-1, 1, -1, 1, -1, -1);
-	PT(Geom) square4 = game::makeSquare(-1, -1, -1, -1, 1, 1);
-	PT(Geom) square5 = game::makeSquare(1, -1, -1, 1, 1, 1);
-	GeomNode snode("square");
-	snode.add_geom(square0);
-	snode.add_geom(square1);
-	snode.add_geom(square2);
-	snode.add_geom(square3);
-	snode.add_geom(square4);
-	snode.add_geom(square5);
-	NodePath cube = window->get_render().attach_new_node(DCAST(PandaNode, &snode));
-	cube.set_two_sided(true);
-	cube.set_pos(5, 5, 10);
-
-	//Note: it isn't particularly efficient to make every face as a separate Geom.
-	//instead, it would be better to create one Geom holding all of the faces.
-	PT(Geom) square01 = game::makeSquare(-1, -1, -1, 1, -1, 1);
-	PT(Geom) square11 = game::makeSquare(-1, 1, -1, 1, 1, 1);
-	PT(Geom) square21 = game::makeSquare(-1, 1, 1, 1, -1, 1);
-	PT(Geom) square31 = game::makeSquare(-1, 1, -1, 1, -1, -1);
-	PT(Geom) square41 = game::makeSquare(-1, -1, -1, -1, 1, 1);
-	PT(Geom) square51 = game::makeSquare(1, -1, -1, 1, 1, 1);
-	GeomNode snode1("square");
-	snode1.add_geom(square01);
-	snode1.add_geom(square11);
-	snode1.add_geom(square21);
-	snode1.add_geom(square31);
-	snode1.add_geom(square41);
-	snode1.add_geom(square51);
-	NodePath cube1 = window->get_render().attach_new_node(DCAST(PandaNode, &snode1));
-	cube1.set_pos(-5, 5, 10);
-
 	//Main loop
 	while (framework.do_frame(Thread::get_current_thread()) && shouldRun) {
 
@@ -563,6 +525,8 @@ int main(int argc, char* argv[]) {
 
 		//game::chunk chunk(player.chunk_x, player.chunk_y);		//Create new chunk
 		//chunk.generateChunk(window, framework, perlinNoise);	//Apply the generateChunk function on the new chunk
+
+		traverser->traverse(window->get_render());		//Check collisions and call pusher if a collision is detected
 
 		if (mouseInGame) {
 

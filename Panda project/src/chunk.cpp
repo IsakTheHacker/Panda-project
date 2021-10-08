@@ -25,7 +25,7 @@ namespace game {
 		myVec.normalize();
 		return myVec;
 	}
-	PT(Geom) makeSquare(double x1, double x2, double z1, double z2, double y1, double y2) {
+	PT(Geom) makeSquare(double x1, double x2, double y1, double y2, double z1, double z2) {
 		CPT(GeomVertexFormat) format = GeomVertexFormat::get_v3n3cpt2();
 		PT(GeomVertexData) vdata = new GeomVertexData("square", format, Geom::UH_dynamic);
 
@@ -85,22 +85,28 @@ namespace game {
 
 		//Note: it isn't particularly efficient to make every face as a separate Geom.
 		//instead, it would be better to create one Geom holding all of the faces.
-		PT(Geom) square0 = game::makeSquare(-1, -1, -1, 1, -1, 1);
-		PT(Geom) square1 = game::makeSquare(-1, 1, -1, 1, 1, 1);
-		PT(Geom) square2 = game::makeSquare(-1, 1, 1, 1, -1, 1);
-		PT(Geom) square3 = game::makeSquare(-1, 1, -1, 1, -1, -1);
-		PT(Geom) square4 = game::makeSquare(-1, -1, -1, -1, 1, 1);
-		PT(Geom) square5 = game::makeSquare(1, -1, -1, 1, 1, 1);
+		PT(Geom) square0 = game::makeSquare(-1, -1, -1, 1, -1, 1);		//One side
+		PT(Geom) square1 = game::makeSquare(-8, 8, -8, 8, 1, 1);		//Top
+		PT(Geom) square2 = game::makeSquare(-1, 1, 1, 1, -1, 1);		//One side
+		PT(Geom) square3 = game::makeSquare(-8, 8, -8, 8, -1, -1);		//Bottom
+		PT(Geom) square4 = game::makeSquare(-1, -1, -1, -1, 1, 1);		//Nothing
+		PT(Geom) square5 = game::makeSquare(1, -1, -1, 1, 1, 1);		//Fake top
 		PT(GeomNode) snode = new GeomNode("square");
-		snode->add_geom(square0);
+		//snode->add_geom(square0);
 		snode->add_geom(square1);
-		snode->add_geom(square2);
+		//snode->add_geom(square2);
 		snode->add_geom(square3);
-		snode->add_geom(square4);
-		snode->add_geom(square5);
+		//snode->add_geom(square4);
+		//snode->add_geom(square5);
 		NodePath cube = window->get_render().attach_new_node(snode);
-		//cube.set_two_sided(true);
+		cube.set_two_sided(true);
 		cube.set_pos(start_x, start_y, 10);
+
+		CollisionNode* collisionNode = new CollisionNode("Box");
+		collisionNode->add_solid(new CollisionBox(0, 8, 8, 1));
+		NodePath collisionNodePath = cube.attach_new_node(collisionNode);
+		//collisionNodePath.show();
+
 		return 0;
 	}
 	int chunk::saveChunk() const {
