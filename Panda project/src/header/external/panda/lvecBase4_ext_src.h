@@ -23,8 +23,15 @@ public:
   INLINE_LINMATH int __setattr__(PyObject *self, const std::string &attr_name, PyObject *assign);
   INLINE_LINMATH std::string __repr__() const;
 
-  INLINE_LINMATH FLOATNAME(LVecBase4) __pow__(FLOATTYPE exponent) const;
+  INLINE_LINMATH PyObject *__floordiv__(PyObject *self, FLOATTYPE scalar) const;
+  INLINE_LINMATH PyObject *__ifloordiv__(PyObject *self, FLOATTYPE scalar);
+
+  INLINE_LINMATH PyObject *__pow__(PyObject *self, FLOATTYPE exponent) const;
   INLINE_LINMATH PyObject *__ipow__(PyObject *self, FLOATTYPE exponent);
+
+  INLINE_LINMATH PyObject *__round__(PyObject *self) const;
+  INLINE_LINMATH PyObject *__floor__(PyObject *self) const;
+  INLINE_LINMATH PyObject *__ceil__(PyObject *self) const;
 };
 
 #include "lvecBase4_ext_src.I"

@@ -162,6 +162,48 @@ namespace std {
       __atomic_clear(&_flag, order);
     }
   };
+
+  ALWAYS_INLINE float round(float arg) {
+    return ::roundf(arg);
+  }
+  ALWAYS_INLINE double round(double arg) {
+    return ::round(arg);
+  }
+  ALWAYS_INLINE long double round(long double arg) {
+    return ::roundl(arg);
+  }
+  ALWAYS_INLINE double round(signed char arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(unsigned char arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(short arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(unsigned short arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(int arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(unsigned int arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(long arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(unsigned long arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(long long arg) {
+    return (double)arg;
+  }
+  ALWAYS_INLINE double round(unsigned long long arg) {
+    return (double)arg;
+  }
+  using ::roundf;
+  using ::roundl;
 };
 #else
 // Expect that we have access to the <atomic> header.

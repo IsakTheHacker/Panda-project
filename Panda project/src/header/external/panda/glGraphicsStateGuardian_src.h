@@ -229,10 +229,10 @@ typedef void (APIENTRYP PFNGLPROGRAMBINARYPROC) (GLuint program, GLenum binaryFo
 typedef void (APIENTRYP PFNGLGETINTERNALFORMATIVPROC) (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params);
 typedef void (APIENTRYP PFNGLBUFFERSTORAGEPROC) (GLenum target, GLsizeiptr size, const void *data, GLbitfield flags);
 typedef void (APIENTRYP PFNGLBINDIMAGETEXTUREPROC) (GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format);
-#endif  // OPENGLES_1
-#ifndef OPENGLES
 typedef void (APIENTRYP PFNGLCLEARTEXIMAGEPROC) (GLuint texture, GLint level, GLenum format, GLenum type, const void *data);
 typedef void (APIENTRYP PFNGLCLEARTEXSUBIMAGEPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *data);
+#endif  // OPENGLES_1
+#ifndef OPENGLES
 typedef void (APIENTRYP PFNGLBINDTEXTURESPROC) (GLuint first, GLsizei count, const GLuint *textures);
 typedef void (APIENTRYP PFNGLBINDSAMPLERSPROC) (GLuint first, GLsizei count, const GLuint *samplers);
 typedef void (APIENTRYP PFNGLBINDIMAGETEXTURESPROC) (GLuint first, GLsizei count, const GLuint *textures);
@@ -506,6 +506,10 @@ protected:
 
   virtual void free_pointers();
 
+#if defined(HAVE_CG) && !defined(OPENGLES)
+  CGcontext get_cg_context();
+#endif
+
 #ifndef OPENGLES_1
   INLINE void enable_vertex_attrib_array(GLuint index);
   INLINE void disable_vertex_attrib_array(GLuint index);
@@ -689,8 +693,10 @@ protected:
 
   GLfloat _max_line_width;
 
-#ifdef HAVE_CG
+#if defined(HAVE_CG) && !defined(OPENGLES)
   CGcontext _cg_context;
+  static AtomicAdjust::Integer _num_gsgs_with_cg_contexts;
+  static pvector<CGcontext> _destroyed_cg_contexts;
 #endif
 
 #ifdef SUPPORT_IMMEDIATE_MODE
@@ -755,9 +761,11 @@ protected:
 #endif
 
 public:
-#ifndef OPENGLES
+#ifndef OPENGLES_1
   bool _use_depth_zero_to_one;
   bool _use_remapped_depth_range;
+#endif
+#ifndef OPENGLES
   PFNGLDEPTHRANGEDNVPROC _glDepthRangedNV;
 #endif
 
@@ -785,7 +793,9 @@ public:
 #endif
 
   bool _supports_tex_storage;
+#ifndef OPENGLES
   PFNGLTEXSTORAGE1DPROC _glTexStorage1D;
+#endif
   PFNGLTEXSTORAGE2DPROC _glTexStorage2D;
   PFNGLTEXSTORAGE3DPROC _glTexStorage3D;
 
@@ -794,7 +804,7 @@ public:
 #endif
 
   bool _supports_clear_texture;
-#ifndef OPENGLES
+#ifndef OPENGLES_1
   PFNGLCLEARTEXIMAGEPROC _glClearTexImage;
 #endif
 
@@ -1060,6 +1070,7 @@ public:
   PFNGLGETPROGRAMINTERFACEIVPROC _glGetProgramInterfaceiv;
   PFNGLGETPROGRAMRESOURCENAMEPROC _glGetProgramResourceName;
   PFNGLGETPROGRAMRESOURCEIVPROC _glGetProgramResourceiv;
+  PFNGLSHADERSTORAGEBLOCKBINDINGPROC _glShaderStorageBlockBinding;
 #endif  // !OPENGLES
 
   GLenum _edge_clamp;

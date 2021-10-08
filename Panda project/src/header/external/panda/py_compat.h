@@ -137,6 +137,11 @@ typedef long Py_hash_t;
 #  endif
 #endif
 
+/* Python 3.4 */
+#if PY_VERSION_HEX < 0x03040000
+#define PyGILState_Check() (PyGILState_GetThisThreadState() == _PyThreadState_Current)
+#endif
+
 /* Python 3.6 */
 
 #if PY_VERSION_HEX < 0x03080000 && !defined(_PyObject_CallNoArg)
@@ -205,6 +210,28 @@ INLINE PyObject *_PyLong_Lshift(PyObject *a, size_t shiftby) {
   PyObject *result = PyNumber_Lshift(a, b);
   Py_DECREF(b);
   return result;
+}
+#endif
+
+#if PY_VERSION_HEX < 0x03090000
+INLINE EXPCL_PYPANDA PyObject *PyObject_CallNoArgs(PyObject *func) {
+  return _PyObject_CallNoArg(func);
+}
+
+INLINE PyObject *PyObject_CallOneArg(PyObject *callable, PyObject *arg) {
+#if PY_VERSION_HEX >= 0x03060000
+  return _PyObject_FastCall(callable, &arg, 1);
+#else
+  return PyObject_CallFunctionObjArgs(callable, arg, nullptr);
+#endif
+}
+
+INLINE PyObject *PyObject_CallMethodNoArgs(PyObject *obj, PyObject *name) {
+  return PyObject_CallMethodObjArgs(obj, name, nullptr);
+}
+
+INLINE PyObject *PyObject_CallMethodOneArg(PyObject *obj, PyObject *name, PyObject *arg) {
+  return PyObject_CallMethodObjArgs(obj, name, arg, nullptr);
 }
 #endif
 

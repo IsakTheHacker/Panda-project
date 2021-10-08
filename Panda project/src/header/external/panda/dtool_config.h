@@ -39,7 +39,6 @@
 #undef HAVE_GETOPT
 #undef HAVE_GETOPT_LONG_ONLY
 #define HAVE_GLOBAL_ARGV 1
-#undef HAVE_GLX
 #define HAVE_IMG 1
 #define HAVE_IOS_BINARY 1
 #define HAVE_IOS_TYPEDEFS 1
